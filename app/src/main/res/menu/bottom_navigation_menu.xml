@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+            android:id="@+id/home"
+            android:title="@string/home"
+            android:icon="@drawable/ic_home_grey_24dp"
+            app:showAsAction="always"/>
+
+    <item
+            android:id="@+id/catalog"
+            android:title="@string/catalog"
+            android:icon="@drawable/ic_catalog_grey_24dp"
+            app:showAsAction="always"/>
+
+    <item
+            android:id="@+id/basket"
+            android:title="@string/basket"
+            android:icon="@drawable/ic_basket_grey_24dp"
+            app:showAsAction="always"/>
+
+    <item
+            android:id="@+id/more"
+            android:title="@string/more"
+            android:icon="@drawable/ic_more_grey_24dp"
+            app:showAsAction="always"/>
+
+</menu>

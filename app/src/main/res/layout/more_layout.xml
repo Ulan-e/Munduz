@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@color/pink">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/info_title"
+                android:layout_margin="12dp"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+    <TextView
+            android:id="@+id/contacts_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/contacts_info"
+            android:layout_margin="12dp"
+            android:textSize="18sp"/>
+
+    <TextView
+            android:id="@+id/language"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/lang"
+            android:layout_margin="12dp"
+            android:textSize="18sp"/>
+
+    <TextView
+            android:id="@+id/payment_delivery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/payment_delivery"
+            android:layout_margin="12dp"
+            android:textSize="18sp"/>
+
+    <TextView
+            android:id="@+id/app_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="О Приложении"
+            android:layout_margin="12dp"
+            android:textSize="18sp"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="30dp"
+            android:gravity="bottom|center_horizontal">
+
+        <ImageButton
+                android:id="@+id/gmail"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_public_black_24dp"/>
+
+        <ImageButton
+                android:id="@+id/instagram"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_public_black_24dp"/>
+
+        <ImageButton
+                android:id="@+id/ondoklassniki"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_public_black_24dp"/>
+
+        <ImageButton
+                android:id="@+id/facebook"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_public_black_24dp"/>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
