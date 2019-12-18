@@ -13,14 +13,15 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
             android:background="@color/colorPrimary"
-            app:title="Добавить товар">
+            app:title="@string/add_product"
+            app:titleTextColor="@color/white">
     </androidx.appcompat.widget.Toolbar>
 
     <!-- Category of good -->
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Категория"
+            android:text="@string/category"
             android:textSize="16sp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"/>
@@ -37,7 +38,7 @@
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Название"
+            android:text="@string/product_name"
             android:textSize="16sp"
             android:layout_marginLeft="8dp"/>
     <EditText
@@ -45,6 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
+            android:maxLength="40"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:inputType="text"
@@ -55,7 +57,7 @@
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Описание"
+            android:text="@string/product_desc"
             android:textSize="16sp"
             android:layout_marginLeft="8dp"/>
     <EditText
@@ -63,6 +65,8 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:textSize="16sp"
+            android:maxLength="250"
+            android:maxLines="4"
             android:inputType="textMultiLine"
             android:layout_marginLeft="8dp"
             android:layout_marginBottom="8dp"/>
@@ -72,7 +76,7 @@
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Стоимость"
+            android:text="@string/product_cost"
             android:textSize="16sp"
             android:layout_marginLeft="8dp"/>
     <EditText
@@ -89,7 +93,7 @@
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Видимость"
+            android:text="@string/product_visibility"
             android:textSize="16sp"
             android:layout_marginLeft="8dp"
             android:layout_marginBottom="10dp"/>
@@ -104,7 +108,7 @@
                 android:layout_width="60dp"
                 android:layout_height="20dp"
                 android:textSize="16sp"
-                android:text="Да"
+                android:text="@string/yes"
                 android:checked="true"
                 android:layout_marginLeft="8dp"
                 android:layout_marginBottom="8dp"/>
@@ -114,7 +118,7 @@
                 android:layout_width="60dp"
                 android:layout_height="20dp"
                 android:textSize="16sp"
-                android:text="Нет"
+                android:text="@string/no"
                 android:layout_marginLeft="8dp"
                 android:layout_marginBottom="8dp"/>
     </RadioGroup>
@@ -124,7 +128,7 @@
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Добавить картинку"
+            android:text="@string/product_image"
             android:textSize="16sp"
             android:layout_marginLeft="8dp"/>
 
@@ -134,29 +138,32 @@
 
         <ImageButton
                 android:id="@+id/choose_product_image"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginBottom="8dp"
-                android:src="@drawable/ic_add_a_photo_gray_24dp"/>
+                android:src="@drawable/ic_add_a_photo_gray_24dp"
+                android:layout_gravity="center_horizontal|center_vertical"/>
 
         <ImageView
                 android:id="@+id/product_image"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="4dp"
                 android:clickable="true"
-                android:src="@drawable/ic_add_a_photo_gray_24dp"/>
+                android:background="@color/white"/>
     </LinearLayout>
 
+
+    <!--  Add Button -->
     <Button
             android:id="@+id/add_button_database"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Добавить товар"
+            android:layout_height="45dp"
+            android:text="@string/add_product"
             android:textSize="14sp"
-            android:layout_margin="8dp"/>
+            android:layout_margin="5dp"/>
 
 
 </LinearLayout>

@@ -12,10 +12,25 @@
     <string name="info_title">Информация</string>
     <string name="search_hint">подсказка</string>
     <string name="search">Поиск</string>
+    <string name="loading">Загрузка</string>
+    <string name="loading_success">Продукт добавлен</string>
+    <string name="loading_failed">Ошибка при загрузке картинки</string>
+    <string name="loading_not_completed">Загрузка не завершена</string>
+    <string name="select_image">Выберите изображение</string>
+    <string name="edit_text_empty"> не заполнен</string>
+    <string name="category">Категория</string>
+    <string name="product_name">Название</string>
+    <string name="product_desc">Описание</string>
+    <string name="product_cost">Стоимость</string>
+    <string name="product_visibility">Видимость</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="product_image">Картинка</string>
+    <string name="add_product">Добавить товар</string>
 
     <array name="category">
-        <item>food</item>
-        <item>dishes</item>
-        <item>house</item>
+        <item>Food</item>
+        <item>Fishes</item>
+        <item>House</item>
     </array>
 </resources>
