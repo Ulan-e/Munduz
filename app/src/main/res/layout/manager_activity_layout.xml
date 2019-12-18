@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+            android:id="@+id/handle_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:minHeight="?attr/actionBarSize"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:background="@color/colorPrimary"
+            app:title="Менеджер">
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <Button
+            android:id="@+id/add_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Добавить товар"
+            android:layout_margin="12dp"
+            android:textSize="14sp"
+            android:background="?android:selectableItemBackground"/>
+
+    <Button
+            android:id="@+id/manage_products"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Управление товарами"
+            android:layout_margin="12dp"
+            android:textSize="14sp"
+            android:background="?android:selectableItemBackground"/>
+
+    <Button
+            android:id="@+id/order_products"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Заказы товаров"
+            android:layout_margin="12dp"
+            android:textSize="14sp"
+            android:background="?android:selectableItemBackground"/>
+
+    <Button
+            android:id="@+id/letter_developer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Написать разработчику"
+            android:layout_margin="12dp"
+            android:textSize="14sp"
+            android:background="?android:selectableItemBackground"/>
+
+    <TextView
+            android:id="@+id/date_of_last_change"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="16.12.2019 12:00"
+            android:layout_margin="12dp"
+            android:textSize="14sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="?android:selectableItemBackground"
+            android:layout_gravity="center_horizontal"
+            android:gravity="bottom"/>
+
+
+
+</LinearLayout>

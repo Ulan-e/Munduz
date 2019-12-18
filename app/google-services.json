@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "914915015213",
+    "firebase_url": "https://munduz-414a0.firebaseio.com",
+    "project_id": "munduz-414a0",
+    "storage_bucket": "munduz-414a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:914915015213:android:4dc92dad43882fb3bdd6a4",
+        "android_client_info": {
+          "package_name": "com.ulan.app.munduz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "914915015213-7l9rdeic8dnv0tungr21u8kobqrebdi8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ulan.app.munduz",
+            "certificate_hash": "3f4ace4e79c63174e112e2ac39917ecf5a626eb9"
+          }
+        },
+        {
+          "client_id": "914915015213-jkneoklc59v9u7pcu8l33ng1hmuai2j1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAB2qXVCbiRKuwcvTz0m9GSLPcm-8E1ofA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "914915015213-jkneoklc59v9u7pcu8l33ng1hmuai2j1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

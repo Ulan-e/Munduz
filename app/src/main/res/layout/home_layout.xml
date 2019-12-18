@@ -10,7 +10,6 @@
             android:layout_height="wrap_content"
             android:text="@string/news_goods_title"
             android:textSize="18sp"
-            android:textStyle="bold"
             android:layout_margin="8dp"/>
 
 

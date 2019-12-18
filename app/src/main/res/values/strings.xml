@@ -10,4 +10,12 @@
     <string name="lang">Язык</string>
     <string name="basket_title">Корзина</string>
     <string name="info_title">Информация</string>
+    <string name="search_hint">подсказка</string>
+    <string name="search">Поиск</string>
+
+    <array name="category">
+        <item>food</item>
+        <item>dishes</item>
+        <item>house</item>
+    </array>
 </resources>

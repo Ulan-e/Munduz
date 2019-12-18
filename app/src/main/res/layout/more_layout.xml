@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:theme="@style/AppTheme.NoActionBar">
 
-    <LinearLayout
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:background="@color/pink">
 
         <TextView
@@ -15,43 +18,65 @@
                 android:layout_height="wrap_content"
                 android:text="@string/info_title"
                 android:layout_margin="12dp"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 android:gravity="center"
                 android:textColor="@color/white"/>
 
     </LinearLayout>
 
-    <TextView
+    <Button
             android:id="@+id/contacts_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/contacts_info"
             android:layout_margin="12dp"
-            android:textSize="18sp"/>
+            android:textSize="14sp"
+            android:gravity="left"
+            android:background="?android:selectableItemBackground"/>
 
-    <TextView
+    <Button
             android:id="@+id/language"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/lang"
             android:layout_margin="12dp"
-            android:textSize="18sp"/>
+            android:textSize="14sp"
+            android:gravity="left"
+            android:background="?android:selectableItemBackground"/>
 
-    <TextView
+    <Button
             android:id="@+id/payment_delivery"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/payment_delivery"
             android:layout_margin="12dp"
-            android:textSize="18sp"/>
+            android:textSize="14sp"
+            android:gravity="left"
+            android:background="?android:selectableItemBackground"
+            android:contentDescription=""/>
 
-    <TextView
+    <Button
             android:id="@+id/app_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="О Приложении"
             android:layout_margin="12dp"
-            android:textSize="18sp"/>
+            android:gravity="left"
+            android:textSize="14sp"
+            android:background="?android:selectableItemBackground"
+            android:contentDescription=""/>
+
+    <Button
+            android:id="@+id/manager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Менеджер"
+            android:layout_margin="12dp"
+            android:gravity="left"
+            android:textSize="14sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:background="?android:selectableItemBackground"
+            android:contentDescription=""/>
 
     <LinearLayout
             android:layout_width="match_parent"

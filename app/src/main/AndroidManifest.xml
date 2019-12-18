@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.ulan.app.munduz">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
@@ -16,6 +19,21 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity android:name=".developer.ManagerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+
+            <meta-data android:name="android.app.searchable"
+                       android:resource="@xml/handle_searchable"/>
+        </activity>
+
+        <provider android:authorities="com.ulan.app.munduz.developer.SuggestionProvider"
+                  android:name=".developer.SuggestionProvider"/>
+
+        <activity android:name=".developer.AddProductActivity"/>
+        <activity android:name=".developer.HandleProductsActivity"/>
     </application>
 
 </manifest>

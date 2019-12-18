@@ -5,12 +5,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/catalog_recycler_view"
+    <ListView
+            android:id="@+id/orders_list_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/gray">
-    </androidx.recyclerview.widget.RecyclerView>
+    </ListView>
 
 </LinearLayout>
