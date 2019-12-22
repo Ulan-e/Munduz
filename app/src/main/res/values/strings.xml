@@ -27,6 +27,8 @@
     <string name="no">Нет</string>
     <string name="product_image">Картинка</string>
     <string name="add_product">Добавить товар</string>
+    <string name="update_product">Обновить товар</string>
+    <string name="remove_product">Удалить товар</string>
 
     <array name="category">
         <item>Food</item>

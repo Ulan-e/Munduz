@@ -5,22 +5,11 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
-            android:id="@+id/handle_toolbar"
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/handle_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:minHeight="?attr/actionBarSize"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
-            android:background="@color/colorPrimaryDark"
-            app:title="Управление товарами">
-    </androidx.appcompat.widget.Toolbar>
+            android:layout_height="match_parent">
+    </androidx.recyclerview.widget.RecyclerView>
 
-    <ListView
-            android:id="@+id/handle_catalog_list_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/gray">
-    </ListView>
 
 </LinearLayout>

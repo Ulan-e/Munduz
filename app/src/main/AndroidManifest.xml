@@ -33,7 +33,8 @@
                   android:name=".developer.SuggestionProvider"/>
 
         <activity android:name=".developer.AddProductActivity"/>
-        <activity android:name=".developer.HandleProductsActivity"/>
+        <activity android:name=".developer.HandleActivity"/>
+
     </application>
 
 </manifest>

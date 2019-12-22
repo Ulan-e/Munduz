@@ -26,15 +26,15 @@ import kotlinx.android.synthetic.main.add_product_layout.*
 class AddProductActivity : AppCompatActivity() {
 
     companion object {
-        private const val PICK_IMAGE_REQUEST = 22
-        private const val TAG = "munduz.ru"
-        private const val GOODS = "goods"
+        const val PICK_IMAGE_REQUEST = 22
+        const val TAG = "munduz.ru"
+        const val GOODS = "goods"
     }
 
     private val database: FirebaseDatabase = FirebaseDatabase.getInstance()
-    private val databaseReference: DatabaseReference = database.getReference(GOODS)
+    private val databaseRef: DatabaseReference = database.getReference(GOODS)
     private val storage: FirebaseStorage = FirebaseStorage.getInstance()
-    private val storageReference: StorageReference = storage.reference
+    private val storageRef: StorageReference = storage.reference
 
     private var filePath: Uri? = null
     private lateinit var product: Product
@@ -44,6 +44,10 @@ class AddProductActivity : AppCompatActivity() {
         setContentView(R.layout.add_product_layout)
         product = Product()
         val emptyField = resources.getString(R.string.edit_text_empty)
+
+        setSupportActionBar(product_toolbar)
+        val actionBar = supportActionBar
+        actionBar!!.setTitle("Add Product")
 
         // Category
         val categoryList = resources.getStringArray(R.array.category)
@@ -60,15 +64,6 @@ class AddProductActivity : AppCompatActivity() {
             }
         }
 
-        // Visibility of product
-        product_visibility.setOnCheckedChangeListener { group, checkedId ->
-            if (R.id.product_visible == checkedId) {
-                product.isVisible = true
-            } else if (R.id.product_invisible == checkedId) {
-                product.isVisible = false
-            }
-        }
-
         // Choose image from phone's storage
         choose_product_image.setOnClickListener {
             chooseImage()
@@ -76,9 +71,11 @@ class AddProductActivity : AppCompatActivity() {
 
         // Add to Firebase RealtimeDatabase
         add_button_database.setOnClickListener {
-
             // Date and Time
             product.date = System.currentTimeMillis()
+
+            //Visibility
+            product.isVisible = true
 
             // Name
             if (product_name.text.toString() == "") {
@@ -127,12 +124,13 @@ class AddProductActivity : AppCompatActivity() {
     }
 
     private fun writeToDatabase(product: Product) {
-        val key = databaseReference.push().key
+        val key = databaseRef.push().key
         if (key == null) {
             Log.d(TAG, "Couldn't get push key for products")
             return
         }
-        databaseReference.child(key).setValue(product)
+        product.id = key
+        databaseRef.child(key).setValue(product)
     }
 
     private fun uploadImage() {
@@ -141,9 +139,10 @@ class AddProductActivity : AppCompatActivity() {
             progressDialog.setTitle(resources.getString(R.string.loading))
             progressDialog.show()
 
-            val storageRef: StorageReference = storageReference.child("images/" + product.name + 22)
+            val storageRef: StorageReference = storageRef.child("images/" + product.name + 22)
             var uploadTask: UploadTask = storageRef.putFile(filePath!!)
-            val urlTask = uploadTask.continueWithTask { task ->
+            uploadTask
+                .continueWithTask { task ->
                 if (!task.isSuccessful) {
                     task.exception?.let {
                         throw it
@@ -173,6 +172,7 @@ class AddProductActivity : AppCompatActivity() {
                         product.image = downloadUri.toString()
                         //Write to Database
                         writeToDatabase(product)
+                        clearField()
                     } else {
                         Toast.makeText(
                             this@AddProductActivity,
@@ -182,6 +182,13 @@ class AddProductActivity : AppCompatActivity() {
                     }
                 }
         }
+    }
+
+    private fun clearField(){
+        product_name.text.clear()
+        product_desc.text.clear()
+        product_cost.text.clear()
+        product_image.setImageResource(android.R.color.transparent)
     }
 
     private fun chooseImage() {
@@ -200,7 +207,6 @@ class AddProductActivity : AppCompatActivity() {
             && data != null && data.data != null
         ) {
             filePath = data.data
-            Log.d("ulanbek", filePath.toString())
             try {
                 var bitmap: Bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
                 product_image.setImageBitmap(bitmap)

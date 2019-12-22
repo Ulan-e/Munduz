@@ -23,7 +23,7 @@ class ManagerActivity: AppCompatActivity() {
         }
 
         buttonManager.setOnClickListener{
-            val intent = Intent(this, HandleProductsActivity::class.java)
+            val intent = Intent(this, HandleActivity::class.java)
             startActivity(intent)
         }
 

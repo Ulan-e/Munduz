@@ -6,14 +6,13 @@
               android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
-            android:id="@+id/handle_toolbar"
+            android:id="@+id/product_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="55dp"
             android:minHeight="?attr/actionBarSize"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
             android:background="@color/colorPrimary"
-            app:title="@string/add_product"
             app:titleTextColor="@color/white">
     </androidx.appcompat.widget.Toolbar>
 
@@ -23,15 +22,15 @@
             android:layout_height="wrap_content"
             android:text="@string/category"
             android:textSize="16sp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="7dp"/>
     <Spinner
             android:id="@+id/product_category"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:textSize="16sp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginLeft="7dp"
+            android:layout_marginBottom="7dp"/>
 
 
     <!-- Name of good -->
@@ -40,17 +39,17 @@
             android:layout_height="wrap_content"
             android:text="@string/product_name"
             android:textSize="16sp"
-            android:layout_marginLeft="8dp"/>
+            android:layout_marginLeft="7dp"/>
     <EditText
             android:id="@+id/product_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:maxLength="40"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
             android:inputType="text"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="7dp"/>
 
 
     <!-- Description of good -->
@@ -59,7 +58,7 @@
             android:layout_height="wrap_content"
             android:text="@string/product_desc"
             android:textSize="16sp"
-            android:layout_marginLeft="8dp"/>
+            android:layout_marginLeft="7dp"/>
     <EditText
             android:id="@+id/product_desc"
             android:layout_width="match_parent"
@@ -68,8 +67,8 @@
             android:maxLength="250"
             android:maxLines="4"
             android:inputType="textMultiLine"
-            android:layout_marginLeft="8dp"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginLeft="7dp"
+            android:layout_marginBottom="7dp"/>
 
 
     <!-- Cost of good -->
@@ -78,50 +77,27 @@
             android:layout_height="wrap_content"
             android:text="@string/product_cost"
             android:textSize="16sp"
-            android:layout_marginLeft="8dp"/>
+            android:layout_marginLeft="7dp"/>
     <EditText
             android:id="@+id/product_cost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:inputType="numberDecimal"
-            android:layout_marginLeft="8dp"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginLeft="7dp"
+            android:layout_marginBottom="7dp"/>
 
 
     <!-- Visibility of good -->
-    <TextView
+    <Switch
+            android:id="@+id/visibility"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/product_visibility"
             android:textSize="16sp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginBottom="10dp"/>
-    <RadioGroup
-            android:id="@+id/product_visibility"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="15dp">
-        <RadioButton
-                android:id="@+id/product_visible"
-                android:layout_width="60dp"
-                android:layout_height="20dp"
-                android:textSize="16sp"
-                android:text="@string/yes"
-                android:checked="true"
-                android:layout_marginLeft="8dp"
-                android:layout_marginBottom="8dp"/>
-
-        <RadioButton
-                android:id="@+id/product_invisible"
-                android:layout_width="60dp"
-                android:layout_height="20dp"
-                android:textSize="16sp"
-                android:text="@string/no"
-                android:layout_marginLeft="8dp"
-                android:layout_marginBottom="8dp"/>
-    </RadioGroup>
+            android:visibility="gone"
+            android:textColor="?attr/textColorAlertDialogListItem"
+            android:layout_margin="8dp"/>
 
 
     <!-- Image of good -->
@@ -130,7 +106,7 @@
             android:layout_height="wrap_content"
             android:text="@string/product_image"
             android:textSize="16sp"
-            android:layout_marginLeft="8dp"/>
+            android:layout_marginLeft="7dp"/>
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -140,8 +116,8 @@
                 android:id="@+id/choose_product_image"
                 android:layout_width="45dp"
                 android:layout_height="45dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginBottom="7dp"
                 android:src="@drawable/ic_add_a_photo_gray_24dp"
                 android:layout_gravity="center_horizontal|center_vertical"/>
 
@@ -160,10 +136,28 @@
     <Button
             android:id="@+id/add_button_database"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
             android:text="@string/add_product"
             android:textSize="14sp"
             android:layout_margin="5dp"/>
+
+    <Button
+            android:id="@+id/update_button_database"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="@string/update_product"
+            android:textSize="14sp"
+            android:layout_margin="5dp"
+            android:visibility="gone"/>
+
+    <Button
+            android:id="@+id/delete_button_database"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:text="@string/remove_product"
+            android:textSize="14sp"
+            android:layout_margin="5dp"
+            android:visibility="gone"/>
 
 
 </LinearLayout>
