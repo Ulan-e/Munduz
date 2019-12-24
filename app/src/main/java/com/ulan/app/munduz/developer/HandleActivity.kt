@@ -11,11 +11,24 @@ class HandleActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.handle_activity)
 
-        setSupportActionBar(handle_toolbar)
-        val actionBar = supportActionBar
-        actionBar!!.setTitle("Handle Product")
+        setupToolbar()
+        callFragment()
 
-        supportFragmentManager.beginTransaction().add(R.id.container_frag, HandleFragment()).commit()
+    }
+
+    private fun callFragment() {
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.container_frag, ListFragment())
+            .commit()
+    }
+
+    private fun setupToolbar() {
+        setSupportActionBar(handle_toolbar)
+        handle_toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp)
+        handle_toolbar.setNavigationOnClickListener {
+            finish()
+        }
     }
 
 

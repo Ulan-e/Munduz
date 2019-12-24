@@ -9,11 +9,16 @@
             android:id="@+id/product_toolbar"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:minHeight="?attr/actionBarSize"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
             android:background="@color/colorPrimary"
-            app:titleTextColor="@color/white">
+            app:titleTextColor="@color/white"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:contentInsetStartWithNavigation="0dp"
+            app:contentInsetEndWithActions="0dp"
+            app:contentInsetEnd="0dp"
+            app:contentInsetRight="0dp">
     </androidx.appcompat.widget.Toolbar>
 
     <!-- Category of good -->
@@ -84,6 +89,7 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:inputType="numberDecimal"
+            android:maxLength="6"
             android:layout_marginLeft="7dp"
             android:layout_marginBottom="7dp"/>
 

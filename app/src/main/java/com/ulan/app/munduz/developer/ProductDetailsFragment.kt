@@ -22,8 +22,9 @@ import com.squareup.picasso.Picasso
 import com.ulan.app.munduz.R
 import kotlinx.android.synthetic.main.add_product_layout.*
 import java.io.IOException
+import android.widget.Switch as Switch
 
-class ItemsDetailsFragment : Fragment() {
+class ProductDetailsFragment : Fragment() {
 
     private lateinit var intent: Intent
     private lateinit var product: Product
@@ -34,13 +35,25 @@ class ItemsDetailsFragment : Fragment() {
     private val storageRef: StorageReference = storage.reference
 
     private var filePath: Uri? = null
+    private lateinit var uploadTask: UploadTask
     private var emptyField = ""
+    private lateinit var urlImage: String
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
             product = arguments!!.getParcelable(ARG_PARAM)
+        }
+
+        (activity as HandleActivity).supportActionBar?.title = "Details"
+        var toolbar = (activity as HandleActivity).findViewById<Toolbar>(R.id.handle_toolbar)
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp)
+        toolbar.setNavigationOnClickListener {
+            (activity as HandleActivity).supportFragmentManager
+                .beginTransaction()
+                .replace(R.id.container_frag, ListFragment())
+                .commit()
         }
 
         newProduct = Product()
@@ -59,7 +72,7 @@ class ItemsDetailsFragment : Fragment() {
         val choose_image = view.findViewById<ImageButton>(R.id.choose_product_image)
 
         // Image
-        choose_image.setOnClickListener{
+        choose_image.setOnClickListener {
             chooseImage()
         }
 
@@ -82,8 +95,6 @@ class ItemsDetailsFragment : Fragment() {
         //Visibility
         val switch = view.findViewById<Switch>(R.id.visibility)
         switch.visibility = View.VISIBLE
-
-
         // Visible needed views
         val add_button = view.findViewById<Button>(R.id.add_button_database)
         val update_button = view.findViewById<Button>(R.id.update_button_database)
@@ -94,9 +105,8 @@ class ItemsDetailsFragment : Fragment() {
 
 
         // Set values for product views
-        if (product != null) {
-            for((i,item) in categoryList.withIndex()) {
-                if (product.category == item){
+            for ((i, item) in categoryList.withIndex()) {
+                if (product.category == item) {
                     product_category.setSelection(i)
                     break
                 }
@@ -106,9 +116,11 @@ class ItemsDetailsFragment : Fragment() {
             product_cost.setText(product.cost.toString())
             switch.setChecked(product.isVisible)
             Picasso.get().load(product.image).into(product_image)
-        }
+            Log.d("ulanbek","product image url " + product.image)
+
 
         update_button.setOnClickListener {
+
             // Date and Time
             newProduct.date = System.currentTimeMillis()
 
@@ -145,23 +157,15 @@ class ItemsDetailsFragment : Fragment() {
             }
             newProduct.cost = Integer.parseInt(product_cost.text.toString())
 
-
-            if (product_image.drawable == null && filePath == null) {
-                Toast.makeText(
-                    activity,
-                    resources.getString(R.string.product_image) + " не выбрана ",
-                    Toast.LENGTH_SHORT
-                ).show()
-                return@setOnClickListener
-            }
-
             //Visibility
             newProduct.isVisible = switch.isChecked
-            newProduct.id= product.id
-            uploadImage()
+            newProduct.id = product.id
+            newProduct.image = product.image
+            writeToDatabase(newProduct)
         }
 
-        delete_button.setOnClickListener{
+
+        delete_button.setOnClickListener {
             val key = product.id
             if (key == null) {
                 Log.d(AddProductActivity.TAG, "Couldn't get push key for products")
@@ -169,31 +173,31 @@ class ItemsDetailsFragment : Fragment() {
             product.id = key
             databaseRef.child(key).removeValue()
         }
-
         return view
     }
 
     private fun uploadImage() {
-        if(filePath != null){
-            val progress: ProgressDialog= ProgressDialog(activity)
+        if (filePath != null) {
+            val progress: ProgressDialog = ProgressDialog(activity)
             progress.setTitle("Загрузка")
             progress.show()
 
             val storageRef: StorageReference = storageRef.child("images/" + product.name + 11)
-            var uploadTask: UploadTask = storageRef.putFile(filePath!!)
+            uploadTask = storageRef.putFile(filePath!!)
 
-            uploadTask.continueWithTask{ task ->
-                if(!task.isSuccessful){
-                    task.exception?.let {
-                        throw it
+            uploadTask
+                .continueWithTask { task ->
+                    if (!task.isSuccessful) {
+                        task.exception?.let {
+                            throw it
+                        }
                     }
+                    storageRef.downloadUrl
                 }
-                storageRef.downloadUrl
-            }
                 .addOnSuccessListener {
                     progress.dismiss()
                 }
-                .addOnFailureListener{
+                .addOnFailureListener {
                     progress.dismiss()
                     Toast.makeText(
                         activity,
@@ -201,27 +205,38 @@ class ItemsDetailsFragment : Fragment() {
                         Toast.LENGTH_LONG
                     ).show()
                 }
-                .addOnCompleteListener{task ->
-                    if(task.isSuccessful){
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
                         val downloadImageUri = task.result
                         newProduct.image = downloadImageUri.toString()
-                        //Write to Database
-                        writeToDatabase(newProduct)
-                        clearField()
+                        urlImage = downloadImageUri.toString()
+                        Log.d("ulanbek",
+                            "newProduct image url " + newProduct.image
+                        )
+
                     }
                 }
         }
     }
 
     private fun writeToDatabase(product: Product) {
-        val key = product.id
-        databaseRef.child(key).setValue(newProduct)
-        Toast.makeText(activity,
-            "Updated",
-            Toast.LENGTH_SHORT).show()
+        Log.d(
+            "ulanbek",
+            ">>>>> product " + product.toString() + ">>>>>newProduct image " + newProduct.toString()
+        )
+        if (filePath == null) {
+            databaseRef.child(newProduct.id).setValue(newProduct)
+            Toast.makeText(activity, "Updated", Toast.LENGTH_SHORT).show()
+            clearField()
+        } else {
+            newProduct.image = urlImage
+            databaseRef.child(newProduct.id).setValue(newProduct)
+            Toast.makeText(activity, "Updated new photo", Toast.LENGTH_SHORT).show()
+            clearField()
+        }
     }
 
-    private fun clearField(){
+    private fun clearField() {
         product_name.text.clear()
         product_desc.text.clear()
         product_cost.text.clear()
@@ -247,6 +262,7 @@ class ItemsDetailsFragment : Fragment() {
             try {
                 var bitmap: Bitmap = MediaStore.Images.Media.getBitmap(activity!!.contentResolver, filePath)
                 product_image.setImageBitmap(bitmap)
+                uploadImage()
             } catch (e: IOException) {
                 e.printStackTrace()
             }
@@ -257,8 +273,8 @@ class ItemsDetailsFragment : Fragment() {
 
         private val ARG_PARAM = "details_bundle"
 
-        fun newInstance(product: Product?): ItemsDetailsFragment {
-            val fragment = ItemsDetailsFragment()
+        fun newInstance(product: Product?): ProductDetailsFragment {
+            val fragment = ProductDetailsFragment()
             val args = Bundle()
             args.putParcelable(ARG_PARAM, product)
             fragment.arguments = args

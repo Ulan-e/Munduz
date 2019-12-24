@@ -10,9 +10,9 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -22,6 +22,8 @@ import com.ulan.app.munduz.R
 import java.io.IOException
 
 import kotlinx.android.synthetic.main.add_product_layout.*
+import java.util.*
+import android.widget.ArrayAdapter as ArrayAdapter1
 
 class AddProductActivity : AppCompatActivity() {
 
@@ -43,15 +45,33 @@ class AddProductActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_product_layout)
         product = Product()
-        val emptyField = resources.getString(R.string.edit_text_empty)
 
+        setUpToolbar()
+        setCategoryPref()
+
+        // Choose image from phone's storage
+        choose_product_image.setOnClickListener {
+            chooseImage()
+        }
+
+        // Add to Firebase RealtimeDatabase
+        add_button_database.setOnClickListener {
+            addProduct()
+        }
+    }
+
+    private fun setUpToolbar() {
         setSupportActionBar(product_toolbar)
-        val actionBar = supportActionBar
-        actionBar!!.setTitle("Add Product")
+        supportActionBar?.title = "Добавить продукт"
+        product_toolbar?.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp)
+        product_toolbar?.setNavigationOnClickListener {
+            finish()
+        }
+    }
 
-        // Category
+    private fun setCategoryPref(){
         val categoryList = resources.getStringArray(R.array.category)
-        val categoryAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, categoryList)
+        val categoryAdapter = ArrayAdapter1(this, android.R.layout.simple_spinner_item, categoryList)
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         product_category.adapter = categoryAdapter
         product_category.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -63,64 +83,46 @@ class AddProductActivity : AppCompatActivity() {
                 product.category = categoryList[p2]
             }
         }
+    }
 
-        // Choose image from phone's storage
-        choose_product_image.setOnClickListener {
-            chooseImage()
+    private fun addProduct(){
+        // Default value for Time and Visibility
+        product.date = System.currentTimeMillis()
+        product.isVisible = true
+
+        // Name
+        if (product_name.text.toString() == "") {
+            fillAllFields()
+            return
         }
+        product.name = product_name.text.toString()
 
-        // Add to Firebase RealtimeDatabase
-        add_button_database.setOnClickListener {
-            // Date and Time
-            product.date = System.currentTimeMillis()
-
-            //Visibility
-            product.isVisible = true
-
-            // Name
-            if (product_name.text.toString() == "") {
-                Toast.makeText(
-                    this@AddProductActivity,
-                    resources.getString(R.string.product_name) + " " + emptyField,
-                    Toast.LENGTH_SHORT
-                ).show()
-                return@setOnClickListener
-            }
-            product.name = product_name.text.toString()
-
-            // Description
-            if (product_desc.text.toString() == "") {
-                Toast.makeText(
-                    this@AddProductActivity,
-                    resources.getString(R.string.product_desc) + " " + emptyField,
-                    Toast.LENGTH_SHORT
-                ).show()
-                return@setOnClickListener
-            }
-            product.desc = product_desc.text.toString()
-
-            // Cost
-            if (product_cost.text.toString() == "") {
-                Toast.makeText(
-                    this@AddProductActivity,
-                    resources.getString(R.string.product_cost) + " " + emptyField,
-                    Toast.LENGTH_SHORT
-                ).show()
-                return@setOnClickListener
-            }
-            product.cost = Integer.parseInt(product_cost.text.toString())
-
-            // Image
-            if (product_image.drawable == null && filePath == null) {
-                Toast.makeText(
-                    this@AddProductActivity,
-                    resources.getString(R.string.product_image) + " не выбрана ",
-                    Toast.LENGTH_SHORT
-                ).show()
-                return@setOnClickListener
-            }
-            uploadImage()
+        // Description
+        if (product_desc.text.toString() == "") {
+            fillAllFields()
+            return
         }
+        product.desc = product_desc.text.toString()
+
+        // Cost
+        if (product_cost.text.toString() == "") {
+            fillAllFields()
+            return
+        }
+        product.cost = Integer.parseInt(product_cost.text.toString())
+
+        // Image
+        if (product_image.drawable == null && filePath == null) {
+            Toast.makeText(
+                this@AddProductActivity,
+                resources.getString(R.string.product_image) + " не выбрана ",
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+        //Write to Database
+        writeToDatabase(product)
+        clearField()
     }
 
     private fun writeToDatabase(product: Product) {
@@ -133,30 +135,32 @@ class AddProductActivity : AppCompatActivity() {
         databaseRef.child(key).setValue(product)
     }
 
+    private fun fillAllFields() {
+        Toast.makeText(this@AddProductActivity, resources.getString(R.string.edit_text_empty), Toast.LENGTH_SHORT)
+            .show()
+    }
+
     private fun uploadImage() {
         if (filePath != null) {
             val progressDialog: ProgressDialog = ProgressDialog(this)
             progressDialog.setTitle(resources.getString(R.string.loading))
             progressDialog.show()
 
-            val storageRef: StorageReference = storageRef.child("images/" + product.name + 22)
+            val random = Random()
+            val randomInt = random.nextInt(100) + 1
+            val storageRef: StorageReference = storageRef.child("images/" + product.name + randomInt)
             var uploadTask: UploadTask = storageRef.putFile(filePath!!)
             uploadTask
                 .continueWithTask { task ->
-                if (!task.isSuccessful) {
-                    task.exception?.let {
-                        throw it
+                    if (!task.isSuccessful) {
+                        task.exception?.let {
+                            throw it
+                        }
                     }
+                    storageRef.downloadUrl
                 }
-                storageRef.downloadUrl
-            }
                 .addOnSuccessListener {
                     progressDialog.dismiss()
-                    Toast.makeText(
-                        this@AddProductActivity,
-                        resources.getString(R.string.loading_success),
-                        Toast.LENGTH_LONG
-                    ).show()
                 }
                 .addOnFailureListener {
                     progressDialog.dismiss()
@@ -170,9 +174,11 @@ class AddProductActivity : AppCompatActivity() {
                     if (task.isSuccessful) {
                         val downloadUri = task.result
                         product.image = downloadUri.toString()
-                        //Write to Database
-                        writeToDatabase(product)
-                        clearField()
+                        Toast.makeText(
+                            this@AddProductActivity,
+                            resources.getString(R.string.loading_success),
+                            Toast.LENGTH_SHORT
+                        ).show()
                     } else {
                         Toast.makeText(
                             this@AddProductActivity,
@@ -184,7 +190,8 @@ class AddProductActivity : AppCompatActivity() {
         }
     }
 
-    private fun clearField(){
+    private fun clearField() {
+        product_category.setSelection(0)
         product_name.text.clear()
         product_desc.text.clear()
         product_cost.text.clear()
@@ -197,7 +204,7 @@ class AddProductActivity : AppCompatActivity() {
         intent.setAction(Intent.ACTION_GET_CONTENT)
         startActivityForResult(
             Intent.createChooser(intent, resources.getString(R.string.select_image)),
-            Companion.PICK_IMAGE_REQUEST
+            PICK_IMAGE_REQUEST
         )
     }
 
@@ -210,9 +217,11 @@ class AddProductActivity : AppCompatActivity() {
             try {
                 var bitmap: Bitmap = MediaStore.Images.Media.getBitmap(contentResolver, filePath)
                 product_image.setImageBitmap(bitmap)
+                uploadImage()
             } catch (e: IOException) {
                 e.printStackTrace()
             }
+            uploadImage()
         }
     }
 

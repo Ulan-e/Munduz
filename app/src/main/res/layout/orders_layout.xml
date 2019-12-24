@@ -6,11 +6,11 @@
               android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
-            android:id="@+id/handle_toolbar"
+            android:id="@+id/product_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="55dp"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
             android:background="@color/colorPrimary"
             app:titleTextColor="@color/white"
             app:contentInsetLeft="0dp"
@@ -21,12 +21,10 @@
             app:contentInsetRight="0dp">
     </androidx.appcompat.widget.Toolbar>
 
-    <FrameLayout
-            android:id="@+id/container_frag"
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/orders_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="5dp">
-
-    </FrameLayout>
+            android:layout_height="match_parent">
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>
