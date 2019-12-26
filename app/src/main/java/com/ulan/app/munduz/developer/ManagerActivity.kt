@@ -6,6 +6,7 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.ulan.app.munduz.R
+import com.ulan.app.munduz.orders.DeveloperMessage
 
 class ManagerActivity: AppCompatActivity() {
 
@@ -16,7 +17,17 @@ class ManagerActivity: AppCompatActivity() {
         setupToolbar()
         callAddActivity()
         callHandleActivity()
+        callDeveloperMessage()
 
+    }
+
+    private fun callDeveloperMessage() {
+        val buttonSend = findViewById<Button>(R.id.message_to_developer)
+        buttonSend.setOnClickListener {
+            val ft = supportFragmentManager.beginTransaction()
+            val messageFragment = DeveloperMessage()
+            messageFragment.show(ft, "dialog")
+        }
     }
 
     private fun callHandleActivity() {

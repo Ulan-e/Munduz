@@ -52,11 +52,12 @@
             android:background="?android:selectableItemBackground"/>
 
     <Button
-            android:id="@+id/letter_developer"
+            android:id="@+id/message_to_developer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Написать разработчику"
             android:layout_margin="12dp"
             android:textSize="14sp"
             android:background="?android:selectableItemBackground"/>
+
 </LinearLayout>

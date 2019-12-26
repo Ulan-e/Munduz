@@ -1,14 +1,10 @@
-package com.ulan.app.munduz
+package com.ulan.app.munduz.ui
 
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.ulan.app.munduz.ui.BasketFragment
-import com.ulan.app.munduz.ui.CatalogFragment
-import com.ulan.app.munduz.ui.HomeFragment
-import com.ulan.app.munduz.ui.MoreFragment
+import com.ulan.app.munduz.R
 
 class MainActivity : AppCompatActivity() {
 

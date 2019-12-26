@@ -1,4 +1,4 @@
-package com.ulan.app.munduz.search
+package com.ulan.app.munduz.developer
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,10 +8,7 @@ import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.database.core.persistence.PruneForest
 import com.ulan.app.munduz.R
-import com.ulan.app.munduz.developer.Product
-import kotlin.collections.MutableList as MutableList1
 
 class SearchProductAdapter: RecyclerView.Adapter<SearchProductAdapter.ProductHolder>, Filterable {
 

@@ -7,16 +7,17 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ulan.app.munduz.R
+import com.ulan.app.munduz.helpers.convertLongToTime
 
 class ProductAdapter: RecyclerView.Adapter<ProductAdapter.Holder> {
 
-    private var proItems: ArrayList<Product?>
+    private var products: ArrayList<Product?>
     private var context: Context?
     private val onItemClickListener: OnItemClickListener?
 
     constructor(context: Context, items: ArrayList<Product?>, listener: OnItemClickListener){
         this.context = context
-        this.proItems = items
+        this.products = items
         this.onItemClickListener = listener
     }
     
@@ -27,16 +28,15 @@ class ProductAdapter: RecyclerView.Adapter<ProductAdapter.Holder> {
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        var product: Product? = proItems.get(position)
-        var itemNum = (position + 1).toString()
+        var product: Product? = products.get(position)
         holder.bind(product, onItemClickListener)
-        holder.item_name.text = itemNum + ". " + product!!.name
+        holder.item_name.text = product!!.name
         holder.item_category.text = product!!.category
         holder.item_cost.text = product.date.convertLongToTime(product!!.date)
     }
 
     override fun getItemCount(): Int {
-        return proItems.size
+        return products.size
     }
 
     class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
