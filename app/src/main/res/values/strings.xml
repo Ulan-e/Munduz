@@ -16,6 +16,7 @@
     <string name="loading_success">Картинка добавлена</string>
     <string name="loading_failed">Ошибка при загрузке картинки</string>
     <string name="loading_not_completed">Загрузка не завершена</string>
+    <string name="error_read_data">"Error to read data from database"</string>
     <string name="select_image">Выберите изображение</string>
     <string name="edit_text_empty"> Заполните все поля </string>
     <string name="category">Категория</string>
@@ -29,11 +30,13 @@
     <string name="add_product">Добавить товар</string>
     <string name="update_product">Обновить товар</string>
     <string name="remove_product">Удалить товар</string>
+    <string name="buy_product">Купить</string>
 
-    <array name="category">
-        <item>Food</item>
-        <item>Dishes</item>
-        <item>House</item>
-        <item>Clothes</item>
-    </array>
+    <string-array name="category">
+        <item>Продукты</item>
+        <item>Посуда</item>
+        <item>Для дома</item>
+        <item>Одежда</item>
+        <item>Книги</item>
+    </string-array>
 </resources>

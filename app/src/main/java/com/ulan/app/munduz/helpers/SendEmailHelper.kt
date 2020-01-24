@@ -2,7 +2,6 @@ package com.ulan.app.munduz.helpers
 
 import android.content.Context
 import android.os.AsyncTask
-import android.widget.Toast
 import java.util.*
 import javax.mail.*
 import javax.mail.internet.InternetAddress
@@ -16,17 +15,19 @@ class SendEmailHelper : AsyncTask<Void, Void, Void>{
     private var email: String
     private var subject: String
     private var message: String
+    private var time: String
 
-    constructor(context: Context, email: String, subject: String, message: String) {
+    constructor(context: Context, email: String, subject: String, message: String, time: String) {
         this.context = context
         this.email = email
         this.subject = subject
         this.message = message
+        this.time = time
     }
 
     override fun onPostExecute(result: Void?) {
         super.onPostExecute(result)
-        Toast.makeText(context, "Письмо отправлено", Toast.LENGTH_LONG).show()
+        showSuccessMessageSent(context)
     }
 
     override fun doInBackground(vararg p0: Void?): Void? {
@@ -49,7 +50,7 @@ class SendEmailHelper : AsyncTask<Void, Void, Void>{
             mime.setFrom(InternetAddress(Config.EMAIL))
             mime.addRecipient(Message.RecipientType.TO, InternetAddress(email))
             mime.setSubject(subject)
-            mime.setText(message)
+            mime.setText("$message\n\n >>>>> $time")
             Transport.send(mime)
         }catch (e: MessagingException){
             e.printStackTrace()
@@ -57,10 +58,7 @@ class SendEmailHelper : AsyncTask<Void, Void, Void>{
         return null
     }
 
-
-    // Sender Configuration class
     class Config {
-
         companion object{
             const val EMAIL = "ulanbek255@gmail.com"
             const val PASSWORD = "ulitsapolbina16"

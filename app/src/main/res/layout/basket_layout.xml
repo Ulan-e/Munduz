@@ -5,23 +5,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/pink">
-
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/basket_title"
-                android:layout_margin="12dp"
-                android:textSize="18sp"
-                android:gravity="center"
-                android:textColor="@color/white"/>
-
-    </LinearLayout>
-
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/basket_recycler_view"
             android:layout_width="match_parent"

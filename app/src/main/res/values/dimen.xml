@@ -2,5 +2,14 @@
 <resources>
 
     <dimen name="toolbar_title_size">18sp</dimen>
+    <dimen name="product_name_size">16sp</dimen>
+    <dimen name="product_desc_title_size">15sp</dimen>
+    <dimen name="product_desc_size">14sp</dimen>
+    <dimen name="product_price_size">17sp</dimen>
+    <dimen name="product_amount_size">14sp</dimen>
+    <dimen name="product_cardview_margin">8sp</dimen>
+    <dimen name="product_image_margin">5sp</dimen>
+    <dimen name="product_text_top_margin">5sp</dimen>
+    <dimen name="product_item_margin">5sp</dimen>
 
 </resources>

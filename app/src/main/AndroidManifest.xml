@@ -13,7 +13,7 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name="com.ulan.app.munduz.ui.MainActivity">
+        <activity android:name="com.ulan.app.munduz.ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -21,16 +21,17 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".developer.HandleActivity">
+       <!-- <activity android:name=".developer.productsActivity.ProductActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>
             </intent-filter>
 
-        </activity>
+        </activity>-->
 
-        <activity android:name=".developer.AddProductActivity"/>
-        <activity android:name=".orders.OrdersActivity"/>
-        <activity android:name=".developer.ManagerActivity"/>
+        <activity android:name=".ui.details.DetailsActivity"/>
+        <activity android:name=".ui.filtered.FilteredActivity"/>
+
+
 
     </application>
 

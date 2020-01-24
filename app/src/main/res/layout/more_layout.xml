@@ -8,22 +8,6 @@
         android:fitsSystemWindows="true">
 
 
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/pink">
-
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/info_title"
-                android:layout_margin="12dp"
-                android:textSize="16sp"
-                android:gravity="center"
-                android:textColor="@color/white"/>
-
-    </LinearLayout>
-
     <Button
             android:id="@+id/contacts_info"
             android:layout_width="match_parent"
@@ -63,20 +47,7 @@
             android:layout_margin="12dp"
             android:gravity="left"
             android:textSize="14sp"
-            android:background="?android:selectableItemBackground"
-            android:contentDescription=""/>
-
-    <Button
-            android:id="@+id/manager"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Менеджер"
-            android:layout_margin="12dp"
-            android:gravity="left"
-            android:textSize="14sp"
-            android:textColor="@color/colorPrimaryDark"
-            android:background="?android:selectableItemBackground"
-            android:contentDescription=""/>
+            android:background="?android:selectableItemBackground"/>
 
     <LinearLayout
             android:layout_width="match_parent"

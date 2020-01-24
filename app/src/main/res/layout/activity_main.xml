@@ -1,76 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
         android:orientation="vertical"
-        tools:context=".ui.MainActivity"
+        tools:context=".ui.main.MainActivity">
 
-        android:fitsSystemWindows="true">
+    <androidx.appcompat.widget.Toolbar
+            android:id="@+id/main_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_alignParentTop="true"
+            android:background="@color/colorPrimary"
+            android:minHeight="?attr/actionBarSize">
 
+        <TextView
+                android:id="@+id/main_toolbar_text"
+                style="@style/ToolBarTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+    </androidx.appcompat.widget.Toolbar>
 
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/main_toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="90dp"
-                    android:minHeight="?attr/actionBarSize"
-                    android:background="@color/colorPrimary"
-                    android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                    android:layout_alignParentTop="true">
+    <LinearLayout
+            android:id="@+id/search_layout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/main_toolbar"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical">
 
-                <LinearLayout
-                        android:id="@+id/linear_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:layout_margin="8dp">
+        <androidx.appcompat.widget.SearchView
+                android:id="@+id/search_bar"
+                android:layout_width="300dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="9dp"
+                android:background="@color/white"
+                android:textSize="15sp"
+                app:queryHint="Search" />
+    </LinearLayout>
 
-                    <TextView
-                            android:id="@+id/app_munduz_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center"
-                            android:text="Munduz"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/white"
-                            android:layout_margin="5dp"/>
-
-                    <TextView
-                            android:id="@+id/search_bar"
-                            android:layout_width="300dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="i can search"
-                            android:textStyle="italic"
-                            android:background="@color/white"
-                            android:layout_margin="4dp"
-                            android:textSize="18sp"/>
-                </LinearLayout>
-
-            </androidx.appcompat.widget.Toolbar>
 
     <FrameLayout
             android:id="@+id/container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/gray"
-            android:layout_below="@+id/main_toolbar">
-    </FrameLayout>
-
+            android:layout_below="@+id/search_layout"></FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation_menu"
             android:layout_width="match_parent"
             android:layout_height="56dp"
+            android:layout_alignParentBottom="true"
             android:background="@color/white"
-            app:menu="@menu/bottom_navigation_menu"
             app:labelVisibilityMode="labeled"
-            android:layout_alignParentBottom="true">
-    </com.google.android.material.bottomnavigation.BottomNavigationView>
-
+            app:menu="@menu/bottom_navigation_menu"></com.google.android.material.bottomnavigation.BottomNavigationView>
 
 </RelativeLayout>
