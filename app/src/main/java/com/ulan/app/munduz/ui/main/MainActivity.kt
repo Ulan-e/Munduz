@@ -1,16 +1,13 @@
 package com.ulan.app.munduz.ui.main
 
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.LinearLayout
 import androidx.appcompat.widget.Toolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.ui.base.BaseActivity
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.more.MoreFragment
-import com.ulan.app.munduz.ui.basket.BasketFragment
+import com.ulan.app.munduz.ui.liked.LikedFragment
 import com.ulan.app.munduz.ui.catalog.CatalogFragment
 import com.ulan.app.munduz.ui.home.HomeFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -54,7 +51,7 @@ class MainActivity : BaseActivity(), MainView {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.basket -> {
-                val basketFragment = BasketFragment.newInstance()
+                val basketFragment = LikedFragment.newInstance()
                 mPresenter.addFragment(basketFragment)
                 return@OnNavigationItemSelectedListener true
             }

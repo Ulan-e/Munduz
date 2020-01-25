@@ -56,6 +56,7 @@
             android:layout_alignParentBottom="true"
             android:background="@color/white"
             app:labelVisibilityMode="labeled"
-            app:menu="@menu/bottom_navigation_menu"></com.google.android.material.bottomnavigation.BottomNavigationView>
+            app:menu="@menu/bottom_navigation_menu"
+            android:layout_below="@id/container"></com.google.android.material.bottomnavigation.BottomNavigationView>
 
 </RelativeLayout>

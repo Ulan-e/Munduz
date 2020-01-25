@@ -44,12 +44,13 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
 
     //Database
-    implementation 'androidx.room:room-runtime:2.2.0'
-    implementation 'androidx.room:room-rxjava2:2.0.0'
     implementation 'com.google.firebase:firebase-database:16.0.4'
     implementation 'com.google.firebase:firebase-storage:16.0.4'
     implementation 'com.google.firebase:firebase-auth:16.0.5'
-    annotationProcessor 'androidx.room:room-compiler:2.2.0'
+
+    implementation "android.arch.persistence.room:runtime:1.1.1"
+    kapt "android.arch.persistence.room:compiler:1.1.1"
+    annotationProcessor 'androidx.room:room-compiler:2.2.3'
 
     //RxJava2
     implementation "io.reactivex.rxjava2:rxjava:2.2.10"
@@ -63,6 +64,7 @@ dependencies {
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.16'
     kapt 'com.google.dagger:dagger-compiler:2.16'
     kapt 'com.google.dagger:dagger-android-processor:2.16'
+
 
 
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'

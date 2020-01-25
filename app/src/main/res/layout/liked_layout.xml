@@ -6,9 +6,16 @@
         android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/basket_recycler_view"
+            android:id="@+id/liked_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
     </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+            android:id="@+id/liked_text_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"/>
 
 </LinearLayout>

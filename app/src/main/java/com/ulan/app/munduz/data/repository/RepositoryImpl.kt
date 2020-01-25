@@ -6,6 +6,7 @@ import com.ulan.app.munduz.R
 import com.ulan.app.munduz.listeners.ProductListCallback
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCTS_DATA
+import com.ulan.app.munduz.listeners.ProductCallback
 
 class RepositoryImpl : Repository {
 
@@ -54,6 +55,8 @@ class RepositoryImpl : Repository {
         })
     }
 
+
+
     override fun loadFilterProducts(category: String, callback: ProductListCallback) {
         val products = mutableListOf<Product>()
         val query = ref.child(PRODUCTS_DATA).orderByChild("category").equalTo(category)
@@ -66,6 +69,25 @@ class RepositoryImpl : Repository {
                 callback.onCallback(products)
             }
 
+            override fun onCancelled(p0: DatabaseError) {
+                TODO()
+            }
+        })
+    }
+
+   override fun loadLikedProduct(key: String, callback: ProductCallback){
+       var product = Product()
+        val query = ref.child(PRODUCTS_DATA).orderByChild("id").equalTo(key)
+        query.addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(p0: DataSnapshot) {
+                for(item : DataSnapshot in p0.children){
+                    val likedProduct: Product? = item.getValue(Product::class.java)
+                    if (likedProduct != null) {
+                        product = likedProduct
+                    }
+                }
+                callback.onCallback(product)
+            }
             override fun onCancelled(p0: DatabaseError) {
                 TODO()
             }
