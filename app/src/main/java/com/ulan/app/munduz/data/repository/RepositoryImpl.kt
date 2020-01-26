@@ -1,11 +1,15 @@
 package com.ulan.app.munduz.data.repository
 
 import android.content.Context
+import android.util.Log
 import com.google.firebase.database.*
 import com.ulan.app.munduz.R
+import com.ulan.app.munduz.data.model.Order
 import com.ulan.app.munduz.listeners.ProductListCallback
 import com.ulan.app.munduz.developer.Product
+import com.ulan.app.munduz.helpers.Constants.Companion.ORDERS_DATA
 import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCTS_DATA
+import com.ulan.app.munduz.helpers.Constants.Companion.TAG
 import com.ulan.app.munduz.listeners.ProductCallback
 
 class RepositoryImpl : Repository {
@@ -18,6 +22,16 @@ class RepositoryImpl : Repository {
         this.context = context
         database = FirebaseDatabase.getInstance()
         ref = database.reference
+    }
+
+    override fun insertOrder(order: Order) {
+        val key = ref.child(ORDERS_DATA).push().key
+        if(key == null){
+            Log.d(TAG, "Couldn't get push key for products")
+            return
+        }
+        order.id = key
+        ref.child(ORDERS_DATA).child(key).setValue(order)
     }
 
     override fun loadProducts(callback: ProductListCallback){

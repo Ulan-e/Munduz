@@ -8,5 +8,6 @@ interface DetailsView{
     fun closeDetails()
     fun showProduct(product: Product)
     fun showNoProduct(text: String)
+    fun showOrderProduct()
 
 }

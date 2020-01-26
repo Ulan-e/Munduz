@@ -13,6 +13,7 @@ import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_ARG
 import com.ulan.app.munduz.helpers.showNoProduct
 import com.ulan.app.munduz.ui.base.BaseActivity
+import com.ulan.app.munduz.ui.buy.BuyFragment
 import kotlinx.android.synthetic.main.details_layout.*
 
 class DetailsActivity : BaseActivity(), DetailsView {
@@ -61,6 +62,11 @@ class DetailsActivity : BaseActivity(), DetailsView {
 
     override fun showNoProduct(text: String) {
         showNoProduct(this)
+    }
+
+    override fun showOrderProduct() {
+        val buyFragment = BuyFragment.newInstance(mProduct)
+        buyFragment.show(supportFragmentManager, "buy_dialog")
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

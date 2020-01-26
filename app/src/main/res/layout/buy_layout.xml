@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:layout_marginBottom="10dp">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
+                android:layout_margin="7dp"
+                android:text="Заказ"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        <Button
+                android:id="@+id/cancel_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_margin="5dp"
+                android:text="x"
+                android:textSize="24sp"
+                android:padding="0dp"
+                android:background="?attr/selectableItemBackground"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <TextView
+                android:id="@+id/order_product_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_margin="7dp"
+                android:textSize="16sp" />
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:orientation="horizontal">
+
+            <Button
+                    android:id="@+id/order_decrement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-"
+                    android:textSize="16sp"
+                    android:padding="0dp"
+                    android:background="?attr/selectableItemBackground"/>
+
+            <TextView
+                    android:id="@+id/order_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0" />
+
+            <Button
+                    android:id="@+id/order_increment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:textSize="16sp"
+                    android:padding="0dp"
+                    android:background="?attr/selectableItemBackground"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <Switch
+            android:id="@+id/order_with_delivery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="7sp"
+            android:text="Доставка"
+            android:textSize="16sp"
+            android:checked="true"
+            android:textOn="Да"
+            android:textOff="Нет"
+            android:showText="true"/>
+
+    <EditText
+            android:id="@+id/client_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp"
+            android:hint="Ваше имя"
+            android:textSize="16sp" />
+
+
+    <EditText
+            android:id="@+id/client_phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp"
+            android:hint="Телефонный номер"
+            android:textSize="16sp" />
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:text="по этому номеру вам позвонят"
+            android:textSize="12sp" />
+
+    <Button
+            android:id="@+id/order_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginLeft="7dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="7dp"
+            android:layout_marginBottom="7dp"
+            android:text="Заказать"
+            android:textSize="16sp"/>
+
+
+</LinearLayout>

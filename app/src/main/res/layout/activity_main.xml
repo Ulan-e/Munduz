@@ -1,53 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        android:orientation="vertical"
         tools:context=".ui.main.MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
-            android:id="@+id/main_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:layout_alignParentTop="true"
-            android:background="@color/colorPrimary"
-            android:minHeight="?attr/actionBarSize">
-
-        <TextView
-                android:id="@+id/main_toolbar_text"
-                style="@style/ToolBarTextView"
+        <androidx.appcompat.widget.Toolbar
+                android:id="@+id/main_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-    </androidx.appcompat.widget.Toolbar>
+                android:layout_height="45dp"
+                android:layout_gravity="top"
+                android:background="@color/colorPrimary"
+                android:minHeight="?attr/actionBarSize">
 
-    <LinearLayout
-            android:id="@+id/search_layout"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_below="@+id/main_toolbar"
-            android:background="@color/colorPrimary"
-            android:orientation="vertical">
+            <TextView
+                    android:id="@+id/main_toolbar_text"
+                    style="@style/ToolBarTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+        </androidx.appcompat.widget.Toolbar>
 
-        <androidx.appcompat.widget.SearchView
-                android:id="@+id/search_bar"
-                android:layout_width="300dp"
-                android:layout_height="32dp"
-                android:layout_gravity="center"
-                android:layout_marginBottom="9dp"
-                android:background="@color/white"
-                android:textSize="15sp"
-                app:queryHint="Search" />
-    </LinearLayout>
+        <LinearLayout
+                android:id="@+id/search_layout"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/colorPrimary"
+                android:orientation="vertical"
+                android:layout_below="@+id/main_toolbar">
+
+            <androidx.appcompat.widget.SearchView
+                    android:id="@+id/search_bar"
+                    android:layout_width="280dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="9dp"
+                    android:background="@color/white"
+                    android:textSize="15sp"
+                    app:queryHint="Search" />
+        </LinearLayout>
+
+        <FrameLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/search_layout"
+                android:layout_marginBottom="5dp">
+        </FrameLayout>
 
 
-    <FrameLayout
-            android:id="@+id/container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/search_layout"></FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation_menu"
@@ -56,7 +59,8 @@
             android:layout_alignParentBottom="true"
             android:background="@color/white"
             app:labelVisibilityMode="labeled"
-            app:menu="@menu/bottom_navigation_menu"
-            android:layout_below="@id/container"></com.google.android.material.bottomnavigation.BottomNavigationView>
+            app:menu="@menu/bottom_navigation_menu">
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
-</RelativeLayout>
+
+    </RelativeLayout>

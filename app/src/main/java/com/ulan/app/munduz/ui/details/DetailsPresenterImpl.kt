@@ -28,7 +28,7 @@ class DetailsPresenterImpl : DetailsPresenter {
     }
 
     override fun buyButtonClicked() {
-
+        mView?.showOrderProduct()
     }
 
     override fun favoriteButtonClicked() {
