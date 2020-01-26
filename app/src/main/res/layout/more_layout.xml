@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         android:fitsSystemWindows="true">
-
 
     <Button
             android:id="@+id/contacts_info"
@@ -26,18 +25,8 @@
             android:layout_margin="12dp"
             android:textSize="14sp"
             android:gravity="left"
-            android:background="?android:selectableItemBackground"/>
-
-    <Button
-            android:id="@+id/payment_delivery"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/payment_delivery"
-            android:layout_margin="12dp"
-            android:textSize="14sp"
-            android:gravity="left"
             android:background="?android:selectableItemBackground"
-            android:contentDescription=""/>
+            android:layout_below="@+id/contacts_info"/>
 
     <Button
             android:id="@+id/app_info"
@@ -47,43 +36,42 @@
             android:layout_margin="12dp"
             android:gravity="left"
             android:textSize="14sp"
-            android:background="?android:selectableItemBackground"/>
+            android:background="?android:selectableItemBackground"
+            android:layout_below="@+id/language"/>
 
     <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="30dp"
-            android:gravity="bottom|center_horizontal">
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/app_info"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp">
 
-        <ImageButton
-                android:id="@+id/gmail"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_margin="10dp"
-                android:src="@drawable/ic_public_black_24dp"/>
-
-        <ImageButton
+        <ImageView
                 android:id="@+id/instagram"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_margin="10dp"
-                android:src="@drawable/ic_public_black_24dp"/>
+                android:layout_margin="13dp"
+                android:src="@drawable/ic_instagram"
+                android:clickable="true"
+                android:layout_weight="1"/>
 
-        <ImageButton
-                android:id="@+id/ondoklassniki"
+        <ImageView
+                android:id="@+id/odnoklassniki"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_margin="10dp"
-                android:src="@drawable/ic_public_black_24dp"/>
+                android:layout_margin="13dp"
+                android:src="@drawable/ic_odnoklassniki"
+                android:layout_weight="1"/>
 
-        <ImageButton
+        <ImageView
                 android:id="@+id/facebook"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:layout_margin="10dp"
-                android:src="@drawable/ic_public_black_24dp"/>
+                android:layout_margin="13dp"
+                android:src="@drawable/ic_facebook"
+                android:clickable="true"
+                android:layout_weight="1"/>
 
     </LinearLayout>
 
-
-</LinearLayout>
+</RelativeLayout>
