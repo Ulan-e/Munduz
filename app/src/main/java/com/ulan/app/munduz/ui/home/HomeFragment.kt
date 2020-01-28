@@ -45,9 +45,9 @@ class HomeFragment : BaseFragment(), HomeView,
     private fun showToolbar(){
         val activity = (activity as AppCompatActivity)
         activity.findViewById<LinearLayout>(R.id.search_layout).visibility = View.VISIBLE
-        val toolbar = activity.findViewById<Toolbar>(R.id.main_toolbar)
-        val textToolbar = toolbar.findViewById<TextView>(R.id.main_toolbar_text)
-        textToolbar.text = resources.getString(R.string.app_name)
+        activity.supportActionBar?.hide()
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

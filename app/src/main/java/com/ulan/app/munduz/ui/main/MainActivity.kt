@@ -1,34 +1,35 @@
 package com.ulan.app.munduz.ui.main
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.widget.Toolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ulan.app.munduz.R
+import com.ulan.app.munduz.ui.search.SearchActivity
 import com.ulan.app.munduz.ui.base.BaseActivity
 import com.ulan.app.munduz.ui.base.BaseFragment
-import com.ulan.app.munduz.ui.more.MoreFragment
-import com.ulan.app.munduz.ui.liked.LikedFragment
 import com.ulan.app.munduz.ui.catalog.CatalogFragment
 import com.ulan.app.munduz.ui.home.HomeFragment
+import com.ulan.app.munduz.ui.liked.LikedFragment
+import com.ulan.app.munduz.ui.more.MoreFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity(), MainView {
 
-    private lateinit var mToolbar: Toolbar
-    lateinit var mPresenter: MainPresenter
+    private lateinit var mPresenter: MainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mPresenter = MainPresenterImpl(this)
 
-        initToolbar()
+        button_click.setOnClickListener{
+            startActivity(Intent(this@MainActivity, SearchActivity::class.java))
+        }
+
         initBottomNav()
     }
 
     override fun initToolbar() {
-        mToolbar = findViewById(R.id.main_toolbar)
-        setSupportActionBar(mToolbar)
 
     }
 
@@ -37,7 +38,7 @@ class MainActivity : BaseActivity(), MainView {
         bottom_navigation_menu.selectedItemId = R.id.home
     }
 
-    private var itemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener{
+    private var itemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener {
             menuItem ->
         when (menuItem.itemId) {
             R.id.home -> {
@@ -72,5 +73,7 @@ class MainActivity : BaseActivity(), MainView {
             .addToBackStack(null)
             .commit()
     }
+
+
 
 }

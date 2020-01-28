@@ -11,6 +11,7 @@ import com.ulan.app.munduz.helpers.Constants.Companion.ORDERS_DATA
 import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCTS_DATA
 import com.ulan.app.munduz.helpers.Constants.Companion.TAG
 import com.ulan.app.munduz.listeners.ProductCallback
+import com.ulan.app.munduz.listeners.ProductsCallback
 
 class RepositoryImpl : Repository {
 
@@ -36,6 +37,24 @@ class RepositoryImpl : Repository {
 
     override fun loadProducts(callback: ProductListCallback){
         val products = mutableListOf<Product>()
+        ref.child(PRODUCTS_DATA).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(p0: DataSnapshot) {
+                for (item: DataSnapshot in p0.children) {
+                    val product: Product? = item.getValue(Product::class.java)
+                    products.add(product!!)
+                }
+                callback.onCallback(products)
+            }
+
+            override fun onCancelled(p0: DatabaseError) {
+                TODO()
+            }
+        })
+    }
+
+
+    override fun loadSearchedProducts(callback: ProductsCallback){
+        val products = ArrayList<Product>()
         ref.child(PRODUCTS_DATA).addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 for (item: DataSnapshot in p0.children) {

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:padding="5dp">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:id="@+id/munduz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="Мундуз"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="19dp"
+                    android:textSize="16sp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/munduz"
+                    android:layout_alignParentLeft="true"
+                    android:text="+7 965 965 00 00"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="10dp"/>
+
+            <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_odnoklassniki"
+                    android:layout_margin="5dp"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:padding="5dp">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <TextView
+                    android:id="@+id/munar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:text="Мунар"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="19dp"
+                    android:textSize="16sp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/munar"
+                    android:layout_alignParentLeft="true"
+                    android:text="+7 965 965 00 00"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginLeft="10dp"/>
+
+            <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/ic_facebook"
+                    android:layout_margin="5dp"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:padding="5dp">
+
+        <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:src="@drawable/ic_whatsapp" />
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="0x1F60A Наш адрес: Волгограсдкий проспект 32к8 \n
+                                Метро: Волгоградский проспект \n
+                        График 9:00 - 21:00 \n "
+                />
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
