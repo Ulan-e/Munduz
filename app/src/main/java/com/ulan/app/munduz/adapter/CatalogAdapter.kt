@@ -11,13 +11,17 @@ import com.ulan.app.munduz.listeners.OnItemClickListener
 class CatalogAdapter : RecyclerView.Adapter<CatalogViewHolder> {
 
     private var context: Context
-    private var catalogs: MutableList<String>
     private var listener: OnCategoryClickListener
 
-    constructor(context: Context, catalogs: MutableList<String>, listener: OnCategoryClickListener) : super() {
-        this.catalogs = catalogs
+    private lateinit  var catalog: MutableList<String>
+
+    constructor(context: Context, listener: OnCategoryClickListener) : super() {
         this.context = context
         this.listener = listener
+    }
+
+    fun setCatalogs(catalog: MutableList<String>){
+        this.catalog = catalog
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatalogViewHolder {
@@ -27,11 +31,11 @@ class CatalogAdapter : RecyclerView.Adapter<CatalogViewHolder> {
     }
 
     override fun getItemCount(): Int {
-        return catalogs.size
+        return catalog.size
     }
 
     override fun onBindViewHolder(holder: CatalogViewHolder, position: Int) {
-        val category = catalogs[position]
+        val category = catalog[position]
         holder.bind(category, listener)
         holder.name.text = category
     }

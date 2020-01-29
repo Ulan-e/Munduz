@@ -11,19 +11,24 @@ import com.ulan.app.munduz.adapter.SearchResultsAdapter
 import com.ulan.app.munduz.data.repository.Repository
 import com.ulan.app.munduz.data.repository.RepositoryImpl
 import com.ulan.app.munduz.developer.Product
+import com.ulan.app.munduz.helpers.Constants
 import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_SEARCH
 import com.ulan.app.munduz.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.base.BaseActivity
 import com.ulan.app.munduz.ui.details.DetailsActivity
 import kotlinx.android.synthetic.main.search_layout.*
+import javax.inject.Inject
 
 class SearchActivity: BaseActivity(), SearchView, OnItemClickListener,
     android.widget.SearchView.OnQueryTextListener {
 
-    private lateinit var mRepository: Repository
-    private lateinit var mPresenter: SearchPresenter
+    @Inject
+    lateinit var mPresenter: SearchPresenter
+
+    @Inject
+    lateinit var mAdapter: SearchResultsAdapter
+
     private lateinit var mProducts: ArrayList<Product>
-    private lateinit var mAdapter: SearchResultsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,12 +40,6 @@ class SearchActivity: BaseActivity(), SearchView, OnItemClickListener,
         search_view_full.setOnQueryTextListener(this)
         search_view_full.queryHint="Search"
 
-
-        mRepository = RepositoryImpl(this)
-        mPresenter =
-            SearchPresenterImpl(this,
-                mRepository
-            )
         mPresenter.loadProducts()
 
         press_back.setOnClickListener{
@@ -52,10 +51,7 @@ class SearchActivity: BaseActivity(), SearchView, OnItemClickListener,
         mProducts = products
         val layoutManager = LinearLayoutManager(this)
         search_results.layoutManager = layoutManager
-        mAdapter = SearchResultsAdapter(
-            this, products,
-            this@SearchActivity
-        )
+        mAdapter.setProducts(products)
         search_results.adapter = mAdapter
     }
 
@@ -65,7 +61,7 @@ class SearchActivity: BaseActivity(), SearchView, OnItemClickListener,
 
     override fun onItemClick(product: Product?) {
         val intent = Intent(this, DetailsActivity::class.java)
-        intent.putExtra(PRODUCT_SEARCH, product)
+        intent.putExtra(Constants.PRODUCT_ARG, product)
         startActivity(intent)
     }
 

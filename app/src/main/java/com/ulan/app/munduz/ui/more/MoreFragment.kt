@@ -13,11 +13,14 @@ import androidx.appcompat.widget.Toolbar
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.more.sections.ContactUsFragment
+import com.ulan.app.munduz.ui.more.sections.WtiteToUsFragment
 import kotlinx.android.synthetic.main.more_layout.*
+import javax.inject.Inject
 
 class MoreFragment: BaseFragment(), MoreView{
 
-    private lateinit var mPresenter: MorePresenter
+    @Inject
+    lateinit var mPresenter: MorePresenter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.more_layout, container, false)
@@ -27,13 +30,12 @@ class MoreFragment: BaseFragment(), MoreView{
         super.onViewCreated(view, savedInstanceState)
         showToolbar()
 
-        mPresenter = MorePresenterImpl(this)
         contacts_us.setOnClickListener{
             mPresenter.goToContactsUs()
         }
 
-        about_app.setOnClickListener{
-            mPresenter.goToAboutApp()
+        write_tous_button.setOnClickListener{
+            mPresenter.goToWriteToUsFragment()
         }
 
         instagram.setOnClickListener{
@@ -49,7 +51,7 @@ class MoreFragment: BaseFragment(), MoreView{
         }
     }
 
-    private fun showToolbar(){
+    override fun showToolbar() {
         val activity = (activity as AppCompatActivity)
         activity.findViewById<LinearLayout>(R.id.search_layout).visibility = View.GONE
         val toolbar = activity.findViewById<Toolbar>(R.id.main_toolbar)
@@ -69,8 +71,9 @@ class MoreFragment: BaseFragment(), MoreView{
         TODO("not implemented")
     }
 
-    override fun showAboutApp() {
-        TODO()
+    override fun showWriteUs() {
+        val dialogFragment = WtiteToUsFragment()
+        dialogFragment.show(activity!!.supportFragmentManager, "dialogg")
     }
 
     override fun showInstagramPage() {

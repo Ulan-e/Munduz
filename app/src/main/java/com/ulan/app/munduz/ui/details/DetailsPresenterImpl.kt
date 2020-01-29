@@ -1,11 +1,10 @@
 package com.ulan.app.munduz.ui.details
 
 import android.util.Log
-import androidx.core.content.ContextCompat
-import com.ulan.app.munduz.R
 import com.ulan.app.munduz.data.roomdatabase.KeyEntity
 import com.ulan.app.munduz.data.roomdatabase.LikedDatabase
 import com.ulan.app.munduz.developer.Product
+import javax.inject.Inject
 
 class DetailsPresenterImpl : DetailsPresenter {
 
@@ -13,6 +12,7 @@ class DetailsPresenterImpl : DetailsPresenter {
     private var mDatabase: LikedDatabase
     private lateinit var mProduct: Product
 
+    @Inject
     constructor(mView: DetailsView, database: LikedDatabase) {
         this.mView = mView
         this.mDatabase = database
@@ -27,19 +27,29 @@ class DetailsPresenterImpl : DetailsPresenter {
         mView?.initToolbar("Details")
     }
 
+    override fun isFavoriteProduct() {
+        val key = mProduct.id
+        val table = mDatabase.keysDao().fetchAllKeys()
+        for (item in table) {
+            if (key == item.key) {
+                mView?.markAsLiked()
+            }
+        }
+    }
+
     override fun buyButtonClicked() {
         mView?.showOrderProduct()
     }
 
     override fun favoriteButtonClicked() {
         val key = mProduct.id
-        val table = mDatabase.productsDao().fetchAllKeys()
+        val table = mDatabase.keysDao().fetchAllKeys()
         if(table.isEmpty()) {
-            mDatabase.productsDao().insertKey(getProductKey())
+            mDatabase.keysDao().insertKey(getProductKey())
         }else{
             for(item in table){
                 if(key != item.key){
-                    mDatabase.productsDao().insertKey(getProductKey())
+                    mDatabase.keysDao().insertKey(getProductKey())
                 }else{
                     Log.d("ulanbek", "product.id $key and item.key $item.key is equal ")
                 }

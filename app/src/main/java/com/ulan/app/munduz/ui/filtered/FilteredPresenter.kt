@@ -2,6 +2,7 @@ package com.ulan.app.munduz.ui.filtered
 
 interface FilteredPresenter {
 
-    fun loadProducts(categoryName: String)
+    fun setToolbar()
+    fun loadProductsByCategory(categoryName: String)
     fun onDetachView()
 }

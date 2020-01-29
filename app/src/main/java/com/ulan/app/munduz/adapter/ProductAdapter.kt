@@ -11,16 +11,22 @@ import com.ulan.app.munduz.listeners.OnItemClickListener
 
 class ProductAdapter : RecyclerView.Adapter<ProductViewHolder>{
 
-    private var products:  MutableList<Product>
     private var context: Context
-    private var listener: OnItemClickListener
+    private lateinit var products:  MutableList<Product>
+    private lateinit var listener: OnItemClickListener
 
-    constructor(context: Context, products: MutableList<Product>, listener: OnItemClickListener) : super() {
-        this.products = products
+    constructor(context: Context, listener: OnItemClickListener) : super() {
         this.context = context
         this.listener = listener
     }
 
+    fun setProducts(products: MutableList<Product>){
+        this.products = products
+    }
+
+    fun setItemClickListener(listener: OnItemClickListener){
+        this.listener = listener
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater

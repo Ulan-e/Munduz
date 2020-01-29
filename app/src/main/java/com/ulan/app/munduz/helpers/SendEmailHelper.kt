@@ -12,13 +12,17 @@ class SendEmailHelper : AsyncTask<Void, Void, Void>{
     private val context: Context
     private lateinit var session: Session
 
-    private var email: String
-    private var subject: String
-    private var message: String
-    private var time: String
+    private lateinit var email: String
+    private lateinit var subject: String
+    private lateinit var message: String
+    private lateinit var time: String
 
-    constructor(context: Context, email: String, subject: String, message: String, time: String) {
+
+    constructor(context: Context) {
         this.context = context
+    }
+
+    fun setMessage(email: String, subject: String, message: String, time: String){
         this.email = email
         this.subject = subject
         this.message = message
@@ -50,7 +54,7 @@ class SendEmailHelper : AsyncTask<Void, Void, Void>{
             mime.setFrom(InternetAddress(Config.EMAIL))
             mime.addRecipient(Message.RecipientType.TO, InternetAddress(email))
             mime.setSubject(subject)
-            mime.setText("$message\n\n >>>>> $time")
+            mime.setText("$message\n\n >>> $time")
             Transport.send(mime)
         }catch (e: MessagingException){
             e.printStackTrace()

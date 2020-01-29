@@ -22,29 +22,26 @@ import com.ulan.app.munduz.helpers.Constants
 import com.ulan.app.munduz.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.details.DetailsActivity
+import javax.inject.Inject
 
 class LikedFragment: BaseFragment(), LikedView, OnItemClickListener {
-
-    private lateinit var mDatabase: LikedDatabase
-    private lateinit var mRepository: Repository
-    private lateinit var mPresenter: LikedPresenter
 
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mTextView: TextView
 
+    @Inject
+    lateinit var mPresenter: LikedPresenter
+
+    @Inject
+    lateinit var mAdapter: ProductAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.liked_layout, container, false)
 
         mRecyclerView = view.findViewById(R.id.liked_recycler_view)
         mTextView = view.findViewById(R.id.liked_text_empty)
-
-        mDatabase = LikedDatabase.getDatabase(activity!!.applicationContext)!!
-        mRepository = RepositoryImpl(activity!!)
-        mPresenter = LikedPresenterImpl(this, mDatabase, mRepository)
         mPresenter.initToolbar()
         mPresenter.loadProducts()
-        Log.d("ulanbek", "LikedFragmnet " + mDatabase.productsDao().fetchAllKeys().size.toString())
         return view
     }
 
@@ -58,9 +55,10 @@ class LikedFragment: BaseFragment(), LikedView, OnItemClickListener {
 
     override fun showLikedProducts(products: MutableList<Product>) {
         val layoutManager  =  GridLayoutManager(activity, 2)
-        val adapter = ProductAdapter(activity!!, products, this)
+        mAdapter.setProducts(products)
+        mAdapter.setItemClickListener(this)
         mRecyclerView.layoutManager = layoutManager
-        mRecyclerView.adapter = adapter
+        mRecyclerView.adapter = mAdapter
     }
 
     override fun showNoLikedProducts() {

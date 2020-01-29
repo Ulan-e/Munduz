@@ -10,9 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.ulan.app.munduz.R
+import com.ulan.app.munduz.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.more_layout.*
 
-class ContactUsFragment: Fragment(){
+class ContactUsFragment: BaseFragment(){
 
     override fun onCreateView(
         inflater: LayoutInflater,

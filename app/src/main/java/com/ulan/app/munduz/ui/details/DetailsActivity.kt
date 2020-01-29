@@ -1,38 +1,34 @@
 package com.ulan.app.munduz.ui.details
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.squareup.picasso.Picasso
 import com.ulan.app.munduz.R
-import com.ulan.app.munduz.data.roomdatabase.LikedDatabase
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_ARG
 import com.ulan.app.munduz.helpers.showNoProduct
 import com.ulan.app.munduz.ui.base.BaseActivity
 import com.ulan.app.munduz.ui.buy.BuyFragment
 import kotlinx.android.synthetic.main.details_layout.*
+import javax.inject.Inject
 
 class DetailsActivity : BaseActivity(), DetailsView {
 
-    private lateinit var mProduct: Product
-    private lateinit var mPresenter: DetailsPresenter
-    private lateinit var mDatabase: LikedDatabase
     private var mMenu: Menu? = null
+    private lateinit var mProduct: Product
+
+    @Inject
+    lateinit var mPresenter: DetailsPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.details_layout)
 
-        mDatabase = LikedDatabase.getDatabase(this)!!
         mProduct = intent.getParcelableExtra<Product>(PRODUCT_ARG)
-        mPresenter = DetailsPresenterImpl(this, mDatabase)
         mPresenter.setToolbar()
         mPresenter.setProduct(mProduct)
-
 
         buy_product.setOnClickListener {
             mPresenter.buyButtonClicked()
@@ -72,7 +68,7 @@ class DetailsActivity : BaseActivity(), DetailsView {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.details_menu, menu)
         this.mMenu = menu
-        isFavoriteProduct()
+        mPresenter.isFavoriteProduct()
         return true
     }
 
@@ -80,29 +76,19 @@ class DetailsActivity : BaseActivity(), DetailsView {
         when (item!!.itemId) {
             R.id.favorite -> {
                 mPresenter.favoriteButtonClicked()
-                disableFavoriteButton()
+                markAsLiked()
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun disableFavoriteButton() {
+    override fun markAsLiked() {
         mMenu?.getItem(0)?.setIcon(
             ContextCompat.getDrawable(this, R.drawable.ic_favorite_black_24dp)
         )
         mMenu?.getItem(0)?.isEnabled = false
         mMenu?.getItem(0)?.isCheckable = false
         mMenu?.getItem(0)?.isChecked = false
-    }
-
-    private fun isFavoriteProduct() {
-        val key = mProduct.id
-        val table = mDatabase.productsDao().fetchAllKeys()
-        for (item in table) {
-            if (key == item.key) {
-                disableFavoriteButton()
-            }
-        }
     }
 
     override fun onDestroy() {

@@ -5,6 +5,7 @@ import com.ulan.app.munduz.data.roomdatabase.LikedDatabase
 import com.ulan.app.munduz.data.roomdatabase.KeyEntity
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.listeners.ProductCallback
+import javax.inject.Inject
 
 class LikedPresenterImpl : LikedPresenter{
 
@@ -13,6 +14,7 @@ class LikedPresenterImpl : LikedPresenter{
     private var mDatabase: LikedDatabase
     private var mRepository: Repository
 
+    @Inject
     constructor(mView: LikedView, mDatabase: LikedDatabase, mRepository: Repository) {
         this.mView = mView
         this.mDatabase = mDatabase
@@ -29,7 +31,7 @@ class LikedPresenterImpl : LikedPresenter{
 
     override fun loadProducts() {
         var products = mutableListOf<Product>()
-        val keys = mDatabase.productsDao().fetchAllKeys()
+        val keys = mDatabase.keysDao().fetchAllKeys()
         for(item: KeyEntity in keys){
             mRepository.loadLikedProduct(item.key, object : ProductCallback{
                 override fun onCallback(product: Product) {

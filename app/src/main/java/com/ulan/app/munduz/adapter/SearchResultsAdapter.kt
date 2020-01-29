@@ -15,15 +15,19 @@ class SearchResultsAdapter: RecyclerView.Adapter<SearchViewHolder>, Filterable  
 
     private var mContext: Context
     private var mListener: OnItemClickListener
-    private var mProducts: ArrayList<Product>
-    private var mFilteredProducts: ArrayList<Product>
     private var emptyList =  ArrayList<Product>()
 
-    constructor(context: Context, products: ArrayList<Product>, listener: OnItemClickListener) : super() {
+    private lateinit var mProducts: ArrayList<Product>
+    private lateinit var mFilteredProducts: ArrayList<Product>
+
+    constructor(context: Context, listener: OnItemClickListener) : super() {
         this.mContext = context
+        this.mListener = listener
+    }
+
+    fun setProducts(products : ArrayList<Product>){
         this.mProducts = products
         mFilteredProducts = emptyList
-        this.mListener = listener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
@@ -50,12 +54,13 @@ class SearchResultsAdapter: RecyclerView.Adapter<SearchViewHolder>, Filterable  
                 if(pattern.isEmpty()){
                     mFilteredProducts = emptyList
                 }else{
+                    var innerList =  ArrayList<Product>()
                     for(product: Product in mProducts) {
                         if (product.name.toLowerCase().contains(pattern)) {
-                            emptyList.add(product)
+                            innerList.add(product)
                         }
                     }
-                    mFilteredProducts = emptyList
+                    mFilteredProducts = innerList
                 }
 
                 val results: FilterResults = FilterResults()

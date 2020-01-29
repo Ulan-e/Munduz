@@ -1,8 +1,13 @@
 package com.ulan.app.munduz.ui.base
 
-import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import dagger.android.AndroidInjection
+import dagger.android.support.DaggerAppCompatActivity
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : DaggerAppCompatActivity() {
 
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
+        super.onCreate(savedInstanceState)
+    }
 }

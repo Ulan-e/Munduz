@@ -1,8 +1,17 @@
 package com.ulan.app.munduz.ui.main
 
 import com.ulan.app.munduz.ui.base.BaseFragment
+import javax.inject.Inject
 
-class MainPresenterImpl(val mView: MainView) : MainPresenter {
+class MainPresenterImpl : MainPresenter {
+
+    private var mView: MainView
+
+    @Inject
+    constructor(mView: MainView) {
+        this.mView = mView
+    }
+
 
     override fun addFragment(fragment: BaseFragment) {
         val title = fragment.toString()

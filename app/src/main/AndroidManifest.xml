@@ -33,7 +33,6 @@
         </activity>
 
         <activity android:name=".ui.details.DetailsActivity"/>
-        <activity android:name=".ui.filtered.FilteredActivity"/>
 
     </application>
 

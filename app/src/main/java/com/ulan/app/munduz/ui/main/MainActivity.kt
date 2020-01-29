@@ -2,6 +2,7 @@ package com.ulan.app.munduz.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.ui.search.SearchActivity
@@ -11,16 +12,20 @@ import com.ulan.app.munduz.ui.catalog.CatalogFragment
 import com.ulan.app.munduz.ui.home.HomeFragment
 import com.ulan.app.munduz.ui.liked.LikedFragment
 import com.ulan.app.munduz.ui.more.MoreFragment
+import dagger.android.AndroidInjection
+import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainView {
 
-    private lateinit var mPresenter: MainPresenter
+    @Inject
+    lateinit var mPresenter: MainPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        mPresenter = MainPresenterImpl(this)
 
         button_click.setOnClickListener{
             startActivity(Intent(this@MainActivity, SearchActivity::class.java))

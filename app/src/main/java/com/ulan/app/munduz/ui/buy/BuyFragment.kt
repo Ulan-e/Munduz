@@ -5,20 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.DialogFragment
 import com.ulan.app.munduz.R
+import com.ulan.app.munduz.data.model.Message
 import com.ulan.app.munduz.data.model.Order
-import com.ulan.app.munduz.data.repository.Repository
-import com.ulan.app.munduz.data.repository.RepositoryImpl
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_BUY_ARG
+import com.ulan.app.munduz.helpers.SendEmailHelper
+import com.ulan.app.munduz.ui.base.BaseDialogFragment
 import kotlinx.android.synthetic.main.buy_layout.*
+import javax.inject.Inject
 
-class BuyFragment : DialogFragment(), BuyView{
+class BuyFragment : BaseDialogFragment(), BuyView{
 
-    private lateinit var mPresenter: BuyPresenter
-    private lateinit var mRepository: Repository
     private lateinit var mProduct: Product
+
+    @Inject
+    lateinit var mPresenter: BuyPresenter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,9 +33,10 @@ class BuyFragment : DialogFragment(), BuyView{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mRepository = RepositoryImpl(activity!!)
-        mPresenter = BuyPresenterImpl(this, mRepository)
         mPresenter.setProduct(mProduct)
+
+        val sendEmailHelper = SendEmailHelper(activity!!.applicationContext)
+        mPresenter.setSendEmailHelper(sendEmailHelper)
 
         order_button.setOnClickListener{
             mPresenter.sendButtonClicked()
@@ -46,23 +49,22 @@ class BuyFragment : DialogFragment(), BuyView{
         order_product_name.text=mProduct.name
 
         order_increment.setOnClickListener{
-            order_count.text = incre().toString()
+            order_count.text = incrementProduct().toString()
         }
 
         order_decrement.setOnClickListener{
-            order_count.text = decre().toString()
+            order_count.text = decrementProduct().toString()
         }
-
 
     }
 
-    private fun incre(): Int{
+    private fun incrementProduct(): Int{
         var count = order_count.text.toString().toInt()
         count = count.inc()
         return count
     }
 
-    private fun decre(): Int{
+    private fun decrementProduct(): Int{
         var count = order_count.text.toString().toInt()
         if(count == 1){
             return 1

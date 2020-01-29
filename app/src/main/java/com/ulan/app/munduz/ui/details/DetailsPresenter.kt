@@ -7,6 +7,7 @@ interface DetailsPresenter {
     fun setProduct(product: Product)
     fun setToolbar()
     fun buyButtonClicked()
+    fun isFavoriteProduct()
     fun favoriteButtonClicked()
     fun onBackPressed()
     fun detachView()

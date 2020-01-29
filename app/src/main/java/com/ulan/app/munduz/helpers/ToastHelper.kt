@@ -6,7 +6,7 @@ import android.widget.Toast
 fun showNoProduct(context: Context){
     Toast.makeText(
         context,
-        "Такой продукт в данноу время отсутсвует",
+        "Такой продукт в данное время отсутсвует",
         Toast.LENGTH_LONG
     ).show()
 }
@@ -14,7 +14,15 @@ fun showNoProduct(context: Context){
 fun showSuccessMessageSent(context: Context){
     Toast.makeText(
         context,
-        "Message Sent",
+        "Спасибо за ваш отзыв",
+        Toast.LENGTH_LONG
+    ).show()
+}
+
+fun showEmptyFields(context: Context){
+    Toast.makeText(
+        context,
+        "Заполните поля",
         Toast.LENGTH_LONG
     ).show()
 }
