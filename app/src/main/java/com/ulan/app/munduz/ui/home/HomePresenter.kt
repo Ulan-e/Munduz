@@ -4,5 +4,6 @@ interface HomePresenter {
 
     fun setToolbar()
     fun loadProducts()
+    fun loadSliderImages()
     fun onDetachView()
 }

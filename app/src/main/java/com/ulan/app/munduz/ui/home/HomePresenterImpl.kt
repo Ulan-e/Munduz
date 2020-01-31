@@ -1,8 +1,10 @@
 package com.ulan.app.munduz.ui.home
 
+import com.ulan.app.munduz.data.model.SliderImage
 import com.ulan.app.munduz.listeners.ProductListCallback
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.data.repository.Repository
+import com.ulan.app.munduz.listeners.SliderImagesCallback
 import javax.inject.Inject
 
 class HomePresenterImpl: HomePresenter{
@@ -21,16 +23,21 @@ class HomePresenterImpl: HomePresenter{
     }
 
     override fun loadProducts() {
-
         mRepository.loadNewProducts(object :
             ProductListCallback {
             override fun onCallback(value: MutableList<Product>) {
-                mView?.showProgress()
                 mView?.showProducts(value)
-                mView?.hideProgress()
             }
         })
 
+    }
+
+    override fun loadSliderImages() {
+        mRepository.loadSliderPhotos(object : SliderImagesCallback{
+            override fun onCallback(value: ArrayList<SliderImage>) {
+                mView?.showSliderImages(value)
+            }
+        })
     }
 
     override fun onDetachView() {

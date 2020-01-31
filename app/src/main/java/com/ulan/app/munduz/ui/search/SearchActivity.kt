@@ -12,7 +12,6 @@ import com.ulan.app.munduz.data.repository.Repository
 import com.ulan.app.munduz.data.repository.RepositoryImpl
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
-import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_SEARCH
 import com.ulan.app.munduz.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.base.BaseActivity
 import com.ulan.app.munduz.ui.details.DetailsActivity

@@ -5,13 +5,16 @@ import android.util.Log
 import com.google.firebase.database.*
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.data.model.Order
+import com.ulan.app.munduz.data.model.SliderImage
 import com.ulan.app.munduz.listeners.ProductListCallback
 import com.ulan.app.munduz.developer.Product
+import com.ulan.app.munduz.helpers.Constants
 import com.ulan.app.munduz.helpers.Constants.Companion.ORDERS_DATA
 import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCTS_DATA
 import com.ulan.app.munduz.helpers.Constants.Companion.TAG
 import com.ulan.app.munduz.listeners.ProductCallback
 import com.ulan.app.munduz.listeners.ProductsCallback
+import com.ulan.app.munduz.listeners.SliderImagesCallback
 
 class RepositoryImpl : Repository {
 
@@ -108,7 +111,24 @@ class RepositoryImpl : Repository {
         })
     }
 
-   override fun loadLikedProduct(key: String, callback: ProductCallback){
+    override fun loadSliderPhotos(callback: SliderImagesCallback) {
+        val sliderImages = ArrayList<SliderImage>()
+        ref.child(Constants.SLIDER_DATA).addListenerForSingleValueEvent(object : ValueEventListener{
+            override fun onDataChange(p0: DataSnapshot) {
+                for(item : DataSnapshot in p0.children){
+                    val image = item.getValue(SliderImage::class.java)
+                    sliderImages.add(image!!)
+                }
+                callback.onCallback(sliderImages)
+            }
+
+            override fun onCancelled(p0: DatabaseError) {
+                TODO()
+            }
+        })
+    }
+
+    override fun loadLikedProduct(key: String, callback: ProductCallback){
        var product = Product()
         val query = ref.child(PRODUCTS_DATA).orderByChild("id").equalTo(key)
         query.addListenerForSingleValueEvent(object : ValueEventListener{
