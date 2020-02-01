@@ -2,8 +2,7 @@ package com.ulan.app.munduz.ui.search
 
 import com.ulan.app.munduz.data.repository.Repository
 import com.ulan.app.munduz.developer.Product
-import com.ulan.app.munduz.listeners.ProductsCallback
-import javax.inject.Inject
+import com.ulan.app.munduz.helpers.listeners.ProductsCallback
 
 class SearchPresenterImpl: SearchPresenter{
 

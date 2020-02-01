@@ -14,13 +14,18 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme.NoActionBar"
             android:name=".BaseApplication">
-        <activity android:name="com.ulan.app.munduz.ui.main.MainActivity">
+        <activity android:name=".ui.SplashActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <activity android:name="com.ulan.app.munduz.ui.main.MainActivity"/>
 
         <activity android:name=".ui.search.SearchActivity">
             <intent-filter>

@@ -1,4 +1,4 @@
-package com.ulan.app.munduz.listeners
+package com.ulan.app.munduz.helpers.listeners
 
 import com.ulan.app.munduz.data.model.SliderImage
 

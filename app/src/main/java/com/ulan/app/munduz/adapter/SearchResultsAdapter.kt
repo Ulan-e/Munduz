@@ -3,13 +3,12 @@ package com.ulan.app.munduz.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.developer.Product
-import com.ulan.app.munduz.listeners.OnItemClickListener
+import com.ulan.app.munduz.helpers.listeners.OnItemClickListener
 
 class SearchResultsAdapter: RecyclerView.Adapter<SearchViewHolder>, Filterable  {
 

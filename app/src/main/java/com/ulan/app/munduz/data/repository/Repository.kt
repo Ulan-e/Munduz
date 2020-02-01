@@ -1,11 +1,7 @@
 package com.ulan.app.munduz.data.repository
 
 import com.ulan.app.munduz.data.model.Order
-import com.ulan.app.munduz.listeners.ProductListCallback
-import com.ulan.app.munduz.developer.Product
-import com.ulan.app.munduz.listeners.ProductCallback
-import com.ulan.app.munduz.listeners.ProductsCallback
-import com.ulan.app.munduz.listeners.SliderImagesCallback
+import com.ulan.app.munduz.helpers.listeners.*
 
 interface Repository{
 

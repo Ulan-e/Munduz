@@ -6,12 +6,11 @@ import com.ulan.app.munduz.dagger.modules.RoomModule
 import com.ulan.app.munduz.dagger.scopes.MainScope
 import com.ulan.app.munduz.data.repository.Repository
 import com.ulan.app.munduz.data.roomdatabase.LikedDatabase
-import com.ulan.app.munduz.listeners.OnItemClickListener
+import com.ulan.app.munduz.helpers.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.liked.LikedFragment
 import com.ulan.app.munduz.ui.liked.LikedPresenter
 import com.ulan.app.munduz.ui.liked.LikedPresenterImpl
 import com.ulan.app.munduz.ui.liked.LikedView
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 

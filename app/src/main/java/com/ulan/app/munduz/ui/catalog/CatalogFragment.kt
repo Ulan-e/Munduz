@@ -1,6 +1,5 @@
 package com.ulan.app.munduz.ui.catalog
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +11,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.adapter.CatalogAdapter
-import com.ulan.app.munduz.helpers.Constants.Companion.CATEGORY_ARG
-import com.ulan.app.munduz.listeners.OnCategoryClickListener
+import com.ulan.app.munduz.helpers.listeners.OnCategoryClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.filtered.FilteredFragment
 import kotlinx.android.synthetic.main.catalog_layout.*

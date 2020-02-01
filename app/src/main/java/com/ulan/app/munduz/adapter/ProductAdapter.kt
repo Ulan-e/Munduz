@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.developer.Product
-import com.ulan.app.munduz.listeners.OnItemClickListener
+import com.ulan.app.munduz.helpers.listeners.OnItemClickListener
 
 class ProductAdapter : RecyclerView.Adapter<ProductViewHolder>{
 

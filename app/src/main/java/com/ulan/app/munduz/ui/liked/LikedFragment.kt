@@ -2,7 +2,6 @@ package com.ulan.app.munduz.ui.liked
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,12 +13,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.adapter.ProductAdapter
-import com.ulan.app.munduz.data.repository.Repository
-import com.ulan.app.munduz.data.repository.RepositoryImpl
-import com.ulan.app.munduz.data.roomdatabase.LikedDatabase
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
-import com.ulan.app.munduz.listeners.OnItemClickListener
+import com.ulan.app.munduz.helpers.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.details.DetailsActivity
 import javax.inject.Inject

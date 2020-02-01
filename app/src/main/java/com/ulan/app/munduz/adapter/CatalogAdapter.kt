@@ -5,8 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.ulan.app.munduz.R
-import com.ulan.app.munduz.listeners.OnCategoryClickListener
-import com.ulan.app.munduz.listeners.OnItemClickListener
+import com.ulan.app.munduz.helpers.listeners.OnCategoryClickListener
 
 class CatalogAdapter : RecyclerView.Adapter<CatalogViewHolder> {
 

@@ -1,20 +1,25 @@
 package com.ulan.app.munduz.data.repository
 
 import android.content.Context
+import android.os.Handler
 import android.util.Log
 import com.google.firebase.database.*
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.data.model.Order
 import com.ulan.app.munduz.data.model.SliderImage
-import com.ulan.app.munduz.listeners.ProductListCallback
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
 import com.ulan.app.munduz.helpers.Constants.Companion.ORDERS_DATA
 import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCTS_DATA
 import com.ulan.app.munduz.helpers.Constants.Companion.TAG
-import com.ulan.app.munduz.listeners.ProductCallback
-import com.ulan.app.munduz.listeners.ProductsCallback
-import com.ulan.app.munduz.listeners.SliderImagesCallback
+import com.ulan.app.munduz.helpers.listeners.*
+import durdinapps.rxfirebase2.RxFirebaseDatabase
+import io.reactivex.BackpressureStrategy
+import io.reactivex.Emitter
+import io.reactivex.Flowable
+import io.reactivex.FlowableEmitter
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 
 class RepositoryImpl : Repository {
 
@@ -55,7 +60,6 @@ class RepositoryImpl : Repository {
         })
     }
 
-
     override fun loadSearchedProducts(callback: ProductsCallback){
         val products = ArrayList<Product>()
         ref.child(PRODUCTS_DATA).addListenerForSingleValueEvent(object : ValueEventListener {
@@ -73,8 +77,7 @@ class RepositoryImpl : Repository {
         })
     }
 
-    override fun loadNewProducts(callback: ProductListCallback) {
-        val products = mutableListOf<Product>()
+    override fun loadNewProducts(callback: ProductListCallback) { val products = mutableListOf<Product>()
         val query = ref.child(PRODUCTS_DATA).orderByKey().limitToLast(4)
         query.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(p0: DataSnapshot) {
@@ -90,7 +93,6 @@ class RepositoryImpl : Repository {
             }
         })
     }
-
 
 
     override fun loadFilterProducts(category: String, callback: ProductListCallback) {

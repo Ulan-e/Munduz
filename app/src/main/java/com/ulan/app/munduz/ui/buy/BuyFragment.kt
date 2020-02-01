@@ -17,10 +17,13 @@ import javax.inject.Inject
 
 class BuyFragment : BaseDialogFragment(), BuyView{
 
-    private lateinit var mProduct: Product
-
     @Inject
     lateinit var mPresenter: BuyPresenter
+
+    @Inject
+    lateinit var mSendEmailHelper: SendEmailHelper
+
+    private lateinit var mProduct: Product
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,8 +38,8 @@ class BuyFragment : BaseDialogFragment(), BuyView{
         super.onViewCreated(view, savedInstanceState)
         mPresenter.setProduct(mProduct)
 
-        val sendEmailHelper = SendEmailHelper(activity!!.applicationContext)
-        mPresenter.setSendEmailHelper(sendEmailHelper)
+        mPresenter.setSendEmailHelper(mSendEmailHelper)
+        order_product_name.text=mProduct.name
 
         order_button.setOnClickListener{
             mPresenter.sendButtonClicked()
@@ -46,7 +49,6 @@ class BuyFragment : BaseDialogFragment(), BuyView{
             mPresenter.cancelButtonClicked()
         }
 
-        order_product_name.text=mProduct.name
 
         order_increment.setOnClickListener{
             order_count.text = incrementProduct().toString()
@@ -99,11 +101,10 @@ class BuyFragment : BaseDialogFragment(), BuyView{
     }
 
     override fun showSuccessOrder() {
-        Toast.makeText(activity!!, "Successully ordered", Toast.LENGTH_SHORT).show()
+        Toast.makeText(activity!!, "Ваш заказ успешно выполнен", Toast.LENGTH_SHORT).show()
     }
 
     companion object{
-
         fun newInstance(product: Product): BuyFragment{
             val fragment = BuyFragment()
             val args = Bundle()

@@ -3,16 +3,12 @@ package com.ulan.app.munduz.ui.search
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ulan.app.munduz.R
-import com.ulan.app.munduz.adapter.ProductAdapter
 import com.ulan.app.munduz.adapter.SearchResultsAdapter
-import com.ulan.app.munduz.data.repository.Repository
-import com.ulan.app.munduz.data.repository.RepositoryImpl
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
-import com.ulan.app.munduz.listeners.OnItemClickListener
+import com.ulan.app.munduz.helpers.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.base.BaseActivity
 import com.ulan.app.munduz.ui.details.DetailsActivity
 import kotlinx.android.synthetic.main.search_layout.*

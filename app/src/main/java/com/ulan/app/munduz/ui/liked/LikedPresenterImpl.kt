@@ -4,7 +4,7 @@ import com.ulan.app.munduz.data.repository.Repository
 import com.ulan.app.munduz.data.roomdatabase.LikedDatabase
 import com.ulan.app.munduz.data.roomdatabase.KeyEntity
 import com.ulan.app.munduz.developer.Product
-import com.ulan.app.munduz.listeners.ProductCallback
+import com.ulan.app.munduz.helpers.listeners.ProductCallback
 import javax.inject.Inject
 
 class LikedPresenterImpl : LikedPresenter{

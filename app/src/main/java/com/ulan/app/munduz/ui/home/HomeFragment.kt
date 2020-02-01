@@ -1,7 +1,6 @@
 package com.ulan.app.munduz.ui.home
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -18,7 +17,7 @@ import com.ulan.app.munduz.adapter.SliderAdapter
 import com.ulan.app.munduz.data.model.SliderImage
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_ARG
-import com.ulan.app.munduz.listeners.OnItemClickListener
+import com.ulan.app.munduz.helpers.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.details.DetailsActivity
 import kotlinx.android.synthetic.main.home_layout.*
@@ -95,7 +94,6 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
     override fun showSliderImages(images: ArrayList<SliderImage>) {
         val sliderAdapter = SliderAdapter(activity!!.applicationContext, images)
         view_pager.adapter = sliderAdapter
-        Log.d("ulanbek", "Slider adapter size  " + sliderAdapter.count.toString())
         view_pager.addOnPageChangeListener(object: ViewPager.OnPageChangeListener{
             override fun onPageScrollStateChanged(state: Int) {
 

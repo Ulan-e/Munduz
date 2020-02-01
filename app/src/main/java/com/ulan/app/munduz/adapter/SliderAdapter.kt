@@ -35,7 +35,6 @@ class SliderAdapter: PagerAdapter {
         val view = inflater.inflate(R.layout.item_slider, null)
         val imageView = view.findViewById<ImageView>(R.id.imageView)
         val sliderImage = images.get(position)
-        Log.d("ulanbek", "Slider Image " + sliderImage.toString())
         Picasso.get().load(sliderImage.image).into(imageView)
 
         val viewPager = container as ViewPager

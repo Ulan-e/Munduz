@@ -14,10 +14,9 @@ import com.ulan.app.munduz.adapter.ProductAdapter
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
 import com.ulan.app.munduz.helpers.Constants.Companion.CATEGORY_ARG
-import com.ulan.app.munduz.listeners.OnItemClickListener
+import com.ulan.app.munduz.helpers.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.details.DetailsActivity
-import com.ulan.app.munduz.ui.more.MoreFragment
 import kotlinx.android.synthetic.main.filtered_layout.*
 import javax.inject.Inject
 
