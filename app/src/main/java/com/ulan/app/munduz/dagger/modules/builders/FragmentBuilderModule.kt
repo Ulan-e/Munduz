@@ -10,6 +10,7 @@ import com.ulan.app.munduz.ui.home.HomeFragment
 import com.ulan.app.munduz.ui.liked.LikedFragment
 import com.ulan.app.munduz.ui.more.MoreFragment
 import com.ulan.app.munduz.ui.more.sections.ContactUsFragment
+import com.ulan.app.munduz.ui.more.sections.WriteToUsFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -32,14 +33,18 @@ abstract class FragmentBuilderModule {
     @ContributesAndroidInjector(modules = [MoreModule::class])
     abstract fun moreFragment(): MoreFragment
 
+    @DetailsScope
+    @ContributesAndroidInjector(modules = [BuyModule::class])
+    abstract fun buyFragment(): BuyFragment
+
+
     @MainScope
     @ContributesAndroidInjector
     abstract fun contactUsFragmet(): ContactUsFragment
 
-
-    @DetailsScope
-    @ContributesAndroidInjector(modules = [BuyModule::class])
-    abstract fun buyFragment(): BuyFragment
+    @MainScope
+    @ContributesAndroidInjector
+    abstract fun writeUsFragment(): WriteToUsFragment
 
 
 

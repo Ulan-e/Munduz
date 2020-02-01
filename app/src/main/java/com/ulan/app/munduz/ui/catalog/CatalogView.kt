@@ -4,5 +4,5 @@ interface CatalogView {
 
     fun showToolbar()
     fun showCatalog(catalog: MutableList<String>)
-    fun showNoCatalog(text: String)
+    fun showNoCatalog()
 }

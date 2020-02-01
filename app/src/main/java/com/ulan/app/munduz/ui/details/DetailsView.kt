@@ -4,9 +4,9 @@ import com.ulan.app.munduz.developer.Product
 
 interface DetailsView{
 
-    fun initToolbar(title: String)
+    fun initToolbar()
     fun showProduct(product: Product)
-    fun showNoProduct(text: String)
+    fun showNoProduct()
     fun showOrderProduct()
     fun markAsLiked()
     fun closeDetails()

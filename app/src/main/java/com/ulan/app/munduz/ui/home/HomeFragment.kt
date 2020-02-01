@@ -71,14 +71,6 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
         mPresenter.loadSliderImages()
     }
 
-    override fun showProgress() {
-        home_progress_bar.visibility = View.VISIBLE
-    }
-
-    override fun hideProgress() {
-        home_progress_bar.visibility = View.GONE
-    }
-
     override fun showProducts(products: MutableList<Product>) {
         val layoutManager = GridLayoutManager(activity, 2)
         home_recycler_view.layoutManager = layoutManager
@@ -88,7 +80,7 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
     }
 
     override fun showNoProducts() {
-        showNoProducts()
+        empty_new_products.visibility = View.VISIBLE
     }
 
     override fun showSliderImages(images: ArrayList<SliderImage>) {

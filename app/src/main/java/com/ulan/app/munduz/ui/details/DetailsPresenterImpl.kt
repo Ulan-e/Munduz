@@ -19,12 +19,16 @@ class DetailsPresenterImpl : DetailsPresenter {
     }
 
     override fun setProduct(product: Product) {
-        this.mProduct = product
-        mView?.showProduct(mProduct)
+        if(product != null) {
+            this.mProduct = product
+            mView?.showProduct(mProduct)
+        }else {
+            mView?.showNoProduct()
+        }
     }
 
     override fun setToolbar() {
-        mView?.initToolbar("Details")
+        mView?.initToolbar()
     }
 
     override fun isFavoriteProduct() {
@@ -44,21 +48,19 @@ class DetailsPresenterImpl : DetailsPresenter {
     override fun favoriteButtonClicked() {
         val key = mProduct.id
         val table = mDatabase.keysDao().fetchAllKeys()
-        if(table.isEmpty()) {
+        if (table.isEmpty()) {
             mDatabase.keysDao().insertKey(getProductKey())
-        }else{
-            for(item in table){
-                if(key != item.key){
+        } else {
+            for (item in table) {
+                if (key != item.key) {
                     mDatabase.keysDao().insertKey(getProductKey())
-                }else{
-                    Log.d("ulanbek", "product.id $key and item.key $item.key is equal ")
                 }
             }
         }
 
     }
 
-    private fun getProductKey():KeyEntity{
+    private fun getProductKey(): KeyEntity {
         val keyEntity = KeyEntity()
         keyEntity.key = this.mProduct.id
         return keyEntity

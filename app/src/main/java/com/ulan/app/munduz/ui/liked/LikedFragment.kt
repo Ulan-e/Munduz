@@ -18,12 +18,10 @@ import com.ulan.app.munduz.helpers.Constants
 import com.ulan.app.munduz.helpers.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.details.DetailsActivity
+import kotlinx.android.synthetic.main.liked_layout.*
 import javax.inject.Inject
 
 class LikedFragment: BaseFragment(), LikedView, OnItemClickListener {
-
-    private lateinit var mRecyclerView: RecyclerView
-    private lateinit var mTextView: TextView
 
     @Inject
     lateinit var mPresenter: LikedPresenter
@@ -32,13 +30,14 @@ class LikedFragment: BaseFragment(), LikedView, OnItemClickListener {
     lateinit var mAdapter: ProductAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.liked_layout, container, false)
+        return inflater.inflate(R.layout.liked_layout, container, false)
+    }
 
-        mRecyclerView = view.findViewById(R.id.liked_recycler_view)
-        mTextView = view.findViewById(R.id.liked_text_empty)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         mPresenter.initToolbar()
         mPresenter.loadProducts()
-        return view
     }
 
     override fun showToolbar(){
@@ -53,12 +52,12 @@ class LikedFragment: BaseFragment(), LikedView, OnItemClickListener {
         val layoutManager  =  GridLayoutManager(activity, 2)
         mAdapter.setProducts(products)
         mAdapter.setItemClickListener(this)
-        mRecyclerView.layoutManager = layoutManager
-        mRecyclerView.adapter = mAdapter
+        liked_recycler_view.layoutManager = layoutManager
+        liked_recycler_view.adapter = mAdapter
     }
 
     override fun showNoLikedProducts() {
-        mTextView.text = "Liked is Empty"
+        empty_liked_products.visibility = View.VISIBLE
     }
 
     override fun onItemClick(product: Product?) {

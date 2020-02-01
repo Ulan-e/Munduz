@@ -28,7 +28,6 @@ class BuyModule {
         return  BuyPresenterImpl(buyView, repository)
     }
 
-    @DetailsScope
     @Provides
     fun sendEmail(context: Context) : SendEmailHelper {
         return SendEmailHelper(context)

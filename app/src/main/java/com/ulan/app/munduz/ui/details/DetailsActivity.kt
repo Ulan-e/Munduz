@@ -3,12 +3,12 @@ package com.ulan.app.munduz.ui.details
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.core.content.ContextCompat
 import com.squareup.picasso.Picasso
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_ARG
-import com.ulan.app.munduz.helpers.showNoProduct
 import com.ulan.app.munduz.ui.base.BaseActivity
 import com.ulan.app.munduz.ui.buy.BuyFragment
 import kotlinx.android.synthetic.main.details_layout.*
@@ -16,17 +16,18 @@ import javax.inject.Inject
 
 class DetailsActivity : BaseActivity(), DetailsView {
 
-    private var mMenu: Menu? = null
-    private lateinit var mProduct: Product
-
     @Inject
     lateinit var mPresenter: DetailsPresenter
+
+    private var mMenu: Menu? = null
+    private lateinit var mProduct: Product
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.details_layout)
 
         mProduct = intent.getParcelableExtra<Product>(PRODUCT_ARG)
+
         mPresenter.setToolbar()
         mPresenter.setProduct(mProduct)
 
@@ -36,8 +37,9 @@ class DetailsActivity : BaseActivity(), DetailsView {
 
     }
 
-    override fun initToolbar(title: String) {
+    override fun initToolbar() {
         setSupportActionBar(product_toolbar)
+        product_toolbar.title = mProduct.name
         Picasso.get().load(mProduct.picture.urlImage).into(details_image)
         product_toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp)
         product_toolbar.setNavigationOnClickListener {
@@ -56,8 +58,8 @@ class DetailsActivity : BaseActivity(), DetailsView {
         product_amount.text = product.amount.toString()
     }
 
-    override fun showNoProduct(text: String) {
-        showNoProduct(this)
+    override fun showNoProduct() {
+        empty_product.visibility = View.VISIBLE
     }
 
     override fun showOrderProduct() {

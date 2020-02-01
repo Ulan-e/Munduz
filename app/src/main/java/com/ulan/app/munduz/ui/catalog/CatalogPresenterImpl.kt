@@ -19,7 +19,11 @@ class CatalogPresenterImpl : CatalogPresenter {
 
     override fun loadCatalog() {
         val categories = mRepository.loadCatalogs()
-        mView?.showCatalog(categories)
+        if (categories.size > 0){
+            mView?.showCatalog(categories)
+        }else{
+            mView?.showNoCatalog()
+        }
     }
 
     override fun detachView() {

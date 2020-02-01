@@ -52,14 +52,6 @@ class FilteredFragment : BaseFragment(), FilteredView,  OnItemClickListener{
         textToolbar.text = mCategory
     }
 
-    override fun showProgress() {
-        filter_progress_bar.visibility = View.VISIBLE
-    }
-
-    override fun hideProgress() {
-        filter_progress_bar.visibility = View.GONE
-    }
-
     override fun showProducts(products: MutableList<Product>) {
         val layoutManager = GridLayoutManager(activity, 2)
         filter_recycler_view.layoutManager = layoutManager
@@ -68,7 +60,7 @@ class FilteredFragment : BaseFragment(), FilteredView,  OnItemClickListener{
     }
 
     override fun showNoProducts() {
-        TODO()
+        empty_filter_catalog.visibility = View.VISIBLE
     }
 
     override fun onItemClick(product: Product?) {

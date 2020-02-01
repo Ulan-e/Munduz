@@ -30,6 +30,11 @@
     <string name="update_product">Обновить товар</string>
     <string name="remove_product">Удалить товар</string>
     <string name="buy_product">Купить</string>
+    <string name="empty_list">Каталог пуст</string>
+    <string name="empty_filter_products">Данный каталог пуст</string>
+    <string name="empty_new_products">Пока новинок нет</string>
+    <string name="empty_liked_products">У вас пока нет понравивщихся</string>
+    <string name="empty_product">Данный продукт не существует</string>
 
     <string-array name="category">
         <item>Продукты</item>

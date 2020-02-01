@@ -17,15 +17,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/ic_launcher"/>
+                android:src="@mipmap/ic_launcher" />
 
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/blue"
-            android:layout_below="@+id/product_toolbar">
+            android:layout_below="@+id/product_toolbar"
+            android:background="@color/blue">
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -36,9 +36,8 @@
                     android:id="@+id/product_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/product_name_size"
-                    android:text="Name">
-            </TextView>
+                    android:text="Name"
+                    android:textSize="@dimen/product_name_size"></TextView>
 
             <RelativeLayout
                     android:layout_width="match_parent"
@@ -49,16 +48,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:textSize="@dimen/product_price_size"
-                        android:text="Price"></TextView>
+                        android:text="Price"
+                        android:textSize="@dimen/product_price_size"></TextView>
 
                 <TextView
                         android:id="@+id/product_amount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:textSize="@dimen/product_amount_size"
-                        android:text="Amount"></TextView>
+                        android:text="Amount"
+                        android:textSize="@dimen/product_amount_size"></TextView>
 
             </RelativeLayout>
 
@@ -66,15 +65,15 @@
                     android:id="@+id/product_desc_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/product_desc_title_size"
-                    android:text="Desc"></TextView>
+                    android:text="Desc"
+                    android:textSize="@dimen/product_desc_title_size"></TextView>
 
             <TextView
                     android:id="@+id/product_desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/product_desc_size"
-                    android:text="Full Desc"></TextView>
+                    android:text="Full Desc"
+                    android:textSize="@dimen/product_desc_size"></TextView>
 
         </LinearLayout>
 
@@ -84,11 +83,20 @@
             android:id="@+id/buy_product"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/buy_product"
+            android:layout_alignParentBottom="true"
             android:layout_margin="5dp"
-            android:layout_alignParentBottom="true">
-
+            android:text="@string/buy_product">
     </Button>
+
+    <TextView
+            android:id="@+id/empty_product"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/empty_product"
+            android:visibility="gone">
+    </TextView>
 
 
 </RelativeLayout>

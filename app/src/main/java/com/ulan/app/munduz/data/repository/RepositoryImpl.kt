@@ -55,7 +55,7 @@ class RepositoryImpl : Repository {
             }
 
             override fun onCancelled(p0: DatabaseError) {
-                TODO()
+                Log.d(TAG, "Firebase Database Error " + p0.message)
             }
         })
     }
@@ -72,7 +72,7 @@ class RepositoryImpl : Repository {
             }
 
             override fun onCancelled(p0: DatabaseError) {
-                TODO()
+                Log.d(TAG, "Firebase Database Error " + p0.message)
             }
         })
     }
@@ -89,7 +89,7 @@ class RepositoryImpl : Repository {
             }
 
             override fun onCancelled(p0: DatabaseError) {
-                TODO()
+                Log.d(TAG, "Firebase Database Error " + p0.message)
             }
         })
     }
@@ -108,7 +108,7 @@ class RepositoryImpl : Repository {
             }
 
             override fun onCancelled(p0: DatabaseError) {
-                TODO()
+                Log.d(TAG, "Firebase Database Error " + p0.message)
             }
         })
     }
@@ -125,7 +125,7 @@ class RepositoryImpl : Repository {
             }
 
             override fun onCancelled(p0: DatabaseError) {
-                TODO()
+                Log.d(TAG, "Firebase Database Error " + p0.message)
             }
         })
     }
@@ -144,7 +144,7 @@ class RepositoryImpl : Repository {
                 callback.onCallback(product)
             }
             override fun onCancelled(p0: DatabaseError) {
-                TODO()
+                Log.d(TAG, "Firebase Database Error " + p0.message)
             }
         })
     }

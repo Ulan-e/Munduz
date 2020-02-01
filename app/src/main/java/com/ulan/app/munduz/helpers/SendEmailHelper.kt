@@ -29,11 +29,6 @@ class SendEmailHelper : AsyncTask<Void, Void, Void>{
         this.time = time
     }
 
-    override fun onPostExecute(result: Void?) {
-        super.onPostExecute(result)
-        showSuccessMessageSent(context)
-    }
-
     override fun doInBackground(vararg p0: Void?): Void? {
         val props = Properties()
         props.setProperty("mail.transport.protocol", "smtp")

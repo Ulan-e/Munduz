@@ -19,13 +19,15 @@ class FilteredPresenterImpl: FilteredPresenter {
     }
 
     override fun loadProductsByCategory(categoryName: String) {
-        mView?.showProgress()
         mRepository.loadFilterProducts(categoryName, object : ProductListCallback {
-            override fun onCallback(value: MutableList<Product>) {
-                mView?.showProducts(value)
+            override fun onCallback(values: MutableList<Product>) {
+                if(values.size > 0){
+                    mView?.showProducts(values)
+                }else{
+                    mView?.showNoProducts()
+                }
             }
         })
-        mView?.hideProgress()
     }
 
     override fun onDetachView() {

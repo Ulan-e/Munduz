@@ -35,7 +35,7 @@ abstract class HomeModule {
 
         @JvmStatic
         @Provides
-        fun providListener(homeFragment: HomeFragment): OnItemClickListener{
+        fun provideListener(homeFragment: HomeFragment): OnItemClickListener{
             return homeFragment
         }
     }

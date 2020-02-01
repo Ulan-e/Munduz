@@ -11,9 +11,12 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.ulan.app.munduz.R
+import com.ulan.app.munduz.helpers.Constants.Companion.FACEBOOK_PAGE
+import com.ulan.app.munduz.helpers.Constants.Companion.INSTAGRAM_PAGE
+import com.ulan.app.munduz.helpers.Constants.Companion.ODNOKLASSNIKI_PAGE
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.more.sections.ContactUsFragment
-import com.ulan.app.munduz.ui.more.sections.WtiteToUsFragment
+import com.ulan.app.munduz.ui.more.sections.WriteToUsFragment
 import kotlinx.android.synthetic.main.more_layout.*
 import javax.inject.Inject
 
@@ -72,28 +75,28 @@ class MoreFragment: BaseFragment(), MoreView{
     }
 
     override fun showWriteUs() {
-        val dialogFragment = WtiteToUsFragment()
-        dialogFragment.show(activity!!.supportFragmentManager, "dialogg")
+        val dialogFragment = WriteToUsFragment()
+        dialogFragment.show(activity!!.supportFragmentManager, "dialogWriteUs")
     }
 
     override fun showInstagramPage() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/munduz.ru"))
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(INSTAGRAM_PAGE))
         startActivity(intent)
     }
 
     override fun showOdnoklassnikiPage() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://ok.ru/profile/581176986653"))
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(ODNOKLASSNIKI_PAGE))
         startActivity(intent)
     }
 
     override fun showFacebookPage() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://m.facebook.com/profile.php?id=100008205792318"))
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(FACEBOOK_PAGE))
         startActivity(intent)
     }
 
     companion object{
         fun newInstance(): MoreFragment {
-            val args: Bundle = Bundle()
+            val args = Bundle()
             val fragment = MoreFragment()
             fragment.arguments = args
             return fragment

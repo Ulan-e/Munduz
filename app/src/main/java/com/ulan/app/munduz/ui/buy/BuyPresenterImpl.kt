@@ -30,9 +30,9 @@ class BuyPresenterImpl : BuyPresenter {
 
     override fun sendButtonClicked() {
         val order = mView?.getInputOrder()
-        mRepository.insertOrder(order!!)
-        sendToEmail(order)
         if (mView?.isNotEmptyFields() == true) {
+            mRepository.insertOrder(order!!)
+            sendToEmail(order)
             mView?.showSuccessOrder()
         } else {
             mView?.isNotEmptyFields()

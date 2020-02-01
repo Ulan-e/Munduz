@@ -62,8 +62,8 @@ class CatalogFragment : BaseFragment(), CatalogView, OnCategoryClickListener {
             .commit()
     }
 
-    override fun showNoCatalog(text: String) {
-        TODO()
+    override fun showNoCatalog() {
+        empty_catalog.visibility = View.VISIBLE
     }
 
     companion object {

@@ -24,8 +24,12 @@ class HomePresenterImpl: HomePresenter{
 
     override fun loadProducts() {
         mRepository.loadNewProducts(object : ProductListCallback{
-            override fun onCallback(value: MutableList<Product>) {
-                mView?.showProducts(value)
+            override fun onCallback(values: MutableList<Product>) {
+                if(values.size > 0){
+                    mView?.showProducts(values)
+                }else{
+                    mView?.showNoProducts()
+                }
             }
         })
 

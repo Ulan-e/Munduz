@@ -36,7 +36,11 @@ class LikedPresenterImpl : LikedPresenter{
             mRepository.loadLikedProduct(item.key, object : ProductCallback{
                 override fun onCallback(product: Product) {
                     products.add(product)
-                    mView?.showLikedProducts(products)
+                    if(products.size > 0) {
+                        mView?.showLikedProducts(products)
+                    }else{
+                        mView?.showNoLikedProducts()
+                    }
                 }
             })
         }
