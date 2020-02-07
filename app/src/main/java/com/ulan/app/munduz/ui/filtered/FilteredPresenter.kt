@@ -1,8 +1,7 @@
 package com.ulan.app.munduz.ui.filtered
 
-interface FilteredPresenter {
+import com.ulan.app.munduz.ui.base.BasePresenter
 
-    fun setToolbar()
+interface FilteredPresenter: BasePresenter {
     fun loadProductsByCategory(categoryName: String)
-    fun onDetachView()
 }

@@ -1,7 +1,7 @@
 package com.ulan.app.munduz.data.repository
 
 import com.ulan.app.munduz.data.model.Order
-import com.ulan.app.munduz.helpers.listeners.*
+import com.ulan.app.munduz.listeners.*
 
 interface Repository{
 

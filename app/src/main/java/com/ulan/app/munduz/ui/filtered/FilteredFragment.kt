@@ -14,7 +14,7 @@ import com.ulan.app.munduz.adapter.ProductAdapter
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
 import com.ulan.app.munduz.helpers.Constants.Companion.CATEGORY_ARG
-import com.ulan.app.munduz.helpers.listeners.OnItemClickListener
+import com.ulan.app.munduz.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.details.DetailsActivity
 import kotlinx.android.synthetic.main.filtered_layout.*
@@ -52,15 +52,15 @@ class FilteredFragment : BaseFragment(), FilteredView,  OnItemClickListener{
         textToolbar.text = mCategory
     }
 
+    override fun showEmptyData() {
+        empty_filter_catalog.visibility = View.VISIBLE
+    }
+
     override fun showProducts(products: MutableList<Product>) {
         val layoutManager = GridLayoutManager(activity, 2)
         filter_recycler_view.layoutManager = layoutManager
         mAdapter.setProducts(products)
         filter_recycler_view.adapter = mAdapter
-    }
-
-    override fun showNoProducts() {
-        empty_filter_catalog.visibility = View.VISIBLE
     }
 
     override fun onItemClick(product: Product?) {
@@ -71,7 +71,7 @@ class FilteredFragment : BaseFragment(), FilteredView,  OnItemClickListener{
 
     override fun onDestroy() {
         super.onDestroy()
-        mPresenter.onDetachView()
+        mPresenter.detachView()
     }
 
     companion object{

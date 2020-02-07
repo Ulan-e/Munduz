@@ -3,7 +3,6 @@ package com.ulan.app.munduz.ui.home
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +16,7 @@ import com.ulan.app.munduz.adapter.SliderAdapter
 import com.ulan.app.munduz.data.model.SliderImage
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_ARG
-import com.ulan.app.munduz.helpers.listeners.OnItemClickListener
+import com.ulan.app.munduz.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.details.DetailsActivity
 import kotlinx.android.synthetic.main.home_layout.*
@@ -47,7 +46,6 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
 
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -62,8 +60,13 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
         activity.supportActionBar?.hide()
     }
 
+    override fun showEmptyData() {
+        empty_new_products.visibility = View.VISIBLE
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         handler = Handler()
 
         mPresenter.setToolbar()
@@ -75,12 +78,7 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
         val layoutManager = GridLayoutManager(activity, 2)
         home_recycler_view.layoutManager = layoutManager
         mAdapter.setProducts(products)
-        mAdapter.setItemClickListener(this)
         home_recycler_view.adapter = mAdapter
-    }
-
-    override fun showNoProducts() {
-        empty_new_products.visibility = View.VISIBLE
     }
 
     override fun showSliderImages(images: ArrayList<SliderImage>) {
@@ -106,6 +104,12 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
         })
     }
 
+    override fun onItemClick(product: Product?) {
+        val intent = Intent(activity, DetailsActivity::class.java)
+        intent.putExtra(PRODUCT_ARG, product)
+        startActivity(intent)
+    }
+
     companion object {
         fun newInstance(): HomeFragment {
             val args = Bundle()
@@ -113,12 +117,6 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
             fragment.arguments = args
             return fragment
         }
-    }
-
-    override fun onItemClick(product: Product?) {
-        val intent = Intent(activity, DetailsActivity::class.java)
-        intent.putExtra(PRODUCT_ARG, product)
-        startActivity(intent)
     }
 
     override fun onResume() {
@@ -129,5 +127,10 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
     override fun onPause() {
         super.onPause()
         handler.removeCallbacks(runnable)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mPresenter.detachView()
     }
 }

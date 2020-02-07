@@ -1,10 +1,8 @@
 package com.ulan.app.munduz.ui.filtered
 
 import com.ulan.app.munduz.developer.Product
+import com.ulan.app.munduz.ui.base.BaseView
 
-interface FilteredView {
-
-    fun showToolbar()
+interface FilteredView: BaseView {
     fun showProducts(products: MutableList<Product>)
-    fun showNoProducts()
 }

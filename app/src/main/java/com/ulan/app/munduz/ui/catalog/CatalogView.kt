@@ -1,8 +1,7 @@
 package com.ulan.app.munduz.ui.catalog
 
-interface CatalogView {
+import com.ulan.app.munduz.ui.base.BaseView
 
-    fun showToolbar()
+interface CatalogView : BaseView {
     fun showCatalog(catalog: MutableList<String>)
-    fun showNoCatalog()
 }

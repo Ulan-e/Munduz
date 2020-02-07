@@ -2,7 +2,7 @@ package com.ulan.app.munduz.ui.search
 
 import com.ulan.app.munduz.data.repository.Repository
 import com.ulan.app.munduz.developer.Product
-import com.ulan.app.munduz.helpers.listeners.ProductsCallback
+import com.ulan.app.munduz.listeners.ProductsCallback
 
 class SearchPresenterImpl: SearchPresenter{
 
@@ -15,13 +15,9 @@ class SearchPresenterImpl: SearchPresenter{
         this.mRepository = mRepository
     }
 
-    override fun setProducts(products: ArrayList<Product>) {
-        this.mProducts = products
-    }
 
-
-    override fun detachView() {
-        this.mView = null
+    override fun setToolbar() {
+        mView?.showToolbar()
     }
 
     override fun loadProducts(): ArrayList<Product> {
@@ -33,6 +29,10 @@ class SearchPresenterImpl: SearchPresenter{
 
         })
         return mProducts
+    }
+
+    override fun detachView() {
+        this.mView = null
     }
 
 }

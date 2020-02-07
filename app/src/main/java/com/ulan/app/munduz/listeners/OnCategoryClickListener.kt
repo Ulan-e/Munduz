@@ -1,4 +1,4 @@
-package com.ulan.app.munduz.helpers.listeners
+package com.ulan.app.munduz.listeners
 
 interface OnCategoryClickListener {
 

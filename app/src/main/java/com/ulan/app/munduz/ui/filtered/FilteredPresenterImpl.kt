@@ -2,7 +2,7 @@ package com.ulan.app.munduz.ui.filtered
 
 import com.ulan.app.munduz.data.repository.Repository
 import com.ulan.app.munduz.developer.Product
-import com.ulan.app.munduz.helpers.listeners.ProductListCallback
+import com.ulan.app.munduz.listeners.ProductListCallback
 
 class FilteredPresenterImpl: FilteredPresenter {
 
@@ -24,13 +24,14 @@ class FilteredPresenterImpl: FilteredPresenter {
                 if(values.size > 0){
                     mView?.showProducts(values)
                 }else{
-                    mView?.showNoProducts()
+                    mView?.showEmptyData()
                 }
             }
         })
     }
 
-    override fun onDetachView() {
+    override fun detachView() {
         mView = null
     }
+
 }

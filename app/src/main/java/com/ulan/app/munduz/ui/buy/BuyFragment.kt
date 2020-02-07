@@ -5,16 +5,15 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import com.ulan.app.munduz.R
-import com.ulan.app.munduz.data.model.Message
 import com.ulan.app.munduz.data.model.Order
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_BUY_ARG
 import com.ulan.app.munduz.helpers.SendEmailHelper
 import com.ulan.app.munduz.ui.base.BaseDialogFragment
 import kotlinx.android.synthetic.main.buy_layout.*
+import kotlinx.android.synthetic.main.buy_layout.view.*
 import javax.inject.Inject
 import javax.inject.Provider
 
@@ -39,8 +38,13 @@ class BuyFragment : BaseDialogFragment(), BuyView {
         return mView
     }
 
+    override fun showToolbar() {
+        title_buy_fragment.text = "Заказ"
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mPresenter.setToolbar()
         mPresenter.setProduct(mProduct)
 
         val sendEmailHelper = mSendEmailHelper.get()
@@ -94,28 +98,43 @@ class BuyFragment : BaseDialogFragment(), BuyView {
         return order
     }
 
-    override fun cancelOrder() {
-        dismiss()
-    }
-
     override fun isNotEmptyFields(): Boolean {
         if (client_name.text.toString() == "" || client_phone_number.text.toString() == "") {
-            showSnack("Заполните поля")
+            showSnackBar("Заполните поля")
             return false
         }
         return true
     }
 
     override fun showSuccessOrder() {
-        showSnack("Ваш заказ успешно выполнен")
+        showSnackBar("Ваш заказ успешно выполнен")
         Handler().postDelayed({
             dismiss()
         }, 2500)
     }
 
-    private fun showSnack(text: String) {
+    override fun showEmptyData() {
+        client_name.setText("Такой продукт в данное время отсутвует")
+        client_name.isEnabled  = false
+        container_product.visibility  = View.GONE
+        order_with_delivery.visibility = View.GONE
+        client_phone_number.visibility = View.GONE
+        client_phone_warning.visibility = View.GONE
+        order_button.isEnabled = false
+    }
+
+    private fun showSnackBar(text: String) {
         val snack = Snackbar.make(mView, text, Snackbar.LENGTH_SHORT)
         snack.show()
+    }
+
+    override fun cancelOrder() {
+        dismiss()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        mPresenter.detachView()
     }
 
     companion object {

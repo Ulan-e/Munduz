@@ -1,13 +1,13 @@
 package com.ulan.app.munduz.ui.more
 
-interface MorePresenter {
+import com.ulan.app.munduz.ui.base.BasePresenter
 
-    fun setToolbar()
+interface MorePresenter : BasePresenter {
+
     fun goToContactsUs()
     fun goToLangChange()
     fun goToWriteToUsFragment()
     fun instagramClicked()
     fun odnoklassnikiClicked()
     fun facebookClicked()
-    fun detachView()
 }

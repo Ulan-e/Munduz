@@ -1,9 +1,7 @@
 package com.ulan.app.munduz.ui.catalog
 
-interface CatalogPresenter {
+import com.ulan.app.munduz.ui.base.BasePresenter
 
-    fun setToolbar()
+interface CatalogPresenter : BasePresenter {
     fun loadCatalog()
-    fun detachView()
-
 }

@@ -10,6 +10,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import com.google.android.material.snackbar.Snackbar
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.helpers.Constants.Companion.FACEBOOK_PAGE
 import com.ulan.app.munduz.helpers.Constants.Companion.INSTAGRAM_PAGE
@@ -25,13 +26,17 @@ class MoreFragment: BaseFragment(), MoreView{
     @Inject
     lateinit var mPresenter: MorePresenter
 
+    private lateinit var mView: View
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.more_layout, container, false)
+        mView = inflater.inflate(R.layout.more_layout, container, false)
+        return mView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showToolbar()
+
+        mPresenter.setToolbar()
 
         contacts_us.setOnClickListener{
             mPresenter.goToContactsUs()
@@ -60,6 +65,15 @@ class MoreFragment: BaseFragment(), MoreView{
         val toolbar = activity.findViewById<Toolbar>(R.id.main_toolbar)
         val textToolbar = toolbar.findViewById<TextView>(R.id.main_toolbar_text)
         textToolbar.text = resources.getString(R.string.more)
+    }
+
+    override fun showEmptyData() {
+        showSnackBar(resources.getString(R.string.error_open_social_page))
+    }
+
+    private fun showSnackBar(text: String) {
+        val snack = Snackbar.make(mView, text, Snackbar.LENGTH_SHORT)
+        snack.show()
     }
 
     override fun showContactsUs() {

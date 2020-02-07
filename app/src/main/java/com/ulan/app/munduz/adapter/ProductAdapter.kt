@@ -7,13 +7,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.developer.Product
-import com.ulan.app.munduz.helpers.listeners.OnItemClickListener
+import com.ulan.app.munduz.listeners.OnItemClickListener
 
 class ProductAdapter : RecyclerView.Adapter<ProductViewHolder>{
 
     private var context: Context
+    private var listener: OnItemClickListener
     private lateinit var products:  MutableList<Product>
-    private lateinit var listener: OnItemClickListener
 
     constructor(context: Context, listener: OnItemClickListener) : super() {
         this.context = context
@@ -22,10 +22,6 @@ class ProductAdapter : RecyclerView.Adapter<ProductViewHolder>{
 
     fun setProducts(products: MutableList<Product>){
         this.products = products
-    }
-
-    fun setItemClickListener(listener: OnItemClickListener){
-        this.listener = listener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {

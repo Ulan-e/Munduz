@@ -1,14 +1,13 @@
 package com.ulan.app.munduz.ui.liked
 
 import com.ulan.app.munduz.data.repository.Repository
-import com.ulan.app.munduz.data.roomdatabase.LikedDatabase
 import com.ulan.app.munduz.data.roomdatabase.KeyEntity
+import com.ulan.app.munduz.data.roomdatabase.LikedDatabase
 import com.ulan.app.munduz.developer.Product
-import com.ulan.app.munduz.helpers.listeners.ProductCallback
+import com.ulan.app.munduz.listeners.ProductCallback
 import javax.inject.Inject
 
 class LikedPresenterImpl : LikedPresenter{
-
 
     private var mView: LikedView?
     private var mDatabase: LikedDatabase
@@ -21,11 +20,7 @@ class LikedPresenterImpl : LikedPresenter{
         this.mRepository = mRepository
     }
 
-    override fun detachView() {
-        mView = null
-    }
-
-    override fun initToolbar() {
+    override fun setToolbar() {
         mView?.showToolbar()
     }
 
@@ -39,7 +34,7 @@ class LikedPresenterImpl : LikedPresenter{
                     if(products.size > 0) {
                         mView?.showLikedProducts(products)
                     }else{
-                        mView?.showNoLikedProducts()
+                        mView?.showEmptyData()
                     }
                 }
             })
@@ -48,6 +43,10 @@ class LikedPresenterImpl : LikedPresenter{
     }
 
     override fun deleteButtonClicked() {
+        TODO()
+    }
 
+    override fun detachView() {
+        mView = null
     }
 }

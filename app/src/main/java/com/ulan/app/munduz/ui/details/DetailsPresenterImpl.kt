@@ -1,6 +1,5 @@
 package com.ulan.app.munduz.ui.details
 
-import android.util.Log
 import com.ulan.app.munduz.data.roomdatabase.KeyEntity
 import com.ulan.app.munduz.data.roomdatabase.LikedDatabase
 import com.ulan.app.munduz.developer.Product
@@ -23,12 +22,12 @@ class DetailsPresenterImpl : DetailsPresenter {
             this.mProduct = product
             mView?.showProduct(mProduct)
         }else {
-            mView?.showNoProduct()
+            mView?.showEmptyData()
         }
     }
 
     override fun setToolbar() {
-        mView?.initToolbar()
+        mView?.showToolbar()
     }
 
     override fun isFavoriteProduct() {

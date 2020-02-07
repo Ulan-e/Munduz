@@ -8,7 +8,7 @@ import com.ulan.app.munduz.R
 import com.ulan.app.munduz.adapter.SearchResultsAdapter
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
-import com.ulan.app.munduz.helpers.listeners.OnItemClickListener
+import com.ulan.app.munduz.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.base.BaseActivity
 import com.ulan.app.munduz.ui.details.DetailsActivity
 import kotlinx.android.synthetic.main.search_layout.*
@@ -42,6 +42,10 @@ class SearchActivity: BaseActivity(), SearchView, OnItemClickListener,
         }
     }
 
+    override fun showToolbar() {
+        TODO()
+    }
+
     override fun showProducts(products: ArrayList<Product>) {
         mProducts = products
         val layoutManager = LinearLayoutManager(this)
@@ -50,8 +54,8 @@ class SearchActivity: BaseActivity(), SearchView, OnItemClickListener,
         search_results.adapter = mAdapter
     }
 
-    override fun showNoProducts(message: String) {
-       Toast.makeText(this, "message + " + message, Toast.LENGTH_SHORT).show()
+    override fun showEmptyData() {
+        Toast.makeText(this, resources.getString(R.string.empty_list), Toast.LENGTH_SHORT).show()
     }
 
     override fun onItemClick(product: Product?) {
@@ -70,4 +74,8 @@ class SearchActivity: BaseActivity(), SearchView, OnItemClickListener,
         return true
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        mPresenter.detachView()
+    }
 }

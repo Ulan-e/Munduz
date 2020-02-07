@@ -4,7 +4,7 @@ import android.content.Context
 import com.ulan.app.munduz.adapter.SearchResultsAdapter
 import com.ulan.app.munduz.dagger.scopes.SearchScope
 import com.ulan.app.munduz.data.repository.Repository
-import com.ulan.app.munduz.helpers.listeners.OnItemClickListener
+import com.ulan.app.munduz.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.search.SearchActivity
 import com.ulan.app.munduz.ui.search.SearchPresenter
 import com.ulan.app.munduz.ui.search.SearchPresenterImpl

@@ -1,9 +1,9 @@
 package com.ulan.app.munduz.ui.home
 
-interface HomePresenter {
+import com.ulan.app.munduz.ui.base.BasePresenter
 
-    fun setToolbar()
+interface HomePresenter : BasePresenter {
+
     fun loadProducts()
     fun loadSliderImages()
-    fun onDetachView()
 }

@@ -11,7 +11,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.adapter.CatalogAdapter
-import com.ulan.app.munduz.helpers.listeners.OnCategoryClickListener
+import com.ulan.app.munduz.listeners.OnCategoryClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.filtered.FilteredFragment
 import kotlinx.android.synthetic.main.catalog_layout.*
@@ -62,8 +62,13 @@ class CatalogFragment : BaseFragment(), CatalogView, OnCategoryClickListener {
             .commit()
     }
 
-    override fun showNoCatalog() {
+    override fun showEmptyData() {
         empty_catalog.visibility = View.VISIBLE
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mPresenter.detachView()
     }
 
     companion object {
@@ -73,6 +78,5 @@ class CatalogFragment : BaseFragment(), CatalogView, OnCategoryClickListener {
             fragment.arguments = args
             return fragment
         }
-
     }
 }

@@ -1,7 +1,6 @@
 package com.ulan.app.munduz.ui.catalog
 
 import com.ulan.app.munduz.data.repository.Repository
-import javax.inject.Inject
 
 class CatalogPresenterImpl : CatalogPresenter {
 
@@ -22,7 +21,7 @@ class CatalogPresenterImpl : CatalogPresenter {
         if (categories.size > 0){
             mView?.showCatalog(categories)
         }else{
-            mView?.showNoCatalog()
+            mView?.showEmptyData()
         }
     }
 

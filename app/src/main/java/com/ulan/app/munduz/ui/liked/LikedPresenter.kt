@@ -1,10 +1,9 @@
 package com.ulan.app.munduz.ui.liked
 
-interface LikedPresenter{
+import com.ulan.app.munduz.ui.base.BasePresenter
 
-    fun initToolbar()
+interface LikedPresenter : BasePresenter{
+    
     fun loadProducts()
     fun deleteButtonClicked()
-    fun detachView()
-
 }

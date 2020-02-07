@@ -1,8 +1,9 @@
 package com.ulan.app.munduz.ui.more
 
-interface MoreView {
+import com.ulan.app.munduz.ui.base.BaseView
 
-    fun showToolbar()
+interface MoreView : BaseView{
+
     fun showContactsUs()
     fun showLangChange()
     fun showWriteUs()

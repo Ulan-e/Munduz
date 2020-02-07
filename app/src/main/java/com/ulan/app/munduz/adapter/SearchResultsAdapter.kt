@@ -8,7 +8,7 @@ import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.developer.Product
-import com.ulan.app.munduz.helpers.listeners.OnItemClickListener
+import com.ulan.app.munduz.listeners.OnItemClickListener
 
 class SearchResultsAdapter: RecyclerView.Adapter<SearchViewHolder>, Filterable  {
 

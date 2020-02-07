@@ -3,7 +3,7 @@ package com.ulan.app.munduz.dagger.modules.fragmentmodule
 import android.content.Context
 import com.ulan.app.munduz.adapter.ProductAdapter
 import com.ulan.app.munduz.dagger.scopes.MainScope
-import com.ulan.app.munduz.helpers.listeners.OnItemClickListener
+import com.ulan.app.munduz.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.home.HomeFragment
 import com.ulan.app.munduz.ui.home.HomePresenter
 import com.ulan.app.munduz.ui.home.HomePresenterImpl

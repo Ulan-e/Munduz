@@ -1,10 +1,9 @@
 package com.ulan.app.munduz.ui.search
 
 import com.ulan.app.munduz.developer.Product
+import com.ulan.app.munduz.ui.base.BasePresenter
 
-interface SearchPresenter{
+interface SearchPresenter : BasePresenter {
 
-    fun setProducts(products: ArrayList<Product>)
-    fun loadProducts() : ArrayList<Product>
-    fun detachView()
+    fun loadProducts(): ArrayList<Product>
 }

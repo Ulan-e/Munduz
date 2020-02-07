@@ -37,7 +37,11 @@ class DetailsActivity : BaseActivity(), DetailsView {
 
     }
 
-    override fun initToolbar() {
+    override fun closeDetails() {
+        finish()
+    }
+
+    override fun showToolbar() {
         setSupportActionBar(product_toolbar)
         product_toolbar.title = mProduct.name
         Picasso.get().load(mProduct.picture.urlImage).into(details_image)
@@ -47,8 +51,8 @@ class DetailsActivity : BaseActivity(), DetailsView {
         }
     }
 
-    override fun closeDetails() {
-        finish()
+    override fun showEmptyData() {
+        empty_product.visibility = View.VISIBLE
     }
 
     override fun showProduct(product: Product) {
@@ -56,10 +60,6 @@ class DetailsActivity : BaseActivity(), DetailsView {
         product_desc.text = product.desc
         product_price.text = product.cost.toString()
         product_amount.text = product.amount.toString()
-    }
-
-    override fun showNoProduct() {
-        empty_product.visibility = View.VISIBLE
     }
 
     override fun showOrderProduct() {

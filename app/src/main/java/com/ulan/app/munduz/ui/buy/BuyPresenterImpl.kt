@@ -5,6 +5,7 @@ import com.ulan.app.munduz.data.repository.Repository
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.SendEmailHelper
 import com.ulan.app.munduz.helpers.convertLongToTime
+import kotlinx.android.synthetic.main.buy_layout.*
 import javax.inject.Inject
 
 class BuyPresenterImpl : BuyPresenter {
@@ -56,6 +57,10 @@ class BuyPresenterImpl : BuyPresenter {
 
     override fun cancelButtonClicked() {
         mView?.cancelOrder()
+    }
+
+    override fun setToolbar() {
+        mView?.showToolbar()
     }
 
     override fun detachView() {

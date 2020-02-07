@@ -5,16 +5,19 @@ import javax.inject.Inject
 
 class MainPresenterImpl : MainPresenter {
 
-    private var mView: MainView
+    private var mView: MainView?
 
     @Inject
     constructor(mView: MainView) {
         this.mView = mView
     }
 
-
     override fun addFragment(fragment: BaseFragment) {
         val title = fragment.toString()
-        mView.showFragment(fragment, title)
+        mView?.showFragment(fragment, title)
+    }
+
+    override fun detachView() {
+        mView = null
     }
 }

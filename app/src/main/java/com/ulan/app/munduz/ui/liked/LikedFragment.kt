@@ -10,12 +10,11 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.adapter.ProductAdapter
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
-import com.ulan.app.munduz.helpers.listeners.OnItemClickListener
+import com.ulan.app.munduz.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.details.DetailsActivity
 import kotlinx.android.synthetic.main.liked_layout.*
@@ -36,7 +35,7 @@ class LikedFragment: BaseFragment(), LikedView, OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mPresenter.initToolbar()
+        mPresenter.setToolbar()
         mPresenter.loadProducts()
     }
 
@@ -48,22 +47,26 @@ class LikedFragment: BaseFragment(), LikedView, OnItemClickListener {
         textToolbar.text = resources.getString(R.string.basket)
     }
 
+    override fun showEmptyData() {
+        empty_liked_products.visibility = View.VISIBLE
+    }
+
     override fun showLikedProducts(products: MutableList<Product>) {
         val layoutManager  =  GridLayoutManager(activity, 2)
         mAdapter.setProducts(products)
-        mAdapter.setItemClickListener(this)
         liked_recycler_view.layoutManager = layoutManager
         liked_recycler_view.adapter = mAdapter
-    }
-
-    override fun showNoLikedProducts() {
-        empty_liked_products.visibility = View.VISIBLE
     }
 
     override fun onItemClick(product: Product?) {
         val intent = Intent(activity, DetailsActivity::class.java)
         intent.putExtra(Constants.PRODUCT_ARG, product)
         startActivity(intent)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mPresenter.detachView()
     }
 
     companion object{

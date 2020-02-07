@@ -2,8 +2,9 @@ package com.ulan.app.munduz.ui.main
 
 import com.ulan.app.munduz.ui.base.BaseFragment
 
-interface MainPresenter {
+interface MainPresenter{
 
     fun addFragment(fragment: BaseFragment)
+    fun detachView()
 
 }

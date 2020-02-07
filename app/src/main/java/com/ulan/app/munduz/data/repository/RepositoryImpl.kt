@@ -1,7 +1,6 @@
 package com.ulan.app.munduz.data.repository
 
 import android.content.Context
-import android.os.Handler
 import android.util.Log
 import com.google.firebase.database.*
 import com.ulan.app.munduz.R
@@ -12,14 +11,7 @@ import com.ulan.app.munduz.helpers.Constants
 import com.ulan.app.munduz.helpers.Constants.Companion.ORDERS_DATA
 import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCTS_DATA
 import com.ulan.app.munduz.helpers.Constants.Companion.TAG
-import com.ulan.app.munduz.helpers.listeners.*
-import durdinapps.rxfirebase2.RxFirebaseDatabase
-import io.reactivex.BackpressureStrategy
-import io.reactivex.Emitter
-import io.reactivex.Flowable
-import io.reactivex.FlowableEmitter
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
+import com.ulan.app.munduz.listeners.*
 
 class RepositoryImpl : Repository {
 
