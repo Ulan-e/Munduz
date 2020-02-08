@@ -7,7 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager.widget.ViewPager
 import com.ulan.app.munduz.R
@@ -19,6 +23,7 @@ import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_ARG
 import com.ulan.app.munduz.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.details.DetailsActivity
+import com.ulan.app.munduz.ui.main.MainActivity
 import kotlinx.android.synthetic.main.home_layout.*
 import javax.inject.Inject
 
@@ -57,7 +62,11 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
     override fun showToolbar(){
         val activity = (activity as AppCompatActivity)
         activity.findViewById<LinearLayout>(R.id.search_layout).visibility = View.VISIBLE
+        val toolbar = activity.findViewById<Toolbar>(R.id.main_toolbar)
+        toolbar.navigationIcon = null
         activity.supportActionBar?.hide()
+        val textToolbar = toolbar.findViewById<TextView>(R.id.main_toolbar_text)
+        textToolbar.text = resources.getString(R.string.app_name)
     }
 
     override fun showEmptyData() {
@@ -132,5 +141,12 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
     override fun onDestroy() {
         super.onDestroy()
         mPresenter.detachView()
+    }
+
+    override fun onBackPressed() : Boolean {
+        super.onBackPressed()
+        activity!!.moveTaskToBack(true)
+        activity!!.finish()
+        return true
     }
 }

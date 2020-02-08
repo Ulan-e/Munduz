@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.adapter.ProductAdapter
 import com.ulan.app.munduz.developer.Product
@@ -17,6 +19,8 @@ import com.ulan.app.munduz.helpers.Constants
 import com.ulan.app.munduz.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.details.DetailsActivity
+import com.ulan.app.munduz.ui.home.HomeFragment
+import com.ulan.app.munduz.ui.main.MainActivity
 import kotlinx.android.synthetic.main.liked_layout.*
 import javax.inject.Inject
 
@@ -43,6 +47,7 @@ class LikedFragment: BaseFragment(), LikedView, OnItemClickListener {
         val activity = (activity as AppCompatActivity)
         activity.findViewById<LinearLayout>(R.id.search_layout).visibility = View.GONE
         val toolbar = activity.findViewById<Toolbar>(R.id.main_toolbar)
+        toolbar.navigationIcon = null
         val textToolbar = toolbar.findViewById<TextView>(R.id.main_toolbar_text)
         textToolbar.text = resources.getString(R.string.basket)
     }
@@ -67,6 +72,17 @@ class LikedFragment: BaseFragment(), LikedView, OnItemClickListener {
     override fun onDestroy() {
         super.onDestroy()
         mPresenter.detachView()
+    }
+
+    override fun onBackPressed(): Boolean {
+        activity!!.supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container, HomeFragment(), "like")
+            .addToBackStack(null)
+            .commit()
+        val bottomNav = activity!!.findViewById<BottomNavigationView>(R.id.bottom_navigation_menu)
+        bottomNav.selectedItemId = R.id.home
+        return true
     }
 
     companion object{

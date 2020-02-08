@@ -41,6 +41,7 @@ class FilteredFragment : BaseFragment(), FilteredView,  OnItemClickListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mCategory = arguments!!.getString(CATEGORY_ARG)
+        mPresenter.setToolbar()
         mPresenter.loadProductsByCategory(mCategory)
     }
 
@@ -48,7 +49,11 @@ class FilteredFragment : BaseFragment(), FilteredView,  OnItemClickListener{
         val activity = (activity as AppCompatActivity)
         activity.findViewById<LinearLayout>(R.id.search_layout).visibility = View.GONE
         val toolbar = activity.findViewById<androidx.appcompat.widget.Toolbar>(R.id.main_toolbar)
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
         val textToolbar = toolbar.findViewById<TextView>(R.id.main_toolbar_text)
+        toolbar.setNavigationOnClickListener {
+            activity!!.supportFragmentManager.popBackStack()
+        }
         textToolbar.text = mCategory
     }
 
@@ -73,6 +78,7 @@ class FilteredFragment : BaseFragment(), FilteredView,  OnItemClickListener{
         super.onDestroy()
         mPresenter.detachView()
     }
+
 
     companion object{
         fun newInstance(category: String): FilteredFragment {

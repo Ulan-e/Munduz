@@ -2,6 +2,7 @@ package com.ulan.app.munduz.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.ui.base.BaseActivity
@@ -71,6 +72,20 @@ class MainActivity : BaseActivity(), MainView {
             .replace(R.id.container, fragment, title)
             .addToBackStack(null)
             .commit()
+    }
+
+    override fun onBackPressed() {
+        tellFragments()
+        super.onBackPressed()
+    }
+
+    private fun tellFragments(){
+        var fragments = supportFragmentManager.fragments
+        for(f: Fragment in  fragments){
+            if(f is BaseFragment) {
+                f.onBackPressed()
+            }
+        }
     }
 
 }

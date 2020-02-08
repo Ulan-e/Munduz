@@ -29,8 +29,12 @@ class ContactUsFragment: BaseFragment(){
         val activity = (activity as AppCompatActivity)
         activity.findViewById<LinearLayout>(R.id.search_layout).visibility = View.GONE
         val toolbar = activity.findViewById<Toolbar>(R.id.main_toolbar)
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
         val textToolbar = toolbar.findViewById<TextView>(R.id.main_toolbar_text)
         textToolbar.text = resources.getString(R.string.contacts_us)
+        toolbar.setNavigationOnClickListener {
+            activity!!.supportFragmentManager.popBackStack()
+        }
     }
 
 }

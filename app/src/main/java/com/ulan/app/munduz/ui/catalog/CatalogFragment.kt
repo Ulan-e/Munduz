@@ -6,14 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.adapter.CatalogAdapter
 import com.ulan.app.munduz.listeners.OnCategoryClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.filtered.FilteredFragment
+import com.ulan.app.munduz.ui.home.HomeFragment
+import com.ulan.app.munduz.ui.main.MainActivity
 import kotlinx.android.synthetic.main.catalog_layout.*
 import javax.inject.Inject
 
@@ -43,8 +47,10 @@ class CatalogFragment : BaseFragment(), CatalogView, OnCategoryClickListener {
         val activity = (activity as AppCompatActivity)
         activity.findViewById<LinearLayout>(R.id.search_layout).visibility = View.VISIBLE
         val toolbar = activity.findViewById<Toolbar>(R.id.main_toolbar)
+        toolbar.navigationIcon = null
         val textToolbar = toolbar.findViewById<TextView>(R.id.main_toolbar_text)
         textToolbar.text = resources.getString(R.string.catalog)
+
     }
 
     override fun showCatalog(catalog: MutableList<String>) {
@@ -78,5 +84,16 @@ class CatalogFragment : BaseFragment(), CatalogView, OnCategoryClickListener {
             fragment.arguments = args
             return fragment
         }
+    }
+
+    override fun onBackPressed(): Boolean  {
+        activity!!.supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container, HomeFragment.newInstance(), "home")
+            .addToBackStack(null)
+            .commit()
+        val bottomNav = activity!!.findViewById<BottomNavigationView>(R.id.bottom_navigation_menu)
+        bottomNav.selectedItemId = R.id.home
+        return true
     }
 }
