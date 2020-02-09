@@ -74,6 +74,11 @@ class SearchActivity: BaseActivity(), SearchView, OnItemClickListener,
         return true
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         mPresenter.detachView()

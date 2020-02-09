@@ -63,7 +63,7 @@ class CatalogFragment : BaseFragment(), CatalogView, OnCategoryClickListener {
     override fun onCategoryClick(category: String) {
         activity!!.supportFragmentManager
             .beginTransaction()
-            .replace(R.id.container, FilteredFragment.newInstance(category))
+            .replace(R.id.container, FilteredFragment.newInstance(category), "filterf")
             .addToBackStack(null)
             .commit()
     }

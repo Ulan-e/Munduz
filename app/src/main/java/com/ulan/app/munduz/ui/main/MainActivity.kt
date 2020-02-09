@@ -43,23 +43,23 @@ class MainActivity : BaseActivity(), MainView {
             when (menuItem.itemId) {
                 R.id.home -> {
                     val homeFragment = HomeFragment.newInstance()
-                    mPresenter.addFragment(homeFragment)
+                    mPresenter.addFragment(homeFragment, "homef")
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.catalog -> {
                     val catalogFragment = CatalogFragment.newInstance()
-                    mPresenter.addFragment(catalogFragment)
+                    mPresenter.addFragment(catalogFragment, "catalogf")
                     return@OnNavigationItemSelectedListener true
                 }
-                R.id.basket -> {
+                R.id.favorite -> {
                     val basketFragment = LikedFragment.newInstance()
-                    mPresenter.addFragment(basketFragment)
+                    mPresenter.addFragment(basketFragment, "favoritef")
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.more -> {
                     val moreFragment =
                         MoreFragment.newInstance()
-                    mPresenter.addFragment(moreFragment)
+                    mPresenter.addFragment(moreFragment, "moref")
                     return@OnNavigationItemSelectedListener true
                 }
             }
@@ -75,15 +75,15 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     override fun onBackPressed() {
-        tellFragments()
+        onBackPressedInFragments()
         super.onBackPressed()
     }
 
-    private fun tellFragments(){
+    private fun onBackPressedInFragments() {
         var fragments = supportFragmentManager.fragments
-        for(f: Fragment in  fragments){
-            if(f is BaseFragment) {
-                f.onBackPressed()
+        for (fragment: Fragment in fragments) {
+            if (fragment is BaseFragment) {
+                fragment.onBackPressed()
             }
         }
     }

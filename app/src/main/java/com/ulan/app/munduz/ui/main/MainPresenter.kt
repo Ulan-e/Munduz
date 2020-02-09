@@ -4,7 +4,7 @@ import com.ulan.app.munduz.ui.base.BaseFragment
 
 interface MainPresenter{
 
-    fun addFragment(fragment: BaseFragment)
+    fun addFragment(fragment: BaseFragment, title: String)
     fun detachView()
 
 }

@@ -35,7 +35,9 @@
     <string name="empty_new_products">Пока новинок нет</string>
     <string name="empty_liked_products">У вас пока нет понравивщихся</string>
     <string name="empty_product">Данный продукт не существует</string>
-    <string name="error_open_social_page">Ошибка с соединения с сервером</string>
+
+    <string name="error_network_text">Ошибка с соединения с сервером</string>
+    <string name="error_network_button">Повторить</string>
 
     <string-array name="category">
         <item>Продукты</item>

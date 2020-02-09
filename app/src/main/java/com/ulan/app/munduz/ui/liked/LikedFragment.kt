@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.adapter.ProductAdapter
@@ -32,8 +33,12 @@ class LikedFragment: BaseFragment(), LikedView, OnItemClickListener {
     @Inject
     lateinit var mAdapter: ProductAdapter
 
+    private lateinit var mRecyclerView: RecyclerView
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.liked_layout, container, false)
+        val view = inflater.inflate(R.layout.liked_layout, container, false)
+        mRecyclerView = view.findViewById(R.id.liked_recycler_view)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,8 +64,8 @@ class LikedFragment: BaseFragment(), LikedView, OnItemClickListener {
     override fun showLikedProducts(products: MutableList<Product>) {
         val layoutManager  =  GridLayoutManager(activity, 2)
         mAdapter.setProducts(products)
-        liked_recycler_view.layoutManager = layoutManager
-        liked_recycler_view.adapter = mAdapter
+        mRecyclerView.layoutManager = layoutManager
+        mRecyclerView.adapter = mAdapter
     }
 
     override fun onItemClick(product: Product?) {

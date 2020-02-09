@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -14,13 +15,16 @@ import com.ulan.app.munduz.adapter.ProductAdapter
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
 import com.ulan.app.munduz.helpers.Constants.Companion.CATEGORY_ARG
+import com.ulan.app.munduz.helpers.isNetworkAvailable
 import com.ulan.app.munduz.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.details.DetailsActivity
+import kotlinx.android.synthetic.main.error_layout.*
 import kotlinx.android.synthetic.main.filtered_layout.*
+import kotlinx.android.synthetic.main.home_layout.*
 import javax.inject.Inject
 
-class FilteredFragment : BaseFragment(), FilteredView,  OnItemClickListener{
+class FilteredFragment : BaseFragment(), FilteredView, OnItemClickListener {
 
     @Inject
     lateinit var mPresenter: FilteredPresenter
@@ -45,14 +49,29 @@ class FilteredFragment : BaseFragment(), FilteredView,  OnItemClickListener{
         mPresenter.loadProductsByCategory(mCategory)
     }
 
-    override fun showToolbar(){
+    override fun isNetworkOn(): Boolean {
+        return isNetworkAvailable(activity!!.applicationContext)
+    }
+
+    override fun showErrorNetwork() {
+        error_layout.visibility = View.VISIBLE
+        error_network_button.setOnClickListener {
+            val fragment = activity!!.supportFragmentManager.findFragmentByTag("homef")
+            val ft = activity!!.supportFragmentManager.beginTransaction()
+            ft.detach(fragment!!)
+            ft.attach(fragment)
+            ft.commit()
+        }
+    }
+
+    override fun showToolbar() {
         val activity = (activity as AppCompatActivity)
         activity.findViewById<LinearLayout>(R.id.search_layout).visibility = View.GONE
         val toolbar = activity.findViewById<androidx.appcompat.widget.Toolbar>(R.id.main_toolbar)
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
         val textToolbar = toolbar.findViewById<TextView>(R.id.main_toolbar_text)
         toolbar.setNavigationOnClickListener {
-            activity!!.supportFragmentManager.popBackStack()
+            activity.supportFragmentManager.popBackStack()
         }
         textToolbar.text = mCategory
     }
@@ -79,8 +98,7 @@ class FilteredFragment : BaseFragment(), FilteredView,  OnItemClickListener{
         mPresenter.detachView()
     }
 
-
-    companion object{
+    companion object {
         fun newInstance(category: String): FilteredFragment {
             val fragment = FilteredFragment()
             val args = Bundle()

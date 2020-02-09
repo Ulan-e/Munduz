@@ -12,8 +12,7 @@ class MainPresenterImpl : MainPresenter {
         this.mView = mView
     }
 
-    override fun addFragment(fragment: BaseFragment) {
-        val title = fragment.toString()
+    override fun addFragment(fragment: BaseFragment, title: String) {
         mView?.showFragment(fragment, title)
     }
 

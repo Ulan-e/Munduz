@@ -21,4 +21,6 @@
             android:visibility="gone">
     </TextView>
 
+    <include layout="@layout/error_layout"/>
+
 </RelativeLayout>

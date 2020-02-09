@@ -3,7 +3,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
+            android:id="@+id/content_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -17,14 +18,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="220dp"
                     android:layout_marginTop="7dp"
-                    android:layout_marginBottom="7dp">
-            </androidx.viewpager.widget.ViewPager>
+                    android:layout_marginBottom="7dp"></androidx.viewpager.widget.ViewPager>
 
             <TextView
                     android:id="@+id/home_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/view_pager"
                     android:layout_margin="5dp"
                     android:text="@string/news_goods_title"
                     android:textSize="18sp">
@@ -35,15 +34,11 @@
                     android:id="@+id/home_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/home_title"
-                    android:layout_margin="8dp">
-
-            </androidx.recyclerview.widget.RecyclerView>
-
+                    android:layout_margin="8dp"></androidx.recyclerview.widget.RecyclerView>
 
         </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <TextView
             android:id="@+id/empty_new_products"
@@ -52,8 +47,9 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="@string/empty_new_products"
-            android:visibility="gone">
+            android:visibility="gone"></TextView>
 
-    </TextView>
+    <include layout="@layout/error_layout" />
+
 
 </RelativeLayout>

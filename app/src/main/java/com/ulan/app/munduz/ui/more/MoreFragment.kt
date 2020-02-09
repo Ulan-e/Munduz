@@ -78,7 +78,7 @@ class MoreFragment : BaseFragment(), MoreView {
     }
 
     override fun showEmptyData() {
-        showSnackBar(resources.getString(R.string.error_open_social_page))
+        showSnackBar(resources.getString(R.string.error_network_text))
     }
 
     private fun showSnackBar(text: String) {
