@@ -1,5 +1,6 @@
 package com.ulan.app.munduz.ui.liked
 
+import android.util.Log
 import com.ulan.app.munduz.data.repository.Repository
 import com.ulan.app.munduz.data.roomdatabase.KeyEntity
 import com.ulan.app.munduz.data.roomdatabase.LikedDatabase
@@ -7,7 +8,7 @@ import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.listeners.ProductCallback
 import javax.inject.Inject
 
-class LikedPresenterImpl : LikedPresenter{
+class LikedPresenterImpl : LikedPresenter {
 
     private var mView: LikedView?
     private var mDatabase: LikedDatabase
@@ -27,17 +28,18 @@ class LikedPresenterImpl : LikedPresenter{
     override fun loadProducts() {
         var products = mutableListOf<Product>()
         val keys = mDatabase.keysDao().fetchAllKeys()
-        for(item: KeyEntity in keys){
-            mRepository.loadLikedProduct(item.key, object : ProductCallback{
-                override fun onCallback(product: Product) {
-                    products.add(product)
-                    if(products.size > 0) {
-                        mView?.showLikedProducts(products)
-                    }else{
-                        mView?.showEmptyData()
+        if (keys.isEmpty()) {
+            mView?.showEmptyData()
+            Log.d("ulanbek", "empty basket")
+        } else {
+            for (item: KeyEntity in keys) {
+                mRepository.loadLikedProduct(item.key, object : ProductCallback {
+                    override fun onCallback(product: Product) {
+                        products.add(product)
                     }
-                }
-            })
+                })
+            }
+            mView?.showLikedProducts(products)
         }
 
     }

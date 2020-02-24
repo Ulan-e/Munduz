@@ -15,29 +15,32 @@ import com.ulan.app.munduz.listeners.*
 
 class RepositoryImpl : Repository {
 
-    private val database: FirebaseDatabase
-    private val ref: DatabaseReference
+
     private val context: Context
+    private val ref: DatabaseReference
+
 
     constructor(context: Context) {
         this.context = context
-        database = FirebaseDatabase.getInstance()
+        val database: FirebaseDatabase = FirebaseDatabase.getInstance()
         ref = database.reference
     }
 
     override fun insertOrder(order: Order) {
-        val key = ref.child(ORDERS_DATA).push().key
+        val key = ref!!.child(ORDERS_DATA).push().key
         if(key == null){
             Log.d(TAG, "Couldn't get push key for products")
             return
         }
         order.id = key
-        ref.child(ORDERS_DATA).child(key).setValue(order)
+        ref!!.child(ORDERS_DATA).child(key).setValue(order)
     }
 
     override fun loadProducts(callback: ProductListCallback){
         val products = mutableListOf<Product>()
-        ref.child(PRODUCTS_DATA).addListenerForSingleValueEvent(object : ValueEventListener {
+        val productsRef = ref!!.child(PRODUCTS_DATA)
+        productsRef.keepSynced(true)
+        productsRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 for (item: DataSnapshot in p0.children) {
                     val product: Product? = item.getValue(Product::class.java)
@@ -54,7 +57,9 @@ class RepositoryImpl : Repository {
 
     override fun loadSearchedProducts(callback: ProductsCallback){
         val products = ArrayList<Product>()
-        ref.child(PRODUCTS_DATA).addListenerForSingleValueEvent(object : ValueEventListener {
+        val productsRef = ref!!.child(PRODUCTS_DATA)
+        productsRef.keepSynced(true)
+        productsRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 for (item: DataSnapshot in p0.children) {
                     val product: Product? = item.getValue(Product::class.java)
@@ -70,8 +75,8 @@ class RepositoryImpl : Repository {
     }
 
     override fun loadNewProducts(callback: ProductListCallback) { val products = mutableListOf<Product>()
-        val query = ref.child(PRODUCTS_DATA).orderByKey().limitToLast(4)
-        query.addListenerForSingleValueEvent(object : ValueEventListener{
+        val queryRef = ref!!.child(PRODUCTS_DATA).orderByKey().limitToLast(4)
+        queryRef.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(p0: DataSnapshot) {
                 for(item : DataSnapshot in p0.children){
                     val product: Product? = item.getValue(Product::class.java)
@@ -86,11 +91,11 @@ class RepositoryImpl : Repository {
         })
     }
 
-
     override fun loadFilterProducts(category: String, callback: ProductListCallback) {
         val products = mutableListOf<Product>()
-        val query = ref.child(PRODUCTS_DATA).orderByChild("category").equalTo(category)
-        query.addListenerForSingleValueEvent(object : ValueEventListener{
+        val queryRef = ref!!.child(PRODUCTS_DATA).orderByChild("category").equalTo(category)
+        queryRef.keepSynced(true)
+        queryRef.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(p0: DataSnapshot) {
                 for(item : DataSnapshot in p0.children){
                     val product: Product? = item.getValue(Product::class.java)
@@ -107,7 +112,9 @@ class RepositoryImpl : Repository {
 
     override fun loadSliderPhotos(callback: SliderImagesCallback) {
         val sliderImages = ArrayList<SliderImage>()
-        ref.child(Constants.SLIDER_DATA).addListenerForSingleValueEvent(object : ValueEventListener{
+        val productsRef = ref!!.child(Constants.SLIDER_DATA)
+        productsRef.keepSynced(true)
+        productsRef.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(p0: DataSnapshot) {
                 for(item : DataSnapshot in p0.children){
                     val image = item.getValue(SliderImage::class.java)
@@ -124,8 +131,9 @@ class RepositoryImpl : Repository {
 
     override fun loadLikedProduct(key: String, callback: ProductCallback){
        var product = Product()
-        val query = ref.child(PRODUCTS_DATA).orderByChild("id").equalTo(key)
-        query.addListenerForSingleValueEvent(object : ValueEventListener{
+        val queryRef = ref!!.child(PRODUCTS_DATA).orderByChild("id").equalTo(key)
+        queryRef.keepSynced(true)
+        queryRef.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(p0: DataSnapshot) {
                 for(item : DataSnapshot in p0.children){
                     val likedProduct: Product? = item.getValue(Product::class.java)

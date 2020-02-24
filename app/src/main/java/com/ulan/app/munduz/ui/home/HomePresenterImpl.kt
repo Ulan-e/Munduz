@@ -1,9 +1,8 @@
 package com.ulan.app.munduz.ui.home
 
-import android.util.Log
 import com.ulan.app.munduz.data.model.SliderImage
-import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.data.repository.Repository
+import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.listeners.ProductListCallback
 import com.ulan.app.munduz.listeners.SliderImagesCallback
 import javax.inject.Inject
@@ -37,15 +36,11 @@ class HomePresenterImpl : HomePresenter {
     }
 
     override fun loadSliderImages() {
-        if (mView?.isNetworkOn()!!) {
             mRepository.loadSliderPhotos(object : SliderImagesCallback {
                 override fun onCallback(value: ArrayList<SliderImage>) {
                     mView?.showSliderImages(value)
                 }
             })
-        } else {
-            mView?.showErrorNetwork()
-        }
     }
 
     override fun detachView() {

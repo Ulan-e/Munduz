@@ -19,7 +19,6 @@ class FilteredPresenterImpl : FilteredPresenter {
     }
 
     override fun loadProductsByCategory(categoryName: String) {
-        if (mView?.isNetworkOn()!!) {
             mRepository.loadFilterProducts(categoryName, object : ProductListCallback {
                 override fun onCallback(values: MutableList<Product>) {
                     if (values.size > 0) {
@@ -29,9 +28,7 @@ class FilteredPresenterImpl : FilteredPresenter {
                     }
                 }
             })
-        } else {
-            mView?.showErrorNetwork()
-        }
+
     }
 
     override fun detachView() {
