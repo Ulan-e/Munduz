@@ -2,6 +2,7 @@ package com.ulan.app.munduz.dagger.modules.fragmentmodule
 
 import android.content.Context
 import com.ulan.app.munduz.adapter.ProductAdapter
+import com.ulan.app.munduz.dagger.modules.RoomModule
 import com.ulan.app.munduz.dagger.scopes.FilteredScope
 import com.ulan.app.munduz.data.repository.Repository
 import com.ulan.app.munduz.listeners.OnItemClickListener
@@ -12,7 +13,7 @@ import com.ulan.app.munduz.ui.filtered.FilteredView
 import dagger.Module
 import dagger.Provides
 
-@Module
+@Module(includes = [RoomModule::class])
 class FilteredModule {
 
     @FilteredScope

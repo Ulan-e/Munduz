@@ -1,7 +1,9 @@
 package com.ulan.app.munduz.ui.home
 
+import android.util.Log
 import com.ulan.app.munduz.data.model.SliderImage
 import com.ulan.app.munduz.data.repository.Repository
+import com.ulan.app.munduz.data.roomdatabase.RoomRepository
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.listeners.ProductListCallback
 import com.ulan.app.munduz.listeners.SliderImagesCallback
@@ -10,12 +12,14 @@ import javax.inject.Inject
 class HomePresenterImpl : HomePresenter {
 
     private var mRepository: Repository
+    private var mRoomRepository: RoomRepository
     private var mView: HomeView? = null
 
     @Inject
-    constructor(view: HomeView, mRepository: Repository) {
+    constructor(view: HomeView, mRepository: Repository, roomRepository: RoomRepository) {
         this.mView = view
         this.mRepository = mRepository
+        this.mRoomRepository = roomRepository
     }
 
     override fun setToolbar() {
@@ -32,7 +36,6 @@ class HomePresenterImpl : HomePresenter {
                     }
                 }
             })
-
     }
 
     override fun loadSliderImages() {

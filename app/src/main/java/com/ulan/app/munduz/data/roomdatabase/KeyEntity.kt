@@ -7,8 +7,11 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "keys_table", indices = [Index(value = ["key"], unique = true)])
 class KeyEntity(
+
     @PrimaryKey(autoGenerate = true)
     var id : Int = 0,
+
     @ColumnInfo(name = "key")
     var key: String = ""
+
 )

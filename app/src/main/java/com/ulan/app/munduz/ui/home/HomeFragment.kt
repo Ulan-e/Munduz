@@ -17,6 +17,7 @@ import com.ulan.app.munduz.R
 import com.ulan.app.munduz.adapter.ProductAdapter
 import com.ulan.app.munduz.adapter.SliderAdapter
 import com.ulan.app.munduz.data.model.SliderImage
+import com.ulan.app.munduz.data.roomdatabase.RoomRepository
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_ARG
 import com.ulan.app.munduz.helpers.isNetworkAvailable
@@ -35,6 +36,9 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
 
     @Inject
     lateinit var mAdapter: ProductAdapter
+
+    @Inject
+    lateinit var mRoomRepository: RoomRepository
 
     var mSliderAdapter: SliderAdapter? = null
 
@@ -76,7 +80,6 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         mPresenter.setToolbar()
         mPresenter.loadSliderImages()
         mPresenter.loadProducts()
@@ -113,6 +116,7 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
         val layoutManager = GridLayoutManager(activity, 2)
         mRecyclerView.layoutManager = layoutManager
         mAdapter.setProducts(products)
+        mAdapter.setRepository(mRoomRepository)
         mRecyclerView.adapter = mAdapter
     }
 
@@ -149,6 +153,11 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
         startActivity(intent)
     }
 
+    override fun onStart() {
+        super.onStart()
+        mAdapter.notifyDataSetChanged()
+    }
+
     override fun onResume() {
         super.onResume()
         handler.postDelayed(runnable, delay)
@@ -179,4 +188,5 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
             return fragment
         }
     }
+
 }

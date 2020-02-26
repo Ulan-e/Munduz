@@ -1,6 +1,7 @@
 package com.ulan.app.munduz.ui.details
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -11,6 +12,7 @@ import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_ARG
 import com.ulan.app.munduz.ui.base.BaseActivity
 import com.ulan.app.munduz.ui.buy.BuyFragment
+import com.ulan.app.munduz.ui.main.MainActivity
 import kotlinx.android.synthetic.main.details_layout.*
 import javax.inject.Inject
 
@@ -77,20 +79,20 @@ class DetailsActivity : BaseActivity(), DetailsView {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
             R.id.favorite -> {
-                mPresenter.favoriteButtonClicked()
-                markAsLiked()
+                mPresenter.favoriteClicked()
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
     override fun markAsLiked() {
-        mMenu?.getItem(0)?.setIcon(
-            ContextCompat.getDrawable(this, R.drawable.ic_favorite_black_24dp)
-        )
-        mMenu?.getItem(0)?.isEnabled = false
-        mMenu?.getItem(0)?.isCheckable = false
-        mMenu?.getItem(0)?.isChecked = false
+        mMenu?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_favorite_black_24dp)
+    }
+
+    override fun markAsNotLiked() {
+        mMenu?.getItem(0)?.icon =
+            ContextCompat.getDrawable(this, R.drawable.ic_favorite_border_24dp)
+
     }
 
     override fun onBackPressed() {

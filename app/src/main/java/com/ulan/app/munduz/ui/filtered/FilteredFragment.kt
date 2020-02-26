@@ -5,13 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.adapter.ProductAdapter
+import com.ulan.app.munduz.data.roomdatabase.RoomRepository
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
 import com.ulan.app.munduz.helpers.Constants.Companion.CATEGORY_ARG
@@ -21,7 +21,6 @@ import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.details.DetailsActivity
 import kotlinx.android.synthetic.main.error_layout.*
 import kotlinx.android.synthetic.main.filtered_layout.*
-import kotlinx.android.synthetic.main.home_layout.*
 import javax.inject.Inject
 
 class FilteredFragment : BaseFragment(), FilteredView, OnItemClickListener {
@@ -31,6 +30,9 @@ class FilteredFragment : BaseFragment(), FilteredView, OnItemClickListener {
 
     @Inject
     lateinit var mAdapter: ProductAdapter
+
+    @Inject
+    lateinit var mRoomRepository: RoomRepository
 
     private lateinit var mCategory: String
 
@@ -84,6 +86,7 @@ class FilteredFragment : BaseFragment(), FilteredView, OnItemClickListener {
         val layoutManager = GridLayoutManager(activity, 2)
         filter_recycler_view.layoutManager = layoutManager
         mAdapter.setProducts(products)
+        mAdapter.setRepository(mRoomRepository)
         filter_recycler_view.adapter = mAdapter
     }
 

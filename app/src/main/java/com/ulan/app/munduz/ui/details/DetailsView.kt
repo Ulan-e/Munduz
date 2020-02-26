@@ -8,6 +8,7 @@ interface DetailsView : BaseView{
     fun showProduct(product: Product)
     fun showOrderProduct()
     fun markAsLiked()
+    fun markAsNotLiked()
     fun closeDetails()
 
 }

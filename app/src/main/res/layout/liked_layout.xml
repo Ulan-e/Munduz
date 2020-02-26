@@ -18,6 +18,6 @@
             android:text="@string/empty_liked_products"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            />
+            android:visibility="gone"/>
 
 </RelativeLayout>

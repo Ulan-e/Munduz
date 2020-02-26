@@ -1,27 +1,26 @@
 package com.ulan.app.munduz.ui.details
 
-import com.ulan.app.munduz.data.roomdatabase.KeyEntity
-import com.ulan.app.munduz.data.roomdatabase.LikedDatabase
+import com.ulan.app.munduz.data.roomdatabase.RoomRepository
 import com.ulan.app.munduz.developer.Product
 import javax.inject.Inject
 
 class DetailsPresenterImpl : DetailsPresenter {
 
     private var mView: DetailsView?
-    private var mDatabase: LikedDatabase
+    private var mRepository: RoomRepository
     private lateinit var mProduct: Product
 
     @Inject
-    constructor(mView: DetailsView, database: LikedDatabase) {
+    constructor(mView: DetailsView, repository: RoomRepository) {
         this.mView = mView
-        this.mDatabase = database
+        this.mRepository = repository
     }
 
     override fun setProduct(product: Product) {
-        if(product != null) {
+        if (product != null) {
             this.mProduct = product
             mView?.showProduct(mProduct)
-        }else {
+        } else {
             mView?.showEmptyData()
         }
     }
@@ -31,12 +30,8 @@ class DetailsPresenterImpl : DetailsPresenter {
     }
 
     override fun isFavoriteProduct() {
-        val key = mProduct.id
-        val table = mDatabase.keysDao().fetchAllKeys()
-        for (item in table) {
-            if (key == item.key) {
-                mView?.markAsLiked()
-            }
+        if (mRepository.isKeyExists(mProduct.id)) {
+            mView?.markAsLiked()
         }
     }
 
@@ -44,34 +39,25 @@ class DetailsPresenterImpl : DetailsPresenter {
         mView?.showOrderProduct()
     }
 
-    override fun favoriteButtonClicked() {
-        val key = mProduct.id
-        val table = mDatabase.keysDao().fetchAllKeys()
-        if (table.isEmpty()) {
-            mDatabase.keysDao().insertKey(getProductKey())
+    override fun favoriteClicked() {
+        if (mRepository.isKeyExists(mProduct.id)) {
+            mRepository.remove(mProduct.id)
+            mView?.markAsNotLiked()
         } else {
-            for (item in table) {
-                if (key != item.key) {
-                    mDatabase.keysDao().insertKey(getProductKey())
-                }
-            }
+            mRepository.insert(mProduct.id)
+            mView?.markAsLiked()
         }
-
     }
 
-    private fun getProductKey(): KeyEntity {
-        val keyEntity = KeyEntity()
-        keyEntity.key = this.mProduct.id
-        return keyEntity
+    override fun unFavoriteClicked() {
+        mRepository.remove(mProduct.id)
     }
 
     override fun onBackPressed() {
         mView?.closeDetails()
-
     }
 
     override fun detachView() {
         mView = null
     }
-
 }

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
@@ -15,13 +14,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.adapter.ProductAdapter
+import com.ulan.app.munduz.data.roomdatabase.RoomRepository
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
 import com.ulan.app.munduz.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.details.DetailsActivity
 import com.ulan.app.munduz.ui.home.HomeFragment
-import com.ulan.app.munduz.ui.main.MainActivity
 import kotlinx.android.synthetic.main.liked_layout.*
 import javax.inject.Inject
 
@@ -33,6 +32,9 @@ class LikedFragment: BaseFragment(), LikedView, OnItemClickListener {
     @Inject
     lateinit var mAdapter: ProductAdapter
 
+    @Inject
+    lateinit var mRoomRepository: RoomRepository
+
     private lateinit var mRecyclerView: RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -43,7 +45,6 @@ class LikedFragment: BaseFragment(), LikedView, OnItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         mPresenter.setToolbar()
         mPresenter.loadProducts()
     }
@@ -64,6 +65,7 @@ class LikedFragment: BaseFragment(), LikedView, OnItemClickListener {
     override fun showLikedProducts(products: MutableList<Product>) {
         val layoutManager  =  GridLayoutManager(activity, 2)
         mAdapter.setProducts(products)
+        mAdapter.setRepository(mRoomRepository)
         mRecyclerView.layoutManager = layoutManager
         mRecyclerView.adapter = mAdapter
     }
@@ -74,20 +76,25 @@ class LikedFragment: BaseFragment(), LikedView, OnItemClickListener {
         startActivity(intent)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        mPresenter.detachView()
-    }
-
     override fun onBackPressed(): Boolean {
         activity!!.supportFragmentManager
             .beginTransaction()
-            .replace(R.id.container, HomeFragment(), "like")
+            .replace(R.id.container, HomeFragment(), "homef")
             .addToBackStack(null)
             .commit()
         val bottomNav = activity!!.findViewById<BottomNavigationView>(R.id.bottom_navigation_menu)
         bottomNav.selectedItemId = R.id.home
         return true
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mAdapter.notifyDataSetChanged()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mPresenter.detachView()
     }
 
     companion object{
