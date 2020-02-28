@@ -1,11 +1,8 @@
 package com.ulan.app.munduz.developer
 
-
-
 import android.os.Parcelable
 import com.ulan.app.munduz.data.model.Picture
 import kotlinx.android.parcel.Parcelize
-import java.time.temporal.TemporalAmount
 
 @Parcelize
 data class Product(

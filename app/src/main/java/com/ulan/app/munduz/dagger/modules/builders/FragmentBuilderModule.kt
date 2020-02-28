@@ -7,8 +7,9 @@ import com.ulan.app.munduz.dagger.scopes.MainScope
 import com.ulan.app.munduz.ui.buy.BuyFragment
 import com.ulan.app.munduz.ui.catalog.CatalogFragment
 import com.ulan.app.munduz.ui.home.HomeFragment
-import com.ulan.app.munduz.ui.liked.LikedFragment
+import com.ulan.app.munduz.ui.favorite.FavoriteFragment
 import com.ulan.app.munduz.ui.more.MoreFragment
+import com.ulan.app.munduz.ui.more.sections.AboutAppFragment
 import com.ulan.app.munduz.ui.more.sections.ContactUsFragment
 import com.ulan.app.munduz.ui.more.sections.WriteToUsFragment
 import dagger.Module
@@ -26,8 +27,8 @@ abstract class FragmentBuilderModule {
     abstract fun catalogFragment(): CatalogFragment
 
     @MainScope
-    @ContributesAndroidInjector(modules = [LikedModule::class])
-    abstract fun likedFragment(): LikedFragment
+    @ContributesAndroidInjector(modules = [FavoriteModule::class])
+    abstract fun likedFragment(): FavoriteFragment
 
     @MainScope
     @ContributesAndroidInjector(modules = [MoreModule::class])
@@ -45,6 +46,10 @@ abstract class FragmentBuilderModule {
     @MainScope
     @ContributesAndroidInjector
     abstract fun writeUsFragment(): WriteToUsFragment
+
+    @MainScope
+    @ContributesAndroidInjector
+    abstract fun aboutAppFragment(): AboutAppFragment
 
 
 

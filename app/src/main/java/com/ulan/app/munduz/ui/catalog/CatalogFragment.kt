@@ -1,5 +1,7 @@
 package com.ulan.app.munduz.ui.catalog
 
+import android.content.Context
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +11,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ulan.app.munduz.R
@@ -34,7 +38,8 @@ class CatalogFragment : BaseFragment(), CatalogView, OnCategoryClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.catalog_layout, container, false)
+        val view = inflater.inflate(R.layout.catalog_layout, container, false)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,13 +54,16 @@ class CatalogFragment : BaseFragment(), CatalogView, OnCategoryClickListener {
         val toolbar = activity.findViewById<Toolbar>(R.id.main_toolbar)
         toolbar.navigationIcon = null
         val textToolbar = toolbar.findViewById<TextView>(R.id.main_toolbar_text)
-        textToolbar.text = resources.getString(R.string.catalog)
-
+        val typeface = Typeface.createFromAsset(activity!!.assets, "fonts/forte.ttf")
+        textToolbar.text = resources.getString(R.string.app_name)
+        textToolbar.typeface = typeface
+        textToolbar.textSize = resources.getDimension(R.dimen.toolbar_app_title_size)
     }
 
     override fun showCatalog(catalog: MutableList<String>) {
         val layoutManager = LinearLayoutManager(activity!!.applicationContext)
         catalog_recycler_view.layoutManager = layoutManager
+        catalog_recycler_view.addItemDecoration(DividerItemDecoration(activity, LinearLayoutManager.HORIZONTAL))
         mAdapter.setCatalogs(catalog)
         catalog_recycler_view.adapter = mAdapter
     }

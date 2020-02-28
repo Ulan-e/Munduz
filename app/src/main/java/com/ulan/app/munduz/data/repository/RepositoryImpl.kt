@@ -76,7 +76,7 @@ class RepositoryImpl : Repository {
 
     override fun loadNewProducts(callback: ProductListCallback) {
         val products = mutableListOf<Product>()
-        val queryRef = ref!!.child(PRODUCTS_DATA).orderByKey().limitToLast(4)
+        val queryRef = ref!!.child(PRODUCTS_DATA).orderByKey().limitToLast(8)
         queryRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 for (item: DataSnapshot in p0.children) {

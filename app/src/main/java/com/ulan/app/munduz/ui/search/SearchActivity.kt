@@ -33,7 +33,7 @@ class SearchActivity: BaseActivity(), SearchView, OnItemClickListener,
         search_view_full.requestFocus()
 
         search_view_full.setOnQueryTextListener(this)
-        search_view_full.queryHint="Search"
+        search_view_full.queryHint="Найти товар"
 
         mPresenter.loadProducts()
 

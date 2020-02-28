@@ -1,6 +1,7 @@
 package com.ulan.app.munduz.ui.more
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,10 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import com.google.android.material.bottomnavigation.BottomNavigationMenu
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.ulan.app.munduz.R
@@ -20,7 +19,7 @@ import com.ulan.app.munduz.helpers.Constants.Companion.INSTAGRAM_PAGE
 import com.ulan.app.munduz.helpers.Constants.Companion.ODNOKLASSNIKI_PAGE
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.home.HomeFragment
-import com.ulan.app.munduz.ui.main.MainActivity
+import com.ulan.app.munduz.ui.more.sections.AboutAppFragment
 import com.ulan.app.munduz.ui.more.sections.ContactUsFragment
 import com.ulan.app.munduz.ui.more.sections.WriteToUsFragment
 import kotlinx.android.synthetic.main.more_layout.*
@@ -55,6 +54,10 @@ class MoreFragment : BaseFragment(), MoreView {
             mPresenter.goToWriteToUsFragment()
         }
 
+        about_app.setOnClickListener(){
+            mPresenter.goToAboutApp()
+        }
+
         instagram.setOnClickListener {
             mPresenter.instagramClicked()
         }
@@ -75,6 +78,8 @@ class MoreFragment : BaseFragment(), MoreView {
         toolbar.navigationIcon = null
         val textToolbar = toolbar.findViewById<TextView>(R.id.main_toolbar_text)
         textToolbar.text = resources.getString(R.string.more)
+        textToolbar.typeface = Typeface.DEFAULT
+        textToolbar.textSize = resources.getDimension(R.dimen.toolbar_title_size)
     }
 
     override fun showEmptyData() {
@@ -94,8 +99,12 @@ class MoreFragment : BaseFragment(), MoreView {
             .commit()
     }
 
-    override fun showLangChange() {
-        TODO("not implemented")
+    override fun showAboutApp() {
+        activity!!.supportFragmentManager
+            .beginTransaction()
+            .addToBackStack(null)
+            .replace(R.id.container, AboutAppFragment())
+            .commit()
     }
 
     override fun showWriteUs() {

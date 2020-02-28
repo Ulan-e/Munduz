@@ -9,7 +9,7 @@ import com.ulan.app.munduz.ui.base.BaseActivity
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.catalog.CatalogFragment
 import com.ulan.app.munduz.ui.home.HomeFragment
-import com.ulan.app.munduz.ui.liked.LikedFragment
+import com.ulan.app.munduz.ui.favorite.FavoriteFragment
 import com.ulan.app.munduz.ui.more.MoreFragment
 import com.ulan.app.munduz.ui.search.SearchActivity
 import dagger.android.AndroidInjection
@@ -26,7 +26,7 @@ class MainActivity : BaseActivity(), MainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        button_click.setOnClickListener {
+        button_click.setOnClickListener{
             startActivity(Intent(this@MainActivity, SearchActivity::class.java))
         }
 
@@ -52,7 +52,7 @@ class MainActivity : BaseActivity(), MainView {
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.favorite -> {
-                    val basketFragment = LikedFragment.newInstance()
+                    val basketFragment = FavoriteFragment.newInstance()
                     mPresenter.addFragment(basketFragment, "favoritef")
                     return@OnNavigationItemSelectedListener true
                 }

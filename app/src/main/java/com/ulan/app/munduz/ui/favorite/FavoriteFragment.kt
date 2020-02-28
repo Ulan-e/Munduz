@@ -1,6 +1,7 @@
-package com.ulan.app.munduz.ui.liked
+package com.ulan.app.munduz.ui.favorite
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,28 +10,30 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ulan.app.munduz.R
-import com.ulan.app.munduz.adapter.ProductAdapter
+import com.ulan.app.munduz.adapter.FavoriteProductAdapter
 import com.ulan.app.munduz.data.roomdatabase.RoomRepository
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
+import com.ulan.app.munduz.listeners.OnFavoriteItemClickListener
 import com.ulan.app.munduz.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
+import com.ulan.app.munduz.ui.buy.BuyFragment
 import com.ulan.app.munduz.ui.details.DetailsActivity
 import com.ulan.app.munduz.ui.home.HomeFragment
-import kotlinx.android.synthetic.main.liked_layout.*
+import kotlinx.android.synthetic.main.favorite_layout.*
 import javax.inject.Inject
 
-class LikedFragment: BaseFragment(), LikedView, OnItemClickListener {
+class FavoriteFragment: BaseFragment(), FavoriteView, OnFavoriteItemClickListener {
 
     @Inject
-    lateinit var mPresenter: LikedPresenter
+    lateinit var mPresenter: FavoritePresenter
 
     @Inject
-    lateinit var mAdapter: ProductAdapter
+    lateinit var mAdapter: FavoriteProductAdapter
 
     @Inject
     lateinit var mRoomRepository: RoomRepository
@@ -38,7 +41,7 @@ class LikedFragment: BaseFragment(), LikedView, OnItemClickListener {
     private lateinit var mRecyclerView: RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.liked_layout, container, false)
+        val view = inflater.inflate(R.layout.favorite_layout, container, false)
         mRecyclerView = view.findViewById(R.id.liked_recycler_view)
         return view
     }
@@ -55,7 +58,9 @@ class LikedFragment: BaseFragment(), LikedView, OnItemClickListener {
         val toolbar = activity.findViewById<Toolbar>(R.id.main_toolbar)
         toolbar.navigationIcon = null
         val textToolbar = toolbar.findViewById<TextView>(R.id.main_toolbar_text)
-        textToolbar.text = resources.getString(R.string.basket)
+        textToolbar.text = resources.getString(R.string.favorite)
+        textToolbar.typeface = Typeface.DEFAULT
+        textToolbar.textSize = resources.getDimension(R.dimen.toolbar_title_size)
     }
 
     override fun showEmptyData() {
@@ -63,7 +68,7 @@ class LikedFragment: BaseFragment(), LikedView, OnItemClickListener {
     }
 
     override fun showLikedProducts(products: MutableList<Product>) {
-        val layoutManager  =  GridLayoutManager(activity, 2)
+        val layoutManager  =  LinearLayoutManager(activity!!.applicationContext)
         mAdapter.setProducts(products)
         mAdapter.setRepository(mRoomRepository)
         mRecyclerView.layoutManager = layoutManager
@@ -74,6 +79,11 @@ class LikedFragment: BaseFragment(), LikedView, OnItemClickListener {
         val intent = Intent(activity, DetailsActivity::class.java)
         intent.putExtra(Constants.PRODUCT_ARG, product)
         startActivity(intent)
+    }
+
+    override fun onBuyClick(product: Product?) {
+        val buyFragment = BuyFragment.newInstance(product!!)
+        buyFragment.show(activity!!.supportFragmentManager, "buy_dialog")
     }
 
     override fun onBackPressed(): Boolean {
@@ -98,11 +108,12 @@ class LikedFragment: BaseFragment(), LikedView, OnItemClickListener {
     }
 
     companion object{
-        fun newInstance(): LikedFragment {
+        fun newInstance(): FavoriteFragment {
             val args = Bundle()
-            val fragment = LikedFragment()
+            val fragment = FavoriteFragment()
             fragment.arguments = args
             return fragment
         }
     }
+
 }

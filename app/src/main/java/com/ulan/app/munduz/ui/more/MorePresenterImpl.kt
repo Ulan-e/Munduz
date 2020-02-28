@@ -19,8 +19,8 @@ class MorePresenterImpl : MorePresenter {
         mView?.showContactsUs()
     }
 
-    override fun goToLangChange() {
-        mView?.showLangChange()
+    override fun goToAboutApp() {
+        mView?.showAboutApp()
     }
 
     override fun goToWriteToUsFragment() {

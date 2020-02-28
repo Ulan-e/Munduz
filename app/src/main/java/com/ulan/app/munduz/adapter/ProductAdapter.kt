@@ -59,21 +59,12 @@ class ProductAdapter : RecyclerView.Adapter<ProductViewHolder>{
         //Click Handle (Favorite)
         holder.favorite.setOnClickListener {
             if (mRepository.isKeyExists(product.id)) {
-                mProducts.removeAt(position)
                 mRepository.remove(product.id)
                 holder.favorite.setImageDrawable(mContext.resources.getDrawable(R.drawable.ic_favorite_border_24dp))
-                updateAfterRemoving(position)
             } else {
                 mRepository.insert(product.id)
                 holder.favorite.setImageDrawable(mContext.resources.getDrawable(R.drawable.ic_favorite_black_24dp))
             }
         }
-    }
-
-    private fun updateAfterRemoving(position: Int){
-        notifyItemRemoved(position)
-        notifyItemChanged(position)
-        notifyItemRangeChanged(position, mProducts.size)
-        notifyDataSetChanged()
     }
 }

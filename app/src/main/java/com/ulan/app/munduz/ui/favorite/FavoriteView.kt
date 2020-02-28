@@ -1,8 +1,8 @@
-package com.ulan.app.munduz.ui.liked
+package com.ulan.app.munduz.ui.favorite
 
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.ui.base.BaseView
 
-interface LikedView : BaseView {
+interface FavoriteView : BaseView {
     fun showLikedProducts(products: MutableList<Product>)
 }

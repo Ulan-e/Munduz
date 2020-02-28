@@ -5,7 +5,7 @@ import com.ulan.app.munduz.ui.base.BaseView
 interface MoreView : BaseView{
 
     fun showContactsUs()
-    fun showLangChange()
+    fun showAboutApp()
     fun showWriteUs()
     fun showInstagramPage()
     fun showOdnoklassnikiPage()

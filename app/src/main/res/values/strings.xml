@@ -2,7 +2,7 @@
     <string name="app_name">Munduz</string>
     <string name="home">Главная</string>
     <string name="catalog">Каталог</string>
-    <string name="basket">Корзина</string>
+    <string name="favorite">Избранное</string>
     <string name="more">Еще</string>
     <string name="news_goods_title">Новинки</string>
     <string name="contacts_us">Связаться с нами</string>
@@ -38,6 +38,8 @@
 
     <string name="error_network_text">Ошибка с соединения с сервером</string>
     <string name="error_network_button">Повторить</string>
+    <string name="buy_button">Купить</string>
+    <string name="about_app">О Приложении</string>
 
     <string-array name="category">
         <item>Продукты</item>

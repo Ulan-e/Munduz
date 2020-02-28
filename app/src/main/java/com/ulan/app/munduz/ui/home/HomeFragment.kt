@@ -1,12 +1,14 @@
 package com.ulan.app.munduz.ui.home
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
@@ -23,8 +25,10 @@ import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_ARG
 import com.ulan.app.munduz.helpers.isNetworkAvailable
 import com.ulan.app.munduz.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
+import com.ulan.app.munduz.ui.buy.BuyFragment
 import com.ulan.app.munduz.ui.details.DetailsActivity
 import com.ulan.app.munduz.ui.main.MainActivity
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.error_layout.*
 import kotlinx.android.synthetic.main.home_layout.*
 import javax.inject.Inject
@@ -74,7 +78,7 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
         mViewPager = view.findViewById(R.id.view_pager)
         mMainActivity = (activity as MainActivity)
         mMainActivity.findViewById<LinearLayout>(R.id.search_layout).visibility = View.VISIBLE
-        mMainActivity.findViewById<Button>(R.id.button_click).isEnabled = true
+        mMainActivity.findViewById<EditText>(R.id.button_click).isEnabled = true
         return view
     }
 
@@ -91,7 +95,10 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
         toolbar.navigationIcon = null
         mMainActivity.supportActionBar?.hide()
         val textToolbar = toolbar.findViewById<TextView>(R.id.main_toolbar_text)
+        val typeface = Typeface.createFromAsset(activity!!.assets, "fonts/forte.ttf")
         textToolbar.text = resources.getString(R.string.app_name)
+        textToolbar.typeface = typeface
+        textToolbar.textSize = resources.getDimension(R.dimen.toolbar_app_title_size)
     }
 
     override fun isNetworkOn(): Boolean {

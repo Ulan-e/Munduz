@@ -1,6 +1,7 @@
 package com.ulan.app.munduz.ui.filtered
 
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,7 @@ import com.ulan.app.munduz.helpers.Constants.Companion.CATEGORY_ARG
 import com.ulan.app.munduz.helpers.isNetworkAvailable
 import com.ulan.app.munduz.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
+import com.ulan.app.munduz.ui.buy.BuyFragment
 import com.ulan.app.munduz.ui.details.DetailsActivity
 import kotlinx.android.synthetic.main.error_layout.*
 import kotlinx.android.synthetic.main.filtered_layout.*
@@ -76,6 +78,8 @@ class FilteredFragment : BaseFragment(), FilteredView, OnItemClickListener {
             activity.supportFragmentManager.popBackStack()
         }
         textToolbar.text = mCategory
+        textToolbar.typeface = Typeface.DEFAULT
+        textToolbar.textSize = resources.getDimension(R.dimen.toolbar_title_size)
     }
 
     override fun showEmptyData() {

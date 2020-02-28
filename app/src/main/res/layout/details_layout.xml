@@ -8,36 +8,30 @@
             android:id="@+id/product_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
             android:background="@color/colorPrimary"
             android:minHeight="?attr/actionBarSize">
 
         <ImageView
                 android:id="@+id/details_image"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
+                android:layout_height="280dp"
                 android:scaleType="centerCrop"
                 android:src="@mipmap/ic_launcher" />
 
     </androidx.appcompat.widget.Toolbar>
 
-    <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/product_toolbar"
-            android:background="@color/blue">
-
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_below="@+id/product_toolbar">
 
             <TextView
                     android:id="@+id/product_name"
+                    style="@style/DetailsTextStyleBold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:textSize="@dimen/product_name_size"></TextView>
+                    android:text="Name"></TextView>
 
             <RelativeLayout
                     android:layout_width="match_parent"
@@ -45,39 +39,41 @@
 
                 <TextView
                         android:id="@+id/product_price"
+                        style="@style/DetailsTextStyleBold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
-                        android:text="Price"
-                        android:textSize="@dimen/product_price_size"></TextView>
+                        android:text="10000"
+                        android:textStyle="bold"></TextView>
 
                 <TextView
                         android:id="@+id/product_amount"
+                        style="@style/DetailsTextStyleBold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:text="Amount"
-                        android:textSize="@dimen/product_amount_size"></TextView>
+                        android:text="Amount"></TextView>
 
             </RelativeLayout>
 
+
             <TextView
                     android:id="@+id/product_desc_title"
+                    style="@style/DetailsTextStyleBold"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Desc"
-                    android:textSize="@dimen/product_desc_title_size"></TextView>
+                    android:text="Описание"></TextView>
 
             <TextView
                     android:id="@+id/product_desc"
+                    style="@style/DetailsTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Full Desc"
-                    android:textSize="@dimen/product_desc_size"></TextView>
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:text="Full Desc"></TextView>
 
         </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
 
     <Button
             android:id="@+id/buy_product"
@@ -85,18 +81,17 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_margin="5dp"
-            android:text="@string/buy_product">
-    </Button>
+            android:background="@color/purple"
+            android:text="@string/buy_product"></Button>
 
     <TextView
             android:id="@+id/empty_product"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:text="@string/empty_product"
-            android:visibility="gone">
-    </TextView>
+            android:visibility="gone"></TextView>
 
 
 </RelativeLayout>

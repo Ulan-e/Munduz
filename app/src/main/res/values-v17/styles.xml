@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BuyButton" parent="Widget.AppCompat.Button">
+        <item name="android:background">@color/purple</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:minHeight">48dip</item>
+        <item name="android:minWidth">68dip</item>
+    </style>
+</resources>

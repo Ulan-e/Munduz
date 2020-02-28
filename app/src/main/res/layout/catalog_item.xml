@@ -2,26 +2,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-    <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_margin="@dimen/product_item_margin">
-
-        <LinearLayout
+        android:orientation="vertical"
+        android:layout_margin="8dp">
+<!--
+        <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">-->
 
             <TextView
                     android:id="@+id/catalog_name"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold|italic" />
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="16sp"/>
 
-        </LinearLayout>
+      <!--      <ImageView
+                    android:id="@+id/catalog_image"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_launcher"
+                    android:layout_alignParentRight="true"/>
 
-    </androidx.cardview.widget.CardView>
-
+        </RelativeLayout>
+-->
 </LinearLayout>

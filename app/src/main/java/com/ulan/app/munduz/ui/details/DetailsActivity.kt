@@ -1,6 +1,7 @@
 package com.ulan.app.munduz.ui.details
 
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -58,10 +59,16 @@ class DetailsActivity : BaseActivity(), DetailsView {
     }
 
     override fun showProduct(product: Product) {
+        val rub = Html.fromHtml(" &#x20bd")
         product_name.text = product.name
         product_desc.text = product.desc
-        product_price.text = product.cost.toString()
-        product_amount.text = product.amount.toString()
+        product_price.text = product.cost.toString() + rub
+        if(product.amount > 0){
+            product_amount.text = "Есть в наличии"
+        }else{
+            product_amount.text = "Товар ждет поступления"
+        }
+
     }
 
     override fun showOrderProduct() {

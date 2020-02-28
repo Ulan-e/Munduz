@@ -19,27 +19,28 @@
                     android:id="@+id/munduz"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:text="Мундуз"
-                    android:layout_marginTop="5dp"
                     android:layout_marginLeft="19dp"
-                    android:textSize="16sp"/>
+                    android:layout_marginTop="5dp"
+                    android:text="Мундуз"
+                    android:textSize="16sp"
+                    android:layout_centerHorizontal="true"/>
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/munduz"
-                    android:layout_alignParentLeft="true"
-                    android:text="+7 965 965 00 00"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="4dp"
-                    android:layout_marginLeft="10dp"/>
+                    android:text="+7 965 965 00 00"
+                    android:layout_centerHorizontal="true"/>
 
             <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_alignParentRight="true"
-                    android:src="@drawable/ic_odnoklassniki"
-                    android:layout_margin="5dp"/>
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/ic_person_black_24dp" />
 
         </RelativeLayout>
 
@@ -59,27 +60,29 @@
                     android:id="@+id/munar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:text="Мунар"
-                    android:layout_marginTop="5dp"
                     android:layout_marginLeft="19dp"
-                    android:textSize="16sp"/>
+                    android:layout_marginTop="5dp"
+                    android:text="Мунар"
+                    android:textSize="16sp"
+                    android:layout_centerHorizontal="true"/>
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/munar"
-                    android:layout_alignParentLeft="true"
-                    android:text="+7 965 965 00 00"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginTop="4dp"
-                    android:layout_marginLeft="10dp"/>
+                    android:text="+7 965 965 00 00"
+                    android:layout_centerHorizontal="true"/>
 
             <ImageView
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:layout_alignParentRight="true"
-                    android:src="@drawable/ic_facebook"
-                    android:layout_margin="5dp"/>
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/ic_person_black_24dp"
+                    android:layout_centerVertical="true"
+                    />
 
         </RelativeLayout>
 
@@ -91,18 +94,28 @@
             android:layout_margin="5dp"
             android:padding="5dp">
 
-        <ImageView
+        <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
-                android:src="@drawable/ic_whatsapp" />
+                android:layout_height="wrap_content">
 
-        <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="0x1F60A Наш адрес: Волгограсдкий проспект 32к8 \n
-                                Метро: Волгоградский проспект \n
-                        График 9:00 - 21:00 \n "
-                />
+            <TextView
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:text="Адрес: Волгограсдкий проспект 32к8 \n Метро: Волгоградский проспект \n График 9:00 - 21:00 \n "
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/location_market"
+                    android:textAlignment="center"/>
+
+            <ImageView
+                    android:id="@+id/location_market"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_margin="5dp"
+                    android:src="@drawable/ic_location_on_black_24dp"
+                    android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
 

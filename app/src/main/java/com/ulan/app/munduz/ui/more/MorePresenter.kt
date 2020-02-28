@@ -5,7 +5,7 @@ import com.ulan.app.munduz.ui.base.BasePresenter
 interface MorePresenter : BasePresenter {
 
     fun goToContactsUs()
-    fun goToLangChange()
+    fun goToAboutApp()
     fun goToWriteToUsFragment()
     fun instagramClicked()
     fun odnoklassnikiClicked()
