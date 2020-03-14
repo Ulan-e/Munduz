@@ -82,7 +82,9 @@
             android:layout_alignParentBottom="true"
             android:layout_margin="5dp"
             android:background="@color/purple"
-            android:text="@string/buy_product"></Button>
+            android:text="@string/buy_product"
+            android:textSize="16sp"
+            android:textColor="@color/white"></Button>
 
     <TextView
             android:id="@+id/empty_product"

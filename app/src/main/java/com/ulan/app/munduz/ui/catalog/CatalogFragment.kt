@@ -54,7 +54,7 @@ class CatalogFragment : BaseFragment(), CatalogView, OnCategoryClickListener {
         val toolbar = activity.findViewById<Toolbar>(R.id.main_toolbar)
         toolbar.navigationIcon = null
         val textToolbar = toolbar.findViewById<TextView>(R.id.main_toolbar_text)
-        val typeface = Typeface.createFromAsset(activity!!.assets, "fonts/forte.ttf")
+        val typeface = Typeface.createFromAsset(activity.assets, "fonts/forte.ttf")
         textToolbar.text = resources.getString(R.string.app_name)
         textToolbar.typeface = typeface
         textToolbar.textSize = resources.getDimension(R.dimen.toolbar_app_title_size)

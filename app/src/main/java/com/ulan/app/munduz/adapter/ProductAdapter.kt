@@ -45,6 +45,8 @@ class ProductAdapter : RecyclerView.Adapter<ProductViewHolder>{
         holder.bind(product, mListener)
         Picasso.get()
             .load(product.picture.urlImage)
+            .resize(550, 400)
+            .centerCrop()
             .into(holder.image)
         holder.name.text = product.name
         holder.price.text = product.cost.toString()

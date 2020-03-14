@@ -28,7 +28,7 @@
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="9dp"
                 android:layout_marginLeft="11dp"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:background="@drawable/search_rounded"
                 android:layout_toRightOf="@+id/press_back"
                 android:searchIcon="@null"/>

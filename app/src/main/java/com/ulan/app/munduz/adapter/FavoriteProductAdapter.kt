@@ -46,6 +46,8 @@ class FavoriteProductAdapter: RecyclerView.Adapter<FavoriteProductViewHolder> {
         holder.bind(product, mListener)
         Picasso.get()
             .load(product.picture.urlImage)
+            .resize(400, 400)
+            .centerCrop()
             .into(holder.image)
         holder.name.text = product.name
         holder.price.text = product.cost.toString()

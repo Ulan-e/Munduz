@@ -1,6 +1,7 @@
 package com.ulan.app.munduz.ui.base
 
 import android.content.Context
+import android.os.Bundle
 import com.ulan.app.munduz.listeners.OnBackPressedListener
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.DaggerFragment
@@ -10,6 +11,11 @@ abstract class BaseFragment : DaggerFragment(), OnBackPressedListener {
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
     }
 
     override fun onBackPressed(): Boolean {

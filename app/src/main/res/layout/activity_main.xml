@@ -45,7 +45,7 @@
                 android:drawableLeft="@drawable/ic_search_gray_24dp"
                 android:hint="Найти товар"
                 android:paddingLeft="5dp"
-                android:textSize="15sp"/>
+                android:textSize="17sp"/>
     </LinearLayout>
 
     <FrameLayout

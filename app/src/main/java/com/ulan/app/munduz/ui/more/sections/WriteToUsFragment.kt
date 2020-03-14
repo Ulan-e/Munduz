@@ -42,7 +42,7 @@ class WriteToUsFragment : BaseDialogFragment() {
         val message = writer_text.text.toString()
         val currentTime = System.currentTimeMillis()
         val time = currentTime.convertLongToTime(currentTime)
-        if (from != "" || message != "") {
+        if (from != "" && message != "") {
             val body = "*** От кого " + from + "\n" + "*** Сообщение" + message
             mSendEmailHelper.setMessage(email, subject, body, time)
             mSendEmailHelper.execute()
