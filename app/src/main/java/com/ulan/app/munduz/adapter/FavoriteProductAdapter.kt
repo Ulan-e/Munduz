@@ -1,6 +1,7 @@
 package com.ulan.app.munduz.adapter
 
 import android.content.Context
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -44,13 +45,15 @@ class FavoriteProductAdapter: RecyclerView.Adapter<FavoriteProductViewHolder> {
     override fun onBindViewHolder(holder: FavoriteProductViewHolder, position: Int) {
         val product = mProducts.get(position)
         holder.bind(product, mListener)
+        val rub = Html.fromHtml(" &#x20bd")
         Picasso.get()
             .load(product.picture.urlImage)
-            .resize(400, 400)
+            .resize(250, 250)
             .centerCrop()
+            .error(R.drawable.ic_error_image_black_24dp)
             .into(holder.image)
         holder.name.text = product.name
-        holder.price.text = product.cost.toString()
+        holder.price.text = product.cost.toString() + " " + rub
 
         //Mark as favorite if product is in LikedDatabase
         if(mRepository.isKeyExists(product.id)){

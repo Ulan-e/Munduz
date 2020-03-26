@@ -7,73 +7,82 @@
     <androidx.appcompat.widget.Toolbar
             android:id="@+id/product_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:minHeight="?attr/actionBarSize">
+            android:layout_height="280dp">
 
         <ImageView
                 android:id="@+id/details_image"
                 android:layout_width="match_parent"
-                android:layout_height="280dp"
+                android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/ic_launcher" />
+                android:background="@mipmap/download">
+        </ImageView>
 
     </androidx.appcompat.widget.Toolbar>
 
-        <LinearLayout
+    <ProgressBar
+            android:id="@+id/image_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="visible"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="140dp"
+            android:indeterminateTint="@color/blue"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/product_toolbar"
+            android:orientation="vertical">
+
+        <TextView
+                android:id="@+id/product_name"
+                style="@style/DetailsTextStyleBold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_below="@+id/product_toolbar">
+                android:text="Name"></TextView>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
             <TextView
-                    android:id="@+id/product_name"
+                    android:id="@+id/product_price"
                     style="@style/DetailsTextStyleBold"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Name"></TextView>
-
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                <TextView
-                        android:id="@+id/product_price"
-                        style="@style/DetailsTextStyleBold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:text="10000"
-                        android:textStyle="bold"></TextView>
-
-                <TextView
-                        android:id="@+id/product_amount"
-                        style="@style/DetailsTextStyleBold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:text="Amount"></TextView>
-
-            </RelativeLayout>
-
+                    android:layout_alignParentLeft="true"
+                    android:text="10000"
+                    android:textStyle="bold"></TextView>
 
             <TextView
-                    android:id="@+id/product_desc_title"
+                    android:id="@+id/product_amount"
                     style="@style/DetailsTextStyleBold"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Описание"></TextView>
+                    android:layout_alignParentRight="true"
+                    android:text="Amount"></TextView>
 
-            <TextView
-                    android:id="@+id/product_desc"
-                    style="@style/DetailsTextStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:text="Full Desc"></TextView>
+        </RelativeLayout>
 
-        </LinearLayout>
+
+        <TextView
+                android:id="@+id/product_desc_title"
+                style="@style/DetailsTextStyleBold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Описание"></TextView>
+
+        <TextView
+                android:id="@+id/product_desc"
+                style="@style/DetailsTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:text="Full Desc"></TextView>
+
+    </LinearLayout>
 
     <Button
             android:id="@+id/buy_product"
@@ -83,8 +92,8 @@
             android:layout_margin="5dp"
             android:background="@color/purple"
             android:text="@string/buy_product"
-            android:textSize="16sp"
-            android:textColor="@color/white"></Button>
+            android:textColor="@color/white"
+            android:textSize="16sp"></Button>
 
     <TextView
             android:id="@+id/empty_product"
@@ -94,6 +103,5 @@
             android:layout_centerVertical="true"
             android:text="@string/empty_product"
             android:visibility="gone"></TextView>
-
 
 </RelativeLayout>

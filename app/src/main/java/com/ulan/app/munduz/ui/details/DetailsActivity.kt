@@ -7,14 +7,17 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.core.content.ContextCompat
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.developer.Product
+import com.ulan.app.munduz.helpers.Constants
 import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_ARG
 import com.ulan.app.munduz.ui.base.BaseActivity
 import com.ulan.app.munduz.ui.buy.BuyFragment
 import com.ulan.app.munduz.ui.main.MainActivity
 import kotlinx.android.synthetic.main.details_layout.*
+import java.lang.Exception
 import javax.inject.Inject
 
 class DetailsActivity : BaseActivity(), DetailsView {
@@ -47,7 +50,19 @@ class DetailsActivity : BaseActivity(), DetailsView {
     override fun showToolbar() {
         setSupportActionBar(product_toolbar)
         product_toolbar.title = mProduct.name
-        Picasso.get().load(mProduct.picture.urlImage).into(details_image)
+        image_progress_bar.visibility = View.VISIBLE
+        Picasso.get()
+            .load(mProduct.picture.urlImage)
+            .into(details_image, object : Callback {
+                override fun onSuccess() {
+                    image_progress_bar.visibility = View.GONE
+                }
+
+                override fun onError(e: Exception?) {
+                    Log.e(Constants.TAG, "Error loading image")
+                }
+
+            })
         product_toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp)
         product_toolbar.setNavigationOnClickListener {
             finish()
@@ -62,7 +77,7 @@ class DetailsActivity : BaseActivity(), DetailsView {
         val rub = Html.fromHtml(" &#x20bd")
         product_name.text = product.name
         product_desc.text = product.desc
-        product_price.text = product.cost.toString() + rub
+        product_price.text = product.cost.toString() + " " + rub
         if(product.amount > 0){
             product_amount.text = "Есть в наличии"
         }else{

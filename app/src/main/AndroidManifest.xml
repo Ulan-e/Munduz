@@ -26,9 +26,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.ulan.app.munduz.ui.main.MainActivity"/>
+        <activity android:name="com.ulan.app.munduz.ui.main.MainActivity"
+                android:screenOrientation="portrait"/>
 
-        <activity android:name=".ui.search.SearchActivity">
+        <activity android:name=".ui.search.SearchActivity"
+                android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>
             </intent-filter>
@@ -38,7 +40,8 @@
 
         </activity>
 
-        <activity android:name=".ui.details.DetailsActivity"/>
+        <activity android:name=".ui.details.DetailsActivity"
+                android:screenOrientation="portrait"/>
 
     </application>
 
