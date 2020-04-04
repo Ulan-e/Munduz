@@ -3,7 +3,7 @@ package com.ulan.app.munduz.dagger.modules
 import android.content.Context
 import androidx.room.Room
 import com.ulan.app.munduz.data.roomdatabase.DaoKeys
-import com.ulan.app.munduz.data.roomdatabase.LikedDatabase
+import com.ulan.app.munduz.data.roomdatabase.StarredDatabase
 import com.ulan.app.munduz.data.roomdatabase.RoomRepository
 import com.ulan.app.munduz.data.roomdatabase.RoomRepositoryImpl
 import dagger.Module
@@ -13,14 +13,14 @@ import dagger.Provides
 class RoomModule {
 
     @Provides
-    fun database(context: Context): LikedDatabase{
-        return Room.databaseBuilder(context, LikedDatabase::class.java, "munduz_base")
+    fun database(context: Context): StarredDatabase{
+        return Room.databaseBuilder(context, StarredDatabase::class.java, "munduz_base")
             .allowMainThreadQueries()
             .build()
     }
 
     @Provides
-    fun daoKeys(database: LikedDatabase): DaoKeys{
+    fun daoKeys(database: StarredDatabase): DaoKeys{
         return database.keysDao()
     }
 

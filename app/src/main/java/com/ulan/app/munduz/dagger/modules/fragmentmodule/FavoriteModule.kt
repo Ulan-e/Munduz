@@ -5,9 +5,8 @@ import com.ulan.app.munduz.adapter.FavoriteProductAdapter
 import com.ulan.app.munduz.dagger.modules.RoomModule
 import com.ulan.app.munduz.dagger.scopes.MainScope
 import com.ulan.app.munduz.data.repository.Repository
-import com.ulan.app.munduz.data.roomdatabase.LikedDatabase
+import com.ulan.app.munduz.data.roomdatabase.StarredDatabase
 import com.ulan.app.munduz.listeners.OnFavoriteItemClickListener
-import com.ulan.app.munduz.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.favorite.FavoriteFragment
 import com.ulan.app.munduz.ui.favorite.FavoritePresenter
 import com.ulan.app.munduz.ui.favorite.FavoritePresenterImpl
@@ -27,7 +26,7 @@ class FavoriteModule{
 
     @MainScope
     @Provides
-    fun likedPresenter(view: FavoriteView, database: LikedDatabase, repository: Repository): FavoritePresenter{
+    fun likedPresenter(view: FavoriteView, database: StarredDatabase, repository: Repository): FavoritePresenter{
         return FavoritePresenterImpl(view, database, repository)
     }
 

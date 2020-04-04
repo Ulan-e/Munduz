@@ -2,7 +2,7 @@ package com.ulan.app.munduz.ui.favorite
 
 import com.ulan.app.munduz.data.repository.Repository
 import com.ulan.app.munduz.data.roomdatabase.KeyEntity
-import com.ulan.app.munduz.data.roomdatabase.LikedDatabase
+import com.ulan.app.munduz.data.roomdatabase.StarredDatabase
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.listeners.ProductCallback
 import javax.inject.Inject
@@ -10,12 +10,12 @@ import javax.inject.Inject
 class FavoritePresenterImpl : FavoritePresenter{
 
     private var mView: FavoriteView?
-    private var mDatabase: LikedDatabase?
+    private var mDatabase: StarredDatabase?
     private var mRepository: Repository
     private var products = mutableListOf<Product>()
 
     @Inject
-    constructor(mView: FavoriteView, mDatabase: LikedDatabase, mRepository: Repository) {
+    constructor(mView: FavoriteView, mDatabase: StarredDatabase, mRepository: Repository) {
         this.mView = mView
         this.mDatabase = mDatabase
         this.mRepository = mRepository
