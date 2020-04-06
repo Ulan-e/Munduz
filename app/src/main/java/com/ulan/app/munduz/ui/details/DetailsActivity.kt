@@ -53,6 +53,7 @@ class DetailsActivity : BaseActivity(), DetailsView {
         image_progress_bar.visibility = View.VISIBLE
         Picasso.get()
             .load(mProduct.picture.urlImage)
+            .fit()
             .into(details_image, object : Callback {
                 override fun onSuccess() {
                     image_progress_bar.visibility = View.GONE
@@ -78,12 +79,7 @@ class DetailsActivity : BaseActivity(), DetailsView {
         product_name.text = product.name
         product_desc.text = product.desc
         product_price.text = product.cost.toString() + " " + rub
-        if(product.amount > 0){
-            product_amount.text = "Есть в наличии"
-        }else{
-            product_amount.text = "Товар ждет поступления"
-        }
-
+        product_priceFor.text = product.priceFor
     }
 
     override fun showOrderProduct() {

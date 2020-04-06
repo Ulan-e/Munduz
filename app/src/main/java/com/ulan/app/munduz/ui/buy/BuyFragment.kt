@@ -11,11 +11,8 @@ import com.ulan.app.munduz.data.model.Order
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_BUY_ARG
 import com.ulan.app.munduz.helpers.SendEmailHelper
-import com.ulan.app.munduz.helpers.decCount
-import com.ulan.app.munduz.helpers.incCount
 import com.ulan.app.munduz.ui.base.BaseDialogFragment
 import kotlinx.android.synthetic.main.buy_layout.*
-import kotlinx.android.synthetic.main.buy_layout.view.*
 import javax.inject.Inject
 import javax.inject.Provider
 
@@ -60,26 +57,12 @@ class BuyFragment : BaseDialogFragment(), BuyView {
         cancel_button.setOnClickListener {
             mPresenter.cancelButtonClicked()
         }
-
-
-        order_increment.setOnClickListener {
-            val count: Int = order_count.text.toString().toInt()
-            order_count.text = incCount(count).toString()
-        }
-
-        order_decrement.setOnClickListener {
-            val count: Int = order_count.text.toString().toInt()
-            order_count.text = decCount(count).toString()
-        }
-
     }
 
     override fun getInputOrder(): Order {
         val order = Order()
         order.productName = mProduct.name
         order.productKey = mProduct.id
-        val orderCount = order_count.text.toString()
-        order.productCount = orderCount.toInt()
         order.withDelivery = order_with_delivery.isSelected
         order.clientName = client_name.text.toString()
         order.clientPhoneNumber = client_phone_number.text.toString()

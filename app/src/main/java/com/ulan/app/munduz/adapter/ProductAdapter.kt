@@ -47,9 +47,7 @@ class ProductAdapter : RecyclerView.Adapter<ProductViewHolder>{
         val rub = Html.fromHtml(" &#x20bd")
         Picasso.get()
             .load(product.picture.urlImage)
-            .resize(250, 250)
-            .centerCrop()
-            .error(R.drawable.ic_error_image_black_24dp)
+            .fit()
             .into(holder.image)
         holder.name.text = product.name
         holder.price.text = product.cost.toString() + " " + rub

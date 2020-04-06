@@ -15,6 +15,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
+import com.google.android.material.tabs.TabLayout
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.adapter.ProductAdapter
 import com.ulan.app.munduz.adapter.SliderAdapter
@@ -25,10 +26,8 @@ import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_ARG
 import com.ulan.app.munduz.helpers.isNetworkAvailable
 import com.ulan.app.munduz.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
-import com.ulan.app.munduz.ui.buy.BuyFragment
 import com.ulan.app.munduz.ui.details.DetailsActivity
 import com.ulan.app.munduz.ui.main.MainActivity
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.error_layout.*
 import kotlinx.android.synthetic.main.home_layout.*
 import javax.inject.Inject
@@ -49,6 +48,7 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
     private lateinit var mMainActivity: MainActivity
     private lateinit var mRecyclerView: RecyclerView
     private lateinit var mViewPager: ViewPager
+    private lateinit var mTabLayout: TabLayout
 
     lateinit var handler: Handler
     private var page = 0
@@ -76,6 +76,8 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
         val view = inflater.inflate(R.layout.home_layout, container, false)
         mRecyclerView = view.findViewById(R.id.home_recycler_view)
         mViewPager = view.findViewById(R.id.view_pager)
+        mTabLayout = view.findViewById(R.id.tab_dots)
+        mTabLayout.setupWithViewPager(mViewPager, true)
         mMainActivity = (activity as MainActivity)
         mMainActivity.findViewById<LinearLayout>(R.id.search_layout).visibility = View.VISIBLE
         mMainActivity.findViewById<EditText>(R.id.button_click).isEnabled = true
