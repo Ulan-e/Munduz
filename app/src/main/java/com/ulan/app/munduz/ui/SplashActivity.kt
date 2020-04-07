@@ -1,11 +1,10 @@
 package com.ulan.app.munduz.ui
 
 import android.content.Intent
-import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.ui.main.MainActivity
 import kotlinx.android.synthetic.main.splash_screen.*
@@ -27,7 +26,7 @@ class SplashActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.splash_screen)
 
-        val typeface = Typeface.createFromAsset(assets, "fonts/forte.ttf")
+        val typeface = ResourcesCompat.getFont(this, R.font.forte)
         splash_text.text = resources.getString(R.string.app_name)
         splash_text.typeface = typeface
 

@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -54,9 +55,9 @@ class CatalogFragment : BaseFragment(), CatalogView, OnCategoryClickListener {
         val toolbar = activity.findViewById<Toolbar>(R.id.main_toolbar)
         toolbar.navigationIcon = null
         val textToolbar = toolbar.findViewById<TextView>(R.id.main_toolbar_text)
-        val typeface = Typeface.createFromAsset(activity.assets, "fonts/forte.ttf")
-        textToolbar.text = resources.getString(R.string.app_name)
+        val typeface = ResourcesCompat.getFont(activity, R.font.forte)
         textToolbar.typeface = typeface
+        textToolbar.text = resources.getString(R.string.app_name)
         textToolbar.textSize = resources.getDimension(R.dimen.toolbar_app_title_size)
     }
 

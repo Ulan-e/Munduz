@@ -12,6 +12,7 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
@@ -97,9 +98,9 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
         toolbar.navigationIcon = null
         mMainActivity.supportActionBar?.hide()
         val textToolbar = toolbar.findViewById<TextView>(R.id.main_toolbar_text)
-        val typeface = Typeface.createFromAsset(activity!!.assets, "fonts/forte.ttf")
-        textToolbar.text = resources.getString(R.string.app_name)
+        val typeface = ResourcesCompat.getFont(activity!!, R.font.forte)
         textToolbar.typeface = typeface
+        textToolbar.text = resources.getString(R.string.app_name)
         textToolbar.textSize = resources.getDimension(R.dimen.toolbar_app_title_size)
     }
 

@@ -42,10 +42,11 @@
     <string name="about_app">О Приложении</string>
 
     <string-array name="category">
-        <item>Продукты</item>
-        <item>Посуда</item>
-        <item>Для дома</item>
-        <item>Одежда</item>
-        <item>Книги</item>
+        <item>Продукты     </item>
+        <item>Напитки     </item>
+        <item>Посуда     </item>
+        <item>Для дома      </item>
+        <item>Одежда     </item>
+        <item>Книги     </item>
     </string-array>
 </resources>

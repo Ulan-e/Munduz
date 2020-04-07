@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -73,11 +74,12 @@ class FilteredFragment : BaseFragment(), FilteredView, OnItemClickListener {
         activity.findViewById<LinearLayout>(R.id.search_layout).visibility = View.GONE
         val toolbar = activity.findViewById<androidx.appcompat.widget.Toolbar>(R.id.main_toolbar)
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
-        val textToolbar = toolbar.findViewById<TextView>(R.id.main_toolbar_text)
+        var textToolbar = toolbar.findViewById<TextView>(R.id.main_toolbar_text)
         toolbar.setNavigationOnClickListener {
             activity.supportFragmentManager.popBackStack()
         }
-        textToolbar.text = mCategory
+        val emptySpace = "            "
+        textToolbar.text = "$mCategory $emptySpace"
         textToolbar.typeface = Typeface.DEFAULT
         textToolbar.textSize = resources.getDimension(R.dimen.toolbar_title_size)
     }
