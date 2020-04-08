@@ -18,7 +18,7 @@
             <ImageView
                     android:id="@+id/item_image"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="130dp"
                     android:layout_margin="@dimen/product_item_margin"
                     android:scaleType="centerCrop">
             </ImageView>
@@ -27,8 +27,18 @@
                     android:id="@+id/item_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/product_text_top_margin" />
+                    android:layout_margin="@dimen/product_text_top_margin"
+                    android:textSize="16sp"
+                    android:text="Имя"/>
 
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:textColor="@color/colorPrimary"
+                    android:text="В наличии"
+                    android:layout_margin="5dp">
+            </TextView>
 
 
             <RelativeLayout
@@ -41,9 +51,12 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_margin="@dimen/product_text_top_margin"
-                        android:textStyle="bold">
-
+                        android:textStyle="bold"
+                        android:textSize="19sp"
+                        android:text="200">
                 </TextView>
+
+
 
                 <ImageView
                         android:id="@+id/item_favorite"

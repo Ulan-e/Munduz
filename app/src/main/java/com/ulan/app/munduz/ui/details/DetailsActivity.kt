@@ -49,7 +49,9 @@ class DetailsActivity : BaseActivity(), DetailsView {
 
     override fun showToolbar() {
         setSupportActionBar(product_toolbar)
-        product_toolbar.title = mProduct.name
+        product_toolbar.title = ""
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
         image_progress_bar.visibility = View.VISIBLE
         Picasso.get()
             .load(mProduct.picture.urlImage)
@@ -68,6 +70,7 @@ class DetailsActivity : BaseActivity(), DetailsView {
         product_toolbar.setNavigationOnClickListener {
             finish()
         }
+
     }
 
     override fun showEmptyData() {
@@ -79,7 +82,7 @@ class DetailsActivity : BaseActivity(), DetailsView {
         product_name.text = product.name
         product_desc.text = product.desc
         product_price.text = product.cost.toString() + " " + rub
-        product_priceFor.text = product.priceFor
+        product_priceFor.text = "Цена за " + product.priceFor
     }
 
     override fun showOrderProduct() {

@@ -1,122 +1,123 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
-    <androidx.cardview.widget.CardView
+    <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:padding="5dp">
+            android:background="@drawable/bottom_line"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingBottom="4dp">
 
-        <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <TextView
+                android:id="@+id/munduz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="19dp"
+                android:layout_marginTop="5dp"
+                android:text="Мундуз"
+                android:textSize="16sp" />
 
-            <TextView
-                    android:id="@+id/munduz"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="19dp"
-                    android:layout_marginTop="5dp"
-                    android:text="Мундуз"
-                    android:textSize="16sp"
-                    android:layout_centerHorizontal="true"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/munduz"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="2dp"
+                android:paddingBottom="5dp"
+                android:text="+7 965 965 00 00" />
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/munduz"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="4dp"
-                    android:text="+7 965 965 00 00"
-                    android:layout_centerHorizontal="true"/>
+        <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="5dp"
+                android:src="@drawable/ic_person_black_24dp" />
 
-            <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_margin="5dp"
-                    android:src="@drawable/ic_person_black_24dp" />
+    </RelativeLayout>
 
-        </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
+    <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:padding="5dp">
+            android:background="@drawable/bottom_line"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingBottom="4dp">
 
-        <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <TextView
+                android:id="@+id/munar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="19dp"
+                android:layout_marginTop="5dp"
+                android:text="Мунар"
+                android:textSize="16sp" />
 
-            <TextView
-                    android:id="@+id/munar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="19dp"
-                    android:layout_marginTop="5dp"
-                    android:text="Мунар"
-                    android:textSize="16sp"
-                    android:layout_centerHorizontal="true"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/munar"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="2dp"
+                android:paddingBottom="5dp"
+                android:text="+7 965 965 00 00" />
 
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/munar"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="4dp"
-                    android:text="+7 965 965 00 00"
-                    android:layout_centerHorizontal="true"/>
+        <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="5dp"
+                android:src="@drawable/ic_person_black_24dp" />
 
-            <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_margin="5dp"
-                    android:src="@drawable/ic_person_black_24dp"
-                    android:layout_centerVertical="true"
-                    />
+    </RelativeLayout>
 
-        </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
+    <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:padding="5dp">
+            android:background="@drawable/bottom_line"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:paddingBottom="4dp">
 
-        <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <TextView
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/location_market"
+                android:text="Адрес: Волгоградcкий проспект 32к8 \n Метро: Волгоградский проспект \n График 9:00 - 21:00 \n "
+                android:textAlignment="center"
+                android:textSize="16sp" />
 
-            <TextView
-                    android:layout_width="300dp"
-                    android:layout_height="wrap_content"
-                    android:text="Адрес: Волгограсдкий проспект 32к8 \n Метро: Волгоградский проспект \n График 9:00 - 21:00 \n "
-                    android:layout_centerVertical="true"
-                    android:layout_toRightOf="@+id/location_market"
-                    android:textAlignment="center"/>
+        <ImageView
+                android:id="@+id/location_market"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="5dp"
+                android:src="@drawable/ic_location_on_black_24dp" />
 
-            <ImageView
-                    android:id="@+id/location_market"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_margin="5dp"
-                    android:src="@drawable/ic_location_on_black_24dp"
-                    android:layout_centerVertical="true"/>
+    </RelativeLayout>
 
-        </RelativeLayout>
-
-    </androidx.cardview.widget.CardView>
+    <ImageView
+            android:layout_width="305dp"
+            android:layout_height="305dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="9dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/address" />
 
 </LinearLayout>

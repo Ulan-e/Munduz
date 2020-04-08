@@ -1,106 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        >
 
-    <androidx.appcompat.widget.Toolbar
-            android:id="@+id/product_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="280dp">
-
-        <ImageView
-                android:id="@+id/details_image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop">
-        </ImageView>
-
-    </androidx.appcompat.widget.Toolbar>
-
-    <ProgressBar
-            android:id="@+id/image_progress_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:visibility="visible"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="140dp"
-            android:indeterminateTint="@color/blue"/>
-
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/product_toolbar"
-            android:orientation="vertical">
+            android:layout_gravity="top"
+            android:fitsSystemWindows="true"
+            android:theme="@style/Widget.AppCompat.ActionBar"
+            app:expanded="true">
 
-        <TextView
-                android:id="@+id/product_name"
-                style="@style/DetailsTextStyleBold"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/coll_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Name"></TextView>
+                android:layout_height="290dp"
+                android:background="@color/white"
+                app:contentScrim="@color/white"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:toolbarId="@+id/product_toolbar">
 
-        <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
-            <TextView
-                    android:id="@+id/product_priceFor_title"
-                    style="@style/DetailsTextStyleBold"
+            <ImageView
+                    android:id="@+id/details_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="centerCrop"></ImageView>
+
+
+            <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/product_toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    app:layout_collapseMode="pin"
+                    android:fitsSystemWindows="true"
+                    android:background="@android:color/transparent"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
+            </androidx.appcompat.widget.Toolbar>
+
+            <ProgressBar
+                    android:id="@+id/image_progress_bar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:text="Цена за"></TextView>
+                    android:layout_gravity="center"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/blue"
+                    android:visibility="visible" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-            <TextView
-                    android:id="@+id/product_priceFor"
-                    style="@style/DetailsTextStyleBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@id/product_priceFor_title"
-                    android:text="П"></TextView>
+    <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white_gray"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-            <TextView
-                    android:id="@+id/product_price"
-                    style="@style/DetailsTextStyleBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="10000"
-                    android:textStyle="bold"></TextView>
-
-        </RelativeLayout>
-
-
-        <TextView
-                android:id="@+id/product_desc_title"
-                style="@style/DetailsTextStyleBold"
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Описание"></TextView>
+                android:layout_below="@+id/product_toolbar"
+                android:orientation="vertical">
 
-        <TextView
-                android:id="@+id/product_desc"
-                style="@style/DetailsTextStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:text="Full Desc"></TextView>
+            <TextView
+                    android:id="@+id/product_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:textSize="21sp"
+                    android:textStyle="bold"
+                    android:text="Name"></TextView>
 
-    </LinearLayout>
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <TextView
+                        android:id="@+id/product_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="8dp"
+                        android:text="250"
+                        android:textSize="25sp"
+                        android:textStyle="bold"></TextView>
+
+                <TextView
+                        android:id="@+id/product_priceFor"
+                        style="@style/DetailsTextStyleBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/product_price"
+                        android:background="@drawable/frame_for_textview"
+                        android:paddingTop="0dp"
+                        android:paddingBottom="1dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:text="Цена за 100гр"></TextView>
+
+                <TextView
+                        android:id="@+id/product_availability"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_margin="8dp"
+                        android:text="Есть в наличии"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp"></TextView>
+            </RelativeLayout>
+
+            <TextView
+                    android:id="@+id/product_delivery_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    android:drawableLeft="@drawable/ic_small_car"
+                    android:drawablePadding="10dp"
+                    android:paddingTop="6dp"
+                    android:textSize="17sp"
+                    android:layout_margin="8dp"
+                    android:text="Доставка"></TextView>
+
+            <TextView
+                    android:id="@+id/product_delivery"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:layout_margin="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:text="Доставка только через месяц"></TextView>
+
+            <TextView
+                    android:id="@+id/product_desc_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textStyle="bold"
+                    android:textAllCaps="true"
+                    android:drawableLeft="@drawable/ic_small_description"
+                    android:drawablePadding="10dp"
+                    android:paddingTop="6dp"
+                    android:textSize="17sp"
+                    android:layout_margin="8dp"
+                    android:text="Описание"></TextView>
+
+            <TextView
+                    android:id="@+id/product_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:layout_margin="8dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="8dp"
+                    android:lineSpacingExtra="5dp"
+                    android:text="Полное Описание \nПолное"></TextView>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
 
     <Button
             android:id="@+id/buy_product"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_gravity="bottom|center_horizontal"
             android:layout_margin="5dp"
             android:background="@color/purple"
             android:text="@string/buy_product"
+            android:textAlignment="center"
+            android:textStyle="bold"
             android:textColor="@color/white"
-            android:textSize="16sp"></Button>
+            android:textSize="16sp"
+            android:textAllCaps="true"></Button>
+
+
+
 
     <TextView
             android:id="@+id/empty_product"
@@ -111,4 +192,4 @@
             android:text="@string/empty_product"
             android:visibility="gone"></TextView>
 
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

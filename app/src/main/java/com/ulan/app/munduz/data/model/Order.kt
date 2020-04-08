@@ -8,5 +8,6 @@ data class Order(
     var withDelivery: Boolean = true,
     var clientName: String = "",
     var clientPhoneNumber: String = "",
+    var comment: String = "",
     var orderTime: Long = 0L
     )

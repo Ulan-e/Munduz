@@ -38,7 +38,7 @@ class BuyFragment : BaseDialogFragment(), BuyView {
     }
 
     override fun showToolbar() {
-        title_buy_fragment.text = "Заказ"
+        title_buy_fragment.text = "Заказать"
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,12 +48,11 @@ class BuyFragment : BaseDialogFragment(), BuyView {
 
         val sendEmailHelper = mSendEmailHelper.get()
         mPresenter.setSendEmailHelper(sendEmailHelper)
-        order_product_name.text = mProduct.name
 
+        order_product_name.text = mProduct.name
         order_button.setOnClickListener {
             mPresenter.sendButtonClicked()
         }
-
         cancel_button.setOnClickListener {
             mPresenter.cancelButtonClicked()
         }
@@ -63,9 +62,10 @@ class BuyFragment : BaseDialogFragment(), BuyView {
         val order = Order()
         order.productName = mProduct.name
         order.productKey = mProduct.id
-        order.withDelivery = order_with_delivery.isSelected
+        order.withDelivery = order_is_with_delivery.isSelected
         order.clientName = client_name.text.toString()
-        order.clientPhoneNumber = client_phone_number.text.toString()
+        order.comment = client_comment.text.toString()
+        order.clientPhoneNumber = "+7 " + client_phone_number.text.toString()
         order.orderTime = System.currentTimeMillis()
         return order
     }
@@ -88,8 +88,9 @@ class BuyFragment : BaseDialogFragment(), BuyView {
     override fun showEmptyData() {
         client_name.setText("Такой продукт в данное время отсутвует")
         client_name.isEnabled  = false
+        client_comment.visibility = View.GONE
         container_product.visibility  = View.GONE
-        order_with_delivery.visibility = View.GONE
+        order_is_with_delivery.visibility = View.GONE
         client_phone_number.visibility = View.GONE
         client_phone_warning.visibility = View.GONE
         order_button.isEnabled = false

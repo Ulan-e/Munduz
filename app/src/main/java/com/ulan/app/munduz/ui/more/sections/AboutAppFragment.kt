@@ -29,7 +29,8 @@ class AboutAppFragment: BaseFragment(){
         val toolbar = activity.findViewById<Toolbar>(R.id.main_toolbar)
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
         val textToolbar = toolbar.findViewById<TextView>(R.id.main_toolbar_text)
-        textToolbar.text = resources.getString(R.string.about_app)
+        val emptySpace = "       "
+        textToolbar.text = resources.getString(R.string.about_app) + emptySpace
         toolbar.setNavigationOnClickListener {
             activity!!.supportFragmentManager.popBackStack()
         }
