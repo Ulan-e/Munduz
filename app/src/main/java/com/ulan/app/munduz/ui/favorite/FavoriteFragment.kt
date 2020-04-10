@@ -15,19 +15,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.adapter.FavoriteProductAdapter
-import com.ulan.app.munduz.data.roomdatabase.RoomRepository
+import com.ulan.app.munduz.data.room.repository.KeysRepositoryImpl
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
-import com.ulan.app.munduz.listeners.OnFavoriteItemClickListener
 import com.ulan.app.munduz.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
-import com.ulan.app.munduz.ui.buy.BuyFragment
 import com.ulan.app.munduz.ui.details.DetailsActivity
 import com.ulan.app.munduz.ui.home.HomeFragment
 import kotlinx.android.synthetic.main.favorite_layout.*
 import javax.inject.Inject
 
-class FavoriteFragment: BaseFragment(), FavoriteView, OnFavoriteItemClickListener {
+class FavoriteFragment: BaseFragment(), FavoriteView, OnItemClickListener {
 
     @Inject
     lateinit var mPresenter: FavoritePresenter
@@ -36,7 +34,7 @@ class FavoriteFragment: BaseFragment(), FavoriteView, OnFavoriteItemClickListene
     lateinit var mAdapter: FavoriteProductAdapter
 
     @Inject
-    lateinit var mRoomRepository: RoomRepository
+    lateinit var mRoomRepository: KeysRepositoryImpl
 
     private lateinit var mRecyclerView: RecyclerView
 
@@ -67,7 +65,7 @@ class FavoriteFragment: BaseFragment(), FavoriteView, OnFavoriteItemClickListene
         empty_liked_products.visibility = View.VISIBLE
     }
 
-    override fun showLikedProducts(products: MutableList<Product>) {
+    override fun showLikedProducts(products: ArrayList<Product>) {
         val layoutManager  =  LinearLayoutManager(activity!!.applicationContext)
         mAdapter.setProducts(products)
         mAdapter.setRepository(mRoomRepository)
@@ -79,11 +77,6 @@ class FavoriteFragment: BaseFragment(), FavoriteView, OnFavoriteItemClickListene
         val intent = Intent(activity, DetailsActivity::class.java)
         intent.putExtra(Constants.PRODUCT_ARG, product)
         startActivity(intent)
-    }
-
-    override fun onBuyClick(product: Product?) {
-        val buyFragment = BuyFragment.newInstance(product!!)
-        buyFragment.show(activity!!.supportFragmentManager, "buy_dialog")
     }
 
     override fun onBackPressed(): Boolean {

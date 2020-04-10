@@ -3,7 +3,7 @@ package com.ulan.app.munduz.dagger.modules.fragmentmodule
 import android.content.Context
 import com.ulan.app.munduz.adapter.CatalogAdapter
 import com.ulan.app.munduz.dagger.scopes.MainScope
-import com.ulan.app.munduz.data.repository.Repository
+import com.ulan.app.munduz.data.firebase.FirebaseRepository
 import com.ulan.app.munduz.listeners.OnCategoryClickListener
 import com.ulan.app.munduz.ui.catalog.CatalogFragment
 import com.ulan.app.munduz.ui.catalog.CatalogPresenter
@@ -23,7 +23,7 @@ class CatalogModule {
 
     @MainScope
     @Provides
-    fun catalogPresenter(catalogView: CatalogView, repository: Repository): CatalogPresenter {
+    fun catalogPresenter(catalogView: CatalogView, repository: FirebaseRepository): CatalogPresenter {
         return CatalogPresenterImpl(catalogView, repository)
     }
 

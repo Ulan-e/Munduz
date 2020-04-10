@@ -4,7 +4,7 @@ import android.content.Context
 import com.ulan.app.munduz.adapter.ProductAdapter
 import com.ulan.app.munduz.dagger.modules.RoomModule
 import com.ulan.app.munduz.dagger.scopes.FilteredScope
-import com.ulan.app.munduz.data.repository.Repository
+import com.ulan.app.munduz.data.firebase.FirebaseRepository
 import com.ulan.app.munduz.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.filtered.FilteredFragment
 import com.ulan.app.munduz.ui.filtered.FilteredPresenter
@@ -24,7 +24,7 @@ class FilteredModule {
 
     @FilteredScope
     @Provides
-    fun filteredPresenter(filteredView: FilteredView, repository: Repository): FilteredPresenter{
+    fun filteredPresenter(filteredView: FilteredView, repository: FirebaseRepository): FilteredPresenter{
         return FilteredPresenterImpl(filteredView, repository)
     }
 

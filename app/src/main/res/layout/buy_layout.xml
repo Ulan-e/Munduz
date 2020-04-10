@@ -34,22 +34,14 @@
 
     </RelativeLayout>
 
-
-    <RelativeLayout
-            android:id="@+id/container_product"
+    <TextView
+            android:id="@+id/total_purchase"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-        <TextView
-                android:id="@+id/order_product_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_margin="7dp"
-                android:textSize="20sp" />
-
-    </RelativeLayout>
-
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Total"
+            android:textSize="16sp" />
 
     <EditText
             android:id="@+id/client_name"
@@ -65,12 +57,12 @@
             android:id="@+id/client_phone_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="0dp"
-            android:text="+7"
             android:hint="Телефонный номер"
             android:inputType="phone"
+            android:text="+7"
             android:textSize="17sp" />
 
     <TextView
@@ -85,27 +77,31 @@
             android:id="@+id/order_is_with_delivery"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="15dp">
-        <RadioButton android:id="@+id/radio_pirates"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Доставка"
-                android:layout_marginLeft="6dp"
-                android:checked="true"/>
-        <RadioButton android:id="@+id/radio_ninjas"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+        <RadioButton
+                android:id="@+id/radio_pirates"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="6dp"
-                android:text="Резерв"/>
+                android:checked="true"
+                android:text="Доставка" />
+
+        <RadioButton
+                android:id="@+id/radio_ninjas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:text="Резерв" />
     </RadioGroup>
 
     <EditText
             android:id="@+id/client_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="0dp"
             android:hint="Комментарий (необязательный)"
             android:inputType="textShortMessage"

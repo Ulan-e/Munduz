@@ -3,7 +3,7 @@ package com.ulan.app.munduz.dagger.modules.activitymodule
 import android.content.Context
 import com.ulan.app.munduz.adapter.SearchResultsAdapter
 import com.ulan.app.munduz.dagger.scopes.SearchScope
-import com.ulan.app.munduz.data.repository.Repository
+import com.ulan.app.munduz.data.firebase.FirebaseRepository
 import com.ulan.app.munduz.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.search.SearchActivity
 import com.ulan.app.munduz.ui.search.SearchPresenter
@@ -23,7 +23,7 @@ class SearchModule {
 
     @SearchScope
     @Provides
-    fun searchPresenter(searchView: SearchView, repository: Repository): SearchPresenter{
+    fun searchPresenter(searchView: SearchView, repository: FirebaseRepository): SearchPresenter{
         return SearchPresenterImpl(searchView, repository)
     }
 

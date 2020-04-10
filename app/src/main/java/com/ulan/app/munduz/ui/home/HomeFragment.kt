@@ -1,7 +1,6 @@
 package com.ulan.app.munduz.ui.home
 
 import android.content.Intent
-import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -21,7 +20,7 @@ import com.ulan.app.munduz.R
 import com.ulan.app.munduz.adapter.ProductAdapter
 import com.ulan.app.munduz.adapter.SliderAdapter
 import com.ulan.app.munduz.data.model.SliderImage
-import com.ulan.app.munduz.data.roomdatabase.RoomRepository
+import com.ulan.app.munduz.data.room.repository.KeysRepositoryImpl
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_ARG
 import com.ulan.app.munduz.helpers.isNetworkAvailable
@@ -42,7 +41,7 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
     lateinit var mAdapter: ProductAdapter
 
     @Inject
-    lateinit var mRoomRepository: RoomRepository
+    lateinit var mRoomRepository: KeysRepositoryImpl
 
     var mSliderAdapter: SliderAdapter? = null
 

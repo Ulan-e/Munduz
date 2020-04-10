@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.ulan.app.munduz.R
-import com.ulan.app.munduz.data.roomdatabase.RoomRepository
+import com.ulan.app.munduz.data.room.repository.KeysRepositoryImpl
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.listeners.OnItemClickListener
 
@@ -16,7 +16,7 @@ class ProductAdapter : RecyclerView.Adapter<ProductViewHolder>{
     private var mContext: Context
     private var mListener: OnItemClickListener
     private lateinit var mProducts: MutableList<Product>
-    private lateinit var mRepository: RoomRepository
+    private lateinit var mRepository: KeysRepositoryImpl
 
     constructor(context: Context, listener: OnItemClickListener) : super() {
         this.mContext = context
@@ -27,7 +27,7 @@ class ProductAdapter : RecyclerView.Adapter<ProductViewHolder>{
         this.mProducts = products
     }
 
-    fun setRepository(repository: RoomRepository){
+    fun setRepository(repository: KeysRepositoryImpl){
         this.mRepository = repository
     }
 
@@ -53,7 +53,7 @@ class ProductAdapter : RecyclerView.Adapter<ProductViewHolder>{
         holder.price.text = product.cost.toString() + " " + rub
 
         //Mark as favorite if product is in LikedDatabase
-        if(mRepository.isKeyExists(product.id)){
+        if(mRepository.isExist(product.key)){
             holder.favorite.setImageDrawable(mContext.resources.getDrawable(R.drawable.ic_favorite_black_24dp))
         }else{
             holder.favorite.setImageDrawable(mContext.resources.getDrawable(R.drawable.ic_favorite_border_24dp))
@@ -61,11 +61,11 @@ class ProductAdapter : RecyclerView.Adapter<ProductViewHolder>{
 
         //Click Handle (Favorite)
         holder.favorite.setOnClickListener {
-            if (mRepository.isKeyExists(product.id)) {
-                mRepository.remove(product.id)
+            if (mRepository.isExist(product.key)) {
+                mRepository.remove(product.key)
                 holder.favorite.setImageDrawable(mContext.resources.getDrawable(R.drawable.ic_favorite_border_24dp))
             } else {
-                mRepository.insert(product.id)
+                mRepository.insert(product.key)
                 holder.favorite.setImageDrawable(mContext.resources.getDrawable(R.drawable.ic_favorite_black_24dp))
             }
         }

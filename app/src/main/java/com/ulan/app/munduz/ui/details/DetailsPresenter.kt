@@ -11,6 +11,7 @@ interface DetailsPresenter: BasePresenter{
     fun favoriteClicked()
     fun unFavoriteClicked()
     fun onBackPressed()
+    fun addToBasketClicked(id: String)
 
 }
 

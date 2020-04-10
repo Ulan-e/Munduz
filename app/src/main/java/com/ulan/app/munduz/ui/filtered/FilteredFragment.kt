@@ -7,20 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.adapter.ProductAdapter
-import com.ulan.app.munduz.data.roomdatabase.RoomRepository
+import com.ulan.app.munduz.data.room.repository.KeysRepositoryImpl
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
 import com.ulan.app.munduz.helpers.Constants.Companion.CATEGORY_ARG
 import com.ulan.app.munduz.helpers.isNetworkAvailable
 import com.ulan.app.munduz.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
-import com.ulan.app.munduz.ui.buy.BuyFragment
 import com.ulan.app.munduz.ui.details.DetailsActivity
 import kotlinx.android.synthetic.main.error_layout.*
 import kotlinx.android.synthetic.main.filtered_layout.*
@@ -35,7 +33,7 @@ class FilteredFragment : BaseFragment(), FilteredView, OnItemClickListener {
     lateinit var mAdapter: ProductAdapter
 
     @Inject
-    lateinit var mRoomRepository: RoomRepository
+    lateinit var mRoomRepository: KeysRepositoryImpl
 
     private lateinit var mCategory: String
 

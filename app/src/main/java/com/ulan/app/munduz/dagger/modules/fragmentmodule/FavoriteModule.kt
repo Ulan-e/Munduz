@@ -4,9 +4,9 @@ import android.content.Context
 import com.ulan.app.munduz.adapter.FavoriteProductAdapter
 import com.ulan.app.munduz.dagger.modules.RoomModule
 import com.ulan.app.munduz.dagger.scopes.MainScope
-import com.ulan.app.munduz.data.repository.Repository
-import com.ulan.app.munduz.data.roomdatabase.StarredDatabase
-import com.ulan.app.munduz.listeners.OnFavoriteItemClickListener
+import com.ulan.app.munduz.data.firebase.FirebaseRepository
+import com.ulan.app.munduz.data.room.repository.KeysRepositoryImpl
+import com.ulan.app.munduz.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.favorite.FavoriteFragment
 import com.ulan.app.munduz.ui.favorite.FavoritePresenter
 import com.ulan.app.munduz.ui.favorite.FavoritePresenterImpl
@@ -15,30 +15,34 @@ import dagger.Module
 import dagger.Provides
 
 @Module(includes = [RoomModule::class])
-class FavoriteModule{
+class FavoriteModule {
 
 
     @MainScope
     @Provides
-    fun likedView(likedFragment: FavoriteFragment): FavoriteView{
+    fun provideView(likedFragment: FavoriteFragment): FavoriteView {
         return likedFragment
     }
 
     @MainScope
     @Provides
-    fun likedPresenter(view: FavoriteView, database: StarredDatabase, repository: Repository): FavoritePresenter{
-        return FavoritePresenterImpl(view, database, repository)
+    fun providePresenter(
+        view: FavoriteView,
+        firebaseRepository: FirebaseRepository,
+        keysRepository: KeysRepositoryImpl
+    ): FavoritePresenter {
+        return FavoritePresenterImpl(view, firebaseRepository, keysRepository)
     }
 
     @MainScope
     @Provides
-    fun provideListener(likedFragment: FavoriteFragment): OnFavoriteItemClickListener{
-        return likedFragment
+    fun provideListener(fragment: FavoriteFragment): OnItemClickListener {
+        return fragment
     }
 
     @MainScope
     @Provides
-    fun provideAdapter(context: Context, listener: OnFavoriteItemClickListener): FavoriteProductAdapter {
+    fun provideAdapter(context: Context, listener: OnItemClickListener): FavoriteProductAdapter {
         return FavoriteProductAdapter(context, listener)
     }
 }

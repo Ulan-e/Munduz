@@ -1,4 +1,4 @@
-package com.ulan.app.munduz.data.roomdatabase
+package com.ulan.app.munduz.data.room.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

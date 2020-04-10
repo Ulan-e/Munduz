@@ -1,8 +1,8 @@
 package com.ulan.app.munduz.dagger.modules
 
 import android.content.Context
-import com.ulan.app.munduz.data.repository.Repository
-import com.ulan.app.munduz.data.repository.RepositoryImpl
+import com.ulan.app.munduz.data.firebase.FirebaseRepository
+import com.ulan.app.munduz.data.firebase.FirebaseRepositoryImpl
 import dagger.Module
 import dagger.Provides
 
@@ -11,8 +11,8 @@ class RepositoryModule{
 
 
     @Provides
-    fun repository(context: Context): Repository{
-        return RepositoryImpl(context)
+    fun repository(context: Context): FirebaseRepository{
+        return FirebaseRepositoryImpl(context)
     }
 }
 

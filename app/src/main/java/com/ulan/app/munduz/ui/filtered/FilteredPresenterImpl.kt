@@ -1,15 +1,15 @@
 package com.ulan.app.munduz.ui.filtered
 
-import com.ulan.app.munduz.data.repository.Repository
+import com.ulan.app.munduz.data.firebase.FirebaseRepository
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.listeners.ProductListCallback
 
 class FilteredPresenterImpl : FilteredPresenter {
 
     private var mView: FilteredView?
-    private var mRepository: Repository
+    private var mRepository: FirebaseRepository
 
-    constructor(mView: FilteredView, mRepository: Repository) {
+    constructor(mView: FilteredView, mRepository: FirebaseRepository) {
         this.mView = mView
         this.mRepository = mRepository
     }

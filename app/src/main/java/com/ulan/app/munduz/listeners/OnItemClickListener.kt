@@ -6,5 +6,4 @@ interface OnItemClickListener {
 
     fun onItemClick(product: Product?)
 
-
 }

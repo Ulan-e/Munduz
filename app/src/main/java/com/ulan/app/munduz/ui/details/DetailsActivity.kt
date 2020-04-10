@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.core.content.ContextCompat
+import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.ulan.app.munduz.R
@@ -14,10 +15,7 @@ import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
 import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_ARG
 import com.ulan.app.munduz.ui.base.BaseActivity
-import com.ulan.app.munduz.ui.buy.BuyFragment
-import com.ulan.app.munduz.ui.main.MainActivity
 import kotlinx.android.synthetic.main.details_layout.*
-import java.lang.Exception
 import javax.inject.Inject
 
 class DetailsActivity : BaseActivity(), DetailsView {
@@ -26,6 +24,7 @@ class DetailsActivity : BaseActivity(), DetailsView {
     lateinit var mPresenter: DetailsPresenter
 
     private var mMenu: Menu? = null
+    private var mView: View? = null
     private lateinit var mProduct: Product
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +44,11 @@ class DetailsActivity : BaseActivity(), DetailsView {
 
     override fun closeDetails() {
         finish()
+    }
+
+    override fun showSnackBar(result: String) {
+        val snack: Snackbar = Snackbar.make(coordinator_layout, result, Snackbar.LENGTH_LONG)
+        snack.show()
     }
 
     override fun showToolbar() {
@@ -85,9 +89,8 @@ class DetailsActivity : BaseActivity(), DetailsView {
         product_priceFor.text = "Цена за " + product.priceFor
     }
 
-    override fun showOrderProduct() {
-        val buyFragment = BuyFragment.newInstance(mProduct)
-        buyFragment.show(supportFragmentManager, "buy_dialog")
+    override fun addToBasket() {
+        mPresenter.addToBasketClicked(mProduct.key)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

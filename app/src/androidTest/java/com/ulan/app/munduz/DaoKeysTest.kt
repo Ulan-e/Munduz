@@ -2,9 +2,9 @@ package com.ulan.app.munduz
 
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
-import com.ulan.app.munduz.data.roomdatabase.DaoKeys
-import com.ulan.app.munduz.data.roomdatabase.KeyEntity
-import com.ulan.app.munduz.data.roomdatabase.StarredDatabase
+import com.ulan.app.munduz.data.room.dao.KeysDao
+import com.ulan.app.munduz.data.room.entities.KeyEntity
+import com.ulan.app.munduz.data.room.StarredDatabase
 import junit.framework.Assert.*
 import org.junit.After
 import org.junit.Before
@@ -13,9 +13,11 @@ import org.junit.Test
 class DaoKeysTest {
 
     private lateinit var database: StarredDatabase
-    private lateinit var daoKeys: DaoKeys
-    private val keyEntity1 = KeyEntity(1, "Key1")
-    private val keyEntity2 = KeyEntity(2, "Key2")
+    private lateinit var daoKeys: KeysDao
+    private val keyEntity1 =
+        KeyEntity(1, "Key1")
+    private val keyEntity2 =
+        KeyEntity(2, "Key2")
 
     @Before
     fun setUp() {
@@ -45,7 +47,8 @@ class DaoKeysTest {
     fun whenInsertReturnErrorEmptyKey() {
         val id = 0
         val key = ""
-        val keyEntity = KeyEntity(id, key)
+        val keyEntity =
+            KeyEntity(id, key)
         daoKeys.insertKey(keyEntity)
         fail("Wrong key")
     }

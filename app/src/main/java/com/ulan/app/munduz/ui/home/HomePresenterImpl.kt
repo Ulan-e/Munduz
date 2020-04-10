@@ -1,9 +1,8 @@
 package com.ulan.app.munduz.ui.home
 
-import android.util.Log
 import com.ulan.app.munduz.data.model.SliderImage
-import com.ulan.app.munduz.data.repository.Repository
-import com.ulan.app.munduz.data.roomdatabase.RoomRepository
+import com.ulan.app.munduz.data.firebase.FirebaseRepository
+import com.ulan.app.munduz.data.room.repository.KeysRepositoryImpl
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.listeners.ProductListCallback
 import com.ulan.app.munduz.listeners.SliderImagesCallback
@@ -11,12 +10,12 @@ import javax.inject.Inject
 
 class HomePresenterImpl : HomePresenter {
 
-    private var mRepository: Repository
-    private var mRoomRepository: RoomRepository
+    private var mRepository: FirebaseRepository
+    private var mRoomRepository: KeysRepositoryImpl
     private var mView: HomeView? = null
 
     @Inject
-    constructor(view: HomeView, mRepository: Repository, roomRepository: RoomRepository) {
+    constructor(view: HomeView, mRepository: FirebaseRepository, roomRepository: KeysRepositoryImpl) {
         this.mView = view
         this.mRepository = mRepository
         this.mRoomRepository = roomRepository

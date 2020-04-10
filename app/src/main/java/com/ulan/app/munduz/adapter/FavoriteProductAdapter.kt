@@ -7,28 +7,27 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.ulan.app.munduz.R
-import com.ulan.app.munduz.data.roomdatabase.RoomRepository
+import com.ulan.app.munduz.data.room.repository.BaseRepository
 import com.ulan.app.munduz.developer.Product
-import com.ulan.app.munduz.listeners.OnFavoriteItemClickListener
 import com.ulan.app.munduz.listeners.OnItemClickListener
 
 class FavoriteProductAdapter: RecyclerView.Adapter<FavoriteProductViewHolder> {
 
     private var mContext: Context
-    private var mListener: OnFavoriteItemClickListener
-    private lateinit var mProducts: MutableList<Product>
-    private lateinit var mRepository: RoomRepository
+    private var mListener: OnItemClickListener
+    private lateinit var mProducts: ArrayList<Product>
+    private lateinit var mRepository: BaseRepository
 
-    constructor(context: Context, listener: OnFavoriteItemClickListener) : super() {
+    constructor(context: Context, listener: OnItemClickListener) : super() {
         this.mContext = context
         this.mListener = listener
     }
 
-    fun setProducts(products: MutableList<Product>){
+    fun setProducts(products: ArrayList<Product>){
         this.mProducts = products
     }
 
-    fun setRepository(repository: RoomRepository){
+    fun setRepository(repository: BaseRepository){
         this.mRepository = repository
     }
 
@@ -42,8 +41,16 @@ class FavoriteProductAdapter: RecyclerView.Adapter<FavoriteProductViewHolder> {
         return  mProducts.size
     }
 
+    override fun getItemId(position: Int): Long {
+        return position.toLong()
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
     override fun onBindViewHolder(holder: FavoriteProductViewHolder, position: Int) {
-        val product = mProducts.get(position)
+        val product = mProducts[position]
         holder.bind(product, mListener)
         val rub = Html.fromHtml(" &#x20bd")
         Picasso.get()
@@ -53,25 +60,15 @@ class FavoriteProductAdapter: RecyclerView.Adapter<FavoriteProductViewHolder> {
             .error(R.drawable.ic_error_image_black_24dp)
             .into(holder.image)
         holder.name.text = product.name
+        holder.category.text = product.category
         holder.price.text = product.cost.toString() + " " + rub
-
-        //Mark as favorite if product is in LikedDatabase
-        if(mRepository.isKeyExists(product.id)){
-            holder.favorite.setImageDrawable(mContext.resources.getDrawable(R.drawable.ic_favorite_black_24dp))
-        }else{
-            holder.favorite.setImageDrawable(mContext.resources.getDrawable(R.drawable.ic_favorite_border_24dp))
-        }
 
         //Click Handle (Favorite)
         holder.favorite.setOnClickListener {
-            if (mRepository.isKeyExists(product.id)) {
+            if (mRepository.isExist(product.key)) {
                 mProducts.removeAt(position)
-                mRepository.remove(product.id)
-                holder.favorite.setImageDrawable(mContext.resources.getDrawable(R.drawable.ic_favorite_border_24dp))
+                mRepository.remove(product.key)
                 updateAfterRemoving(position)
-            } else {
-                mRepository.insert(product.id)
-                holder.favorite.setImageDrawable(mContext.resources.getDrawable(R.drawable.ic_favorite_black_24dp))
             }
         }
     }

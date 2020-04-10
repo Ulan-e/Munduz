@@ -1,4 +1,4 @@
-package com.ulan.app.munduz.data.repository
+package com.ulan.app.munduz.data.firebase
 
 import android.content.Context
 import android.util.Log
@@ -13,7 +13,7 @@ import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCTS_DATA
 import com.ulan.app.munduz.helpers.Constants.Companion.TAG
 import com.ulan.app.munduz.listeners.*
 
-class RepositoryImpl : Repository {
+class FirebaseRepositoryImpl : FirebaseRepository {
 
     private val context: Context
     private val ref: DatabaseReference
@@ -112,7 +112,7 @@ class RepositoryImpl : Repository {
     }
 
     override fun updateProduct(product: Product) {
-        val key = product.id
+        val key = product.key
         ref.child(PRODUCTS_DATA).child(key).setValue(product)
     }
 

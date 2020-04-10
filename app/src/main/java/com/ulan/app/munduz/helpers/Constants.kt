@@ -10,6 +10,7 @@ class Constants {
         const val PRODUCT_ARG = "product_args"
         const val PRODUCT_BUY_ARG = "product_args"
         const val CATEGORY_ARG = "category_args"
+        const val PRODUCT_SUM_ARG = "cost"
 
         const val INSTAGRAM_PAGE = "https://www.instagram.com/munduz.ru"
         const val FACEBOOK_PAGE = "https://m.facebook.com/profile.php?id=100008205792318"

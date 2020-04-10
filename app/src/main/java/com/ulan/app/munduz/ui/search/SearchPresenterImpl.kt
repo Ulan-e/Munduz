@@ -1,16 +1,16 @@
 package com.ulan.app.munduz.ui.search
 
-import com.ulan.app.munduz.data.repository.Repository
+import com.ulan.app.munduz.data.firebase.FirebaseRepository
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.listeners.ProductsCallback
 
 class SearchPresenterImpl: SearchPresenter{
 
     private var mView: SearchView?
-    private var mRepository: Repository
+    private var mRepository: FirebaseRepository
     private var mProducts = ArrayList<Product>()
 
-    constructor(mView: SearchView, mRepository: Repository) {
+    constructor(mView: SearchView, mRepository: FirebaseRepository) {
         this.mView = mView
         this.mRepository = mRepository
     }

@@ -1,10 +1,10 @@
-package com.ulan.app.munduz.data.repository
+package com.ulan.app.munduz.data.firebase
 
 import com.ulan.app.munduz.data.model.Order
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.listeners.*
 
-interface Repository {
+interface FirebaseRepository {
 
     fun insertOrder(order: Order)
     fun loadProducts(callback: ProductListCallback)

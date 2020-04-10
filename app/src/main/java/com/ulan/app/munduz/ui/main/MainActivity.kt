@@ -7,6 +7,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.ui.base.BaseActivity
 import com.ulan.app.munduz.ui.base.BaseFragment
+import com.ulan.app.munduz.ui.basket.BasketFragment
 import com.ulan.app.munduz.ui.catalog.CatalogFragment
 import com.ulan.app.munduz.ui.home.HomeFragment
 import com.ulan.app.munduz.ui.favorite.FavoriteFragment
@@ -51,9 +52,14 @@ class MainActivity : BaseActivity(), MainView {
                     mPresenter.addFragment(catalogFragment, "catalogf")
                     return@OnNavigationItemSelectedListener true
                 }
+                R.id.basket -> {
+                    val basketFragment = BasketFragment.newInstance()
+                    mPresenter.addFragment(basketFragment, "basketf")
+                    return@OnNavigationItemSelectedListener true
+                }
                 R.id.favorite -> {
-                    val basketFragment = FavoriteFragment.newInstance()
-                    mPresenter.addFragment(basketFragment, "favoritef")
+                    val favoriteFragment = FavoriteFragment.newInstance()
+                    mPresenter.addFragment(favoriteFragment, "favoritef")
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.more -> {

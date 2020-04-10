@@ -1,6 +1,9 @@
-package com.ulan.app.munduz.data.roomdatabase
+package com.ulan.app.munduz.data.room.repository
 
-class RoomRepositoryImpl(private val daoKeys: DaoKeys) : RoomRepository {
+import com.ulan.app.munduz.data.room.dao.KeysDao
+import com.ulan.app.munduz.data.room.entities.KeyEntity
+
+class KeysRepositoryImpl(private val daoKeys: KeysDao) : BaseRepository {
 
     override fun insert(key: String) {
         val table = daoKeys.fetchAllKeys()
@@ -24,7 +27,7 @@ class RoomRepositoryImpl(private val daoKeys: DaoKeys) : RoomRepository {
         }
     }
 
-    override fun isKeyExists(key: String): Boolean {
+    override fun isExist(key: String): Boolean {
         val table = daoKeys.fetchAllKeys()
         for (item in table) {
             if (key == item.key) {
@@ -37,20 +40,14 @@ class RoomRepositoryImpl(private val daoKeys: DaoKeys) : RoomRepository {
     override fun removeAll() {
         daoKeys.removeAllKeys()
     }
-
-    override fun isLiked(key: String): Boolean {
-        val table = daoKeys.fetchAllKeys()
-        for (item in table) {
-            if (key == item.key) {
-                return true
-            }
-        }
-        return false
-    }
-
     private fun getProduct(productKey: String): KeyEntity {
         val keyEntity = KeyEntity()
         keyEntity.key = productKey
+
         return keyEntity
+    }
+
+    fun fetchAllKeys(): List<KeyEntity> {
+        return daoKeys.fetchAllKeys()
     }
 }

@@ -1,13 +1,13 @@
 package com.ulan.app.munduz.ui.catalog
 
-import com.ulan.app.munduz.data.repository.Repository
+import com.ulan.app.munduz.data.firebase.FirebaseRepository
 
 class CatalogPresenterImpl : CatalogPresenter {
 
     private var mView: CatalogView?
-    private var mRepository: Repository
+    private var mRepository: FirebaseRepository
 
-    constructor(mView: CatalogView, mRepository: Repository) {
+    constructor(mView: CatalogView, mRepository: FirebaseRepository) {
         this.mView = mView
         this.mRepository = mRepository
     }
