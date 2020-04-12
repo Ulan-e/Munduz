@@ -1,10 +1,8 @@
 package com.ulan.app.munduz.adapter
 
 import android.content.Context
-import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.ulan.app.munduz.R
@@ -13,7 +11,7 @@ import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.RUBLE
 import com.ulan.app.munduz.listeners.OnItemClickListener
 
-class ProductAdapter : RecyclerView.Adapter<ProductViewHolder> {
+class FavoritesAdapter: RecyclerView.Adapter<FavoritesViewHolder> {
 
     private var mContext: Context
     private var mListener: OnItemClickListener
@@ -25,59 +23,53 @@ class ProductAdapter : RecyclerView.Adapter<ProductViewHolder> {
         this.mListener = listener
     }
 
-    fun setProducts(products: MutableList<Product>) {
+    fun setProducts(products: MutableList<Product>){
         this.mProducts = products
     }
 
-    fun setRepository(repository: FavoritesRepository) {
+    fun setRepository(repository: FavoritesRepository){
         this.mRepository = repository
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoritesViewHolder {
         val inflater = mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view = inflater.inflate(R.layout.product_item, parent, false)
-        return ProductViewHolder(view)
+        val view  = inflater.inflate(R.layout.favorite_product_item, parent, false)
+        return FavoritesViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        return mProducts.size
+        return  mProducts.size
     }
 
-    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: FavoritesViewHolder, position: Int) {
         val product = mProducts.get(position)
         holder.bind(product, mListener)
         Picasso.get()
             .load(product.picture.urlImage)
-            .fit()
+            .resize(250, 250)
+            .centerCrop()
+            .error(R.drawable.ic_error_image_black_24dp)
             .into(holder.image)
         holder.name.text = product.name
+        holder.category.text = product.category
         holder.price.text = product.cost.toString() + " " + RUBLE
 
-        //Mark as favorite if product is in Database
-        if (mRepository.isExist(product.id)) {
-            setAsFavorite(holder)
-        } else {
-            setAsNotFavorite(holder)
-        }
-
-        //Click Handle (Favorite)
-        holder.addFavorite.setOnClickListener {
+        //Remove after click 'favorite'
+        holder.remove.setOnClickListener {
             if (mRepository.isExist(product.id)) {
+                mProducts.removeAt(position)
                 mRepository.remove(product.id)
-                setAsNotFavorite(holder)
-            } else {
-                mRepository.insert(product.id)
-                setAsFavorite(holder)
+                updateAfterItemRemoved(position)
             }
         }
+
     }
 
-    private fun setAsFavorite(viewHolder: ProductViewHolder){
-        viewHolder.addFavorite.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_favorite_black_24dp))
-    }
-
-    private fun setAsNotFavorite(viewHolder: ProductViewHolder){
-        viewHolder.addFavorite.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_favorite_border_24dp))
+    private fun updateAfterItemRemoved(position: Int){
+        notifyItemRemoved(position)
+        notifyItemChanged(position)
+        notifyItemRangeChanged(position, mProducts.size)
+        notifyDataSetChanged()
     }
 
 }

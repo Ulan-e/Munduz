@@ -4,7 +4,7 @@ import android.os.Build
 import android.text.Html
 import android.text.Spanned
 
-val RUBLE = fromHtml(" &#x20bd")
+val RUBLE = " " +  fromHtml(" &#x20bd")
 
 fun fromHtml(source: String?): Spanned? {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {

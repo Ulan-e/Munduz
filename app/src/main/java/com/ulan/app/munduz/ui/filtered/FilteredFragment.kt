@@ -11,12 +11,12 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ulan.app.munduz.R
-import com.ulan.app.munduz.adapter.ProductAdapter
+import com.ulan.app.munduz.adapter.ProductsAdapter
 import com.ulan.app.munduz.data.room.repository.FavoritesRepository
-import com.ulan.app.munduz.data.room.repository.FavoritesRepositoryImpl
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
 import com.ulan.app.munduz.helpers.Constants.Companion.CATEGORY_ARG
+import com.ulan.app.munduz.helpers.Constants.Companion.HOME_FRAGMENT
 import com.ulan.app.munduz.helpers.isNetworkAvailable
 import com.ulan.app.munduz.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
@@ -31,7 +31,7 @@ class FilteredFragment : BaseFragment(), FilteredView, OnItemClickListener {
     lateinit var mPresenter: FilteredPresenter
 
     @Inject
-    lateinit var mAdapter: ProductAdapter
+    lateinit var mAdapter: ProductsAdapter
 
     @Inject
     lateinit var mRoomRepository: FavoritesRepository
@@ -60,7 +60,7 @@ class FilteredFragment : BaseFragment(), FilteredView, OnItemClickListener {
     override fun showErrorNetwork() {
         error_layout.visibility = View.VISIBLE
         error_network_button.setOnClickListener {
-            val fragment = activity!!.supportFragmentManager.findFragmentByTag("homef")
+            val fragment = activity!!.supportFragmentManager.findFragmentByTag(HOME_FRAGMENT)
             val ft = activity!!.supportFragmentManager.beginTransaction()
             ft.detach(fragment!!)
             ft.attach(fragment)
@@ -97,7 +97,7 @@ class FilteredFragment : BaseFragment(), FilteredView, OnItemClickListener {
 
     override fun onItemClick(product: Product) {
         val intent = Intent(activity, DetailsActivity::class.java)
-        intent.putExtra(Constants.PRODUCT_ARG, product)
+        intent.putExtra(Constants.EXTRA_PRODUCT_ARG, product)
         startActivity(intent)
     }
 

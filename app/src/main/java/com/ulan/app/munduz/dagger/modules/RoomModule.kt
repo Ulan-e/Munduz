@@ -2,13 +2,14 @@ package com.ulan.app.munduz.dagger.modules
 
 import android.content.Context
 import androidx.room.Room
-import com.ulan.app.munduz.data.room.StarredDatabase
+import com.ulan.app.munduz.data.room.MunduzDatabase
 import com.ulan.app.munduz.data.room.dao.FavoritesDao
 import com.ulan.app.munduz.data.room.dao.PurchasesDao
 import com.ulan.app.munduz.data.room.repository.FavoritesRepository
 import com.ulan.app.munduz.data.room.repository.FavoritesRepositoryImpl
 import com.ulan.app.munduz.data.room.repository.PurchasesRepository
 import com.ulan.app.munduz.data.room.repository.PurchasesRepositoryImpl
+import com.ulan.app.munduz.helpers.Constants.Companion.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
 
@@ -16,19 +17,19 @@ import dagger.Provides
 class RoomModule {
 
     @Provides
-    fun database(context: Context): StarredDatabase {
-        return Room.databaseBuilder(context, StarredDatabase::class.java, "database00001")
+    fun database(context: Context): MunduzDatabase {
+        return Room.databaseBuilder(context, MunduzDatabase::class.java, DATABASE_NAME)
             .allowMainThreadQueries()
             .build()
     }
 
     @Provides
-    fun favoritesDao(database: StarredDatabase): FavoritesDao {
+    fun favoritesDao(database: MunduzDatabase): FavoritesDao {
         return database.favoritesDao()
     }
 
     @Provides
-    fun purchasesDao(database: StarredDatabase): PurchasesDao {
+    fun purchasesDao(database: MunduzDatabase): PurchasesDao {
         return database.purchasesDao()
     }
 

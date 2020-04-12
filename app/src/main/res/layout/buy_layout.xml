@@ -40,7 +40,6 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:text="Total"
             android:textSize="18sp"
             android:textStyle="bold"/>
 
@@ -49,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="7dp"
-            android:hint="Ваше имя"
+            android:hint="@string/your_name"
             android:inputType="textPersonName"
             android:textSize="16sp" />
 
@@ -61,9 +60,9 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="0dp"
-            android:hint="Телефонный номер"
             android:inputType="phone"
-            android:text="+7"
+            android:text="@string/phone_number_russia"
+            android:hint="@string/phone_number"
             android:textSize="17sp" />
 
     <TextView
@@ -71,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="7dp"
-            android:text="по этому номеру вам позвонят"
+            android:text="@string/bottom_text_phone_number"
             android:textSize="13sp" />
 
     <RadioGroup
@@ -86,14 +85,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="6dp"
-                android:text="Доставка" />
+                android:text="@string/delivery" >
+
+        </RadioButton>
 
         <RadioButton
                 android:id="@+id/pickup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="6dp"
-                android:text="Самовывоз" />
+                android:text="@string/pickup" >
+
+        </RadioButton>
     </RadioGroup>
 
     <EditText
@@ -103,7 +106,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="0dp"
-            android:hint="Комментарий (необязательный)"
+            android:hint="@string/comment_hint"
             android:inputType="textShortMessage"
             android:textSize="16sp" />
 
@@ -116,7 +119,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginRight="7dp"
             android:layout_marginBottom="5dp"
-            android:text="Заказать"
+            android:text="@string/order"
             android:textSize="15sp" />
 
 

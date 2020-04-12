@@ -23,8 +23,8 @@ class CatalogModule {
 
     @MainScope
     @Provides
-    fun catalogPresenter(catalogView: CatalogView, repository: FirebaseRepository): CatalogPresenter {
-        return CatalogPresenterImpl(catalogView, repository)
+    fun catalogPresenter(catalogView: CatalogView): CatalogPresenter {
+        return CatalogPresenterImpl(catalogView)
     }
 
     @MainScope

@@ -24,7 +24,7 @@
             android:layout_below="@+id/contacts_us"
             android:layout_marginBottom="7dp"
             android:background="?android:selectableItemBackground"
-            android:text="Написать нам"
+            android:text="@string/write_to_us"
             android:textSize="16sp"
             android:textStyle="bold"/>
 

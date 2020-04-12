@@ -9,7 +9,7 @@ import com.ulan.app.munduz.data.models.PurchaseEntity
 import com.ulan.app.munduz.developer.Product
 
 @Database(entities = [FavoriteEntity::class, PurchaseEntity::class], version = 1, exportSchema = false)
-abstract class StarredDatabase : RoomDatabase() {
+abstract class MunduzDatabase : RoomDatabase() {
 
     abstract fun favoritesDao(): FavoritesDao
     abstract fun purchasesDao(): PurchasesDao

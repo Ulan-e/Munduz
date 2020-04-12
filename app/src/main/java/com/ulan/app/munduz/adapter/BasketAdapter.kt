@@ -9,10 +9,10 @@ import com.ulan.app.munduz.R
 import com.ulan.app.munduz.data.models.PurchaseEntity
 import com.ulan.app.munduz.data.room.repository.PurchasesRepository
 import com.ulan.app.munduz.helpers.RUBLE
+import com.ulan.app.munduz.helpers.convertStringToInt
+import com.ulan.app.munduz.helpers.convertIntToString
 import com.ulan.app.munduz.listeners.OnChangeSumListener
 import com.ulan.app.munduz.listeners.OnItemBasketClickListener
-import java.util.regex.Matcher
-import java.util.regex.Pattern
 
 
 class BasketAdapter : RecyclerView.Adapter<BasketViewHolder> {
@@ -68,35 +68,30 @@ class BasketAdapter : RecyclerView.Adapter<BasketViewHolder> {
             .error(R.drawable.ic_error_image_black_24dp)
             .into(holder.image)
         holder.name.text = purchase.name
-        holder.price.text = purchase.priceIncreased.toString() + " " + RUBLE
-        holder.perPrice.text = purchase.perPriceIncreased
+        holder.price.text = purchase.priceInc.toString() + RUBLE
+        holder.perPrice.text = purchase.perPriceInc
 
-        var initialPrice = purchase.price
-        var initialWeight = convertToInt(purchase.perPrice)
+        val initialPrice = purchase.price
+        val initialPerPrice = convertStringToInt(purchase.perPrice)
+        var changedPerPrice = convertStringToInt(purchase.perPriceInc)
+        var changedPrice = purchase.priceInc
+        val perCount = convertIntToString(purchase.perPrice)
 
         holder.increase.setOnClickListener {
-            purchase.priceIncreased += initialPrice
-            var resWeight = convertToInt(purchase.perPriceIncreased) + initialWeight
-            purchase.perPriceIncreased = resWeight.toString() + convertToString(purchase.perPrice)
-            mRepository.update(purchase)
-            mChangeListener.onSumChange()
-            holder.price.text = purchase.priceIncreased.toString() + " " + RUBLE
-            holder.perPrice.text = purchase.perPriceIncreased
+            changedPrice += initialPrice
+            changedPerPrice += initialPerPrice
+            purchase.priceInc = changedPrice
+            purchase.perPriceInc = changedPerPrice.toString() + perCount
+            updateValues(holder, purchase)
         }
 
         holder.decrease.setOnClickListener {
-            var priceNew = purchase.priceIncreased
-            var weightNew = convertToInt(purchase.perPriceIncreased)
-            if (priceNew != purchase.price) {
-                priceNew -= initialPrice
-                var resWeight = weightNew - initialWeight
-                purchase.priceIncreased = priceNew
-                purchase.perPriceIncreased =
-                    resWeight.toString() + convertToString(purchase.perPrice)
-                mRepository.update(purchase)
-                mChangeListener.onSumChange()
-                holder.price.text = purchase.priceIncreased.toString() + " " + RUBLE
-                holder.perPrice.text = purchase.perPriceIncreased
+            if (changedPrice != purchase.price) {
+                changedPrice -= initialPrice
+                changedPerPrice -= initialPerPrice
+                purchase.priceInc = changedPrice
+                purchase.perPriceInc = changedPerPrice.toString() + perCount
+                updateValues(holder, purchase)
             }
         }
 
@@ -105,9 +100,15 @@ class BasketAdapter : RecyclerView.Adapter<BasketViewHolder> {
                 mPurchases.removeAt(position)
                 mRepository.remove(purchase)
                 updateAfterRemoving(position)
-                mChangeListener.onSumChange()
             }
         }
+    }
+
+    private fun updateValues(holder: BasketViewHolder, purchase: PurchaseEntity) {
+        mRepository.update(purchase)
+        mChangeListener.onSumChanged()
+        holder.price.text = purchase.priceInc.toString() + RUBLE
+        holder.perPrice.text = purchase.perPriceInc
     }
 
     private fun updateAfterRemoving(position: Int) {
@@ -115,20 +116,7 @@ class BasketAdapter : RecyclerView.Adapter<BasketViewHolder> {
         notifyItemChanged(position)
         notifyItemRangeChanged(position, mPurchases.size)
         notifyDataSetChanged()
-    }
-
-    private fun convertToInt(weight: String): Int {
-        var result = 0
-        val p: Pattern = Pattern.compile("\\d+")
-        val m: Matcher = p.matcher(weight)
-        while (m.find()) {
-            result = m.group().toInt()
-        }
-        return result
-    }
-
-    private fun convertToString(weight: String): String {
-        return weight.replace(Regex("\\d+"), "")
+        mChangeListener.onSumChanged()
     }
 
 }

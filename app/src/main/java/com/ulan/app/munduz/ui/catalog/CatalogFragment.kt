@@ -1,17 +1,13 @@
 package com.ulan.app.munduz.ui.catalog
 
-import android.content.Context
-import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,7 +18,6 @@ import com.ulan.app.munduz.listeners.OnCategoryClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.filtered.FilteredFragment
 import com.ulan.app.munduz.ui.home.HomeFragment
-import com.ulan.app.munduz.ui.main.MainActivity
 import kotlinx.android.synthetic.main.catalog_layout.*
 import javax.inject.Inject
 
@@ -39,14 +34,14 @@ class CatalogFragment : BaseFragment(), CatalogView, OnCategoryClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.catalog_layout, container, false)
-        return view
+        return inflater.inflate(R.layout.catalog_layout, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mPresenter.setToolbar()
-        mPresenter.loadCatalog()
+        val catalog = activity!!.applicationContext.resources.getStringArray(R.array.category)
+        mPresenter.setCatalog(catalog.toMutableList())
     }
 
     override fun showToolbar() {
@@ -65,7 +60,7 @@ class CatalogFragment : BaseFragment(), CatalogView, OnCategoryClickListener {
         val layoutManager = LinearLayoutManager(activity!!.applicationContext)
         catalog_recycler_view.layoutManager = layoutManager
         catalog_recycler_view.addItemDecoration(DividerItemDecoration(activity, LinearLayoutManager.HORIZONTAL))
-        mAdapter.setCatalogs(catalog)
+        mAdapter.setCatalogs(catalog.toMutableList())
         catalog_recycler_view.adapter = mAdapter
     }
 

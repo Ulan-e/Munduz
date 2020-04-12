@@ -17,13 +17,13 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.ulan.app.munduz.R
-import com.ulan.app.munduz.adapter.ProductAdapter
+import com.ulan.app.munduz.adapter.ProductsAdapter
 import com.ulan.app.munduz.adapter.SliderAdapter
 import com.ulan.app.munduz.data.models.SliderImage
 import com.ulan.app.munduz.data.room.repository.FavoritesRepository
-import com.ulan.app.munduz.data.room.repository.FavoritesRepositoryImpl
 import com.ulan.app.munduz.developer.Product
-import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_ARG
+import com.ulan.app.munduz.helpers.Constants.Companion.EXTRA_PRODUCT_ARG
+import com.ulan.app.munduz.helpers.Constants.Companion.HOME_FRAGMENT
 import com.ulan.app.munduz.helpers.isNetworkAvailable
 import com.ulan.app.munduz.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
@@ -39,7 +39,7 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
     lateinit var mPresenter: HomePresenter
 
     @Inject
-    lateinit var mAdapter: ProductAdapter
+    lateinit var mAdapter: ProductsAdapter
 
     @Inject
     lateinit var mRoomRepository: FavoritesRepository
@@ -114,7 +114,7 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
         content_scroll_view.visibility = View.GONE
         error_layout.visibility = View.VISIBLE
         error_network_button.setOnClickListener {
-            val fragment = activity!!.supportFragmentManager.findFragmentByTag("homef")
+            val fragment = activity!!.supportFragmentManager.findFragmentByTag(HOME_FRAGMENT)
             val ft = activity!!.supportFragmentManager.beginTransaction()
             ft.detach(fragment!!)
             ft.attach(fragment)
@@ -159,7 +159,7 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
 
     override fun onItemClick(product: Product) {
         val intent = Intent(activity, DetailsActivity::class.java)
-        intent.putExtra(PRODUCT_ARG, product)
+        intent.putExtra(EXTRA_PRODUCT_ARG, product)
         startActivity(intent)
     }
 

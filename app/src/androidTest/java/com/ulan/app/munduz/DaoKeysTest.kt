@@ -4,7 +4,7 @@ import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import com.ulan.app.munduz.data.room.dao.FavoritesDao
 import com.ulan.app.munduz.data.models.FavoriteEntity
-import com.ulan.app.munduz.data.room.StarredDatabase
+import com.ulan.app.munduz.data.room.MunduzDatabase
 import junit.framework.Assert.*
 import org.junit.After
 import org.junit.Before
@@ -12,7 +12,7 @@ import org.junit.Test
 
 class DaoKeysTest {
 
-    private lateinit var database: StarredDatabase
+    private lateinit var database: MunduzDatabase
     private lateinit var daoKeys: FavoritesDao
     private val keyEntity1 =
         FavoriteEntity(1, "Key1")
@@ -23,7 +23,7 @@ class DaoKeysTest {
     fun setUp() {
         database = Room.inMemoryDatabaseBuilder(
             InstrumentationRegistry.getInstrumentation().context,
-            StarredDatabase::class.java
+            MunduzDatabase::class.java
         )
             .allowMainThreadQueries()
             .build()

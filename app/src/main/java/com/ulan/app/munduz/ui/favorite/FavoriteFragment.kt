@@ -14,10 +14,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ulan.app.munduz.R
-import com.ulan.app.munduz.adapter.FavoriteAdapter
+import com.ulan.app.munduz.adapter.FavoritesAdapter
 import com.ulan.app.munduz.data.room.repository.FavoritesRepository
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
+import com.ulan.app.munduz.helpers.Constants.Companion.HOME_FRAGMENT
 import com.ulan.app.munduz.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.details.DetailsActivity
@@ -31,7 +32,7 @@ class FavoriteFragment: BaseFragment(), FavoriteView, OnItemClickListener {
     lateinit var mPresenter: FavoritePresenter
 
     @Inject
-    lateinit var mAdapter: FavoriteAdapter
+    lateinit var mAdapter: FavoritesAdapter
 
     @Inject
     lateinit var mRoomRepository: FavoritesRepository
@@ -75,14 +76,14 @@ class FavoriteFragment: BaseFragment(), FavoriteView, OnItemClickListener {
 
     override fun onItemClick(product: Product) {
         val intent = Intent(activity, DetailsActivity::class.java)
-        intent.putExtra(Constants.PRODUCT_ARG, product)
+        intent.putExtra(Constants.EXTRA_PRODUCT_ARG, product)
         startActivity(intent)
     }
 
     override fun onBackPressed(): Boolean {
         activity!!.supportFragmentManager
             .beginTransaction()
-            .replace(R.id.container, HomeFragment(), "homef")
+            .replace(R.id.container, HomeFragment(), HOME_FRAGMENT)
             .addToBackStack(null)
             .commit()
         val bottomNav = activity!!.findViewById<BottomNavigationView>(R.id.bottom_navigation_menu)

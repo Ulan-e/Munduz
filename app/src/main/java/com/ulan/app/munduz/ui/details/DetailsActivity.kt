@@ -2,25 +2,24 @@ package com.ulan.app.munduz.ui.details
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Html
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.core.content.ContextCompat
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
+import com.ulan.app.munduz.helpers.Constants.Companion.EXTRA_OPEN_BASKET
 import com.ulan.app.munduz.helpers.Constants.Companion.EXTRA_TURN_OFF_ADD_BASKET
-import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_ARG
+import com.ulan.app.munduz.helpers.Constants.Companion.EXTRA_PRODUCT_ARG
+import com.ulan.app.munduz.helpers.Constants.Companion.IN_BASKET
+import com.ulan.app.munduz.helpers.Constants.Companion.OPEN_BASKET_ARG
 import com.ulan.app.munduz.helpers.Constants.Companion.TURN_OFF_ARG
 import com.ulan.app.munduz.helpers.RUBLE
 import com.ulan.app.munduz.ui.base.BaseActivity
-import com.ulan.app.munduz.ui.home.HomeFragment
 import com.ulan.app.munduz.ui.main.MainActivity
 import kotlinx.android.synthetic.main.details_layout.*
 import javax.inject.Inject
@@ -38,7 +37,7 @@ class DetailsActivity : BaseActivity(), DetailsView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.details_layout)
 
-        mProduct = intent.getParcelableExtra<Product>(PRODUCT_ARG)
+        mProduct = intent.getParcelableExtra<Product>(EXTRA_PRODUCT_ARG)
         val turn = intent.getStringExtra(EXTRA_TURN_OFF_ADD_BASKET)
         if(turn == TURN_OFF_ARG){
             add_to_basket.setBackgroundColor(resources.getColor(R.color.colorPrimaryDark))
@@ -59,7 +58,7 @@ class DetailsActivity : BaseActivity(), DetailsView {
 
     override fun goToBasket() {
         val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("ulan", "basket")
+        intent.putExtra(EXTRA_OPEN_BASKET, OPEN_BASKET_ARG)
         startActivity(intent)
     }
 
@@ -101,7 +100,7 @@ class DetailsActivity : BaseActivity(), DetailsView {
 
     override fun changeAddToBasketText(text: String) {
         add_to_basket.text = text
-        if(text == "Товар в корзине"){
+        if(text == IN_BASKET){
             add_to_basket.setBackgroundColor(resources.getColor(R.color.colorPrimaryDark))
         }else{
             add_to_basket.setBackgroundColor(resources.getColor(R.color.purple))

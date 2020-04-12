@@ -1,53 +1,60 @@
 <resources>
     <string name="app_name">Munduz</string>
+
     <string name="home">Главная</string>
     <string name="catalog">Каталог</string>
     <string name="favorite">Избранное</string>
     <string name="basket">Корзина</string>
     <string name="more">Еще</string>
-    <string name="news_goods_title">Новинки</string>
+    <string name="recommended">Рекомендуем</string>
     <string name="contacts_us">Связаться с нами</string>
-    <string name="lang">Язык</string>
-    <string name="basket_title">Корзина</string>
-    <string name="info_title">Информация</string>
-    <string name="search_hint">подсказка</string>
-    <string name="search">Поиск</string>
-    <string name="loading">Загрузка изображения</string>
-    <string name="loading_success">Картинка добавлена</string>
-    <string name="loading_failed">Ошибка при загрузке картинки</string>
-    <string name="loading_not_completed">Загрузка не завершена</string>
-    <string name="error_read_data">"Error to read data from database"</string>
-    <string name="select_image">Выберите изображение</string>
-    <string name="edit_text_empty"> Заполните все поля </string>
-    <string name="category">Категория</string>
-    <string name="product_name">Название</string>
-    <string name="product_desc">Описание</string>
-    <string name="product_cost">Стоимость</string>
-    <string name="product_visibility">Видимость</string>
-    <string name="yes">Да</string>
-    <string name="no">Нет</string>
-    <string name="product_image">Картинка</string>
-    <string name="add_product">Добавить товар</string>
-    <string name="update_product">Обновить товар</string>
-    <string name="remove_product">Удалить товар</string>
-    <string name="buy_product">Купить</string>
-    <string name="empty_list">Каталог пуст</string>
-    <string name="empty_filter_products">Данный каталог пуст</string>
-    <string name="empty_new_products">Пока новинок нет</string>
-    <string name="empty_liked_products">У вас пока нет понравивщихся</string>
-    <string name="empty_product">Данный продукт не существует</string>
+    <string name="about_app">О Приложении</string>
+    <string name="write_to_us">Написать нам</string>
 
+    <string name="purchases_amount">"Сумма товара "</string>
+    <string name="delivery">"Доставка"</string>
+    <string name="pickup">"Самовывоз"</string>
+    <string name="order">"Заказать"</string>
+    <string name="success_order"> "Ваш заказ успешно выполнен \n Вам позвонять в течении 30 минут" </string>
+    <string name="search_hint">Найти товар</string>
+    <string name="version_title">Версия</string>
+    <string name="version_code">1.2</string>
+    <string name="ulan_erkinbaev">Улан Эркинбаев</string>
+    <string name="developer">Разрабочик</string>
+    <string name="ready_purchase">Оформить Заказ</string>
+    <string name="goto_home">Перейти на главную</string>
+    <string name="minus">-</string>
+    <string name="plus">+</string>
+    <string name="phone_number_russia">+7</string>
+    <string name="bottom_text_phone_number">по этому номеру вам позвонят</string>
+    <string name="comment_hint">Комментарий (необязательный)</string>
+    <string name="your_name">Ваше имя</string>
+    <string name="phone_number">Телефонный номер</string>
+    <string name="error_catalog">Ошибка в каталоге</string>
+    <string name="avalaible">Есть в наличии</string>
+    <string name="delivery_text">Доставка через день после покупки</string>
+    <string name="description">Описание</string>
+    <string name="your_message">Ваше сообщение</string>
+    <string name="send">Отправить</string>
+    <string name="search">Поиск</string>
+
+    <string name="empty_filter_products">Данный каталог пуст</string>
+    <string name="empty_searched_list">Список пуст</string>
+    <string name="empty_favorite_products">У вас пока нет понравивщихся</string>
+    <string name="empty_product">Данный продукт не существует</string>
+    <string name="empty_fields"> Заполните поля </string>
     <string name="error_network_text">Ошибка с соединения с сервером</string>
     <string name="error_network_button">Повторить</string>
-    <string name="buy_button">Купить</string>
-    <string name="about_app">О Приложении</string>
+    <string name="empty_basket">Корзина пуста</string>
+    <string name="empty_favorites">У вас пока нет избранных</string>
+    <string name="empty_recomended">Рекомендаций пока нет</string>
 
     <string-array name="category">
-        <item>Продукты     </item>
-        <item>Напитки     </item>
-        <item>Посуда     </item>
-        <item>Для дома      </item>
-        <item>Одежда     </item>
-        <item>Книги     </item>
+        <item>Продукты</item>
+        <item>Напитки</item>
+        <item>Посуда</item>
+        <item>Для дома </item>
+        <item>Одежда</item>
+        <item>Книги</item>
     </string-array>
 </resources>

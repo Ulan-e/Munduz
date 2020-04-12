@@ -13,9 +13,9 @@ data class PurchaseEntity(
     var name: String = "",
     var desc: String = "",
     var price: Int = -1,
-    var priceIncreased: Int = -1,
+    var priceInc: Int = -1,
     var perPrice: String = "",
-    var perPriceIncreased: String = "",
+    var perPriceInc: String = "",
     @Embedded
     var picture: Picture = Picture("url")
 ) : Parcelable

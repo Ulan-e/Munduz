@@ -4,7 +4,7 @@ data class Order(
 
     var purchases: String = "",
     var amountPurchases: Int = -1,
-    var isWithDelivery: String = "",
+    var purchaseMethod: String = "",
     var clientName: String = "",
     var clientPhoneNumber: String = "",
     var comment: String = ""

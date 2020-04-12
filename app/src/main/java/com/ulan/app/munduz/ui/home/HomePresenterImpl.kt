@@ -3,7 +3,6 @@ package com.ulan.app.munduz.ui.home
 import com.ulan.app.munduz.data.models.SliderImage
 import com.ulan.app.munduz.data.firebase.FirebaseRepository
 import com.ulan.app.munduz.data.room.repository.FavoritesRepository
-import com.ulan.app.munduz.data.room.repository.FavoritesRepositoryImpl
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.listeners.ProductsCallback
 import com.ulan.app.munduz.listeners.SliderImagesCallback
@@ -27,7 +26,7 @@ class HomePresenterImpl : HomePresenter {
     }
 
     override fun loadProducts() {
-            mRepository.loadNewProducts(object : ProductsCallback {
+            mRepository.loadRecommendedProducts(object : ProductsCallback {
                 override fun onCallback(values: MutableList<Product>) {
                     if (values.size > 0) {
                         mView?.showProducts(values)

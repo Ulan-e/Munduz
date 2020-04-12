@@ -8,7 +8,7 @@ import com.ulan.app.munduz.R
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.listeners.OnItemClickListener
 
-class ProductViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class ProductsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     val image: ImageView = itemView.findViewById(R.id.product_image)
     val name: TextView = itemView.findViewById(R.id.product_name)

@@ -1,25 +1,20 @@
 package com.ulan.app.munduz.ui.catalog
 
-import com.ulan.app.munduz.data.firebase.FirebaseRepository
-
 class CatalogPresenterImpl : CatalogPresenter {
 
     private var mView: CatalogView?
-    private var mRepository: FirebaseRepository
 
-    constructor(mView: CatalogView, mRepository: FirebaseRepository) {
+    constructor(mView: CatalogView) {
         this.mView = mView
-        this.mRepository = mRepository
     }
 
     override fun setToolbar() {
         mView?.showToolbar()
     }
 
-    override fun loadCatalog() {
-        val categories = mRepository.loadCatalogs()
-        if (categories.size > 0){
-            mView?.showCatalog(categories)
+    override fun setCatalog(catalog: MutableList<String>) {
+        if (catalog.size > 0){
+            mView?.showCatalog(catalog)
         }else{
             mView?.showEmptyData()
         }

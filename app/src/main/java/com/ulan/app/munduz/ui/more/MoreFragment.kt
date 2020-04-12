@@ -15,8 +15,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.helpers.Constants.Companion.FACEBOOK_PAGE
+import com.ulan.app.munduz.helpers.Constants.Companion.HOME_FRAGMENT
 import com.ulan.app.munduz.helpers.Constants.Companion.INSTAGRAM_PAGE
 import com.ulan.app.munduz.helpers.Constants.Companion.ODNOKLASSNIKI_PAGE
+import com.ulan.app.munduz.helpers.Constants.Companion.WRITE_TO_US_FRAGMENT
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.home.HomeFragment
 import com.ulan.app.munduz.ui.more.sections.AboutAppFragment
@@ -109,7 +111,7 @@ class MoreFragment : BaseFragment(), MoreView {
 
     override fun showWriteUs() {
         val dialogFragment = WriteToUsFragment()
-        dialogFragment.show(activity!!.supportFragmentManager, "dialogWriteUs")
+        dialogFragment.show(activity!!.supportFragmentManager, WRITE_TO_US_FRAGMENT)
     }
 
     override fun showInstagramPage() {
@@ -135,7 +137,7 @@ class MoreFragment : BaseFragment(), MoreView {
     override fun onBackPressed(): Boolean {
         activity!!.supportFragmentManager
             .beginTransaction()
-            .replace(R.id.container, HomeFragment.newInstance(), "home")
+            .replace(R.id.container, HomeFragment.newInstance(), HOME_FRAGMENT)
             .addToBackStack(null)
             .commit()
         val bottomNav = activity!!.findViewById<BottomNavigationView>(R.id.bottom_navigation_menu)

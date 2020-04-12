@@ -49,7 +49,8 @@ class WriteToUsFragment : BaseDialogFragment() {
                 dismiss()
             }, 2500)
         }else{
-            showSnack("Заполните поля")
+            var message = activity!!.resources.getString(R.string.empty_fields)
+            showSnack(message)
         }
     }
 

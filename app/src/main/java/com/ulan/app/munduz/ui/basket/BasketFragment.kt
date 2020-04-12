@@ -21,6 +21,8 @@ import com.ulan.app.munduz.data.models.PurchaseEntity
 import com.ulan.app.munduz.data.room.repository.PurchasesRepository
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
+import com.ulan.app.munduz.helpers.Constants.Companion.BUY_FRAGMENT
+import com.ulan.app.munduz.helpers.Constants.Companion.HOME_FRAGMENT
 import com.ulan.app.munduz.helpers.RUBLE
 import com.ulan.app.munduz.listeners.OnChangeSumListener
 import com.ulan.app.munduz.listeners.OnItemBasketClickListener
@@ -94,22 +96,16 @@ class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, On
 
     override fun purchaseAll(purchases: MutableList<PurchaseEntity>, amount: Int) {
         val fragment = BuyFragment.newInstance(purchases, amount)
-        fragment.show(activity!!.supportFragmentManager, "buy_dialog")
+        fragment.show(activity!!.supportFragmentManager, BUY_FRAGMENT)
     }
 
     override fun showPurchasesAmount(amount: Int) {
-        sum_of_purchase.text = "Сумма товара " + amount.toString() + RUBLE
+        val amountText = activity!!.resources.getString(R.string.purchases_amount)
+        sum_of_purchase.text = amountText + amount.toString() + RUBLE
     }
 
     override fun showGoToHome() {
-        activity!!.supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.container, HomeFragment(), "homef")
-            .addToBackStack(null)
-            .commit()
-        val bottomNav =
-            activity!!.findViewById<BottomNavigationView>(R.id.bottom_navigation_menu)
-        bottomNav.selectedItemId = R.id.home
+        goToHomePage()
     }
 
     override fun hidePurchaseButton() {
@@ -124,20 +120,13 @@ class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, On
 
     override fun onItemClick(purchase: PurchaseEntity) {
         val intent = Intent(activity, DetailsActivity::class.java)
-        intent.putExtra(Constants.PRODUCT_ARG, convertPurchaseToProduct(purchase))
+        intent.putExtra(Constants.EXTRA_PRODUCT_ARG, convertPurchaseToProduct(purchase))
         intent.putExtra(Constants.EXTRA_TURN_OFF_ADD_BASKET, Constants.TURN_OFF_ARG)
         startActivity(intent)
     }
 
     override fun onBackPressed(): Boolean {
-        activity!!.supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.container, HomeFragment(), "homef")
-            .addToBackStack(null)
-            .commit()
-        val bottomNav =
-            activity!!.findViewById<BottomNavigationView>(R.id.bottom_navigation_menu)
-        bottomNav.selectedItemId = R.id.home
+        goToHomePage()
         return true
     }
 
@@ -160,10 +149,20 @@ class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, On
         }
     }
 
-    override fun onSumChange() {
+    override fun onSumChanged() {
         mPresenter.purchasesAmountChanged()
     }
 
+    private fun goToHomePage() {
+        activity!!.supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container, HomeFragment(), HOME_FRAGMENT)
+            .addToBackStack(null)
+            .commit()
+        val bottomNav =
+            activity!!.findViewById<BottomNavigationView>(R.id.bottom_navigation_menu)
+        bottomNav.selectedItemId = R.id.home
+    }
 
     private fun convertPurchaseToProduct(purchase: PurchaseEntity): Product {
         var product = Product()

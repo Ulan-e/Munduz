@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.splash_screen.*
 class SplashActivity : AppCompatActivity() {
 
     private var mDelayHandler: Handler? = null
-    private var SPLASHDELAY: Long = 2500
+    private var SPLASH_DELAY: Long = 2300
 
     private val mRunnable: Runnable = Runnable {
         if (!isFinishing) {
@@ -31,7 +31,7 @@ class SplashActivity : AppCompatActivity() {
         splash_text.typeface = typeface
 
         mDelayHandler = Handler()
-        mDelayHandler!!.postDelayed(mRunnable, SPLASHDELAY)
+        mDelayHandler!!.postDelayed(mRunnable, SPLASH_DELAY)
     }
 
     override fun onDestroy() {

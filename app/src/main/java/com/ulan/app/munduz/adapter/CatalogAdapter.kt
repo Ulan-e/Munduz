@@ -37,7 +37,7 @@ class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.CatalogViewHolder> {
     override fun onBindViewHolder(holder: CatalogViewHolder, position: Int) {
         val category = catalog[position]
         holder.bind(category, mListener)
-        holder.name.text = "$category"
+        holder.name.text = category
     }
 
     class CatalogViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

@@ -6,6 +6,13 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ulan.app.munduz.R
+import com.ulan.app.munduz.helpers.Constants.Companion.BASKET_FRAGMENT
+import com.ulan.app.munduz.helpers.Constants.Companion.CATALOG_FRAGMENT
+import com.ulan.app.munduz.helpers.Constants.Companion.EXTRA_OPEN_BASKET
+import com.ulan.app.munduz.helpers.Constants.Companion.FAVORITE_FRAGMENT
+import com.ulan.app.munduz.helpers.Constants.Companion.HOME_FRAGMENT
+import com.ulan.app.munduz.helpers.Constants.Companion.MORE_FRAGMENT
+import com.ulan.app.munduz.helpers.Constants.Companion.OPEN_BASKET_ARG
 import com.ulan.app.munduz.ui.base.BaseActivity
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.basket.BasketFragment
@@ -28,21 +35,16 @@ class MainActivity : BaseActivity(), MainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val fragment = BasketFragment.newInstance()
-        val mTitle = intent.getStringExtra("ulan")
-        if (mTitle == "basket") {
+        val mTitle = intent.getStringExtra(EXTRA_OPEN_BASKET)
+        if (mTitle == OPEN_BASKET_ARG) {
             initBottomNav(R.id.basket)
-            Log.d("ulanbek", "go to basket")
         }else{
             initBottomNav(R.id.home)
-            Log.d("ulanbek", "go to home")
         }
 
         button_click.setOnClickListener{
             startActivity(Intent(this@MainActivity, SearchActivity::class.java))
         }
-
-
     }
 
     override fun initBottomNav(id: Int) {
@@ -55,28 +57,28 @@ class MainActivity : BaseActivity(), MainView {
             when (menuItem.itemId) {
                 R.id.home -> {
                     val homeFragment = HomeFragment.newInstance()
-                    mPresenter.addFragment(homeFragment, "homef")
+                    mPresenter.addFragment(homeFragment, HOME_FRAGMENT)
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.catalog -> {
                     val catalogFragment = CatalogFragment.newInstance()
-                    mPresenter.addFragment(catalogFragment, "catalogf")
+                    mPresenter.addFragment(catalogFragment, CATALOG_FRAGMENT)
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.basket -> {
                     val basketFragment = BasketFragment.newInstance()
-                    mPresenter.addFragment(basketFragment, "basketf")
+                    mPresenter.addFragment(basketFragment, BASKET_FRAGMENT)
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.favorite -> {
                     val favoriteFragment = FavoriteFragment.newInstance()
-                    mPresenter.addFragment(favoriteFragment, "favoritef")
+                    mPresenter.addFragment(favoriteFragment, FAVORITE_FRAGMENT)
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.more -> {
                     val moreFragment =
                         MoreFragment.newInstance()
-                    mPresenter.addFragment(moreFragment, "moref")
+                    mPresenter.addFragment(moreFragment, MORE_FRAGMENT)
                     return@OnNavigationItemSelectedListener true
                 }
             }

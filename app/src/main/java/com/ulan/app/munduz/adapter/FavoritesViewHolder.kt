@@ -8,7 +8,7 @@ import com.ulan.app.munduz.R
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.listeners.OnItemClickListener
 
-class FavoriteViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+class FavoritesViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
 
     val image: ImageView = itemView.findViewById(R.id.favorite_image)
     val name: TextView = itemView.findViewById(R.id.favorite_name)

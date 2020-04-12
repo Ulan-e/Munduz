@@ -14,7 +14,7 @@ import com.ulan.app.munduz.ui.details.DetailsActivity
 import kotlinx.android.synthetic.main.search_layout.*
 import javax.inject.Inject
 
-class SearchActivity: BaseActivity(), SearchView, OnItemClickListener,
+class SearchActivity : BaseActivity(), SearchView, OnItemClickListener,
     android.widget.SearchView.OnQueryTextListener {
 
     @Inject
@@ -33,11 +33,12 @@ class SearchActivity: BaseActivity(), SearchView, OnItemClickListener,
         search_view_full.requestFocus()
 
         search_view_full.setOnQueryTextListener(this)
-        search_view_full.queryHint="Найти товар"
+        var hintText = resources.getString(R.string.search_hint)
+        search_view_full.queryHint = hintText
 
         mPresenter.loadProducts()
 
-        press_back.setOnClickListener{
+        press_back.setOnClickListener {
             finish()
         }
     }
@@ -55,12 +56,12 @@ class SearchActivity: BaseActivity(), SearchView, OnItemClickListener,
     }
 
     override fun showEmptyData() {
-        Toast.makeText(this, resources.getString(R.string.empty_list), Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, resources.getString(R.string.empty_searched_list), Toast.LENGTH_SHORT).show()
     }
 
     override fun onItemClick(product: Product) {
         val intent = Intent(this, DetailsActivity::class.java)
-        intent.putExtra(Constants.PRODUCT_ARG, product)
+        intent.putExtra(Constants.EXTRA_PRODUCT_ARG, product)
         startActivity(intent)
     }
 

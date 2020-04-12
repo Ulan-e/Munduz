@@ -1,7 +1,7 @@
 package com.ulan.app.munduz.dagger.modules.fragmentmodule
 
 import android.content.Context
-import com.ulan.app.munduz.adapter.ProductAdapter
+import com.ulan.app.munduz.adapter.ProductsAdapter
 import com.ulan.app.munduz.dagger.modules.RoomModule
 import com.ulan.app.munduz.dagger.scopes.MainScope
 import com.ulan.app.munduz.listeners.OnItemClickListener
@@ -30,13 +30,13 @@ abstract class HomeModule {
 
         @JvmStatic
         @Provides
-        fun provideAdapter(context: Context, listener: OnItemClickListener): ProductAdapter {
-            return ProductAdapter(context, listener)
+        fun productsAdapter(context: Context, listener: OnItemClickListener): ProductsAdapter {
+            return ProductsAdapter(context, listener)
         }
 
         @JvmStatic
         @Provides
-        fun provideListener(homeFragment: HomeFragment): OnItemClickListener{
+        fun clickListener(homeFragment: HomeFragment): OnItemClickListener{
             return homeFragment
         }
     }

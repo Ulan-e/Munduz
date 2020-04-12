@@ -42,7 +42,7 @@
                 android:background="@drawable/search_rounded"
                 android:focusable="false"
                 android:drawableLeft="@drawable/ic_search_gray_24dp"
-                android:hint="Найти товар"
+                android:hint="@string/search_hint"
                 android:paddingLeft="5dp"
                 android:textSize="17sp"/>
     </LinearLayout>

@@ -5,16 +5,14 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.RadioButton
 import android.widget.RadioGroup
 import com.google.android.material.snackbar.Snackbar
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.data.models.Order
 import com.ulan.app.munduz.data.models.PurchaseEntity
-import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_BUY_ARG
-import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_SUM_ARG
+import com.ulan.app.munduz.helpers.Constants.Companion.EXTRA_PRODUCT_AMOUNT_ARG
+import com.ulan.app.munduz.helpers.Constants.Companion.EXTRA_PURCHASES_BUY_ARG
 import com.ulan.app.munduz.helpers.SendEmailHelper
-import com.ulan.app.munduz.helpers.convertLongToTime
 import com.ulan.app.munduz.ui.base.BaseDialogFragment
 import kotlinx.android.synthetic.main.buy_layout.*
 import javax.inject.Inject
@@ -38,22 +36,22 @@ class BuyFragment : BaseDialogFragment(), BuyView {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mPurchases = arguments!!.getParcelableArrayList(PRODUCT_BUY_ARG)
-        mAmount = arguments!!.getInt(PRODUCT_SUM_ARG)
+        mPurchases = arguments!!.getParcelableArrayList(EXTRA_PURCHASES_BUY_ARG)
+        mAmount = arguments!!.getInt(EXTRA_PRODUCT_AMOUNT_ARG)
         mView = inflater.inflate(R.layout.buy_layout, container, false)
         val radioGroup = mView.findViewById<RadioGroup>(R.id.order_is_with_delivery)
         radioGroup.setOnCheckedChangeListener {group, checkedId ->
             if (R.id.delivery == checkedId){
-                mRadioButtonText = "Доставка"
+                mRadioButtonText = activity!!.resources.getString(R.string.delivery)
             }else{
-                mRadioButtonText = "Самовывоз"
+                mRadioButtonText = activity!!.resources.getString(R.string.pickup)
             }
         }
         return mView
     }
 
     override fun showToolbar() {
-        title_buy_fragment.text = "Заказать"
+        title_buy_fragment.text = activity!!.resources.getString(R.string.order)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -75,7 +73,7 @@ class BuyFragment : BaseDialogFragment(), BuyView {
     private fun humanReadableArray(purchases: MutableList<PurchaseEntity>): StringBuilder {
         var result: StringBuilder = java.lang.StringBuilder()
         for (item in purchases) {
-            result.append("Товар " + item.name + ", цена за " + item.perPriceIncreased + ", цена " + item.priceIncreased + "\n")
+            result.append("Товар " + item.name + ", цена за " + item.perPriceInc + ", цена " + item.priceInc + "\n")
         }
         return result
     }
@@ -90,7 +88,7 @@ class BuyFragment : BaseDialogFragment(), BuyView {
         order.clientPhoneNumber = client_phone_number.text.toString()
         order.comment = client_comment.text.toString()
         val time = System.currentTimeMillis()
-        order.isWithDelivery = mRadioButtonText
+        order.purchaseMethod = mRadioButtonText
         order.purchases = humanReadableArray(mPurchases).toString()
         order.amountPurchases = mAmount
         return order
@@ -98,14 +96,16 @@ class BuyFragment : BaseDialogFragment(), BuyView {
 
     override fun isNotEmptyFields(): Boolean {
         if (client_name.text.toString() == "" || client_phone_number.text.toString() == "") {
-            showSnackBar("Заполните поля")
+            var message = activity!!.resources.getString(R.string.empty_fields)
+            showSnackBar(message)
             return false
         }
         return true
     }
 
     override fun successOrder() {
-        showSnackBar("Ваш заказ успешно выполнен")
+        var successMessage = activity!!.resources.getString(R.string.success_order)
+        showSnackBar(successMessage)
         Handler().postDelayed({
             dismiss()
         }, 2500)
@@ -133,8 +133,8 @@ class BuyFragment : BaseDialogFragment(), BuyView {
         fun newInstance(purchases: MutableList<PurchaseEntity>, amount: Int): BuyFragment {
             val fragment = BuyFragment()
             val args = Bundle()
-            args.putParcelableArrayList(PRODUCT_BUY_ARG, ArrayList(purchases))
-            args.putInt(PRODUCT_SUM_ARG, amount)
+            args.putParcelableArrayList(EXTRA_PURCHASES_BUY_ARG, ArrayList(purchases))
+            args.putInt(EXTRA_PRODUCT_AMOUNT_ARG, amount)
             fragment.arguments = args
             return fragment
         }

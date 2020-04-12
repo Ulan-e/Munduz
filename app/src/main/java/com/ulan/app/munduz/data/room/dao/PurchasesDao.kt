@@ -9,7 +9,7 @@ interface PurchasesDao {
     @Query("SELECT * FROM purchases_table")
     fun fetchAllPurchases(): List<PurchaseEntity>
 
-    @Query("SELECT SUM(purchases_table.priceIncreased) FROM purchases_table")
+    @Query("SELECT SUM(purchases_table.priceInc) FROM purchases_table")
     fun sumOfPurchases(): Int
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

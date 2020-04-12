@@ -29,7 +29,7 @@ abstract class FragmentBuilderModule {
 
     @MainScope
     @ContributesAndroidInjector(modules = [FavoriteModule::class])
-    abstract fun starredFragment(): FavoriteFragment
+    abstract fun favoriteFragment(): FavoriteFragment
 
     @MainScope
     @ContributesAndroidInjector(modules = [BasketModule::class])

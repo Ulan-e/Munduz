@@ -33,7 +33,9 @@
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_gravity="center_horizontal"
-                    android:scaleType="centerCrop"></ImageView>
+                    android:scaleType="centerCrop">
+
+            </ImageView>
 
 
             <androidx.appcompat.widget.Toolbar
@@ -75,8 +77,9 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:textSize="21sp"
-                    android:textStyle="bold"
-                    android:text="Name"></TextView>
+                    android:textStyle="bold">
+
+            </TextView>
 
             <RelativeLayout
                     android:layout_width="match_parent"
@@ -88,9 +91,10 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
                         android:layout_marginLeft="8dp"
-                        android:text="250"
                         android:textSize="25sp"
-                        android:textStyle="bold"></TextView>
+                        android:textStyle="bold">
+
+                </TextView>
 
                 <TextView
                         android:id="@+id/product_priceFor"
@@ -102,8 +106,9 @@
                         android:paddingTop="0dp"
                         android:paddingBottom="1dp"
                         android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:text="Цена за 100гр"></TextView>
+                        android:paddingRight="5dp">
+
+                </TextView>
 
                 <TextView
                         android:id="@+id/product_availability"
@@ -111,9 +116,11 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_margin="8dp"
-                        android:text="Есть в наличии"
+                        android:text="@string/avalaible"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="14sp"></TextView>
+                        android:textSize="14sp">
+
+                </TextView>
             </RelativeLayout>
 
             <TextView
@@ -127,7 +134,9 @@
                     android:paddingTop="6dp"
                     android:textSize="17sp"
                     android:layout_margin="8dp"
-                    android:text="Доставка"></TextView>
+                    android:text="@string/delivery">
+
+            </TextView>
 
             <TextView
                     android:id="@+id/product_delivery"
@@ -137,7 +146,9 @@
                     android:layout_margin="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:text="Доставка через день после покупки"></TextView>
+                    android:text="@string/delivery_text">
+
+            </TextView>
 
             <TextView
                     android:id="@+id/product_desc_title"
@@ -150,7 +161,9 @@
                     android:paddingTop="6dp"
                     android:textSize="17sp"
                     android:layout_margin="8dp"
-                    android:text="Описание"></TextView>
+                    android:text="@string/description">
+
+            </TextView>
 
             <TextView
                     android:id="@+id/product_desc"
@@ -160,8 +173,9 @@
                     android:layout_margin="8dp"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="8dp"
-                    android:lineSpacingExtra="5dp"
-                    android:text="Полное Описание \nПолное"></TextView>
+                    android:lineSpacingExtra="5dp">
+
+            </TextView>
 
         </LinearLayout>
 
@@ -180,7 +194,9 @@
             android:textStyle="bold"
             android:textColor="@color/white"
             android:textSize="16sp"
-            android:textAllCaps="true"></Button>
+            android:textAllCaps="true">
+
+    </Button>
 
 
 
@@ -192,6 +208,8 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:text="@string/empty_product"
-            android:visibility="gone"></TextView>
+            android:visibility="gone">
+
+    </TextView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

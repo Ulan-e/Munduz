@@ -20,7 +20,9 @@
                     android:layout_height="100dp"
                     android:layout_alignParentLeft="true"
                     android:layout_margin="4dp"
-                    android:scaleType="centerCrop"></ImageView>
+                    android:scaleType="centerCrop">
+
+            </ImageView>
 
             <LinearLayout
                     android:layout_width="match_parent"
@@ -37,19 +39,21 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_alignParentLeft="true"
-                            android:textSize="18sp"
                             android:layout_margin="@dimen/product_text_top_margin"
-                            android:text="Name"/>
+                            android:textSize="18sp">
+
+                    </TextView>
 
                     <ImageView
                             android:id="@+id/remove_purchase"
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:layout_alignParentRight="true"
-                            android:layout_gravity="right"
                             android:layout_margin="5dp"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/ic_delete_black_24dp" />
+                            android:src="@drawable/ic_delete_black_24dp">
+
+                    </ImageView>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -61,9 +65,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
-                            android:text="200"
                             android:textSize="22sp"
-                            android:textStyle="bold"></TextView>
+                            android:textStyle="bold">
+
+                    </TextView>
 
                     <LinearLayout
                             android:layout_width="match_parent"
@@ -75,17 +80,20 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="?android:selectableItemBackground"
-                                android:text="-"
+                                android:text="@string/minus"
                                 android:textColor="@color/colorAccent"
-                                android:textSize="20sp"></Button>
+                                android:textSize="20sp">
+
+                        </Button>
 
                         <TextView
                                 android:id="@+id/purchase_per_price"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="300гр"
                                 android:textSize="16sp"
-                                android:textStyle="bold"></TextView>
+                                android:textStyle="bold">
+
+                        </TextView>
 
 
                         <Button
@@ -93,9 +101,11 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="?android:selectableItemBackground"
-                                android:text="+"
+                                android:text="@string/plus"
                                 android:textColor="@color/colorAccent"
-                                android:textSize="20sp"></Button>
+                                android:textSize="20sp">
+
+                        </Button>
 
                     </LinearLayout>
 

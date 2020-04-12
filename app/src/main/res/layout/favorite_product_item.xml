@@ -20,7 +20,9 @@
                     android:layout_height="80dp"
                     android:layout_alignParentLeft="true"
                     android:layout_margin="4dp"
-                    android:scaleType="centerCrop"></ImageView>
+                    android:scaleType="centerCrop">
+
+            </ImageView>
 
             <LinearLayout
                     android:layout_width="match_parent"
@@ -37,8 +39,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/product_text_top_margin"
-                            android:layout_alignParentLeft="true"
-                            android:text="Name"/>
+                            android:layout_alignParentLeft="true">
+
+                    </TextView>
 
                     <TextView
                             android:id="@+id/favorite_category"
@@ -46,8 +49,9 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="@dimen/product_text_top_margin"
                             android:layout_below="@+id/favorite_name"
-                            android:drawableLeft="@drawable/ic_small_catalog"
-                            android:text="Продукты"/>
+                            android:drawableLeft="@drawable/ic_small_catalog">
+
+                    </TextView>
 
                     <ImageView
                             android:id="@+id/remove_purchase"
@@ -57,7 +61,9 @@
                             android:layout_margin="10dp"
                             android:scaleType="centerCrop"
                             android:layout_alignParentRight="true"
-                            android:src="@drawable/ic_favorite_black_24dp" />
+                            android:src="@drawable/ic_favorite_black_24dp">
+
+                    </ImageView>
 
 
                 </RelativeLayout>
@@ -68,8 +74,9 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="@dimen/product_text_top_margin"
                         android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:text="200"></TextView>
+                        android:textStyle="bold">
+
+                </TextView>
             </LinearLayout>
 
         </RelativeLayout>

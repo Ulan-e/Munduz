@@ -5,6 +5,8 @@ import com.ulan.app.munduz.data.models.PurchaseEntity
 import com.ulan.app.munduz.data.room.repository.FavoritesRepository
 import com.ulan.app.munduz.data.room.repository.PurchasesRepository
 import com.ulan.app.munduz.developer.Product
+import com.ulan.app.munduz.helpers.Constants.Companion.ADD_TO_BASKET
+import com.ulan.app.munduz.helpers.Constants.Companion.IN_BASKET
 import javax.inject.Inject
 
 class DetailsPresenterImpl : DetailsPresenter {
@@ -37,9 +39,9 @@ class DetailsPresenterImpl : DetailsPresenter {
 
     private fun getBasketText(): String {
         if (mPurchaseRepository.isExistId(mProduct.id)) {
-            return "Товар в корзине"
+            return IN_BASKET
         } else {
-            return "Добавить в корзину"
+            return ADD_TO_BASKET
         }
     }
 
@@ -73,11 +75,11 @@ class DetailsPresenterImpl : DetailsPresenter {
 
     override fun addToBasketClicked() {
         if (mPurchaseRepository.isExist(generateNewPurchase(mProduct))) {
-            mView?.changeAddToBasketText("Товар в корзине")
+            mView?.changeAddToBasketText(IN_BASKET)
             mView?.goToBasket()
         } else {
             mPurchaseRepository.insert(generateNewPurchase(mProduct))
-            mView?.changeAddToBasketText("Товар в корзине")
+            mView?.changeAddToBasketText(IN_BASKET)
         }
     }
 
@@ -88,9 +90,9 @@ class DetailsPresenterImpl : DetailsPresenter {
         purchase.name = product.name
         purchase.category = product.category
         purchase.price = product.cost
-        purchase.priceIncreased = product.cost
+        purchase.priceInc = product.cost
         purchase.perPrice = product.priceFor
-        purchase.perPriceIncreased = product.priceFor
+        purchase.perPriceInc = product.priceFor
         purchase.desc = product.desc
         picture.urlImage = product.picture.urlImage
         purchase.picture = picture

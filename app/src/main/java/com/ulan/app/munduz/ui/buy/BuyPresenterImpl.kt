@@ -5,7 +5,6 @@ import com.ulan.app.munduz.data.models.Order
 import com.ulan.app.munduz.data.models.PurchaseEntity
 import com.ulan.app.munduz.helpers.RUBLE
 import com.ulan.app.munduz.helpers.SendEmailHelper
-import com.ulan.app.munduz.helpers.convertLongToTime
 import javax.inject.Inject
 
 class BuyPresenterImpl : BuyPresenter {
@@ -53,7 +52,7 @@ class BuyPresenterImpl : BuyPresenter {
                     ">> Сумма заказа  " + order.amountPurchases + "\n" +
                     ">> Имя Клиента  " + order.clientName + "\n" +
                     ">> Номер телефона  " + order.clientPhoneNumber + "\n" +
-                    ">> Способ покупки  " + order.isWithDelivery + "\n" +
+                    ">> Способ покупки  " + order.purchaseMethod + "\n" +
                     ">> Комментарий  " + order.comment + "\n"
 
         mSendEmailHelper.setMessage(email, subject, body)

@@ -44,7 +44,7 @@ class BasketPresenterImpl : BasketPresenter {
         val purchases = mPurchasesRepository.fetchPurchases()
         var amount = 0
         for (num in purchases) {
-            amount += num.priceIncreased
+            amount += num.priceInc
         }
         mView?.purchaseAll(purchases, amount)
     }
