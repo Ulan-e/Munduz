@@ -2,29 +2,31 @@ package com.ulan.app.munduz.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.listeners.OnItemClickListener
 
-class SearchResultsAdapter: RecyclerView.Adapter<SearchViewHolder>, Filterable  {
+class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchViewHolder>, Filterable  {
 
     private var mContext: Context
     private var mListener: OnItemClickListener
     private var emptyList =  ArrayList<Product>()
 
-    private lateinit var mProducts: ArrayList<Product>
-    private lateinit var mFilteredProducts: ArrayList<Product>
+    private lateinit var mProducts: MutableList<Product>
+    private lateinit var mFilteredProducts: MutableList<Product>
 
     constructor(context: Context, listener: OnItemClickListener) : super() {
         this.mContext = context
         this.mListener = listener
     }
 
-    fun setProducts(products : ArrayList<Product>){
+    fun setProducts(products : MutableList<Product>){
         this.mProducts = products
         mFilteredProducts = emptyList
     }
@@ -71,6 +73,19 @@ class SearchResultsAdapter: RecyclerView.Adapter<SearchViewHolder>, Filterable  
                 notifyDataSetChanged()
             }
 
+        }
+    }
+
+    class SearchViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        val name: TextView = itemView.findViewById(R.id.searched_name)
+
+        fun bind(product: Product?, onItemClickListener: OnItemClickListener){
+            itemView.setOnClickListener{
+                if (product != null) {
+                    onItemClickListener.onItemClick(product)
+                }
+            }
         }
     }
 

@@ -7,11 +7,10 @@ import dagger.Module
 import dagger.Provides
 
 @Module(includes = [AppModule::class])
-class RepositoryModule{
-
+class RepositoryModule {
 
     @Provides
-    fun repository(context: Context): FirebaseRepository{
+    fun repository(context: Context): FirebaseRepository {
         return FirebaseRepositoryImpl(context)
     }
 }

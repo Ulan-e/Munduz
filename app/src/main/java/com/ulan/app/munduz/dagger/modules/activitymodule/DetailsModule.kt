@@ -12,7 +12,6 @@ import dagger.Module
 @Module(includes = [RoomModule::class])
 abstract class DetailsModule {
 
-
     @DetailsScope
     @Binds
     abstract fun detailsActivity(detailsActivity: DetailsActivity): DetailsView

@@ -19,8 +19,9 @@ import com.google.android.material.tabs.TabLayout
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.adapter.ProductAdapter
 import com.ulan.app.munduz.adapter.SliderAdapter
-import com.ulan.app.munduz.data.model.SliderImage
-import com.ulan.app.munduz.data.room.repository.KeysRepositoryImpl
+import com.ulan.app.munduz.data.models.SliderImage
+import com.ulan.app.munduz.data.room.repository.FavoritesRepository
+import com.ulan.app.munduz.data.room.repository.FavoritesRepositoryImpl
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_ARG
 import com.ulan.app.munduz.helpers.isNetworkAvailable
@@ -41,9 +42,9 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
     lateinit var mAdapter: ProductAdapter
 
     @Inject
-    lateinit var mRoomRepository: KeysRepositoryImpl
+    lateinit var mRoomRepository: FavoritesRepository
 
-    var mSliderAdapter: SliderAdapter? = null
+    private var mSliderAdapter: SliderAdapter? = null
 
     private lateinit var mMainActivity: MainActivity
     private lateinit var mRecyclerView: RecyclerView
@@ -133,7 +134,7 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
         empty_new_products.visibility = View.VISIBLE
     }
 
-    override fun showSliderImages(images: ArrayList<SliderImage>) {
+    override fun showSliderImages(images: MutableList<SliderImage>) {
         mSliderAdapter = SliderAdapter(activity!!.applicationContext, images)
         mViewPager.adapter = mSliderAdapter
         mViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
@@ -156,7 +157,7 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
         })
     }
 
-    override fun onItemClick(product: Product?) {
+    override fun onItemClick(product: Product) {
         val intent = Intent(activity, DetailsActivity::class.java)
         intent.putExtra(PRODUCT_ARG, product)
         startActivity(intent)

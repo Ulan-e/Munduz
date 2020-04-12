@@ -4,41 +4,29 @@ import android.content.Context
 import android.util.Log
 import com.google.firebase.database.*
 import com.ulan.app.munduz.R
-import com.ulan.app.munduz.data.model.Order
-import com.ulan.app.munduz.data.model.SliderImage
+import com.ulan.app.munduz.data.models.SliderImage
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
-import com.ulan.app.munduz.helpers.Constants.Companion.ORDERS_DATA
 import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCTS_DATA
 import com.ulan.app.munduz.helpers.Constants.Companion.TAG
-import com.ulan.app.munduz.listeners.*
+import com.ulan.app.munduz.listeners.ProductCallback
+import com.ulan.app.munduz.listeners.ProductsCallback
+import com.ulan.app.munduz.listeners.SliderImagesCallback
 
 class FirebaseRepositoryImpl : FirebaseRepository {
 
-    private val context: Context
-    private val ref: DatabaseReference
-
+    private val mContext: Context
+    private val mRef: DatabaseReference
 
     constructor(context: Context) {
-        this.context = context
+        this.mContext = context
         val database: FirebaseDatabase = FirebaseDatabase.getInstance()
-        ref = database.reference
+        mRef = database.reference
     }
 
-    override fun insertOrder(order: Order) {
-        val key = ref!!.child(ORDERS_DATA).push().key
-        if (key == null) {
-            Log.d(TAG, "Couldn't get push key for products")
-            return
-        }
-        order.id = key
-        ref!!.child(ORDERS_DATA).child(key).setValue(order)
-    }
-
-
-    override fun loadProducts(callback: ProductListCallback) {
+    override fun loadProducts(callback: ProductsCallback) {
         val products = mutableListOf<Product>()
-        val productsRef = ref!!.child(PRODUCTS_DATA)
+        val productsRef = mRef.child(PRODUCTS_DATA)
         productsRef.keepSynced(true)
         productsRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
@@ -56,8 +44,8 @@ class FirebaseRepositoryImpl : FirebaseRepository {
     }
 
     override fun loadSearchedProducts(callback: ProductsCallback) {
-        val products = ArrayList<Product>()
-        val productsRef = ref!!.child(PRODUCTS_DATA)
+        val products = mutableListOf<Product>()
+        val productsRef = mRef.child(PRODUCTS_DATA)
         productsRef.keepSynced(true)
         productsRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
@@ -74,9 +62,9 @@ class FirebaseRepositoryImpl : FirebaseRepository {
         })
     }
 
-    override fun loadNewProducts(callback: ProductListCallback) {
+    override fun loadNewProducts(callback: ProductsCallback) {
         val products = mutableListOf<Product>()
-        val queryRef = ref!!.child(PRODUCTS_DATA).orderByKey().limitToLast(8)
+        val queryRef = mRef.child(PRODUCTS_DATA).orderByKey().limitToLast(8)
         queryRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 for (item: DataSnapshot in p0.children) {
@@ -92,9 +80,9 @@ class FirebaseRepositoryImpl : FirebaseRepository {
         })
     }
 
-    override fun loadFilterProducts(category: String, callback: ProductListCallback) {
+    override fun loadFilterProducts(category: String, callback: ProductsCallback) {
         val products = mutableListOf<Product>()
-        val queryRef = ref!!.child(PRODUCTS_DATA).orderByChild("category").equalTo(category)
+        val queryRef = mRef.child(PRODUCTS_DATA).orderByChild("category").equalTo(category)
         queryRef.keepSynced(true)
         queryRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
@@ -112,13 +100,13 @@ class FirebaseRepositoryImpl : FirebaseRepository {
     }
 
     override fun updateProduct(product: Product) {
-        val key = product.key
-        ref.child(PRODUCTS_DATA).child(key).setValue(product)
+        val key = product.id
+        mRef.child(PRODUCTS_DATA).child(key).setValue(product)
     }
 
     override fun loadSliderPhotos(callback: SliderImagesCallback) {
         val sliderImages = ArrayList<SliderImage>()
-        val productsRef = ref!!.child(Constants.SLIDER_DATA)
+        val productsRef = mRef.child(Constants.SLIDER_DATA)
         productsRef.keepSynced(true)
         productsRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
@@ -137,7 +125,7 @@ class FirebaseRepositoryImpl : FirebaseRepository {
 
     override fun loadLikedProduct(key: String, callback: ProductCallback) {
         var product = Product()
-        val queryRef = ref.child(PRODUCTS_DATA).orderByChild("id").equalTo(key)
+        val queryRef = mRef.child(PRODUCTS_DATA).orderByChild("id").equalTo(key)
         queryRef.keepSynced(true)
         queryRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
@@ -156,9 +144,8 @@ class FirebaseRepositoryImpl : FirebaseRepository {
         })
     }
 
-
     override fun loadCatalogs(): MutableList<String> {
-        val catalogs = context.applicationContext.resources.getStringArray(R.array.category)
+        val catalogs = mContext.applicationContext.resources.getStringArray(R.array.category)
         return catalogs.toMutableList()
     }
 }

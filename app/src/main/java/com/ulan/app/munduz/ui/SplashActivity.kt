@@ -9,13 +9,13 @@ import com.ulan.app.munduz.R
 import com.ulan.app.munduz.ui.main.MainActivity
 import kotlinx.android.synthetic.main.splash_screen.*
 
-class SplashActivity : AppCompatActivity(){
+class SplashActivity : AppCompatActivity() {
 
     private var mDelayHandler: Handler? = null
     private var SPLASHDELAY: Long = 2500
 
     private val mRunnable: Runnable = Runnable {
-        if(!isFinishing){
+        if (!isFinishing) {
             val intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
             finish()
@@ -35,7 +35,7 @@ class SplashActivity : AppCompatActivity(){
     }
 
     override fun onDestroy() {
-        if(mDelayHandler != null){
+        if (mDelayHandler != null) {
             mDelayHandler!!.removeCallbacks(mRunnable)
         }
         super.onDestroy()

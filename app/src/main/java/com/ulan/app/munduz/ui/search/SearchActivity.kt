@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ulan.app.munduz.R
-import com.ulan.app.munduz.adapter.SearchResultsAdapter
+import com.ulan.app.munduz.adapter.SearchAdapter
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
 import com.ulan.app.munduz.listeners.OnItemClickListener
@@ -21,9 +21,9 @@ class SearchActivity: BaseActivity(), SearchView, OnItemClickListener,
     lateinit var mPresenter: SearchPresenter
 
     @Inject
-    lateinit var mAdapter: SearchResultsAdapter
+    lateinit var mAdapter: SearchAdapter
 
-    private lateinit var mProducts: ArrayList<Product>
+    private lateinit var mProducts: MutableList<Product>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,7 +46,7 @@ class SearchActivity: BaseActivity(), SearchView, OnItemClickListener,
         TODO()
     }
 
-    override fun showProducts(products: ArrayList<Product>) {
+    override fun showProducts(products: MutableList<Product>) {
         mProducts = products
         val layoutManager = LinearLayoutManager(this)
         search_results.layoutManager = layoutManager
@@ -58,7 +58,7 @@ class SearchActivity: BaseActivity(), SearchView, OnItemClickListener,
         Toast.makeText(this, resources.getString(R.string.empty_list), Toast.LENGTH_SHORT).show()
     }
 
-    override fun onItemClick(product: Product?) {
+    override fun onItemClick(product: Product) {
         val intent = Intent(this, DetailsActivity::class.java)
         intent.putExtra(Constants.PRODUCT_ARG, product)
         startActivity(intent)

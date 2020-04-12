@@ -5,34 +5,35 @@
 
     <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="50dp">
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-        <TextView
-                android:id="@+id/sum_of_purchase"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top|center_horizontal"
-                android:layout_margin="10dp"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:textAlignment="center"
-                android:visibility="gone">
+            <TextView
+                    android:id="@+id/sum_of_purchase"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|center_horizontal"
+                    android:layout_margin="10dp"
+                    android:textAlignment="center"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:visibility="gone">
 
-        </TextView>
+            </TextView>
 
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/basket_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/sum_of_purchase">
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/basket_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/sum_of_purchase">
 
-        </androidx.recyclerview.widget.RecyclerView>
+            </androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
@@ -43,25 +44,42 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginTop="8dp"
             android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginRight="8dp"
-            android:layout_marginBottom="63dp"
+            android:layout_marginBottom="58dp"
             android:background="@color/purple"
             android:text="Оформить Заказ"
-            android:textSize="18sp"
             android:textColor="@color/white"
+            android:textSize="16sp"
             android:visibility="gone">
 
     </Button>
 
-    <TextView
-            android:id="@+id/empty_liked_products"
-            android:layout_width="wrap_content"
+    <LinearLayout
+            android:id="@+id/empty_basket"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="@string/empty_liked_products"
-            android:visibility="gone" />
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:visibility="gone">
+
+        <TextView
+                android:id="@+id/empty_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Корзина пуста"
+                android:textSize="18sp"
+                android:layout_margin="8dp"/>
+
+        <Button
+                android:id="@+id/open_catalog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Перейти на главную"/>
+
+    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -2,7 +2,7 @@ package com.ulan.app.munduz.ui.filtered
 
 import com.ulan.app.munduz.data.firebase.FirebaseRepository
 import com.ulan.app.munduz.developer.Product
-import com.ulan.app.munduz.listeners.ProductListCallback
+import com.ulan.app.munduz.listeners.ProductsCallback
 
 class FilteredPresenterImpl : FilteredPresenter {
 
@@ -19,7 +19,7 @@ class FilteredPresenterImpl : FilteredPresenter {
     }
 
     override fun loadProductsByCategory(categoryName: String) {
-            mRepository.loadFilterProducts(categoryName, object : ProductListCallback {
+            mRepository.loadFilterProducts(categoryName, object : ProductsCallback {
                 override fun onCallback(values: MutableList<Product>) {
                     if (values.size > 0) {
                         mView?.showProducts(values)

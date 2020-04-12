@@ -12,7 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.adapter.ProductAdapter
-import com.ulan.app.munduz.data.room.repository.KeysRepositoryImpl
+import com.ulan.app.munduz.data.room.repository.FavoritesRepository
+import com.ulan.app.munduz.data.room.repository.FavoritesRepositoryImpl
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
 import com.ulan.app.munduz.helpers.Constants.Companion.CATEGORY_ARG
@@ -33,7 +34,7 @@ class FilteredFragment : BaseFragment(), FilteredView, OnItemClickListener {
     lateinit var mAdapter: ProductAdapter
 
     @Inject
-    lateinit var mRoomRepository: KeysRepositoryImpl
+    lateinit var mRoomRepository: FavoritesRepository
 
     private lateinit var mCategory: String
 
@@ -94,7 +95,7 @@ class FilteredFragment : BaseFragment(), FilteredView, OnItemClickListener {
         filter_recycler_view.adapter = mAdapter
     }
 
-    override fun onItemClick(product: Product?) {
+    override fun onItemClick(product: Product) {
         val intent = Intent(activity, DetailsActivity::class.java)
         intent.putExtra(Constants.PRODUCT_ARG, product)
         startActivity(intent)

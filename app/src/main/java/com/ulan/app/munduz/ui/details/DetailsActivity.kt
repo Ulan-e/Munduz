@@ -1,5 +1,6 @@
 package com.ulan.app.munduz.ui.details
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Html
 import android.util.Log
@@ -7,14 +8,20 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.core.content.ContextCompat
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
+import com.ulan.app.munduz.helpers.Constants.Companion.EXTRA_TURN_OFF_ADD_BASKET
 import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_ARG
+import com.ulan.app.munduz.helpers.Constants.Companion.TURN_OFF_ARG
+import com.ulan.app.munduz.helpers.RUBLE
 import com.ulan.app.munduz.ui.base.BaseActivity
+import com.ulan.app.munduz.ui.home.HomeFragment
+import com.ulan.app.munduz.ui.main.MainActivity
 import kotlinx.android.synthetic.main.details_layout.*
 import javax.inject.Inject
 
@@ -23,32 +30,37 @@ class DetailsActivity : BaseActivity(), DetailsView {
     @Inject
     lateinit var mPresenter: DetailsPresenter
 
+    private lateinit var mProduct: Product
     private var mMenu: Menu? = null
     private var mView: View? = null
-    private lateinit var mProduct: Product
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.details_layout)
 
         mProduct = intent.getParcelableExtra<Product>(PRODUCT_ARG)
+        val turn = intent.getStringExtra(EXTRA_TURN_OFF_ADD_BASKET)
+        if(turn == TURN_OFF_ARG){
+            add_to_basket.setBackgroundColor(resources.getColor(R.color.colorPrimaryDark))
+            add_to_basket.isEnabled = false
+        }
 
         mPresenter.setToolbar()
         mPresenter.setProduct(mProduct)
 
-        buy_product.setOnClickListener {
-            mPresenter.buyButtonClicked()
+        add_to_basket.setOnClickListener {
+            mPresenter.addToBasketClicked()
         }
-
     }
 
     override fun closeDetails() {
         finish()
     }
 
-    override fun showSnackBar(result: String) {
-        val snack: Snackbar = Snackbar.make(coordinator_layout, result, Snackbar.LENGTH_LONG)
-        snack.show()
+    override fun goToBasket() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("ulan", "basket")
+        startActivity(intent)
     }
 
     override fun showToolbar() {
@@ -74,7 +86,6 @@ class DetailsActivity : BaseActivity(), DetailsView {
         product_toolbar.setNavigationOnClickListener {
             finish()
         }
-
     }
 
     override fun showEmptyData() {
@@ -82,15 +93,23 @@ class DetailsActivity : BaseActivity(), DetailsView {
     }
 
     override fun showProduct(product: Product) {
-        val rub = Html.fromHtml(" &#x20bd")
         product_name.text = product.name
         product_desc.text = product.desc
-        product_price.text = product.cost.toString() + " " + rub
+        product_price.text = product.cost.toString() + " " + RUBLE
         product_priceFor.text = "Цена за " + product.priceFor
     }
 
+    override fun changeAddToBasketText(text: String) {
+        add_to_basket.text = text
+        if(text == "Товар в корзине"){
+            add_to_basket.setBackgroundColor(resources.getColor(R.color.colorPrimaryDark))
+        }else{
+            add_to_basket.setBackgroundColor(resources.getColor(R.color.purple))
+        }
+    }
+
     override fun addToBasket() {
-        mPresenter.addToBasketClicked(mProduct.key)
+        mPresenter.addToBasketClicked()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -109,14 +128,13 @@ class DetailsActivity : BaseActivity(), DetailsView {
         return super.onOptionsItemSelected(item)
     }
 
-    override fun markAsLiked() {
+    override fun markAsFavorite() {
         mMenu?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_favorite_black_24dp)
     }
 
-    override fun markAsNotLiked() {
+    override fun markAsNotFavorite() {
         mMenu?.getItem(0)?.icon =
             ContextCompat.getDrawable(this, R.drawable.ic_favorite_border_24dp)
-
     }
 
     override fun onBackPressed() {

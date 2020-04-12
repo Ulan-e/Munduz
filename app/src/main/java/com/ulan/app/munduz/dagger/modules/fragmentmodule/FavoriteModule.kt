@@ -1,11 +1,11 @@
 package com.ulan.app.munduz.dagger.modules.fragmentmodule
 
 import android.content.Context
-import com.ulan.app.munduz.adapter.FavoriteProductAdapter
+import com.ulan.app.munduz.adapter.FavoriteAdapter
 import com.ulan.app.munduz.dagger.modules.RoomModule
 import com.ulan.app.munduz.dagger.scopes.MainScope
 import com.ulan.app.munduz.data.firebase.FirebaseRepository
-import com.ulan.app.munduz.data.room.repository.KeysRepositoryImpl
+import com.ulan.app.munduz.data.room.repository.FavoritesRepository
 import com.ulan.app.munduz.listeners.OnItemClickListener
 import com.ulan.app.munduz.ui.favorite.FavoriteFragment
 import com.ulan.app.munduz.ui.favorite.FavoritePresenter
@@ -20,8 +20,8 @@ class FavoriteModule {
 
     @MainScope
     @Provides
-    fun provideView(likedFragment: FavoriteFragment): FavoriteView {
-        return likedFragment
+    fun provideView(fragment: FavoriteFragment): FavoriteView {
+        return fragment
     }
 
     @MainScope
@@ -29,9 +29,9 @@ class FavoriteModule {
     fun providePresenter(
         view: FavoriteView,
         firebaseRepository: FirebaseRepository,
-        keysRepository: KeysRepositoryImpl
+        favoriteRepository: FavoritesRepository
     ): FavoritePresenter {
-        return FavoritePresenterImpl(view, firebaseRepository, keysRepository)
+        return FavoritePresenterImpl(view, firebaseRepository, favoriteRepository)
     }
 
     @MainScope
@@ -42,7 +42,7 @@ class FavoriteModule {
 
     @MainScope
     @Provides
-    fun provideAdapter(context: Context, listener: OnItemClickListener): FavoriteProductAdapter {
-        return FavoriteProductAdapter(context, listener)
+    fun provideAdapter(context: Context, listener: OnItemClickListener): FavoriteAdapter {
+        return FavoriteAdapter(context, listener)
     }
 }

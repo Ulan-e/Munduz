@@ -4,7 +4,6 @@ package com.ulan.app.munduz.ui.basket
 import android.content.Intent
 import android.graphics.Typeface
 import android.os.Bundle
-import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,22 +16,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.adapter.BasketAdapter
-import com.ulan.app.munduz.data.room.entities.PurchaseEntity
-import com.ulan.app.munduz.data.room.repository.PurchasesRepositoryImpl
+import com.ulan.app.munduz.data.models.Picture
+import com.ulan.app.munduz.data.models.PurchaseEntity
+import com.ulan.app.munduz.data.room.repository.PurchasesRepository
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
-import com.ulan.app.munduz.listeners.OnChangeCountListener
-import com.ulan.app.munduz.listeners.OnItemClickListener
-import com.ulan.app.munduz.listeners.PurchaseClickListener
+import com.ulan.app.munduz.helpers.RUBLE
+import com.ulan.app.munduz.listeners.OnChangeSumListener
+import com.ulan.app.munduz.listeners.OnItemBasketClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.buy.BuyFragment
 import com.ulan.app.munduz.ui.details.DetailsActivity
 import com.ulan.app.munduz.ui.home.HomeFragment
 import kotlinx.android.synthetic.main.basket_layout.*
-import kotlinx.android.synthetic.main.favorite_layout.empty_liked_products
 import javax.inject.Inject
 
-class BasketFragment : BaseFragment(), BasketView, PurchaseClickListener, OnChangeCountListener {
+class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, OnChangeSumListener {
 
     @Inject
     lateinit var mPresenter: BasketPresenter
@@ -41,7 +40,7 @@ class BasketFragment : BaseFragment(), BasketView, PurchaseClickListener, OnChan
     lateinit var mAdapter: BasketAdapter
 
     @Inject
-    lateinit var mPurchasesRepository: PurchasesRepositoryImpl
+    lateinit var mPurchasesRepository: PurchasesRepository
 
     private lateinit var mRecyclerView: RecyclerView
 
@@ -59,10 +58,13 @@ class BasketFragment : BaseFragment(), BasketView, PurchaseClickListener, OnChan
         super.onViewCreated(view, savedInstanceState)
         mPresenter.setToolbar()
         mPresenter.loadProducts()
-        mPresenter.countSumOfPurchases()
 
         purchase_all.setOnClickListener {
-            mPresenter.purchaseAllButtonClicked()
+            mPresenter.purchaseButtonClicked()
+        }
+
+        open_catalog.setOnClickListener {
+            mPresenter.goToHomeButtonClicked()
         }
     }
 
@@ -78,10 +80,10 @@ class BasketFragment : BaseFragment(), BasketView, PurchaseClickListener, OnChan
     }
 
     override fun showEmptyData() {
-        empty_liked_products.visibility = View.VISIBLE
+        empty_basket.visibility = View.VISIBLE
     }
 
-    override fun showAllProducts(purchases : ArrayList<PurchaseEntity>) {
+    override fun showProducts(purchases: MutableList<PurchaseEntity>) {
         val layoutManager = LinearLayoutManager(activity!!.applicationContext)
         mAdapter.setProducts(purchases)
         mAdapter.setRepository(mPurchasesRepository)
@@ -90,26 +92,24 @@ class BasketFragment : BaseFragment(), BasketView, PurchaseClickListener, OnChan
         mRecyclerView.adapter = mAdapter
     }
 
-    override fun purchaseAll(purchases : ArrayList<PurchaseEntity>, price: Int) {
-        val fragment = BuyFragment.newInstance(purchases, price)
+    override fun purchaseAll(purchases: MutableList<PurchaseEntity>, amount: Int) {
+        val fragment = BuyFragment.newInstance(purchases, amount)
         fragment.show(activity!!.supportFragmentManager, "buy_dialog")
     }
 
-    override fun showSumOfPurchases(sum: Int) {
-        val rub = Html.fromHtml(" &#x20bd")
-        sum_of_purchase.text = "Сумма товара " + sum.toString() + rub
+    override fun showPurchasesAmount(amount: Int) {
+        sum_of_purchase.text = "Сумма товара " + amount.toString() + RUBLE
     }
 
-    override fun changeSumOfPurchases(sum: Int) {
-
-    }
-
-    override fun decrementProduct(price: Int) {
-        mPresenter.decrementCount(price)
-    }
-
-    override fun incrementProduct(price: Int) {
-        mPresenter.incrementProduct(price)
+    override fun showGoToHome() {
+        activity!!.supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container, HomeFragment(), "homef")
+            .addToBackStack(null)
+            .commit()
+        val bottomNav =
+            activity!!.findViewById<BottomNavigationView>(R.id.bottom_navigation_menu)
+        bottomNav.selectedItemId = R.id.home
     }
 
     override fun hidePurchaseButton() {
@@ -122,9 +122,10 @@ class BasketFragment : BaseFragment(), BasketView, PurchaseClickListener, OnChan
         purchase_all.visibility = View.VISIBLE
     }
 
-    override fun onItemClick(product: Product?) {
+    override fun onItemClick(purchase: PurchaseEntity) {
         val intent = Intent(activity, DetailsActivity::class.java)
-        intent.putExtra(Constants.PRODUCT_ARG, product)
+        intent.putExtra(Constants.PRODUCT_ARG, convertPurchaseToProduct(purchase))
+        intent.putExtra(Constants.EXTRA_TURN_OFF_ADD_BASKET, Constants.TURN_OFF_ARG)
         startActivity(intent)
     }
 
@@ -134,7 +135,8 @@ class BasketFragment : BaseFragment(), BasketView, PurchaseClickListener, OnChan
             .replace(R.id.container, HomeFragment(), "homef")
             .addToBackStack(null)
             .commit()
-        val bottomNav = activity!!.findViewById<BottomNavigationView>(R.id.bottom_navigation_menu)
+        val bottomNav =
+            activity!!.findViewById<BottomNavigationView>(R.id.bottom_navigation_menu)
         bottomNav.selectedItemId = R.id.home
         return true
     }
@@ -156,6 +158,25 @@ class BasketFragment : BaseFragment(), BasketView, PurchaseClickListener, OnChan
             fragment.arguments = args
             return fragment
         }
+    }
+
+    override fun onSumChange() {
+        mPresenter.purchasesAmountChanged()
+    }
+
+
+    private fun convertPurchaseToProduct(purchase: PurchaseEntity): Product {
+        var product = Product()
+        var picture = Picture()
+        product.id = purchase.id
+        product.name = purchase.name
+        product.desc = purchase.desc
+        product.cost = purchase.price
+        product.priceFor = purchase.perPrice
+        picture.urlImage = purchase.picture.urlImage
+        product.picture = picture
+        product.category = purchase.category
+        return product
     }
 
 }

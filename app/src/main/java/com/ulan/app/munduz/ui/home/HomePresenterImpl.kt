@@ -1,21 +1,22 @@
 package com.ulan.app.munduz.ui.home
 
-import com.ulan.app.munduz.data.model.SliderImage
+import com.ulan.app.munduz.data.models.SliderImage
 import com.ulan.app.munduz.data.firebase.FirebaseRepository
-import com.ulan.app.munduz.data.room.repository.KeysRepositoryImpl
+import com.ulan.app.munduz.data.room.repository.FavoritesRepository
+import com.ulan.app.munduz.data.room.repository.FavoritesRepositoryImpl
 import com.ulan.app.munduz.developer.Product
-import com.ulan.app.munduz.listeners.ProductListCallback
+import com.ulan.app.munduz.listeners.ProductsCallback
 import com.ulan.app.munduz.listeners.SliderImagesCallback
 import javax.inject.Inject
 
 class HomePresenterImpl : HomePresenter {
 
     private var mRepository: FirebaseRepository
-    private var mRoomRepository: KeysRepositoryImpl
+    private var mRoomRepository: FavoritesRepository
     private var mView: HomeView? = null
 
     @Inject
-    constructor(view: HomeView, mRepository: FirebaseRepository, roomRepository: KeysRepositoryImpl) {
+    constructor(view: HomeView, mRepository: FirebaseRepository, roomRepository: FavoritesRepository) {
         this.mView = view
         this.mRepository = mRepository
         this.mRoomRepository = roomRepository
@@ -26,7 +27,7 @@ class HomePresenterImpl : HomePresenter {
     }
 
     override fun loadProducts() {
-            mRepository.loadNewProducts(object : ProductListCallback {
+            mRepository.loadNewProducts(object : ProductsCallback {
                 override fun onCallback(values: MutableList<Product>) {
                     if (values.size > 0) {
                         mView?.showProducts(values)

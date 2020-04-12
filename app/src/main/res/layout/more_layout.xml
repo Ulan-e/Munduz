@@ -11,12 +11,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="7dp"
             android:background="?android:selectableItemBackground"
-            android:gravity="left"
             android:text="@string/contacts_us"
-            android:textSize="15sp"
+            android:textSize="16sp"
             android:textStyle="bold"/>
 
     <Button
@@ -24,12 +22,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/contacts_us"
-            android:layout_marginLeft="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="7dp"
             android:background="?android:selectableItemBackground"
-            android:gravity="left"
             android:text="Написать нам"
-            android:textSize="15sp"
+            android:textSize="16sp"
             android:textStyle="bold"/>
 
     <Button
@@ -37,12 +33,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/write_tous_button"
-            android:layout_marginLeft="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="7dp"
             android:background="?android:selectableItemBackground"
-            android:gravity="left"
             android:text="@string/about_app"
-            android:textSize="15sp"
+            android:textSize="16sp"
             android:textStyle="bold"/>
 
 
@@ -51,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/about_app"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="15dp">
 
         <ImageView
                 android:id="@+id/instagram"

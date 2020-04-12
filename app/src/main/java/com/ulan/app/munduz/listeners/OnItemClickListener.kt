@@ -4,6 +4,6 @@ import com.ulan.app.munduz.developer.Product
 
 interface OnItemClickListener {
 
-    fun onItemClick(product: Product?)
+    fun onItemClick(product: Product)
 
 }

@@ -1,9 +1,9 @@
 package com.ulan.app.munduz.ui.buy
 
-import android.text.Html
-import com.ulan.app.munduz.data.model.Order
 import com.ulan.app.munduz.data.firebase.FirebaseRepository
-import com.ulan.app.munduz.data.room.entities.PurchaseEntity
+import com.ulan.app.munduz.data.models.Order
+import com.ulan.app.munduz.data.models.PurchaseEntity
+import com.ulan.app.munduz.helpers.RUBLE
 import com.ulan.app.munduz.helpers.SendEmailHelper
 import com.ulan.app.munduz.helpers.convertLongToTime
 import javax.inject.Inject
@@ -13,7 +13,7 @@ class BuyPresenterImpl : BuyPresenter {
     private var mView: BuyView?
     private var mRepository: FirebaseRepository
     private lateinit var mSendEmailHelper: SendEmailHelper
-    private lateinit var mPurchases: ArrayList<PurchaseEntity>
+    private lateinit var mPurchases: MutableList<PurchaseEntity>
 
     @Inject
     constructor(mView: BuyView, mRepository: FirebaseRepository) {
@@ -21,14 +21,13 @@ class BuyPresenterImpl : BuyPresenter {
         this.mRepository = mRepository
     }
 
-    override fun setProducts(purchases: ArrayList<PurchaseEntity>) {
+    override fun setProducts(purchases: MutableList<PurchaseEntity>) {
         this.mPurchases = purchases
     }
 
-    override fun setTotal(sum: Int) {
-        val rub = Html.fromHtml(" &#x20bd")
-        val goods = "Итого " + mPurchases.size.toString() + " Товар"
-        val price = "Сумма " + sum.toString() + rub
+    override fun setPurchasesAmount(amount: Int) {
+        val goods = "Итого " + mPurchases.size.toString() + " видов товара \n"
+        val price = "К оплате " + amount.toString() + RUBLE
         mView?.showTotalPurchases(goods + price)
     }
 
@@ -39,9 +38,8 @@ class BuyPresenterImpl : BuyPresenter {
     override fun sendButtonClicked() {
         val order = mView?.getInputOrder()
         if (mView?.isNotEmptyFields() == true) {
-            mRepository.insertOrder(order!!)
-            sendToEmail(order)
-            mView?.showSuccessOrder()
+            sendToEmail(order!!)
+            mView?.successOrder()
         } else {
             mView?.isNotEmptyFields()
         }
@@ -51,13 +49,14 @@ class BuyPresenterImpl : BuyPresenter {
         val email = "uulanerkinbaev@gmail.com"
         val subject = "Приложение Munduz"
         val body =
-            ">>> " + order.productName + " количество " + order.productCount + "\n" +
-                    ">>> Имя Клиента " + order.clientName + "\n" +
-                    ">>> Номер телефона " + order.clientPhoneNumber + "\n" +
-                    ">>> С доставкой?" + if (order.withDelivery) "Да" else "Нет"
-        val time = System.currentTimeMillis()
-        val ordertime = time.convertLongToTime(time)
-        mSendEmailHelper.setMessage(email, subject, body, ordertime)
+            order.purchases + "\n"+
+                    ">> Сумма заказа  " + order.amountPurchases + "\n" +
+                    ">> Имя Клиента  " + order.clientName + "\n" +
+                    ">> Номер телефона  " + order.clientPhoneNumber + "\n" +
+                    ">> Способ покупки  " + order.isWithDelivery + "\n" +
+                    ">> Комментарий  " + order.comment + "\n"
+
+        mSendEmailHelper.setMessage(email, subject, body)
         mSendEmailHelper.execute()
 
     }

@@ -32,7 +32,7 @@ class AboutAppFragment: BaseFragment(){
         val emptySpace = "       "
         textToolbar.text = resources.getString(R.string.about_app) + emptySpace
         toolbar.setNavigationOnClickListener {
-            activity!!.supportFragmentManager.popBackStack()
+            activity.supportFragmentManager.popBackStack()
         }
     }
 

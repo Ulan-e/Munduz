@@ -2,8 +2,8 @@ package com.ulan.app.munduz
 
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
-import com.ulan.app.munduz.data.room.dao.KeysDao
-import com.ulan.app.munduz.data.room.entities.KeyEntity
+import com.ulan.app.munduz.data.room.dao.FavoritesDao
+import com.ulan.app.munduz.data.models.FavoriteEntity
 import com.ulan.app.munduz.data.room.StarredDatabase
 import junit.framework.Assert.*
 import org.junit.After
@@ -13,11 +13,11 @@ import org.junit.Test
 class DaoKeysTest {
 
     private lateinit var database: StarredDatabase
-    private lateinit var daoKeys: KeysDao
+    private lateinit var daoKeys: FavoritesDao
     private val keyEntity1 =
-        KeyEntity(1, "Key1")
+        FavoriteEntity(1, "Key1")
     private val keyEntity2 =
-        KeyEntity(2, "Key2")
+        FavoriteEntity(2, "Key2")
 
     @Before
     fun setUp() {
@@ -32,15 +32,15 @@ class DaoKeysTest {
 
     @Test
     fun whenInsertReturnSameSize() {
-        daoKeys.insertKey(keyEntity1)
-        assertEquals(1, daoKeys.fetchAllKeys().size)
+        daoKeys.insert(keyEntity1)
+        assertEquals(1, daoKeys.fetchFavorites().size)
     }
 
     @Test
     fun whenInsertReturnSameKey() {
-        daoKeys.insertKey(keyEntity1)
-        assertEquals(keyEntity1.id, daoKeys.fetchAllKeys().get(0).id)
-        assertEquals(keyEntity1.key, daoKeys.fetchAllKeys().get(0).key)
+        daoKeys.insert(keyEntity1)
+        assertEquals(keyEntity1.id, daoKeys.fetchFavorites().get(0).id)
+        assertEquals(keyEntity1.key, daoKeys.fetchFavorites().get(0).key)
     }
 
     @Test
@@ -48,45 +48,45 @@ class DaoKeysTest {
         val id = 0
         val key = ""
         val keyEntity =
-            KeyEntity(id, key)
-        daoKeys.insertKey(keyEntity)
+            FavoriteEntity(id, key)
+        daoKeys.insert(keyEntity)
         fail("Wrong key")
     }
 
     @Test
     fun whenFetchAllReturnSameSize() {
-        daoKeys.insertKey(keyEntity1)
-        daoKeys.insertKey(keyEntity2)
-        assertEquals(2, daoKeys.fetchAllKeys().size)
+        daoKeys.insert(keyEntity1)
+        daoKeys.insert(keyEntity2)
+        assertEquals(2, daoKeys.fetchFavorites().size)
     }
 
     @Test
     fun whenFetchAllReturnSameKey() {
-        daoKeys.insertKey(keyEntity1)
-        daoKeys.insertKey(keyEntity2)
-        assertEquals(keyEntity2.key, daoKeys.fetchAllKeys().get(1).key)
+        daoKeys.insert(keyEntity1)
+        daoKeys.insert(keyEntity2)
+        assertEquals(keyEntity2.key, daoKeys.fetchFavorites().get(1).key)
     }
 
     @Test
     fun whenFetchAllReturnEmpty(){
-        assertEquals(0, daoKeys.fetchAllKeys().size)
+        assertEquals(0, daoKeys.fetchFavorites().size)
     }
 
     @Test
     fun whenRemoveReturnSuccess(){
-        daoKeys.insertKey(keyEntity1)
-        daoKeys.removeKey(keyEntity1)
-        for(k: KeyEntity in daoKeys.fetchAllKeys()){
+        daoKeys.insert(keyEntity1)
+        daoKeys.remove(keyEntity1)
+        for(k: FavoriteEntity in daoKeys.fetchFavorites()){
             assertNotSame(k.key, keyEntity1.key)
         }
     }
 
     @Test
     fun whenRemoveAllReturnEmpty(){
-        daoKeys.insertKey(keyEntity1)
-        daoKeys.insertKey(keyEntity2)
-        daoKeys.removeAllKeys()
-        assertEquals(0, daoKeys.fetchAllKeys().size)
+        daoKeys.insert(keyEntity1)
+        daoKeys.insert(keyEntity2)
+        daoKeys.removeFavorites()
+        assertEquals(0, daoKeys.fetchFavorites().size)
     }
 
     @After

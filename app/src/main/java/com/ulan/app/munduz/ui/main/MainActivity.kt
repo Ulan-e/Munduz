@@ -2,6 +2,7 @@ package com.ulan.app.munduz.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ulan.app.munduz.R
@@ -9,8 +10,8 @@ import com.ulan.app.munduz.ui.base.BaseActivity
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.basket.BasketFragment
 import com.ulan.app.munduz.ui.catalog.CatalogFragment
-import com.ulan.app.munduz.ui.home.HomeFragment
 import com.ulan.app.munduz.ui.favorite.FavoriteFragment
+import com.ulan.app.munduz.ui.home.HomeFragment
 import com.ulan.app.munduz.ui.more.MoreFragment
 import com.ulan.app.munduz.ui.search.SearchActivity
 import dagger.android.AndroidInjection
@@ -27,16 +28,26 @@ class MainActivity : BaseActivity(), MainView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val fragment = BasketFragment.newInstance()
+        val mTitle = intent.getStringExtra("ulan")
+        if (mTitle == "basket") {
+            initBottomNav(R.id.basket)
+            Log.d("ulanbek", "go to basket")
+        }else{
+            initBottomNav(R.id.home)
+            Log.d("ulanbek", "go to home")
+        }
+
         button_click.setOnClickListener{
             startActivity(Intent(this@MainActivity, SearchActivity::class.java))
         }
 
-        initBottomNav()
+
     }
 
-    override fun initBottomNav() {
+    override fun initBottomNav(id: Int) {
         bottom_navigation_menu.setOnNavigationItemSelectedListener(itemSelectedListener)
-        bottom_navigation_menu.selectedItemId = R.id.home
+        bottom_navigation_menu.selectedItemId = id
     }
 
     private var itemSelectedListener =
@@ -93,5 +104,4 @@ class MainActivity : BaseActivity(), MainView {
             }
         }
     }
-
 }

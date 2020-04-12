@@ -1,7 +1,7 @@
 package com.ulan.app.munduz.dagger.modules.activitymodule
 
 import android.content.Context
-import com.ulan.app.munduz.adapter.SearchResultsAdapter
+import com.ulan.app.munduz.adapter.SearchAdapter
 import com.ulan.app.munduz.dagger.scopes.SearchScope
 import com.ulan.app.munduz.data.firebase.FirebaseRepository
 import com.ulan.app.munduz.listeners.OnItemClickListener
@@ -35,8 +35,8 @@ class SearchModule {
 
     @SearchScope
     @Provides
-    fun searchAdapter(context: Context, clickListener: OnItemClickListener): SearchResultsAdapter{
-        return SearchResultsAdapter(context, clickListener)
+    fun searchAdapter(context: Context, clickListener: OnItemClickListener): SearchAdapter{
+        return SearchAdapter(context, clickListener)
     }
 
 }

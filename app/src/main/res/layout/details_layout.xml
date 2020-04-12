@@ -4,8 +4,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar_layout"
@@ -14,12 +13,13 @@
             android:layout_gravity="top"
             android:fitsSystemWindows="true"
             android:theme="@style/Widget.AppCompat.ActionBar"
-            app:expanded="true">
+            app:expanded="true"
+            android:background="@color/white">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/coll_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="290dp"
+                android:layout_height="310dp"
                 android:background="@color/white"
                 app:contentScrim="@color/white"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
@@ -30,6 +30,8 @@
                     android:id="@+id/details_image"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
                     android:layout_gravity="center_horizontal"
                     android:scaleType="centerCrop"></ImageView>
 
@@ -37,9 +39,8 @@
             <androidx.appcompat.widget.Toolbar
                     android:id="@+id/product_toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
-                    android:fitsSystemWindows="true"
                     android:background="@android:color/transparent"
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
             </androidx.appcompat.widget.Toolbar>
@@ -59,6 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/white_gray"
+            android:layout_marginBottom="50dp"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <LinearLayout
@@ -135,7 +137,7 @@
                     android:layout_margin="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
-                    android:text="Доставка только через месяц"></TextView>
+                    android:text="Доставка через день после покупки"></TextView>
 
             <TextView
                     android:id="@+id/product_desc_title"
@@ -167,14 +169,13 @@
 
 
     <Button
-            android:id="@+id/buy_product"
+            android:id="@+id/add_to_basket"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_gravity="bottom|center_horizontal"
             android:layout_margin="5dp"
             android:background="@color/purple"
-            android:text="Добавить в корзину"
             android:textAlignment="center"
             android:textStyle="bold"
             android:textColor="@color/white"

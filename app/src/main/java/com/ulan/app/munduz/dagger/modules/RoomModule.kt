@@ -3,9 +3,11 @@ package com.ulan.app.munduz.dagger.modules
 import android.content.Context
 import androidx.room.Room
 import com.ulan.app.munduz.data.room.StarredDatabase
-import com.ulan.app.munduz.data.room.dao.KeysDao
+import com.ulan.app.munduz.data.room.dao.FavoritesDao
 import com.ulan.app.munduz.data.room.dao.PurchasesDao
-import com.ulan.app.munduz.data.room.repository.KeysRepositoryImpl
+import com.ulan.app.munduz.data.room.repository.FavoritesRepository
+import com.ulan.app.munduz.data.room.repository.FavoritesRepositoryImpl
+import com.ulan.app.munduz.data.room.repository.PurchasesRepository
 import com.ulan.app.munduz.data.room.repository.PurchasesRepositoryImpl
 import dagger.Module
 import dagger.Provides
@@ -14,15 +16,15 @@ import dagger.Provides
 class RoomModule {
 
     @Provides
-    fun database(context: Context): StarredDatabase{
-        return Room.databaseBuilder(context, StarredDatabase::class.java, "database_44")
+    fun database(context: Context): StarredDatabase {
+        return Room.databaseBuilder(context, StarredDatabase::class.java, "database00001")
             .allowMainThreadQueries()
             .build()
     }
 
     @Provides
-    fun keysDao(database: StarredDatabase): KeysDao {
-        return database.keysDao()
+    fun favoritesDao(database: StarredDatabase): FavoritesDao {
+        return database.favoritesDao()
     }
 
     @Provides
@@ -31,17 +33,13 @@ class RoomModule {
     }
 
     @Provides
-    fun keysRepository(daoKeys: KeysDao): KeysRepositoryImpl {
-        return KeysRepositoryImpl(
-            daoKeys
-        )
+    fun keysRepository(favoriteKeys: FavoritesDao): FavoritesRepository {
+        return FavoritesRepositoryImpl(favoriteKeys)
     }
 
     @Provides
-    fun purchaseRepository(daoKeys: PurchasesDao): PurchasesRepositoryImpl {
-        return PurchasesRepositoryImpl(
-            daoKeys
-        )
+    fun purchaseRepository(purchaseKeys: PurchasesDao): PurchasesRepository {
+        return PurchasesRepositoryImpl(purchaseKeys)
     }
 
 }

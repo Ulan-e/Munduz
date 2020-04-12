@@ -34,7 +34,7 @@ class ContactUsFragment: BaseFragment(){
         val emptySpace = "       "
         textToolbar.text = resources.getString(R.string.contacts_us) + emptySpace
         toolbar.setNavigationOnClickListener {
-            activity!!.supportFragmentManager.popBackStack()
+            activity.supportFragmentManager.popBackStack()
         }
     }
 

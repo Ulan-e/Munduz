@@ -6,12 +6,11 @@ import com.ulan.app.munduz.ui.base.BasePresenter
 interface DetailsPresenter: BasePresenter{
 
     fun setProduct(product: Product)
-    fun buyButtonClicked()
     fun isFavoriteProduct()
     fun favoriteClicked()
     fun unFavoriteClicked()
+    fun addToBasketClicked()
     fun onBackPressed()
-    fun addToBasketClicked(id: String)
 
 }
 

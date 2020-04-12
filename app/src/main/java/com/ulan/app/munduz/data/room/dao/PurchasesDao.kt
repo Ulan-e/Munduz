@@ -1,7 +1,7 @@
 package com.ulan.app.munduz.data.room.dao
 
 import androidx.room.*
-import com.ulan.app.munduz.data.room.entities.PurchaseEntity
+import com.ulan.app.munduz.data.models.PurchaseEntity
 
 @Dao
 interface PurchasesDao {
@@ -9,8 +9,7 @@ interface PurchasesDao {
     @Query("SELECT * FROM purchases_table")
     fun fetchAllPurchases(): List<PurchaseEntity>
 
-
-    @Query("SELECT SUM(purchases_table.cost) FROM purchases_table")
+    @Query("SELECT SUM(purchases_table.priceIncreased) FROM purchases_table")
     fun sumOfPurchases(): Int
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

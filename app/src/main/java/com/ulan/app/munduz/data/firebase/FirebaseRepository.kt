@@ -1,16 +1,16 @@
 package com.ulan.app.munduz.data.firebase
 
-import com.ulan.app.munduz.data.model.Order
 import com.ulan.app.munduz.developer.Product
-import com.ulan.app.munduz.listeners.*
+import com.ulan.app.munduz.listeners.ProductCallback
+import com.ulan.app.munduz.listeners.ProductsCallback
+import com.ulan.app.munduz.listeners.SliderImagesCallback
 
 interface FirebaseRepository {
 
-    fun insertOrder(order: Order)
-    fun loadProducts(callback: ProductListCallback)
+    fun loadProducts(callback: ProductsCallback)
     fun loadSearchedProducts(callback: ProductsCallback)
-    fun loadNewProducts(callback: ProductListCallback)
-    fun loadFilterProducts(category: String, callback: ProductListCallback)
+    fun loadNewProducts(callback: ProductsCallback)
+    fun loadFilterProducts(category: String, callback: ProductsCallback)
 
     fun updateProduct(product: Product)
     fun loadLikedProduct(key: String, callback: ProductCallback)

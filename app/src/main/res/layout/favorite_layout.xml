@@ -6,16 +6,17 @@
         android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/liked_recycler_view"
+            android:id="@+id/favorite_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
     </androidx.recyclerview.widget.RecyclerView>
 
     <TextView
-            android:id="@+id/empty_liked_products"
+            android:id="@+id/empty_favorites"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/empty_liked_products"
+            android:textSize="18sp"
+            android:text="У вас пока нет избранных"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:visibility="gone"/>

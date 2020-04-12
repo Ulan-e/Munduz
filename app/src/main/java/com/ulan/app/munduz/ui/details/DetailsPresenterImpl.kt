@@ -1,33 +1,45 @@
 package com.ulan.app.munduz.ui.details
 
-import com.ulan.app.munduz.data.room.entities.PurchaseEntity
-import com.ulan.app.munduz.data.room.repository.KeysRepositoryImpl
-import com.ulan.app.munduz.data.room.repository.PurchasesRepositoryImpl
+import com.ulan.app.munduz.data.models.Picture
+import com.ulan.app.munduz.data.models.PurchaseEntity
+import com.ulan.app.munduz.data.room.repository.FavoritesRepository
+import com.ulan.app.munduz.data.room.repository.PurchasesRepository
 import com.ulan.app.munduz.developer.Product
 import javax.inject.Inject
 
 class DetailsPresenterImpl : DetailsPresenter {
 
     private var mView: DetailsView?
-    private var mPurchaseRepository: PurchasesRepositoryImpl
-    private var mKeysRepository: KeysRepositoryImpl
+    private var mPurchaseRepository: PurchasesRepository
+    private var mFavoriteRepository: FavoritesRepository
     private lateinit var mProduct: Product
-    private var mPurchase = PurchaseEntity()
 
     @Inject
-    constructor(mView: DetailsView, repository: PurchasesRepositoryImpl, keysRepository: KeysRepositoryImpl) {
+    constructor(
+        mView: DetailsView,
+        repository: PurchasesRepository,
+        keysRepository: FavoritesRepository
+    ) {
         this.mView = mView
         this.mPurchaseRepository = repository
-        this.mKeysRepository = keysRepository
+        this.mFavoriteRepository = keysRepository
     }
 
     override fun setProduct(product: Product) {
         if (product != null) {
             this.mProduct = product
-            setPurchaseEntity(mProduct)
             mView?.showProduct(mProduct)
+            mView?.changeAddToBasketText(getBasketText())
         } else {
             mView?.showEmptyData()
+        }
+    }
+
+    private fun getBasketText(): String {
+        if (mPurchaseRepository.isExistId(mProduct.id)) {
+            return "Товар в корзине"
+        } else {
+            return "Добавить в корзину"
         }
     }
 
@@ -36,59 +48,53 @@ class DetailsPresenterImpl : DetailsPresenter {
     }
 
     override fun isFavoriteProduct() {
-        if (mKeysRepository.isExist(mProduct.key)) {
-            mView?.markAsLiked()
+        if (mFavoriteRepository.isExist(mProduct.id)) {
+            mView?.markAsFavorite()
         }
     }
 
-    override fun buyButtonClicked() {
-        mView?.addToBasket()
-    }
-
     override fun favoriteClicked() {
-        if (mKeysRepository.isExist(mProduct.key)) {
-            mKeysRepository.remove(mProduct.key)
-            mView?.markAsNotLiked()
+        if (mFavoriteRepository.isExist(mProduct.id)) {
+            mFavoriteRepository.remove(mProduct.id)
+            mView?.markAsNotFavorite()
         } else {
-            mKeysRepository.insert(mProduct.key)
-            mView?.markAsLiked()
+            mFavoriteRepository.insert(mProduct.id)
+            mView?.markAsFavorite()
         }
     }
 
     override fun unFavoriteClicked() {
-        mKeysRepository.remove(mProduct.key)
+        mFavoriteRepository.remove(mProduct.id)
     }
 
     override fun onBackPressed() {
         mView?.closeDetails()
     }
 
-    override fun addToBasketClicked(id: String) {
-        if (mPurchaseRepository.isExist(getProduct())) {
-            mView?.showSnackBar("Товар уже в корзине")
+    override fun addToBasketClicked() {
+        if (mPurchaseRepository.isExist(generateNewPurchase(mProduct))) {
+            mView?.changeAddToBasketText("Товар в корзине")
+            mView?.goToBasket()
         } else {
-            mPurchaseRepository.insert(getProduct())
-            mView?.showSnackBar("Товар добавлен")
+            mPurchaseRepository.insert(generateNewPurchase(mProduct))
+            mView?.changeAddToBasketText("Товар в корзине")
         }
     }
 
-    private fun setPurchaseEntity(product: Product){
-        var pictureNew = com.ulan.app.munduz.data.model.Picture()
-        pictureNew.urlImage = product.picture.urlImage
-
-        mPurchase.key = product.key
-        mPurchase.time = 5555555
-        mPurchase.isVisible = product.isVisible
-        mPurchase.name = product.name
-        mPurchase.cost = product.cost
-        mPurchase.priceFor = product.priceFor
-        mPurchase.picture = pictureNew
-        mPurchase.desc = product.desc
-        mPurchase.category = product.category
-    }
-
-    private fun getProduct(): PurchaseEntity {
-        return mPurchase
+    private fun generateNewPurchase(product: Product): PurchaseEntity {
+        var purchase = PurchaseEntity()
+        var picture = Picture()
+        purchase.id = product.id
+        purchase.name = product.name
+        purchase.category = product.category
+        purchase.price = product.cost
+        purchase.priceIncreased = product.cost
+        purchase.perPrice = product.priceFor
+        purchase.perPriceIncreased = product.priceFor
+        purchase.desc = product.desc
+        picture.urlImage = product.picture.urlImage
+        purchase.picture = picture
+        return purchase
     }
 
     override fun detachView() {

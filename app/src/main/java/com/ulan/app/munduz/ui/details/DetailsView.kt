@@ -6,10 +6,11 @@ import com.ulan.app.munduz.ui.base.BaseView
 interface DetailsView : BaseView{
 
     fun showProduct(product: Product)
+    fun changeAddToBasketText(text: String)
     fun addToBasket()
-    fun markAsLiked()
-    fun markAsNotLiked()
+    fun markAsFavorite()
+    fun markAsNotFavorite()
     fun closeDetails()
-    fun showSnackBar(result: String)
+    fun goToBasket()
 
 }

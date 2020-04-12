@@ -41,7 +41,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:text="Total"
-            android:textSize="16sp" />
+            android:textSize="18sp"
+            android:textStyle="bold"/>
 
     <EditText
             android:id="@+id/client_name"
@@ -81,19 +82,18 @@
             android:orientation="horizontal">
 
         <RadioButton
-                android:id="@+id/radio_pirates"
+                android:id="@+id/delivery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="6dp"
-                android:checked="true"
                 android:text="Доставка" />
 
         <RadioButton
-                android:id="@+id/radio_ninjas"
+                android:id="@+id/pickup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="6dp"
-                android:text="Резерв" />
+                android:text="Самовывоз" />
     </RadioGroup>
 
     <EditText
@@ -115,9 +115,9 @@
             android:layout_marginLeft="7dp"
             android:layout_marginTop="20dp"
             android:layout_marginRight="7dp"
-            android:layout_marginBottom="7dp"
+            android:layout_marginBottom="5dp"
             android:text="Заказать"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
 
 </LinearLayout>

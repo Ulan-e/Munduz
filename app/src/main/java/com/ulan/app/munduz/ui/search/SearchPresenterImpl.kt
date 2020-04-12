@@ -8,23 +8,22 @@ class SearchPresenterImpl: SearchPresenter{
 
     private var mView: SearchView?
     private var mRepository: FirebaseRepository
-    private var mProducts = ArrayList<Product>()
+    private var mProducts = mutableListOf<Product>()
 
     constructor(mView: SearchView, mRepository: FirebaseRepository) {
         this.mView = mView
         this.mRepository = mRepository
     }
 
-
     override fun setToolbar() {
         mView?.showToolbar()
     }
 
-    override fun loadProducts(): ArrayList<Product> {
+    override fun loadProducts(): MutableList<Product> {
         mRepository.loadSearchedProducts(object : ProductsCallback {
-            override fun onCallback(products: ArrayList<Product>) {
-                mView?.showProducts(products)
-                mProducts = products
+            override fun onCallback(values: MutableList<Product>) {
+                mView?.showProducts(values)
+                mProducts = values
             }
 
         })

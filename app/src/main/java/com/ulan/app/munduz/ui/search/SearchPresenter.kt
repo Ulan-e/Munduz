@@ -5,5 +5,5 @@ import com.ulan.app.munduz.ui.base.BasePresenter
 
 interface SearchPresenter : BasePresenter {
 
-    fun loadProducts(): ArrayList<Product>
+    fun loadProducts(): MutableList<Product>
 }

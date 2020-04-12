@@ -1,4 +1,4 @@
-package com.ulan.app.munduz.data.model
+package com.ulan.app.munduz.data.models
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
@@ -7,5 +7,4 @@ import kotlinx.android.parcel.Parcelize
 data class Message(
     var email: String = "",
     var subject: String = "",
-    var body: String ="",
-    var time: String = ""): Parcelable
+    var body: String =""): Parcelable

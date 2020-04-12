@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ulan.app.munduz.R
-import com.ulan.app.munduz.adapter.FavoriteProductAdapter
-import com.ulan.app.munduz.data.room.repository.KeysRepositoryImpl
+import com.ulan.app.munduz.adapter.FavoriteAdapter
+import com.ulan.app.munduz.data.room.repository.FavoritesRepository
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
 import com.ulan.app.munduz.listeners.OnItemClickListener
@@ -31,16 +31,16 @@ class FavoriteFragment: BaseFragment(), FavoriteView, OnItemClickListener {
     lateinit var mPresenter: FavoritePresenter
 
     @Inject
-    lateinit var mAdapter: FavoriteProductAdapter
+    lateinit var mAdapter: FavoriteAdapter
 
     @Inject
-    lateinit var mRoomRepository: KeysRepositoryImpl
+    lateinit var mRoomRepository: FavoritesRepository
 
     private lateinit var mRecyclerView: RecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.favorite_layout, container, false)
-        mRecyclerView = view.findViewById(R.id.liked_recycler_view)
+        mRecyclerView = view.findViewById(R.id.favorite_recycler_view)
         return view
     }
 
@@ -62,10 +62,10 @@ class FavoriteFragment: BaseFragment(), FavoriteView, OnItemClickListener {
     }
 
     override fun showEmptyData() {
-        empty_liked_products.visibility = View.VISIBLE
+        empty_favorites.visibility = View.VISIBLE
     }
 
-    override fun showLikedProducts(products: ArrayList<Product>) {
+    override fun showProducts(products: MutableList<Product>) {
         val layoutManager  =  LinearLayoutManager(activity!!.applicationContext)
         mAdapter.setProducts(products)
         mAdapter.setRepository(mRoomRepository)
@@ -73,7 +73,7 @@ class FavoriteFragment: BaseFragment(), FavoriteView, OnItemClickListener {
         mRecyclerView.adapter = mAdapter
     }
 
-    override fun onItemClick(product: Product?) {
+    override fun onItemClick(product: Product) {
         val intent = Intent(activity, DetailsActivity::class.java)
         intent.putExtra(Constants.PRODUCT_ARG, product)
         startActivity(intent)

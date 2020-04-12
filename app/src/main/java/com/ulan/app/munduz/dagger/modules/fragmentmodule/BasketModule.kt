@@ -5,9 +5,10 @@ import com.ulan.app.munduz.adapter.BasketAdapter
 import com.ulan.app.munduz.dagger.modules.RoomModule
 import com.ulan.app.munduz.dagger.scopes.MainScope
 import com.ulan.app.munduz.data.firebase.FirebaseRepository
+import com.ulan.app.munduz.data.room.repository.PurchasesRepository
 import com.ulan.app.munduz.data.room.repository.PurchasesRepositoryImpl
+import com.ulan.app.munduz.listeners.OnItemBasketClickListener
 import com.ulan.app.munduz.listeners.OnItemClickListener
-import com.ulan.app.munduz.listeners.PurchaseClickListener
 import com.ulan.app.munduz.ui.basket.BasketFragment
 import com.ulan.app.munduz.ui.basket.BasketPresenter
 import com.ulan.app.munduz.ui.basket.BasketPresenterImpl
@@ -30,20 +31,20 @@ class BasketModule {
     fun providePresenter(
         view: BasketView,
         firebaseRepository: FirebaseRepository,
-        purchasesRepository: PurchasesRepositoryImpl
+        purchasesRepository: PurchasesRepository
     ): BasketPresenter {
         return BasketPresenterImpl(view, firebaseRepository, purchasesRepository)
     }
 
     @MainScope
     @Provides
-    fun provideListener(fragment: BasketFragment): PurchaseClickListener {
+    fun provideListener(fragment: BasketFragment): OnItemBasketClickListener {
         return fragment
     }
 
     @MainScope
     @Provides
-    fun provideAdapter(context: Context, listener: PurchaseClickListener): BasketAdapter {
+    fun provideAdapter(context: Context, listener: OnItemBasketClickListener): BasketAdapter {
         return BasketAdapter(context, listener)
     }
 }
