@@ -7,7 +7,5 @@ interface MorePresenter : BasePresenter {
     fun goToContactsUs()
     fun goToAboutApp()
     fun goToWriteToUsFragment()
-    fun instagramClicked()
-    fun odnoklassnikiClicked()
-    fun facebookClicked()
+    fun socialPageClicked(siteUrl: String)
 }

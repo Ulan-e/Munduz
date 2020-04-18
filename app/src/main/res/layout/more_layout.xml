@@ -2,42 +2,32 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
+        android:background="@color/colorBackground"
         android:fitsSystemWindows="true"
         android:orientation="vertical">
 
-    <Button
+    <com.google.android.material.button.MaterialButton
             android:id="@+id/contacts_us"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="7dp"
-            android:background="?android:selectableItemBackground"
-            android:text="@string/contacts_us"
-            android:textSize="16sp"
-            android:textStyle="bold"/>
+            style="@style/ButtonBlackOnlyTextStyle"
+            android:text="@string/contacts_us"/>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
             android:id="@+id/write_tous_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/contacts_us"
-            android:layout_marginBottom="7dp"
-            android:background="?android:selectableItemBackground"
-            android:text="@string/write_to_us"
-            android:textSize="16sp"
-            android:textStyle="bold"/>
+            style="@style/ButtonBlackOnlyTextStyle"
+            android:text="@string/write_to_us"/>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
             android:id="@+id/about_app"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/write_tous_button"
-            android:layout_marginBottom="7dp"
-            android:background="?android:selectableItemBackground"
-            android:text="@string/about_app"
-            android:textSize="16sp"
-            android:textStyle="bold"/>
+            style="@style/ButtonBlackOnlyTextStyle"
+            android:text="@string/about_app"/>
 
 
     <LinearLayout
@@ -65,13 +55,22 @@
                 android:src="@drawable/ic_odnoklassniki" />
 
         <ImageView
-                android:id="@+id/facebook"
+                android:id="@+id/vkontakte"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_margin="13dp"
                 android:layout_weight="1"
                 android:clickable="true"
-                android:src="@drawable/ic_facebook" />
+                android:src="@drawable/ic_vkontakte" />
+
+        <ImageView
+                android:id="@+id/telegram"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="13dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:src="@mipmap/telegram" />
 
     </LinearLayout>
 

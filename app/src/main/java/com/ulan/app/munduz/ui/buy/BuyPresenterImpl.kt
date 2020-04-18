@@ -44,21 +44,26 @@ class BuyPresenterImpl : BuyPresenter {
         }
     }
 
+
+
     private fun sendToEmail(order: Order) {
         val email = "uulanerkinbaev@gmail.com"
         val subject = "Приложение Munduz"
         val body =
             order.purchases + "\n"+
-                    ">> Сумма заказа  " + order.amountPurchases + "\n" +
-                    ">> Имя Клиента  " + order.clientName + "\n" +
-                    ">> Номер телефона  " + order.clientPhoneNumber + "\n" +
-                    ">> Способ покупки  " + order.purchaseMethod + "\n" +
-                    ">> Комментарий  " + order.comment + "\n"
+                    "> Сумма заказа  " + order.amountPurchases + "\n" +
+                    "> Имя Клиента  " + order.clientName + "\n" +
+                    "> Номер телефона  " + order.clientPhoneNumber + "\n" +
+                    "> Номер телефона 2 " + order.clientPhoneNumberSecond + "\n" +
+                    "> Способ покупки  " + order.purchaseMethod + "\n" +
+                    "> Комментарий  " + order.comment + "\n"
 
         mSendEmailHelper.setMessage(email, subject, body)
         mSendEmailHelper.execute()
 
     }
+
+
 
     override fun cancelButtonClicked() {
         mView?.cancelOrder()

@@ -5,8 +5,8 @@ import com.ulan.app.munduz.data.models.PurchaseEntity
 import com.ulan.app.munduz.data.room.repository.FavoritesRepository
 import com.ulan.app.munduz.data.room.repository.PurchasesRepository
 import com.ulan.app.munduz.developer.Product
-import com.ulan.app.munduz.helpers.Constants.Companion.ADD_TO_BASKET
-import com.ulan.app.munduz.helpers.Constants.Companion.IN_BASKET
+import com.ulan.app.munduz.helpers.Constants.Companion.ALREADY_IN_BASKET
+import com.ulan.app.munduz.helpers.Constants.Companion.NOT_IN_BASKET
 import javax.inject.Inject
 
 class DetailsPresenterImpl : DetailsPresenter {
@@ -38,10 +38,10 @@ class DetailsPresenterImpl : DetailsPresenter {
     }
 
     private fun getBasketText(): String {
-        if (mPurchaseRepository.isExistId(mProduct.id)) {
-            return IN_BASKET
+        if (mPurchaseRepository.isExist(mProduct.id)) {
+            return NOT_IN_BASKET
         } else {
-            return ADD_TO_BASKET
+            return NOT_IN_BASKET
         }
     }
 
@@ -52,6 +52,14 @@ class DetailsPresenterImpl : DetailsPresenter {
     override fun isFavoriteProduct() {
         if (mFavoriteRepository.isExist(mProduct.id)) {
             mView?.markAsFavorite()
+        }
+    }
+
+    override fun isInAlreadyInBasket() {
+        if (mPurchaseRepository.isExist(mProduct.id)) {
+            mView?.changeAddToBasketText(ALREADY_IN_BASKET)
+        } else {
+            mView?.changeAddToBasketText(NOT_IN_BASKET)
         }
     }
 
@@ -74,29 +82,12 @@ class DetailsPresenterImpl : DetailsPresenter {
     }
 
     override fun addToBasketClicked() {
-        if (mPurchaseRepository.isExist(generateNewPurchase(mProduct))) {
-            mView?.changeAddToBasketText(IN_BASKET)
+        if (mPurchaseRepository.isExist(mProduct.id)) {
             mView?.goToBasket()
         } else {
-            mPurchaseRepository.insert(generateNewPurchase(mProduct))
-            mView?.changeAddToBasketText(IN_BASKET)
+            mPurchaseRepository.insert(mProduct)
+            mView?.changeAddToBasketText(ALREADY_IN_BASKET)
         }
-    }
-
-    private fun generateNewPurchase(product: Product): PurchaseEntity {
-        var purchase = PurchaseEntity()
-        var picture = Picture()
-        purchase.id = product.id
-        purchase.name = product.name
-        purchase.category = product.category
-        purchase.price = product.cost
-        purchase.priceInc = product.cost
-        purchase.perPrice = product.priceFor
-        purchase.perPriceInc = product.priceFor
-        purchase.desc = product.desc
-        picture.urlImage = product.picture.urlImage
-        purchase.picture = picture
-        return purchase
     }
 
     override fun detachView() {

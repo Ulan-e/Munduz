@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:theme="@style/MainAppTheme">
 
     <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/product_cardview_margin"
+            android:layout_margin="4dp"
             app:cardUseCompatPadding="true">
 
         <LinearLayout
@@ -15,67 +16,67 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-            <ImageView
-                    android:id="@+id/product_image"
+            <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="130dp"
-                    android:layout_margin="@dimen/product_item_margin"
-                    android:scaleType="centerCrop">
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-            </ImageView>
+                <ImageView
+                        android:id="@+id/product_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="130dp"
+                        android:layout_marginTop="8dp"
+                        android:scaleType="centerCrop">
+
+                </ImageView>
+
+                <ImageView
+                        android:id="@+id/favorite"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_gravity="right"
+                        android:layout_margin="10dp"
+                        android:src="@drawable/ic_favorite_border_24dp">
+
+                </ImageView>
+            </FrameLayout>
 
             <TextView
                     android:id="@+id/product_name"
+                    style="@style/NameTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/product_text_top_margin"
-                    android:textSize="16sp">
+                    android:text="Курут"></TextView>
+
+            <TextView
+                    android:id="@+id/product_availability"
+                    style="@style/AvailabilityTextStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/available">
 
             </TextView>
 
             <TextView
+                    android:id="@+id/product_price"
+                    style="@style/PriceTextStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="13sp"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_margin="5dp">
+                    android:text="22H"></TextView>
 
-            </TextView>
-
-
-            <RelativeLayout
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/in_out_basket"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp">
+                    android:layout_height="38dp"
+                    app:icon="@drawable/ic_basket_black_24dp"
+                    app:iconGravity="textEnd"
+                    app:iconSize="14dp"
+                    style="@style/ButtonVioletSmallStyle">
 
-                <TextView
-                        android:id="@+id/product_price"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentLeft="true"
-                        android:layout_margin="@dimen/product_text_top_margin"
-                        android:textStyle="bold"
-                        android:textSize="19sp">
-
-                </TextView>
-
-
-
-                <ImageView
-                        android:id="@+id/add_favorite"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_gravity="right"
-                        android:layout_margin="4dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ic_favorite_border_24dp"
-                        android:layout_marginTop="5dp">
-
-                </ImageView>
-            </RelativeLayout>
+            </com.google.android.material.button.MaterialButton>
 
         </LinearLayout>
 
-    </androidx.cardview.widget.CardView>
 
-</RelativeLayout>
+    </androidx.cardview.widget.CardView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

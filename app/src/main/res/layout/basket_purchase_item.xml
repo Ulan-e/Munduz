@@ -1,121 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp">
+        android:layout_margin="5dp"
+        app:cardUseCompatPadding="true">
 
-    <androidx.cardview.widget.CardView
+    <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardUseCompatPadding="true">
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp">
+
+        <ImageView
+                android:id="@+id/purchase_image"
+                android:layout_width="105dp"
+                android:layout_height="100dp"
+                android:layout_alignParentLeft="true"
+                android:scaleType="centerCrop">
+
+        </ImageView>
 
         <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/purchase_image">
+
+            <TextView
+                    android:id="@+id/purchase_name"
+                    style="@style/NameTextStyle"
+                    android:layout_width="210dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true">
+
+            </TextView>
+
+            <TextView
+                    android:id="@+id/purchase_availability"
+                    style="@style/AvailabilityTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Готов к покупке"
+                    android:layout_below="@+id/purchase_name">
+
+            </TextView>
+
+            <TextView
+                    android:id="@+id/purchase_price"
+                    style="@style/PriceTextStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_below="@+id/purchase_availability"
+                    android:text="200">
+
+            </TextView>
 
             <ImageView
-                    android:id="@+id/purchase_image"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_alignParentLeft="true"
-                    android:layout_margin="4dp"
-                    android:scaleType="centerCrop">
+                    android:id="@+id/remove_purchase"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_margin="10dp"
+                    android:src="@drawable/ic_delete_black_24dp">
 
             </ImageView>
 
             <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/purchase_image"
-                    android:orientation="vertical">
+                    android:layout_below="@id/purchase_price"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="3dp">
 
-                <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                <ImageButton
+                        android:id="@+id/decrement"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/ic_small_minus"
+                        android:background="@drawable/rounded_button">
 
-                    <TextView
-                            android:id="@+id/purchase_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentLeft="true"
-                            android:layout_margin="@dimen/product_text_top_margin"
-                            android:textSize="18sp">
+                </ImageButton>
 
-                    </TextView>
+                <TextView
+                        android:id="@+id/purchase_per_price"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|center_vertical"
+                        android:maxLength="10"
+                        android:textAlignment="center"
+                        android:textSize="16sp"
+                        android:textColor="@color/gray_dark"
+                        android:text="1литр">
 
-                    <ImageView
-                            android:id="@+id/remove_purchase"
-                            android:layout_width="25dp"
-                            android:layout_height="25dp"
-                            android:layout_alignParentRight="true"
-                            android:layout_margin="5dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/ic_delete_black_24dp">
+                </TextView>
 
-                    </ImageView>
-                </RelativeLayout>
+                <ImageButton
+                        android:id="@+id/increment"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/ic_small_plus"
+                        android:background="@drawable/rounded_button">
 
-                <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                    <TextView
-                            android:id="@+id/purchase_price"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:textSize="22sp"
-                            android:textStyle="bold">
-
-                    </TextView>
-
-                    <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/purchase_price">
-
-                        <Button
-                                android:id="@+id/decrement"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="?android:selectableItemBackground"
-                                android:text="@string/minus"
-                                android:textColor="@color/colorAccent"
-                                android:textSize="20sp">
-
-                        </Button>
-
-                        <TextView
-                                android:id="@+id/purchase_per_price"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="16sp"
-                                android:textStyle="bold">
-
-                        </TextView>
-
-
-                        <Button
-                                android:id="@+id/increment"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="?android:selectableItemBackground"
-                                android:text="@string/plus"
-                                android:textColor="@color/colorAccent"
-                                android:textSize="20sp">
-
-                        </Button>
-
-                    </LinearLayout>
-
-                </RelativeLayout>
-
+                </ImageButton>
 
             </LinearLayout>
-
         </RelativeLayout>
 
-    </androidx.cardview.widget.CardView>
+    </RelativeLayout>
 
-</RelativeLayout>
+</androidx.cardview.widget.CardView>

@@ -9,6 +9,7 @@ import com.ulan.app.munduz.helpers.Constants.Companion.FIREBASE_ERROR_TITLE
 import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCTS_TABLE
 import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_CATEGORY
 import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_ID
+import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_RECOMMEND
 import com.ulan.app.munduz.helpers.Constants.Companion.TAG
 import com.ulan.app.munduz.listeners.ProductCallback
 import com.ulan.app.munduz.listeners.ProductsCallback
@@ -63,7 +64,7 @@ class FirebaseRepositoryImpl: FirebaseRepository {
 
     override fun loadRecommendedProducts(callback: ProductsCallback) {
         val products = mutableListOf<Product>()
-        val queryRef = mRef.child(PRODUCTS_TABLE).orderByKey().limitToLast(8)
+        val queryRef = mRef.child(PRODUCTS_TABLE).orderByChild(PRODUCT_RECOMMEND).equalTo(true)
         queryRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 for (item: DataSnapshot in p0.children) {
@@ -82,7 +83,6 @@ class FirebaseRepositoryImpl: FirebaseRepository {
     override fun loadFilteredProducts(category: String, callback: ProductsCallback) {
         val products = mutableListOf<Product>()
         val queryRef = mRef.child(PRODUCTS_TABLE).orderByChild(PRODUCT_CATEGORY).equalTo(category)
-        queryRef.keepSynced(true)
         queryRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 for (item: DataSnapshot in p0.children) {

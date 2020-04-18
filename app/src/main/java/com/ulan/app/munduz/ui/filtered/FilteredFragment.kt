@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.adapter.ProductsAdapter
 import com.ulan.app.munduz.data.room.repository.FavoritesRepository
+import com.ulan.app.munduz.data.room.repository.PurchasesRepository
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
 import com.ulan.app.munduz.helpers.Constants.Companion.CATEGORY_ARG
@@ -34,7 +35,10 @@ class FilteredFragment : BaseFragment(), FilteredView, OnItemClickListener {
     lateinit var mAdapter: ProductsAdapter
 
     @Inject
-    lateinit var mRoomRepository: FavoritesRepository
+    lateinit var mFirebaseRepository: FavoritesRepository
+
+    @Inject
+    lateinit var mPurchasesRepository: PurchasesRepository
 
     private lateinit var mCategory: String
 
@@ -91,7 +95,7 @@ class FilteredFragment : BaseFragment(), FilteredView, OnItemClickListener {
         val layoutManager = GridLayoutManager(activity, 2)
         filter_recycler_view.layoutManager = layoutManager
         mAdapter.setProducts(products)
-        mAdapter.setRepository(mRoomRepository)
+        mAdapter.setRepositories(mFirebaseRepository, mPurchasesRepository)
         filter_recycler_view.adapter = mAdapter
     }
 

@@ -15,10 +15,9 @@
             android:id="@+id/empty_filter_catalog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/empty_filter_products"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:visibility="gone">
+            android:visibility="gone"
+            style="@style/EmptyTextStyle"
+            android:text="@string/empty_filter_products">
     </TextView>
 
     <include layout="@layout/error_layout"/>

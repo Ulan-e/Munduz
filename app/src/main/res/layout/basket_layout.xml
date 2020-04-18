@@ -15,14 +15,10 @@
 
             <TextView
                     android:id="@+id/sum_of_purchase"
+                    style="@style/TitleSumTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="top|center_horizontal"
-                    android:layout_margin="10dp"
-                    android:textAlignment="center"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:visibility="gone">
+                    android:layout_gravity="top|center_horizontal">
 
             </TextView>
 
@@ -30,7 +26,8 @@
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/basket_recycler_view"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never">
 
             </androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>
@@ -38,50 +35,44 @@
     </androidx.core.widget.NestedScrollView>
 
 
-    <Button
+    <com.google.android.material.button.MaterialButton
             android:id="@+id/purchase_all"
+            style="@style/ButtonVioletStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="58dp"
-            android:background="@color/purple"
-            android:text="@string/ready_purchase"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:visibility="gone">
+            android:textSize="15sp"
+            android:text="@string/ready_purchase">
 
-    </Button>
+    </com.google.android.material.button.MaterialButton>
 
     <LinearLayout
             android:id="@+id/empty_basket"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_gravity="center"
+            android:orientation="vertical"
             android:visibility="gone">
 
         <TextView
                 android:id="@+id/empty_data"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/empty_basket"
-                android:textSize="18sp"
-                android:layout_margin="8dp">
+                style="@style/EmptyTextStyle"
+                android:text="@string/empty_basket">
 
         </TextView>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
                 android:id="@+id/open_catalog"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:textSize="14sp"
+                style="@style/ButtonVioletStyle"
                 android:text="@string/goto_home">
 
-        </Button>
+        </com.google.android.material.button.MaterialButton>
 
     </LinearLayout>
 

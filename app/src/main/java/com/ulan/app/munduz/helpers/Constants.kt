@@ -17,7 +17,8 @@ class Constants {
         //Product
         const val EXTRA_PRODUCT_ARG = "product_args"
         const val PRODUCT_ID = "id"
-        const val PRODUCT_CATEGORY = "id"
+        const val PRODUCT_CATEGORY = "category"
+        const val PRODUCT_RECOMMEND = "recommend"
         const val EXTRA_PRODUCT_AMOUNT_ARG = "cost"
         const val EXTRA_PURCHASES_BUY_ARG = "product_args"
 
@@ -31,11 +32,13 @@ class Constants {
 
         //Social Network
         const val INSTAGRAM_PAGE = "https://www.instagram.com/munduz.ru"
-        const val FACEBOOK_PAGE = "https://m.facebook.com/profile.php?id=100008205792318"
+        const val VKONTAKTE_PAGE = "https://vk.com/ulanerkinbaev"
         const val ODNOKLASSNIKI_PAGE = "https://ok.ru/profile/581176986653"
+        const val TELEGRAM_PAGE = "https://tele.click/ulanerkinbaev"
 
-        const val IN_BASKET = "Товар в корзине"
-        const val ADD_TO_BASKET = "Добавить в корзину"
+
+        const val ALREADY_IN_BASKET = "В корзине"
+        const val NOT_IN_BASKET = "Добавить"
 
         //Fragments title
         const val HOME_FRAGMENT = "home_fragment"

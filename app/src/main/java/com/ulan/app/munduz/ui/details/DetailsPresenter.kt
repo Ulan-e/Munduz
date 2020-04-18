@@ -7,6 +7,7 @@ interface DetailsPresenter: BasePresenter{
 
     fun setProduct(product: Product)
     fun isFavoriteProduct()
+    fun isInAlreadyInBasket()
     fun favoriteClicked()
     fun unFavoriteClicked()
     fun addToBasketClicked()

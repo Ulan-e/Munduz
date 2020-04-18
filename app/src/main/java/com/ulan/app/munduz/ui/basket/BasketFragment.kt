@@ -21,13 +21,12 @@ import com.ulan.app.munduz.data.models.PurchaseEntity
 import com.ulan.app.munduz.data.room.repository.PurchasesRepository
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
-import com.ulan.app.munduz.helpers.Constants.Companion.BUY_FRAGMENT
 import com.ulan.app.munduz.helpers.Constants.Companion.HOME_FRAGMENT
 import com.ulan.app.munduz.helpers.RUBLE
 import com.ulan.app.munduz.listeners.OnChangeSumListener
 import com.ulan.app.munduz.listeners.OnItemBasketClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
-import com.ulan.app.munduz.ui.buy.BuyFragment
+import com.ulan.app.munduz.ui.buy.BuyActivity
 import com.ulan.app.munduz.ui.details.DetailsActivity
 import com.ulan.app.munduz.ui.home.HomeFragment
 import kotlinx.android.synthetic.main.basket_layout.*
@@ -95,8 +94,10 @@ class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, On
     }
 
     override fun purchaseAll(purchases: MutableList<PurchaseEntity>, amount: Int) {
-        val fragment = BuyFragment.newInstance(purchases, amount)
-        fragment.show(activity!!.supportFragmentManager, BUY_FRAGMENT)
+        val intent = Intent(activity!!, BuyActivity::class.java)
+        intent.putExtra(Constants.EXTRA_PRODUCT_AMOUNT_ARG, amount)
+        intent.putParcelableArrayListExtra(Constants.EXTRA_PURCHASES_BUY_ARG, ArrayList(purchases))
+        startActivity(intent)
     }
 
     override fun showPurchasesAmount(amount: Int) {

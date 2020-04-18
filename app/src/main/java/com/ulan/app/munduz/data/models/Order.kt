@@ -7,6 +7,7 @@ data class Order(
     var purchaseMethod: String = "",
     var clientName: String = "",
     var clientPhoneNumber: String = "",
+    var clientPhoneNumberSecond: String = "",
     var comment: String = ""
 
 )

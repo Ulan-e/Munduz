@@ -14,10 +14,11 @@ import androidx.appcompat.widget.Toolbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.ulan.app.munduz.R
-import com.ulan.app.munduz.helpers.Constants.Companion.FACEBOOK_PAGE
 import com.ulan.app.munduz.helpers.Constants.Companion.HOME_FRAGMENT
 import com.ulan.app.munduz.helpers.Constants.Companion.INSTAGRAM_PAGE
 import com.ulan.app.munduz.helpers.Constants.Companion.ODNOKLASSNIKI_PAGE
+import com.ulan.app.munduz.helpers.Constants.Companion.TELEGRAM_PAGE
+import com.ulan.app.munduz.helpers.Constants.Companion.VKONTAKTE_PAGE
 import com.ulan.app.munduz.helpers.Constants.Companion.WRITE_TO_US_FRAGMENT
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.home.HomeFragment
@@ -61,15 +62,19 @@ class MoreFragment : BaseFragment(), MoreView {
         }
 
         instagram.setOnClickListener {
-            mPresenter.instagramClicked()
+            mPresenter.socialPageClicked(INSTAGRAM_PAGE)
         }
 
-        facebook.setOnClickListener {
-            mPresenter.facebookClicked()
+        vkontakte.setOnClickListener {
+            mPresenter.socialPageClicked(VKONTAKTE_PAGE)
         }
 
         odnoklassniki.setOnClickListener {
-            mPresenter.odnoklassnikiClicked()
+            mPresenter.socialPageClicked(ODNOKLASSNIKI_PAGE)
+        }
+
+        telegram.setOnClickListener {
+            mPresenter.socialPageClicked(TELEGRAM_PAGE)
         }
     }
 
@@ -114,18 +119,8 @@ class MoreFragment : BaseFragment(), MoreView {
         dialogFragment.show(activity!!.supportFragmentManager, WRITE_TO_US_FRAGMENT)
     }
 
-    override fun showInstagramPage() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(INSTAGRAM_PAGE))
-        startActivity(intent)
-    }
-
-    override fun showOdnoklassnikiPage() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(ODNOKLASSNIKI_PAGE))
-        startActivity(intent)
-    }
-
-    override fun showFacebookPage() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(FACEBOOK_PAGE))
+    override fun showSocialPage(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
         startActivity(intent)
     }
 

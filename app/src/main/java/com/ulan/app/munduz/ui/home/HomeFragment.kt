@@ -3,6 +3,7 @@ package com.ulan.app.munduz.ui.home
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,7 @@ import com.ulan.app.munduz.adapter.ProductsAdapter
 import com.ulan.app.munduz.adapter.SliderAdapter
 import com.ulan.app.munduz.data.models.SliderImage
 import com.ulan.app.munduz.data.room.repository.FavoritesRepository
+import com.ulan.app.munduz.data.room.repository.PurchasesRepository
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants.Companion.EXTRA_PRODUCT_ARG
 import com.ulan.app.munduz.helpers.Constants.Companion.HOME_FRAGMENT
@@ -42,7 +44,10 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
     lateinit var mAdapter: ProductsAdapter
 
     @Inject
-    lateinit var mRoomRepository: FavoritesRepository
+    lateinit var mFavoritesRepo: FavoritesRepository
+
+    @Inject
+    lateinit var mPurchasesRepo: PurchasesRepository
 
     private var mSliderAdapter: SliderAdapter? = null
 
@@ -91,6 +96,7 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
         mPresenter.loadSliderImages()
         mPresenter.loadProducts()
         handler = Handler()
+        Log.d("ulanbek","HomeFragment adapter=" +  mAdapter.toString())
     }
 
     override fun showToolbar() {
@@ -126,7 +132,7 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
         val layoutManager = GridLayoutManager(activity, 2)
         mRecyclerView.layoutManager = layoutManager
         mAdapter.setProducts(products)
-        mAdapter.setRepository(mRoomRepository)
+        mAdapter.setRepositories(mFavoritesRepo, mPurchasesRepo)
         mRecyclerView.adapter = mAdapter
     }
 

@@ -29,6 +29,8 @@ class CatalogFragment : BaseFragment(), CatalogView, OnCategoryClickListener {
     @Inject
     lateinit var mAdapter: CatalogAdapter
 
+    var mImages = intArrayOf()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,6 +43,12 @@ class CatalogFragment : BaseFragment(), CatalogView, OnCategoryClickListener {
         super.onViewCreated(view, savedInstanceState)
         mPresenter.setToolbar()
         val catalog = activity!!.applicationContext.resources.getStringArray(R.array.category)
+        mImages = intArrayOf(R.mipmap.grocery, R.mipmap.napitki,
+            R.mipmap.dishes, R.mipmap.postel,
+            R.mipmap.kazan, R.mipmap.chemodany,
+            R.mipmap.beshik, R.mipmap.sredstvo,
+            R.mipmap.knigi
+        )
         mPresenter.setCatalog(catalog.toMutableList())
     }
 
@@ -61,6 +69,7 @@ class CatalogFragment : BaseFragment(), CatalogView, OnCategoryClickListener {
         catalog_recycler_view.layoutManager = layoutManager
         catalog_recycler_view.addItemDecoration(DividerItemDecoration(activity, LinearLayoutManager.HORIZONTAL))
         mAdapter.setCatalogs(catalog.toMutableList())
+        mAdapter.setImages(mImages)
         catalog_recycler_view.adapter = mAdapter
     }
 

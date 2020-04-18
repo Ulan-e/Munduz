@@ -47,22 +47,22 @@
                     app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
             </androidx.appcompat.widget.Toolbar>
 
-            <ProgressBar
+          <ProgressBar
                     android:id="@+id/image_progress_bar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:indeterminate="true"
-                    android:indeterminateTint="@color/blue"
+                    android:indeterminateTint="@color/blue_dark"
                     android:visibility="visible" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/white_gray"
-            android:layout_marginBottom="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="65dp"
+            android:overScrollMode="never"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
         <LinearLayout
@@ -98,9 +98,10 @@
 
                 <TextView
                         android:id="@+id/product_priceFor"
-                        style="@style/DetailsTextStyleBold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:layout_margin="5dp"
                         android:layout_below="@+id/product_price"
                         android:background="@drawable/frame_for_textview"
                         android:paddingTop="0dp"
@@ -117,7 +118,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_margin="8dp"
                         android:text="@string/avalaible"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="@color/green_tiny"
                         android:textSize="14sp">
 
                 </TextView>
@@ -182,33 +183,24 @@
     </androidx.core.widget.NestedScrollView>
 
 
-    <Button
+    <com.google.android.material.button.MaterialButton
             android:id="@+id/add_to_basket"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
+            android:layout_height="58dp"
             android:layout_gravity="bottom|center_horizontal"
-            android:layout_margin="5dp"
-            android:background="@color/purple"
-            android:textAlignment="center"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:textAllCaps="true">
-
-    </Button>
-
-
+            app:icon="@drawable/ic_basket_black_24dp"
+            app:iconGravity="textEnd"
+            style="@style/ButtonVioletStyle">
+    </com.google.android.material.button.MaterialButton>
 
 
     <TextView
             android:id="@+id/empty_product"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="@string/empty_product"
-            android:visibility="gone">
+            style="@style/EmptyTextStyle"
+            android:visibility="gone"
+            android:text="@string/empty_product">
 
     </TextView>
 

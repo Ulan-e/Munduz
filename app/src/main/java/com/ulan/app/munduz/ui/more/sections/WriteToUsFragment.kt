@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import com.google.android.material.snackbar.Snackbar
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.helpers.SendEmailHelper
-import com.ulan.app.munduz.helpers.convertLongToTime
 import com.ulan.app.munduz.ui.base.BaseDialogFragment
 import kotlinx.android.synthetic.main.writetous_layout.*
 
@@ -30,8 +29,12 @@ class WriteToUsFragment : BaseDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        writer_button.setOnClickListener {
+        send.setOnClickListener {
             sendMessage()
+        }
+
+        cancel.setOnClickListener{
+            dismiss()
         }
     }
 

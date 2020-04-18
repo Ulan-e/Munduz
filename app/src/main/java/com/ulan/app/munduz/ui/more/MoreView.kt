@@ -7,7 +7,5 @@ interface MoreView : BaseView{
     fun showContactsUs()
     fun showAboutApp()
     fun showWriteUs()
-    fun showInstagramPage()
-    fun showOdnoklassnikiPage()
-    fun showFacebookPage()
+    fun showSocialPage(url: String)
 }

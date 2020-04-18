@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.ulan.app.munduz.R
@@ -13,7 +14,8 @@ class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.CatalogViewHolder> {
 
     private var mContext: Context
     private var mListener: OnCategoryClickListener
-    private lateinit  var catalog: MutableList<String>
+    private lateinit  var mCatalog: MutableList<String>
+    private lateinit  var mImages: IntArray
 
     constructor(context: Context, listener: OnCategoryClickListener) : super() {
         this.mContext = context
@@ -21,7 +23,11 @@ class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.CatalogViewHolder> {
     }
 
     fun setCatalogs(catalog: MutableList<String>){
-        this.catalog = catalog
+        this.mCatalog = catalog
+    }
+
+    fun setImages(images: IntArray){
+        mImages = images
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatalogViewHolder {
@@ -31,18 +37,21 @@ class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.CatalogViewHolder> {
     }
 
     override fun getItemCount(): Int {
-        return catalog.size
+        return mCatalog.size
     }
 
     override fun onBindViewHolder(holder: CatalogViewHolder, position: Int) {
-        val category = catalog[position]
+        val category = mCatalog[position]
+        val image = mImages[position]
         holder.bind(category, mListener)
         holder.name.text = category
+        holder.image.setImageResource(image)
     }
 
     class CatalogViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         val name: TextView = itemView.findViewById(R.id.catalog_name)
+        val image: ImageView = itemView.findViewById(R.id.catalog_image)
 
         fun bind(category: String, listener: OnCategoryClickListener){
             itemView.setOnClickListener {

@@ -22,19 +22,19 @@
     <string name="ulan_erkinbaev">Улан Эркинбаев</string>
     <string name="developer">Разрабочик</string>
     <string name="ready_purchase">Оформить Заказ</string>
-    <string name="goto_home">Перейти на главную</string>
+    <string name="goto_home">На главную</string>
     <string name="minus">-</string>
     <string name="plus">+</string>
     <string name="phone_number_russia">+7</string>
     <string name="bottom_text_phone_number">по этому номеру вам позвонят</string>
     <string name="comment_hint">Комментарий (необязательный)</string>
-    <string name="your_name">Ваше имя</string>
+    <string name="your_name">Имя</string>
     <string name="phone_number">Телефонный номер</string>
     <string name="error_catalog">Ошибка в каталоге</string>
     <string name="avalaible">Есть в наличии</string>
-    <string name="delivery_text">Доставка через день после покупки</string>
+    <string name="delivery_text"> Доставка 190р до подъезда. \nВнутри МКАД(за МКАД 20р каждый 1км) \nДоставка по России</string>
     <string name="description">Описание</string>
-    <string name="your_message">Ваше сообщение</string>
+    <string name="your_message">Сообщение</string>
     <string name="send">Отправить</string>
     <string name="search">Поиск</string>
 
@@ -48,13 +48,21 @@
     <string name="empty_basket">Корзина пуста</string>
     <string name="empty_favorites">У вас пока нет избранных</string>
     <string name="empty_recomended">Рекомендаций пока нет</string>
+    <string name="available">В наличии</string>
+    <string name="cancel">Отмена</string>
+    <string name="phone">Телефон</string>
+    <string name="metro">Метро</string>
+    <string name="address">Адрес</string>
 
     <string-array name="category">
         <item>Продукты</item>
         <item>Напитки</item>
         <item>Посуда</item>
-        <item>Для дома </item>
-        <item>Одежда</item>
+        <item>Постель</item>
+        <item>Казаны</item>
+        <item>Чемоданы</item>
+        <item>Бешик</item>
+        <item>Химия</item>
         <item>Книги</item>
     </string-array>
 </resources>

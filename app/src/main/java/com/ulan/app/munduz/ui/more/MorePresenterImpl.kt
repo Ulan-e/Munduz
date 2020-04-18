@@ -27,16 +27,8 @@ class MorePresenterImpl : MorePresenter {
         mView?.showWriteUs()
     }
 
-    override fun instagramClicked() {
-        mView?.showInstagramPage()
-    }
-
-    override fun odnoklassnikiClicked() {
-        mView?.showOdnoklassnikiPage()
-    }
-
-    override fun facebookClicked() {
-        mView?.showFacebookPage()
+    override fun socialPageClicked(siteUrl: String) {
+        mView?.showSocialPage(siteUrl)
     }
 
     override fun detachView() {

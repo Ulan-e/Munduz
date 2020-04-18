@@ -24,21 +24,21 @@ abstract class HomeModule {
     @Binds
     abstract fun homePresenter(homePresenter: HomePresenterImpl): HomePresenter
 
-
     @Module
     companion object{
 
         @JvmStatic
+        @MainScope
         @Provides
         fun productsAdapter(context: Context, listener: OnItemClickListener): ProductsAdapter {
             return ProductsAdapter(context, listener)
         }
 
         @JvmStatic
+        @MainScope
         @Provides
         fun clickListener(homeFragment: HomeFragment): OnItemClickListener{
             return homeFragment
         }
     }
-
 }

@@ -10,34 +10,37 @@ import com.ulan.app.munduz.ui.filtered.FilteredFragment
 import com.ulan.app.munduz.ui.filtered.FilteredPresenter
 import com.ulan.app.munduz.ui.filtered.FilteredPresenterImpl
 import com.ulan.app.munduz.ui.filtered.FilteredView
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 
 @Module(includes = [RoomModule::class])
-class FilteredModule {
+abstract class FilteredModule {
 
     @FilteredScope
-    @Provides
-    fun filteredView(filteredFragment: FilteredFragment): FilteredView{
-        return filteredFragment
-    }
+    @Binds
+    abstract fun filteredView(filteredFragment: FilteredFragment): FilteredView
 
     @FilteredScope
-    @Provides
-    fun filteredPresenter(filteredView: FilteredView, repository: FirebaseRepository): FilteredPresenter{
-        return FilteredPresenterImpl(filteredView, repository)
-    }
+    @Binds
+    abstract fun filteredPresenter(presenter: FilteredPresenterImpl): FilteredPresenter
 
-    @FilteredScope
-    @Provides
-    fun clickListener(filteredFragment: FilteredFragment):OnItemClickListener{
-        return filteredFragment
-    }
+    @Module
+    companion object {
 
-    @FilteredScope
-    @Provides
-    fun productsAdapter(context: Context, clickListener: OnItemClickListener): ProductsAdapter{
-        return ProductsAdapter(context, clickListener)
+        @JvmStatic
+        @FilteredScope
+        @Provides
+        fun productsAdapter(context: Context, clickListener: OnItemClickListener): ProductsAdapter {
+            return ProductsAdapter(context, clickListener)
+        }
+
+        @JvmStatic
+        @FilteredScope
+        @Provides
+        fun clickListener(filteredFragment: FilteredFragment): OnItemClickListener {
+            return filteredFragment
+        }
     }
 
 }

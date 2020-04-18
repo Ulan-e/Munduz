@@ -15,7 +15,7 @@ import com.ulan.app.munduz.helpers.Constants
 import com.ulan.app.munduz.helpers.Constants.Companion.EXTRA_OPEN_BASKET
 import com.ulan.app.munduz.helpers.Constants.Companion.EXTRA_TURN_OFF_ADD_BASKET
 import com.ulan.app.munduz.helpers.Constants.Companion.EXTRA_PRODUCT_ARG
-import com.ulan.app.munduz.helpers.Constants.Companion.IN_BASKET
+import com.ulan.app.munduz.helpers.Constants.Companion.NOT_IN_BASKET
 import com.ulan.app.munduz.helpers.Constants.Companion.OPEN_BASKET_ARG
 import com.ulan.app.munduz.helpers.Constants.Companion.TURN_OFF_ARG
 import com.ulan.app.munduz.helpers.RUBLE
@@ -40,12 +40,17 @@ class DetailsActivity : BaseActivity(), DetailsView {
         mProduct = intent.getParcelableExtra<Product>(EXTRA_PRODUCT_ARG)
         val turn = intent.getStringExtra(EXTRA_TURN_OFF_ADD_BASKET)
         if(turn == TURN_OFF_ARG){
-            add_to_basket.setBackgroundColor(resources.getColor(R.color.colorPrimaryDark))
+            add_to_basket.setBackgroundColor(resources.getColor(R.color.white))
+            add_to_basket.setTextColor(resources.getColor(R.color.colorPrimary))
+            add_to_basket.text = Constants.ALREADY_IN_BASKET
+            add_to_basket.isClickable = false
             add_to_basket.isEnabled = false
         }
 
         mPresenter.setToolbar()
         mPresenter.setProduct(mProduct)
+
+        mPresenter.isInAlreadyInBasket()
 
         add_to_basket.setOnClickListener {
             mPresenter.addToBasketClicked()
@@ -77,6 +82,7 @@ class DetailsActivity : BaseActivity(), DetailsView {
                 }
 
                 override fun onError(e: Exception?) {
+                    details_image.setImageResource(R.drawable.ic_error_image_black_24dp)
                     Log.e(Constants.TAG, "Error loading image")
                 }
 
@@ -99,11 +105,14 @@ class DetailsActivity : BaseActivity(), DetailsView {
     }
 
     override fun changeAddToBasketText(text: String) {
-        add_to_basket.text = text
-        if(text == IN_BASKET){
-            add_to_basket.setBackgroundColor(resources.getColor(R.color.colorPrimaryDark))
+        if(text == NOT_IN_BASKET){
+            add_to_basket.setBackgroundColor(resources.getColor(R.color.colorPrimary))
+            add_to_basket.setTextColor(resources.getColor(R.color.white))
+            add_to_basket.text = Constants.NOT_IN_BASKET
         }else{
-            add_to_basket.setBackgroundColor(resources.getColor(R.color.purple))
+            add_to_basket.setBackgroundColor(resources.getColor(R.color.white))
+            add_to_basket.setTextColor(resources.getColor(R.color.colorPrimary))
+            add_to_basket.text = Constants.ALREADY_IN_BASKET
         }
     }
 

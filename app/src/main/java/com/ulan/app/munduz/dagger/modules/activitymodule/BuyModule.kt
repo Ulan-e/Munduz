@@ -1,10 +1,10 @@
-package com.ulan.app.munduz.dagger.modules.fragmentmodule
+package com.ulan.app.munduz.dagger.modules.activitymodule
 
 import android.content.Context
 import com.ulan.app.munduz.dagger.scopes.DetailsScope
 import com.ulan.app.munduz.data.firebase.FirebaseRepository
 import com.ulan.app.munduz.helpers.SendEmailHelper
-import com.ulan.app.munduz.ui.buy.BuyFragment
+import com.ulan.app.munduz.ui.buy.BuyActivity
 import com.ulan.app.munduz.ui.buy.BuyPresenter
 import com.ulan.app.munduz.ui.buy.BuyPresenterImpl
 import com.ulan.app.munduz.ui.buy.BuyView
@@ -16,14 +16,14 @@ class BuyModule {
 
     @DetailsScope
     @Provides
-    fun buyFragment(buyFragment: BuyFragment) : BuyView{
-        return buyFragment
+    fun buyFragment(buyActivity: BuyActivity) : BuyView{
+        return buyActivity
     }
 
     @DetailsScope
     @Provides
     fun buyPresenter(buyView: BuyView, repository: FirebaseRepository): BuyPresenter{
-        return  BuyPresenterImpl(buyView, repository)
+        return BuyPresenterImpl(buyView, repository)
     }
 
     @Provides

@@ -33,7 +33,8 @@
                 android:textSize="12sp"
                 android:background="@drawable/search_rounded"
                 android:layout_toRightOf="@+id/press_back"
-                android:searchIcon="@null">
+                android:searchIcon="@null"
+                android:inputType="text">
 
         </SearchView>
     </RelativeLayout>

@@ -1,17 +1,96 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="fontFamily">@font/calibri</item>
+    <style name="ButtonVioletStyle" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_margin">8dp</item>
     </style>
 
-    <style name="AppTheme.NoActionBar" parent="AppTheme">
-        <item name="windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
+    <style name="ButtonVioletSmallStyle" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_gravity">bottom|center_horizontal</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:layout_marginBottom">2dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+    </style>
+
+    <style name="ButtonVioletOnlyTextStyle" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:layout_margin">8dp</item>
+    </style>
+
+    <style name="ButtonBlackOnlyTextStyle" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/black_light</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="ButtonRoundedStyle" parent="Widget.AppCompat.Button">
+        <item name="android:textSize">19sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:layout_margin">5dp</item>
+        <item name="android:paddingBottom">3dp</item>
+    </style>
+
+    <style name="NameTextStyle" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/gray_dark</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginBottom">3dp</item>
+    </style>
+
+    <style name="AvailabilityTextStyle" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/green_tiny</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginBottom">3dp</item>
+    </style>
+
+    <style name="PriceTextStyle" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/gray_dark</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginBottom">3dp</item>
+    </style>
+
+    <style name="CategoryTextStyle" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/gray_dark</item>
+        <item name="android:drawableLeft">@drawable/ic_small_catalog</item>
+        <item name="android:drawablePadding">4dp</item>
+        <item name="android:layout_marginLeft">4dp</item>
+    </style>
+
+    <style name="CatalogTextStyle" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/gray_dark</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginLeft">20dp</item>
+    </style>
+
+    <style name="EmptyTextStyle" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/gray_light</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_centerVertical">true</item>
+    </style>
+
+
+    <style name="EditTextStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black_tiny</item>
+        <item name="strokeColor">@color/colorPrimary</item>
+        <item name="hintTextColor">@color/gray_dark</item>
+        <item name="android:layout_margin">10dp</item>
     </style>
 
     <style name="ToolBarTextView" parent="Widget.AppCompat.TextView">
@@ -22,26 +101,41 @@
 
     <style name="DetailsTextStyleBold" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">17sp</item>
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColor">@color/gray_dark</item>
         <item name="android:layout_margin">8dp</item>
     </style>
 
     <style name="DetailsTextStyle" parent="Widget.AppCompat.TextView">
         <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColor">@color/gray_dark</item>
     </style>
 
-
-    <style name="BuyButton" parent="Widget.AppCompat.Button">
-        <item name="android:background">@color/purple</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">13sp</item>
-        <item name="android:layout_margin">3dp</item>
-        <item name="android:gravity">left</item>
-        <item name="android:paddingTop">1dp</item>
-        <item name="android:paddingBottom">1dp</item>
-        <item name="android:paddingLeft">2dp</item>
-        <item name="android:paddingRight">2dp</item>
+    <style name="TitleSumTextStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/black_tiny</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_margin">12dp</item>
     </style>
+
+    <style name="RecommendedTextStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/gray_dark</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginTop">11dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="ContactUsTextStyle" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/gray_dark</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginTop">11dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
 
 </resources>

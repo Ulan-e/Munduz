@@ -1,17 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:orientation="vertical">
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="9dp"
+        android:layout_marginRight="9dp">
 
-    <TextView
-            android:id="@+id/catalog_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:layout_marginTop="10dp"
-            android:textSize="16sp" >
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-    </TextView>
-</LinearLayout>
+        <TextView
+                android:id="@+id/catalog_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/CatalogTextStyle"
+                android:text="Name">
+
+        </TextView>
+
+        <ImageView
+                android:id="@+id/catalog_image"
+                android:layout_width="125dp"
+                android:layout_height="90dp"
+                android:layout_alignParentRight="true"
+                android:src="@mipmap/napitki"
+                android:scaleType="centerCrop"
+                android:layout_marginRight="-60dp">
+
+        </ImageView>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

@@ -22,7 +22,8 @@
                 android:layout_marginLeft="19dp"
                 android:layout_marginTop="5dp"
                 android:text="Мундуз"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textColor="@color/gray_dark"/>
 
         <TextView
                 android:layout_width="wrap_content"
@@ -32,7 +33,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="2dp"
                 android:paddingBottom="5dp"
-                android:text="+7 965 965 00 00" />
+                android:text="+7 965 965 00 00"
+                android:textColor="@color/gray_dark"/>
 
         <ImageView
                 android:layout_width="40dp"
@@ -61,7 +63,8 @@
                 android:layout_marginLeft="19dp"
                 android:layout_marginTop="5dp"
                 android:text="Мунар"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textColor="@color/gray_dark"/>
 
         <TextView
                 android:layout_width="wrap_content"
@@ -71,7 +74,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="2dp"
                 android:paddingBottom="5dp"
-                android:text="+7 965 965 00 00" />
+                android:text="+7 965 965 00 00"
+                android:textColor="@color/gray_dark"/>
 
         <ImageView
                 android:layout_width="40dp"
@@ -99,7 +103,8 @@
                 android:layout_toRightOf="@+id/location_market"
                 android:text="Адрес: Волгоградcкий проспект 32к8 \n Метро: Волгоградский проспект \n График 9:00 - 21:00 \n "
                 android:textAlignment="center"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textColor="@color/gray_dark"/>
 
         <ImageView
                 android:id="@+id/location_market"
@@ -113,8 +118,8 @@
     </RelativeLayout>
 
     <ImageView
-            android:layout_width="305dp"
-            android:layout_height="305dp"
+            android:layout_width="295dp"
+            android:layout_height="295dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="9dp"
             android:scaleType="fitXY"

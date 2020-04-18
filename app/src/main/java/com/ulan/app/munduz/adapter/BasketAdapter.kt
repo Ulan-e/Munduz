@@ -63,9 +63,8 @@ class BasketAdapter : RecyclerView.Adapter<BasketViewHolder> {
         holder.bind(purchase, mListener)
         Picasso.get()
             .load(purchase.picture.urlImage)
-            .resize(250, 250)
-            .centerCrop()
             .error(R.drawable.ic_error_image_black_24dp)
+            .fit()
             .into(holder.image)
         holder.name.text = purchase.name
         holder.price.text = purchase.priceInc.toString() + RUBLE
@@ -96,9 +95,9 @@ class BasketAdapter : RecyclerView.Adapter<BasketViewHolder> {
         }
 
         holder.remove.setOnClickListener {
-            if (mRepository.isExist(purchase)) {
+            if (mRepository.isExist(purchase.id)) {
                 mPurchases.removeAt(position)
-                mRepository.remove(purchase)
+                mRepository.remove(purchase.id)
                 updateAfterRemoving(position)
             }
         }

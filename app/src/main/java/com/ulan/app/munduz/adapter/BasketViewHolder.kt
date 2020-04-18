@@ -17,8 +17,8 @@ class BasketViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val perPrice: TextView = itemView.findViewById(R.id.purchase_per_price)
     val remove: ImageView = itemView.findViewById(R.id.remove_purchase)
 
-    val increase: Button = itemView.findViewById(R.id.increment)
-    val decrease: Button = itemView.findViewById(R.id.decrement)
+    val increase: ImageView = itemView.findViewById(R.id.increment)
+    val decrease: ImageView = itemView.findViewById(R.id.decrement)
 
     fun bind(purchase: PurchaseEntity, clickListener: OnItemBasketClickListener) {
         itemView.setOnClickListener {

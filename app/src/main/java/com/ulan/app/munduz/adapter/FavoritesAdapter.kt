@@ -46,9 +46,8 @@ class FavoritesAdapter: RecyclerView.Adapter<FavoritesViewHolder> {
         holder.bind(product, mListener)
         Picasso.get()
             .load(product.picture.urlImage)
-            .resize(250, 250)
-            .centerCrop()
             .error(R.drawable.ic_error_image_black_24dp)
+            .fit()
             .into(holder.image)
         holder.name.text = product.name
         holder.category.text = product.category

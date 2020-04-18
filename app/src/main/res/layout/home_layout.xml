@@ -4,7 +4,8 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/content_scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:overScrollMode="never">
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -15,7 +16,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginBottom="12dp">
+                android:layout_marginBottom="10dp">
 
             <androidx.viewpager.widget.ViewPager
                     android:id="@+id/view_pager"
@@ -30,10 +31,11 @@
                     android:layout_height="20dp"
                     android:layout_gravity="center_horizontal|bottom"
                     android:paddingBottom="7dp"
-                    app:tabBackground="@drawable/selector_tab"
+                    app:tabBackground="@drawable/tab_selector"
+                    android:background="@color/transparent"
                     app:tabGravity="center"
                     app:tabIndicatorHeight="0dp"
-                    app:tabMaxWidth="14dp" />
+                    app:tabMaxWidth="14dp"/>
         </FrameLayout>
 
 
@@ -41,10 +43,8 @@
                 android:id="@+id/home_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="6dp"
-                android:layout_marginBottom="4dp"
-                android:text="@string/recommended"
-                android:textSize="19sp">
+                style="@style/RecommendedTextStyle"
+                android:text="@string/recommended">
 
         </TextView>
 
@@ -53,6 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
+                android:overScrollMode="never"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         </androidx.recyclerview.widget.RecyclerView>
@@ -61,11 +62,9 @@
                 android:id="@+id/empty_new_products"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="@string/empty_recomended"
-                android:visibility="gone">
-
+                style="@style/EmptyTextStyle"
+                android:visibility="gone"
+                android:text="@string/empty_recomended">
         </TextView>
 
     </LinearLayout>

@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.data.room.repository.FavoritesRepository
+import com.ulan.app.munduz.data.room.repository.PurchasesRepository
 import com.ulan.app.munduz.developer.Product
+import com.ulan.app.munduz.helpers.Constants
 import com.ulan.app.munduz.helpers.RUBLE
 import com.ulan.app.munduz.listeners.OnItemClickListener
 
@@ -17,7 +19,8 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsViewHolder> {
     private var mContext: Context
     private var mListener: OnItemClickListener
     private lateinit var mProducts: MutableList<Product>
-    private lateinit var mRepository: FavoritesRepository
+    private lateinit var mFavoritesRepo: FavoritesRepository
+    private lateinit var mPurchasesRepo: PurchasesRepository
 
     constructor(context: Context, listener: OnItemClickListener) : super() {
         this.mContext = context
@@ -28,8 +31,9 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsViewHolder> {
         this.mProducts = products
     }
 
-    fun setRepository(repository: FavoritesRepository) {
-        this.mRepository = repository
+    fun setRepositories(favorites: FavoritesRepository, purchases: PurchasesRepository) {
+        this.mFavoritesRepo = favorites
+        this.mPurchasesRepo = purchases
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductsViewHolder {
@@ -53,30 +57,68 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsViewHolder> {
         holder.price.text = product.cost.toString() + RUBLE
 
         //Mark as favorite if product is in Database
-        if (mRepository.isExist(product.id)) {
+        if (mFavoritesRepo.isExist(product.id)) {
             setAsFavorite(holder)
         } else {
             setAsNotFavorite(holder)
         }
 
+        if (mPurchasesRepo.isExist(product.id)) {
+            setInAlreadyBasket(holder)
+        } else {
+            setNotInBasket(holder)
+        }
+
         //Click Handle (Favorite)
-        holder.addFavorite.setOnClickListener {
-            if (mRepository.isExist(product.id)) {
-                mRepository.remove(product.id)
+        holder.favorite.setOnClickListener {
+            if (mFavoritesRepo.isExist(product.id)) {
+                mFavoritesRepo.remove(product.id)
                 setAsNotFavorite(holder)
             } else {
-                mRepository.insert(product.id)
+                mFavoritesRepo.insert(product.id)
                 setAsFavorite(holder)
+            }
+        }
+
+        holder.in_out_basket.setOnClickListener {
+            if (mPurchasesRepo.isExist(product.id)) {
+                mPurchasesRepo.remove(product.id)
+                setNotInBasket(holder)
+            } else {
+                mPurchasesRepo.insert(product)
+                setInAlreadyBasket(holder)
             }
         }
     }
 
-    private fun setAsFavorite(viewHolder: ProductsViewHolder){
-        viewHolder.addFavorite.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_favorite_black_24dp))
+    private fun setNotInBasket(holder: ProductsViewHolder) {
+        holder.in_out_basket.setBackgroundColor(mContext.resources.getColor(R.color.colorPrimary))
+        holder.in_out_basket.setTextColor(mContext.resources.getColor(R.color.white))
+        holder.in_out_basket.text = Constants.NOT_IN_BASKET
     }
 
-    private fun setAsNotFavorite(viewHolder: ProductsViewHolder){
-        viewHolder.addFavorite.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.ic_favorite_border_24dp))
+    private fun setInAlreadyBasket(holder: ProductsViewHolder) {
+        holder.in_out_basket.setBackgroundColor(mContext.resources.getColor(R.color.white))
+        holder.in_out_basket.setTextColor(mContext.resources.getColor(R.color.colorPrimary))
+        holder.in_out_basket.text = Constants.ALREADY_IN_BASKET
+    }
+
+    private fun setAsFavorite(viewHolder: ProductsViewHolder) {
+        viewHolder.favorite.setImageDrawable(
+            ContextCompat.getDrawable(
+                mContext,
+                R.drawable.ic_favorite_black_24dp
+            )
+        )
+    }
+
+    private fun setAsNotFavorite(viewHolder: ProductsViewHolder) {
+        viewHolder.favorite.setImageDrawable(
+            ContextCompat.getDrawable(
+                mContext,
+                R.drawable.ic_favorite_border_24dp
+            )
+        )
     }
 
 }
