@@ -43,10 +43,13 @@
 
             <TextView
                     android:id="@+id/product_name"
-                    style="@style/NameTextStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Курут"></TextView>
+                    style="@style/NameTextStyle"
+                    android:text="Курут FАлма фавыаы \n Gddsgs dgsdfgds \n sfdsfsd"
+                    android:minHeight="30dp"
+                    android:lines="2"
+                    android:maxLines="2"></TextView>
 
             <TextView
                     android:id="@+id/product_availability"

@@ -23,6 +23,15 @@
         <item name="android:layout_margin">8dp</item>
     </style>
 
+    <style name="ButtonVioletOutlinedStyle" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:layout_margin">8dp</item>
+        <item name="strokeWidth">2dp</item>
+        <item name="strokeColor">@color/colorPrimary</item>
+    </style>
+
     <style name="ButtonBlackOnlyTextStyle" parent="Widget.MaterialComponents.Button.TextButton">
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
@@ -39,10 +48,10 @@
     </style>
 
     <style name="NameTextStyle" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:textColor">@color/gray_dark</item>
         <item name="android:layout_marginLeft">5dp</item>
-        <item name="android:layout_marginBottom">3dp</item>
+        <item name="android:layout_marginBottom">2dp</item>
     </style>
 
     <style name="AvailabilityTextStyle" parent="Widget.MaterialComponents.TextView">

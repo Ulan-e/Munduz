@@ -1,5 +1,6 @@
 package com.ulan.app.munduz.ui.buy
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -82,6 +83,8 @@ class BuyActivity : BaseActivity(), BuyView {
         supportActionBar!!.setDisplayShowTitleEnabled(false)
         val emptySpace = "       "
         order_toolbar_text.text = resources.getString(R.string.order) + emptySpace
+        order_toolbar_text.typeface = Typeface.DEFAULT
+        order_toolbar_text.textSize = resources.getDimension(R.dimen.toolbar_title_size)
         order_toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
         order_toolbar.setNavigationOnClickListener {
             finish()

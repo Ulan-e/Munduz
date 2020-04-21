@@ -147,6 +147,7 @@
                     android:layout_margin="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
+                    android:lineSpacingExtra="5dp"
                     android:text="@string/delivery_text">
 
             </TextView>

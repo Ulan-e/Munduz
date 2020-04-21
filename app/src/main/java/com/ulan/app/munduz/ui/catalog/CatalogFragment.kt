@@ -44,10 +44,10 @@ class CatalogFragment : BaseFragment(), CatalogView, OnCategoryClickListener {
         mPresenter.setToolbar()
         val catalog = activity!!.applicationContext.resources.getStringArray(R.array.category)
         mImages = intArrayOf(R.mipmap.grocery, R.mipmap.napitki,
-            R.mipmap.dishes, R.mipmap.postel,
+            R.mipmap.postel, R.mipmap.dishes,
             R.mipmap.kazan, R.mipmap.chemodany,
-            R.mipmap.beshik, R.mipmap.sredstvo,
-            R.mipmap.knigi
+            R.mipmap.beshik, R.mipmap.odezhda,
+            R.mipmap.sredstvo
         )
         mPresenter.setCatalog(catalog.toMutableList())
     }

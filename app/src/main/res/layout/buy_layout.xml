@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/relative_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -32,19 +31,24 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:textAlignment="center"
                 android:textSize="19sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:lineSpacingExtra="3dp"/>
 
 
         <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp">
 
             <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/client_name"
@@ -61,8 +65,10 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp">
 
             <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/client_phone_number"
@@ -87,8 +93,10 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp">
 
             <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/client_phone_number_second"
@@ -105,7 +113,7 @@
                 android:id="@+id/order_is_with_delivery"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="13dp"
+                android:layout_marginTop="16dp"
                 android:checkedButton="@id/delivery"
                 android:orientation="horizontal">
 
@@ -133,8 +141,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp">
 
             <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/client_metro"
@@ -152,8 +162,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp">
 
             <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/client_address"
@@ -192,8 +204,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="13dp"
+                android:layout_marginRight="13dp">
 
             <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/client_comment"
@@ -215,9 +229,9 @@
 
         <com.google.android.material.button.MaterialButton
                 android:id="@+id/cancel_button"
-                style="@style/ButtonVioletOnlyTextStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/ButtonVioletOutlinedStyle"
                 android:layout_weight="1"
                 android:text="@string/cancel"
                 android:textSize="14sp">

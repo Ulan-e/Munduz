@@ -57,12 +57,12 @@
     <string-array name="category">
         <item>Продукты</item>
         <item>Напитки</item>
-        <item>Посуда</item>
-        <item>Постель</item>
+        <item>Матрасы/Одеяло</item>
+        <item>Кухня</item>
         <item>Казаны</item>
         <item>Чемоданы</item>
-        <item>Бешик</item>
+        <item>Мебель/Бешик</item>
+        <item>Одежда</item>
         <item>Химия</item>
-        <item>Книги</item>
     </string-array>
 </resources>
