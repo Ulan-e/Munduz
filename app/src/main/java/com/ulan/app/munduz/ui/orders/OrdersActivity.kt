@@ -1,44 +1,25 @@
-package com.ulan.app.munduz.ui.buy
+package com.ulan.app.munduz.ui.orders
 
 import android.graphics.Typeface
 import android.os.Bundle
-import android.os.Handler
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.RadioGroup
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.data.models.Order
 import com.ulan.app.munduz.data.models.PurchaseEntity
-import com.ulan.app.munduz.helpers.Constants
 import com.ulan.app.munduz.helpers.Constants.Companion.EXTRA_PRODUCT_AMOUNT_ARG
 import com.ulan.app.munduz.helpers.Constants.Companion.EXTRA_PURCHASES_BUY_ARG
-import com.ulan.app.munduz.helpers.SendEmailHelper
+import com.ulan.app.munduz.helpers.Constants.Companion.PURCHASE_FRAGMENT
 import com.ulan.app.munduz.ui.base.BaseActivity
-import com.ulan.app.munduz.ui.base.BaseFragment
-import com.ulan.app.munduz.ui.basket.BasketFragment
-import com.ulan.app.munduz.ui.home.HomeFragment
-import com.ulan.app.munduz.ui.main.MainActivity
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.buy_layout.*
-import kotlinx.android.synthetic.main.details_layout.*
+import com.ulan.app.munduz.ui.purchase.PurchaseFragment
+import kotlinx.android.synthetic.main.orders_layout.*
 import javax.inject.Inject
-import javax.inject.Provider
 
 
-class BuyActivity : BaseActivity(), BuyView {
-
-    @Inject
-    lateinit var mPresenter: BuyPresenter
+class OrdersActivity : BaseActivity(), OrdersView {
 
     @Inject
-    lateinit var mSendEmailHelper: Provider<SendEmailHelper>
+    lateinit var mPresenter: OrdersPresenter
 
     private lateinit var mPurchases: MutableList<PurchaseEntity>
     private var mAmount: Int = 0
@@ -46,7 +27,7 @@ class BuyActivity : BaseActivity(), BuyView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.buy_layout)
+        setContentView(R.layout.orders_layout)
         mPurchases = intent.getParcelableArrayListExtra(EXTRA_PURCHASES_BUY_ARG)
         mAmount = intent.getIntExtra(EXTRA_PRODUCT_AMOUNT_ARG, -1)
         mRadioButtonText = resources.getString(R.string.delivery)
@@ -65,8 +46,6 @@ class BuyActivity : BaseActivity(), BuyView {
         mPresenter.setToolbar()
         mPresenter.setProducts(mPurchases)
         mPresenter.setPurchasesAmount(mAmount)
-        val sendEmailHelper = mSendEmailHelper.get()
-        mPresenter.setSendEmailHelper(sendEmailHelper)
 
         order_button.setOnClickListener {
             mPresenter.sendButtonClicked()
@@ -94,7 +73,7 @@ class BuyActivity : BaseActivity(), BuyView {
     private fun humanReadableArray(purchases: MutableList<PurchaseEntity>): StringBuilder {
         var result: StringBuilder = java.lang.StringBuilder()
         for (item in purchases) {
-            result.append("Товар " + item.name + ", цена за " + item.perPriceInc + ", цена " + item.priceInc + "\n")
+            result.append(item.name + ", цена за " + item.perPriceInc + ", цена " + item.priceInc + "\n")
         }
         return result
     }
@@ -109,20 +88,19 @@ class BuyActivity : BaseActivity(), BuyView {
         order.purchases = humanReadableArray(mPurchases).toString()
         order.clientName = client_name.text.toString()
         order.clientPhoneNumber = client_phone_number.text.toString()
-        order.clientPhoneNumberSecond = client_phone_number_second.text.toString()
         if (mRadioButtonText == resources.getString(R.string.delivery)) {
             order.purchaseMethod =
-                mRadioButtonText + "\n" + client_metro.text.toString() + "\n" + client_address.text.toString()
-        }else{
+                mRadioButtonText + " Метро" + client_metro.text.toString() + "\n" + client_address.text.toString()
+        } else {
             order.purchaseMethod =
-                mRadioButtonText + "\n" + client_time.text.toString()
+                mRadioButtonText + client_time.text.toString()
         }
         order.comment = client_comment.text.toString()
         return order
     }
 
-    override fun isNotEmptyFields(): Boolean {
-        if (client_name.text.toString() == "" || client_phone_number.text.toString() == "") {
+    override fun isNotEmptyFieldsDelivery(): Boolean {
+        if (client_name.text.toString() == "" && client_phone_number.text.toString() == ""){
             var message = resources.getString(R.string.empty_fields)
             showSnackBar(message)
             return false
@@ -130,20 +108,18 @@ class BuyActivity : BaseActivity(), BuyView {
         return true
     }
 
-    override fun successOrder() {
-        var successMessage = resources.getString(R.string.success_order)
-        showSnackBar(successMessage)
-        Handler().postDelayed({
-            supportFragmentManager
-                .beginTransaction()
-                .replace(R.id.container, BasketFragment.newInstance(), Constants.BASKET_FRAGMENT)
-                .addToBackStack(null)
-                .commit()
-        }, 3000)
+    override fun cancelOrder() {
+        finish()
     }
 
-    override fun cancelOrder() {
-       finish()
+    override fun goToPurchaseMethod(order: Order) {
+        var fragment = PurchaseFragment.newInstance(order)
+        fragment.show(supportFragmentManager, PURCHASE_FRAGMENT)
+    }
+
+    private fun showSnackBar(text: String) {
+        val snack = Snackbar.make(relative_layout, text, Snackbar.LENGTH_SHORT)
+        snack.show()
     }
 
     override fun showEmptyData() {
@@ -160,11 +136,6 @@ class BuyActivity : BaseActivity(), BuyView {
     private fun setVisibilitiesOfPickUp(visibility: Int) {
         client_time_container.visibility = visibility
         client_time.visibility = visibility
-    }
-
-    private fun showSnackBar(text: String) {
-        val snack = Snackbar.make(relative_layout, text, Snackbar.LENGTH_SHORT)
-        snack.show()
     }
 
     override fun onDestroy() {

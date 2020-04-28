@@ -26,7 +26,7 @@ import com.ulan.app.munduz.helpers.RUBLE
 import com.ulan.app.munduz.listeners.OnChangeSumListener
 import com.ulan.app.munduz.listeners.OnItemBasketClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
-import com.ulan.app.munduz.ui.buy.BuyActivity
+import com.ulan.app.munduz.ui.orders.OrdersActivity
 import com.ulan.app.munduz.ui.details.DetailsActivity
 import com.ulan.app.munduz.ui.home.HomeFragment
 import kotlinx.android.synthetic.main.basket_layout.*
@@ -94,7 +94,7 @@ class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, On
     }
 
     override fun purchaseAll(purchases: MutableList<PurchaseEntity>, amount: Int) {
-        val intent = Intent(activity!!, BuyActivity::class.java)
+        val intent = Intent(activity!!, OrdersActivity::class.java)
         intent.putExtra(Constants.EXTRA_PRODUCT_AMOUNT_ARG, amount)
         intent.putParcelableArrayListExtra(Constants.EXTRA_PURCHASES_BUY_ARG, ArrayList(purchases))
         startActivity(intent)
@@ -167,14 +167,16 @@ class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, On
 
     private fun convertPurchaseToProduct(purchase: PurchaseEntity): Product {
         var product = Product()
-        var picture = Picture()
+        var pictures = Picture()
         product.id = purchase.id
         product.name = purchase.name
         product.desc = purchase.desc
         product.cost = purchase.price
         product.priceFor = purchase.perPrice
-        picture.urlImage = purchase.picture.urlImage
-        product.picture = picture
+        pictures.urlImage = purchase.picture.urlImage
+        pictures.urlImage2 = purchase.picture.urlImage2
+        pictures.urlImage3 = purchase.picture.urlImage3
+        product.picture = pictures
         product.category = purchase.category
         return product
     }

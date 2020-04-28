@@ -14,16 +14,16 @@ class SendEmailHelper : AsyncTask<Void, Void, Void>{
 
     private lateinit var email: String
     private lateinit var subject: String
-    private lateinit var message: String
+    private lateinit var body: String
 
     constructor(context: Context) {
         this.context = context
     }
 
-    fun setMessage(email: String, subject: String, message: String){
-        this.email = email
-        this.subject = subject
-        this.message = message
+    fun setMessage(message: com.ulan.app.munduz.data.models.Message){
+        this.email = message.email
+        this.subject = message.subject
+        this.body = message.body
     }
 
     override fun doInBackground(vararg p0: Void?): Void? {
@@ -46,7 +46,7 @@ class SendEmailHelper : AsyncTask<Void, Void, Void>{
             mime.setFrom(InternetAddress(Config.EMAIL))
             mime.addRecipient(Message.RecipientType.TO, InternetAddress(email))
             mime.setSubject(subject)
-            mime.setText("$message\n")
+            mime.setText("$body\n")
             Transport.send(mime)
         }catch (e: MessagingException){
             e.printStackTrace()

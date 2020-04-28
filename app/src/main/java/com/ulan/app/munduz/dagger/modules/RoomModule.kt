@@ -18,7 +18,7 @@ class RoomModule {
 
     @Provides
     fun database(context: Context): MunduzDatabase {
-        return Room.databaseBuilder(context, MunduzDatabase::class.java, DATABASE_NAME)
+        return Room.databaseBuilder(context, MunduzDatabase::class.java, "database_ulan123")
             .allowMainThreadQueries()
             .build()
     }

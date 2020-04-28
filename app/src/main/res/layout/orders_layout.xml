@@ -89,25 +89,6 @@
                 android:text="@string/bottom_text_phone_number"
                 android:textSize="13sp" />
 
-        <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:layout_marginBottom="3dp"
-                android:layout_marginLeft="13dp"
-                android:layout_marginRight="13dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/client_phone_number_second"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Телефон (не обязательный)"
-                    android:inputType="phone"
-                    android:maxLength="12">
-
-            </com.google.android.material.textfield.TextInputEditText>
-        </com.google.android.material.textfield.TextInputLayout>
 
         <RadioGroup
                 android:id="@+id/order_is_with_delivery"

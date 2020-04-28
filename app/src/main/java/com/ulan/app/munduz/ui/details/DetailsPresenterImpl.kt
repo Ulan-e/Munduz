@@ -1,7 +1,5 @@
 package com.ulan.app.munduz.ui.details
 
-import com.ulan.app.munduz.data.models.Picture
-import com.ulan.app.munduz.data.models.PurchaseEntity
 import com.ulan.app.munduz.data.room.repository.FavoritesRepository
 import com.ulan.app.munduz.data.room.repository.PurchasesRepository
 import com.ulan.app.munduz.developer.Product

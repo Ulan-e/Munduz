@@ -2,6 +2,7 @@ package com.ulan.app.munduz.ui.more.sections
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.Message
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,13 +40,14 @@ class WriteToUsFragment : BaseDialogFragment() {
     }
 
     private fun sendMessage() {
-        val email = "uulanerkinbaev@gmail.com"
-        val subject = "Отзыв Munduz"
+        var message = com.ulan.app.munduz.data.models.Message()
+        message.email = "uulanerkinbaev@gmail.com"
+        message.subject = "Отзыв Munduz"
         val from = writer_name.text.toString()
-        val message = writer_text.text.toString()
-        if (from != "" && message != "") {
-            val body = "*** От кого " + from + "\n" + "*** Сообщение" + message
-            mSendEmailHelper.setMessage(email, subject, body)
+        val text = writer_text.text.toString()
+        if (from != "" && text != "") {
+            message.body = "*** От кого " + from + "\n" + "*** Сообщение" + message
+            mSendEmailHelper.setMessage(message)
             mSendEmailHelper.execute()
             showSnack("Спасибо за ваш отзыв")
             Handler().postDelayed({

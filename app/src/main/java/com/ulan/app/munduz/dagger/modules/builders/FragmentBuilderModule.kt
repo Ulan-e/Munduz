@@ -4,6 +4,7 @@ import com.ulan.app.munduz.dagger.modules.RepositoryModule
 import com.ulan.app.munduz.dagger.modules.fragmentmodule.*
 import com.ulan.app.munduz.dagger.scopes.FilteredScope
 import com.ulan.app.munduz.dagger.scopes.MainScope
+import com.ulan.app.munduz.dagger.scopes.OrdersScope
 import com.ulan.app.munduz.ui.basket.BasketFragment
 import com.ulan.app.munduz.ui.catalog.CatalogFragment
 import com.ulan.app.munduz.ui.home.HomeFragment
@@ -13,6 +14,7 @@ import com.ulan.app.munduz.ui.more.MoreFragment
 import com.ulan.app.munduz.ui.more.sections.AboutAppFragment
 import com.ulan.app.munduz.ui.more.sections.ContactUsFragment
 import com.ulan.app.munduz.ui.more.sections.WriteToUsFragment
+import com.ulan.app.munduz.ui.purchase.PurchaseFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -43,6 +45,10 @@ abstract class FragmentBuilderModule {
     @ContributesAndroidInjector(modules = [FilteredModule::class])
     abstract fun filteredFragment(): FilteredFragment
 
+    @OrdersScope
+    @ContributesAndroidInjector(modules = [PurchaseModule::class])
+    abstract fun purchaseFragment(): PurchaseFragment
+
     @MainScope
     @ContributesAndroidInjector
     abstract fun contactUsFragment(): ContactUsFragment
@@ -54,5 +60,6 @@ abstract class FragmentBuilderModule {
     @MainScope
     @ContributesAndroidInjector
     abstract fun aboutAppFragment(): AboutAppFragment
+
 
 }

@@ -4,6 +4,8 @@
         <shape>
             <size android:height="1dp" />
             <solid android:color="#454647" />
+            <padding android:left="6dp"/>
+            <padding android:right="6dp"/>
         </shape>
     </item>
 </layer-list>

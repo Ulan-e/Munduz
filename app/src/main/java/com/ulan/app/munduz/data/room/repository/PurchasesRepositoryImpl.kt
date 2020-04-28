@@ -73,6 +73,8 @@ class PurchasesRepositoryImpl(private val purchasesDao: PurchasesDao) : Purchase
         purchase.perPriceInc = product.priceFor
         purchase.desc = product.desc
         picture.urlImage = product.picture.urlImage
+        picture.urlImage2 = product.picture.urlImage2
+        picture.urlImage3 = product.picture.urlImage3
         purchase.picture = picture
         return purchase
     }

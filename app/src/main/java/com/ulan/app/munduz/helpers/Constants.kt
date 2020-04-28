@@ -5,11 +5,11 @@ class Constants {
     companion object {
 
         //Room
-        const val DATABASE_NAME = "munduz_database"
+        const val DATABASE_NAME = "database123"
 
         const val TAG = "munduz.ru"
 
-        //Firebae
+        //Firebase
         const val FIREBASE_ERROR_TITLE = "Firebase Database Error "
         const val PRODUCTS_TABLE = "products"
         const val SLIDER_TABLE = "sliderimages"
@@ -21,6 +21,7 @@ class Constants {
         const val PRODUCT_RECOMMEND = "recommend"
         const val EXTRA_PRODUCT_AMOUNT_ARG = "cost"
         const val EXTRA_PURCHASES_BUY_ARG = "product_args"
+        const val ARGS_ORDER = "args_order"
 
         const val CATEGORY_ARG = "category_args"
 
@@ -46,6 +47,7 @@ class Constants {
         const val BASKET_FRAGMENT = "basket_fragment"
         const val FAVORITE_FRAGMENT = "favorite_fragment"
         const val MORE_FRAGMENT = "more_fragment"
+        const val PURCHASE_FRAGMENT = "purchase_fragment"
         const val BUY_FRAGMENT = "buy_fragment"
         const val CONTACT_TO_US_FRAGMENT = "contact_to_us_fragment"
         const val WRITE_TO_US_FRAGMENT = "write_to_us_fragment"
