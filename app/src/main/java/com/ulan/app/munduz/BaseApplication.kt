@@ -1,7 +1,7 @@
 package com.ulan.app.munduz
 
 import com.google.firebase.database.FirebaseDatabase
-import com.ulan.app.munduz.dagger.component.DaggerAppComponent
+import com.ulan.app.munduz.dagger.app.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.support.DaggerApplication
 

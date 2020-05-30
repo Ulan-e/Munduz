@@ -12,60 +12,60 @@ import com.ulan.app.munduz.R
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.listeners.OnItemClickListener
 
-class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchViewHolder>, Filterable  {
+class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>, Filterable {
 
-    private var mContext: Context
-    private var mListener: OnItemClickListener
-    private var emptyList =  ArrayList<Product>()
+    private var context: Context
+    private var itemClickListener: OnItemClickListener
 
-    private lateinit var mProducts: MutableList<Product>
-    private lateinit var mFilteredProducts: MutableList<Product>
+    private var emptyProducts = ArrayList<Product>()
+    private lateinit var initialProducts: MutableList<Product>
+    private lateinit var filterProducts: MutableList<Product>
 
     constructor(context: Context, listener: OnItemClickListener) : super() {
-        this.mContext = context
-        this.mListener = listener
+        this.context = context
+        this.itemClickListener = listener
     }
 
-    fun setProducts(products : MutableList<Product>){
-        this.mProducts = products
-        mFilteredProducts = emptyList
+    fun setProducts(products: MutableList<Product>) {
+        this.initialProducts = products
+        filterProducts = emptyProducts
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
-        val inflater = mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.searched_items, parent, false)
         return SearchViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        return mFilteredProducts.size
+        return filterProducts.size
     }
 
     override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
-        val product = mFilteredProducts[position]
+        val product = filterProducts[position]
         holder.name.text = product.name
-        holder.bind(product, mListener)
+        holder.bind(product, itemClickListener)
     }
 
     override fun getFilter(): Filter {
-        return object : Filter(){
+        return object : Filter() {
             override fun performFiltering(p0: CharSequence?): FilterResults {
                 val pattern = p0.toString()
 
-                if(pattern.isEmpty()){
-                    mFilteredProducts = emptyList
-                }else{
-                    var innerList =  ArrayList<Product>()
-                    for(product: Product in mProducts) {
+                if (pattern.isEmpty()) {
+                    filterProducts = emptyProducts
+                } else {
+                    var innerList = ArrayList<Product>()
+                    for (product: Product in initialProducts) {
                         if (product.name.toLowerCase().contains(pattern)) {
                             innerList.add(product)
                         }
                     }
-                    mFilteredProducts = innerList
+                    filterProducts = innerList
                 }
 
                 val results: FilterResults = FilterResults()
-                results.values = mFilteredProducts
+                results.values = filterProducts
                 return results
             }
 
@@ -80,16 +80,14 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.SearchViewHolder>, Filte
 
         val name: TextView = itemView.findViewById(R.id.searched_name)
 
-        fun bind(product: Product?, onItemClickListener: OnItemClickListener){
-            itemView.setOnClickListener{
+        fun bind(product: Product?, onItemClickListener: OnItemClickListener) {
+            itemView.setOnClickListener {
                 if (product != null) {
                     onItemClickListener.onItemClick(product)
                 }
             }
         }
     }
-
-
 }
 
 

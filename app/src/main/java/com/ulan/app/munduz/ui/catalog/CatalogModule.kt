@@ -1,14 +1,9 @@
-package com.ulan.app.munduz.dagger.modules.fragmentmodule
+package com.ulan.app.munduz.ui.catalog
 
 import android.content.Context
 import com.ulan.app.munduz.adapter.CatalogAdapter
-import com.ulan.app.munduz.dagger.scopes.MainScope
-import com.ulan.app.munduz.data.firebase.FirebaseRepository
 import com.ulan.app.munduz.listeners.OnCategoryClickListener
-import com.ulan.app.munduz.ui.catalog.CatalogFragment
-import com.ulan.app.munduz.ui.catalog.CatalogPresenter
-import com.ulan.app.munduz.ui.catalog.CatalogPresenterImpl
-import com.ulan.app.munduz.ui.catalog.CatalogView
+import com.ulan.app.munduz.ui.main.MainScope
 import dagger.Module
 import dagger.Provides
 

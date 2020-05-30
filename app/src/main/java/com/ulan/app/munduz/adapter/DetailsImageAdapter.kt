@@ -17,12 +17,12 @@ import com.ulan.app.munduz.helpers.Constants
 
 class DetailsImageAdapter: PagerAdapter {
 
-    private var mContext: Context
-    private var mImages : MutableList<Picture>
+    private var context: Context
+    private var images : MutableList<Picture>
 
     constructor(context: Context, images: MutableList<Picture>) : super() {
-        this.mContext = context
-        this.mImages = images
+        this.context = context
+        this.images = images
     }
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
@@ -30,15 +30,15 @@ class DetailsImageAdapter: PagerAdapter {
     }
 
     override fun getCount(): Int {
-        return mImages.size
+        return images.size
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val inflater= mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val inflater= context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.item_slider, null)
         val image = view.findViewById<ImageView>(R.id.item_image)
         val progress = view.findViewById<ProgressBar>(R.id.item_progress_bar)
-        val picture = mImages.get(position)
+        val picture = images.get(position)
         progress.visibility = View.VISIBLE
         Picasso.get()
             .load(picture.urlImage)

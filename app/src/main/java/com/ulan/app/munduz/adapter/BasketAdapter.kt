@@ -9,45 +9,45 @@ import com.ulan.app.munduz.R
 import com.ulan.app.munduz.data.models.PurchaseEntity
 import com.ulan.app.munduz.data.room.repository.PurchasesRepository
 import com.ulan.app.munduz.helpers.RUBLE
-import com.ulan.app.munduz.helpers.convertStringToInt
 import com.ulan.app.munduz.helpers.convertIntToString
+import com.ulan.app.munduz.helpers.convertStringToInt
 import com.ulan.app.munduz.listeners.OnChangeSumListener
 import com.ulan.app.munduz.listeners.OnItemBasketClickListener
 
 
 class BasketAdapter : RecyclerView.Adapter<BasketViewHolder> {
 
-    private var mContext: Context
-    private var mListener: OnItemBasketClickListener
-    private lateinit var mChangeListener: OnChangeSumListener
-    private lateinit var mPurchases: MutableList<PurchaseEntity>
-    private lateinit var mRepository: PurchasesRepository
+    private var context: Context
+    private var itemClickListener: OnItemBasketClickListener
+    private lateinit var sumChangeListener: OnChangeSumListener
+    private lateinit var purchases: MutableList<PurchaseEntity>
+    private lateinit var purchasesRepository: PurchasesRepository
 
     constructor(context: Context, listener: OnItemBasketClickListener) : super() {
-        this.mContext = context
-        this.mListener = listener
+        this.context = context
+        this.itemClickListener = listener
     }
 
     fun setProducts(purchases: MutableList<PurchaseEntity>) {
-        this.mPurchases = purchases
+        this.purchases = purchases
     }
 
     fun setListener(listener: OnChangeSumListener) {
-        this.mChangeListener = listener
+        this.sumChangeListener = listener
     }
 
     fun setRepository(repository: PurchasesRepository) {
-        this.mRepository = repository
+        this.purchasesRepository = repository
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BasketViewHolder {
-        val inflater = mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.basket_purchase_item, parent, false)
         return BasketViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        return mPurchases.size
+        return purchases.size
     }
 
     override fun getItemId(position: Int): Long {
@@ -59,8 +59,8 @@ class BasketAdapter : RecyclerView.Adapter<BasketViewHolder> {
     }
 
     override fun onBindViewHolder(holder: BasketViewHolder, position: Int) {
-        val purchase = mPurchases[position]
-        holder.bind(purchase, mListener)
+        val purchase = purchases[position]
+        holder.bind(purchase, itemClickListener)
         Picasso.get()
             .load(purchase.picture.urlImage)
             .error(R.drawable.ic_error_image_black_24dp)
@@ -95,17 +95,17 @@ class BasketAdapter : RecyclerView.Adapter<BasketViewHolder> {
         }
 
         holder.remove.setOnClickListener {
-            if (mRepository.isExist(purchase.id)) {
-                mPurchases.removeAt(position)
-                mRepository.remove(purchase.id)
+            if (purchasesRepository.isExist(purchase.id)) {
+                purchases.removeAt(position)
+                purchasesRepository.remove(purchase.id)
                 updateAfterRemoving(position)
             }
         }
     }
 
     private fun updateValues(holder: BasketViewHolder, purchase: PurchaseEntity) {
-        mRepository.update(purchase)
-        mChangeListener.onSumChanged()
+        purchasesRepository.update(purchase)
+        sumChangeListener.onSumChanged()
         holder.price.text = purchase.priceInc.toString() + RUBLE
         holder.perPrice.text = purchase.perPriceInc
     }
@@ -113,9 +113,9 @@ class BasketAdapter : RecyclerView.Adapter<BasketViewHolder> {
     private fun updateAfterRemoving(position: Int) {
         notifyItemRemoved(position)
         notifyItemChanged(position)
-        notifyItemRangeChanged(position, mPurchases.size)
+        notifyItemRangeChanged(position, purchases.size)
         notifyDataSetChanged()
-        mChangeListener.onSumChanged()
+        sumChangeListener.onSumChanged()
     }
 
 }

@@ -12,38 +12,38 @@ import com.ulan.app.munduz.listeners.OnCategoryClickListener
 
 class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.CatalogViewHolder> {
 
-    private var mContext: Context
-    private var mListener: OnCategoryClickListener
-    private lateinit  var mCatalog: MutableList<String>
-    private lateinit  var mImages: IntArray
+    private var context: Context
+    private var categoryClickListener: OnCategoryClickListener
+    private lateinit var catalog: MutableList<String>
+    private lateinit var images: IntArray
 
     constructor(context: Context, listener: OnCategoryClickListener) : super() {
-        this.mContext = context
-        this.mListener = listener
+        this.context = context
+        this.categoryClickListener = listener
     }
 
-    fun setCatalogs(catalog: MutableList<String>){
-        this.mCatalog = catalog
+    fun setCatalogs(catalog: MutableList<String>) {
+        this.catalog = catalog
     }
 
-    fun setImages(images: IntArray){
-        mImages = images
+    fun setImages(images: IntArray) {
+        this.images = images
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatalogViewHolder {
-        val inflater = mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.catalog_item, parent, false)
         return CatalogViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        return mCatalog.size
+        return catalog.size
     }
 
     override fun onBindViewHolder(holder: CatalogViewHolder, position: Int) {
-        val category = mCatalog[position]
-        val image = mImages[position]
-        holder.bind(category, mListener)
+        val category = catalog[position]
+        val image = images[position]
+        holder.bind(category, this.categoryClickListener)
         holder.name.text = category
         holder.image.setImageResource(image)
     }
@@ -53,7 +53,7 @@ class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.CatalogViewHolder> {
         val name: TextView = itemView.findViewById(R.id.catalog_name)
         val image: ImageView = itemView.findViewById(R.id.catalog_image)
 
-        fun bind(category: String, listener: OnCategoryClickListener){
+        fun bind(category: String, listener: OnCategoryClickListener) {
             itemView.setOnClickListener {
                 listener.onCategoryClick(category)
             }

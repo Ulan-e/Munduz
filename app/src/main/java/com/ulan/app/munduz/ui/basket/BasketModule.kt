@@ -1,18 +1,12 @@
-package com.ulan.app.munduz.dagger.modules.fragmentmodule
+package com.ulan.app.munduz.ui.basket
 
 import android.content.Context
 import com.ulan.app.munduz.adapter.BasketAdapter
 import com.ulan.app.munduz.dagger.modules.RoomModule
-import com.ulan.app.munduz.dagger.scopes.MainScope
-import com.ulan.app.munduz.data.firebase.FirebaseRepository
+import com.ulan.app.munduz.data.repository.FirebaseRepository
 import com.ulan.app.munduz.data.room.repository.PurchasesRepository
-import com.ulan.app.munduz.data.room.repository.PurchasesRepositoryImpl
 import com.ulan.app.munduz.listeners.OnItemBasketClickListener
-import com.ulan.app.munduz.listeners.OnItemClickListener
-import com.ulan.app.munduz.ui.basket.BasketFragment
-import com.ulan.app.munduz.ui.basket.BasketPresenter
-import com.ulan.app.munduz.ui.basket.BasketPresenterImpl
-import com.ulan.app.munduz.ui.basket.BasketView
+import com.ulan.app.munduz.ui.main.MainScope
 import dagger.Module
 import dagger.Provides
 
@@ -22,13 +16,13 @@ class BasketModule {
 
     @MainScope
     @Provides
-    fun provideView(fragment: BasketFragment): BasketView {
+    fun basketView(fragment: BasketFragment): BasketView {
         return fragment
     }
 
     @MainScope
     @Provides
-    fun providePresenter(
+    fun basketPresenter(
         view: BasketView,
         firebaseRepository: FirebaseRepository,
         purchasesRepository: PurchasesRepository
@@ -38,13 +32,13 @@ class BasketModule {
 
     @MainScope
     @Provides
-    fun provideListener(fragment: BasketFragment): OnItemBasketClickListener {
+    fun basketListener(fragment: BasketFragment): OnItemBasketClickListener {
         return fragment
     }
 
     @MainScope
     @Provides
-    fun provideAdapter(context: Context, listener: OnItemBasketClickListener): BasketAdapter {
+    fun basketAdapter(context: Context, listener: OnItemBasketClickListener): BasketAdapter {
         return BasketAdapter(context, listener)
     }
 }

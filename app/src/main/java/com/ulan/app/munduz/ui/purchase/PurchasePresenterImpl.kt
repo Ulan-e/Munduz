@@ -7,24 +7,24 @@ import javax.inject.Inject
 
 class PurchasePresenterImpl : PurchasePresenter {
 
-    private var mView: PurchaseView
-    private lateinit var mSendEmailHelper: SendEmailHelper
-    private lateinit var mMessage: Message
+    private var view: PurchaseView
+    private lateinit var sendEmailHelper: SendEmailHelper
+    private lateinit var message: Message
 
     @Inject
     constructor(view: PurchaseView) {
-        this.mView = view
+        this.view = view
     }
 
     override fun setEmailHelper(emailHelper: SendEmailHelper) {
-        this.mSendEmailHelper = emailHelper
+        this.sendEmailHelper = emailHelper
     }
 
     override fun putOrderToMessage(order: Order) {
-        mMessage = Message()
-        mMessage.email = "uulanerkinbaev@gmail.com"
-        mMessage.subject = "Приложение Munduz"
-        mMessage.body =
+        message = Message()
+        message.email = "uulanerkinbaev@gmail.com"
+        message.subject = "Приложение Munduz"
+        message.body =
             "               Товары " + "\n" +
                     order.purchases + "\n" +
                     "> Сумма заказа  " + order.amountPurchases + "\n" +
@@ -35,19 +35,19 @@ class PurchasePresenterImpl : PurchasePresenter {
     }
 
     override fun sendViaWhatsApp() {
-        mView.sendOrderToWhatsApp(mMessage)
+        view.sendOrderToWhatsApp(message)
         sendWithEmailHelper()
-        mView?.closeDialog()
+        view?.closeDialog()
     }
 
     override fun sendViaEmail() {
         sendWithEmailHelper()
-        mView.showMessage("Ожидайте, вам позвонят в течении 15 минут")
+        view.showMessage("Ожидайте, вам позвонят в течении 15 минут")
     }
 
     private fun sendWithEmailHelper() {
-        mSendEmailHelper.setMessage(mMessage)
-        mSendEmailHelper.execute()
+        sendEmailHelper.setMessage(message)
+        sendEmailHelper.execute()
     }
 
 }

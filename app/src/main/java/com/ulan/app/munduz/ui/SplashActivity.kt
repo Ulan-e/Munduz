@@ -11,10 +11,10 @@ import kotlinx.android.synthetic.main.splash_screen.*
 
 class SplashActivity : AppCompatActivity() {
 
-    private var mDelayHandler: Handler? = null
+    private var delayHandler: Handler? = null
     private var SPLASH_DELAY: Long = 2300
 
-    private val mRunnable: Runnable = Runnable {
+    private val runnable: Runnable = Runnable {
         if (!isFinishing) {
             val intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
@@ -30,13 +30,13 @@ class SplashActivity : AppCompatActivity() {
         splash_text.text = resources.getString(R.string.app_name)
         splash_text.typeface = typeface
 
-        mDelayHandler = Handler()
-        mDelayHandler!!.postDelayed(mRunnable, SPLASH_DELAY)
+        delayHandler = Handler()
+        delayHandler!!.postDelayed(runnable, SPLASH_DELAY)
     }
 
     override fun onDestroy() {
-        if (mDelayHandler != null) {
-            mDelayHandler!!.removeCallbacks(mRunnable)
+        if (delayHandler != null) {
+            delayHandler!!.removeCallbacks(runnable)
         }
         super.onDestroy()
     }

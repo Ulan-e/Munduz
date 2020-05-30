@@ -11,14 +11,14 @@ import com.squareup.picasso.Picasso
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.data.models.SliderImage
 
-class SliderAdapter: PagerAdapter {
+class SliderAdapter : PagerAdapter {
 
-    private var mContext: Context
-    private var mImages : MutableList<SliderImage>
+    private var context: Context
+    private var images: MutableList<SliderImage>
 
     constructor(context: Context, images: MutableList<SliderImage>) : super() {
-        this.mContext = context
-        this.mImages = images
+        this.context = context
+        this.images = images
     }
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
@@ -26,14 +26,14 @@ class SliderAdapter: PagerAdapter {
     }
 
     override fun getCount(): Int {
-        return mImages.size
+        return images.size
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val inflater= mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.item_slider, null)
         val imageView = view.findViewById<ImageView>(R.id.imageView)
-        val sliderImage = mImages.get(position)
+        val sliderImage = images.get(position)
         Picasso.get().load(sliderImage.image).into(imageView)
 
         val viewPager = container as ViewPager

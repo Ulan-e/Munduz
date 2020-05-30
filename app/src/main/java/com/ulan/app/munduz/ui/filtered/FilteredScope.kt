@@ -1,7 +1,7 @@
-package com.ulan.app.munduz.dagger.scopes
+package com.ulan.app.munduz.ui.filtered
 
 import javax.inject.Scope
 
 @Scope
 @Retention(AnnotationRetention.RUNTIME)
-annotation class AppScope
+annotation class FilteredScope

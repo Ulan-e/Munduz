@@ -6,40 +6,40 @@ import javax.inject.Inject
 
 class OrdersPresenterImpl : OrdersPresenter {
 
-    private var mView: OrdersView?
-    private lateinit var mPurchases: MutableList<PurchaseEntity>
+    private var view: OrdersView?
+    private lateinit var purchases: MutableList<PurchaseEntity>
 
     @Inject
-    constructor(mView: OrdersView) {
-        this.mView = mView
+    constructor(view: OrdersView) {
+        this.view = view
     }
 
     override fun setProducts(purchases: MutableList<PurchaseEntity>) {
-        this.mPurchases = purchases
+        this.purchases = purchases
     }
 
     override fun setPurchasesAmount(amount: Int) {
-        val goods = "Итого " + mPurchases.size.toString() + " видов товара \n"
+        val goods = "Итого " + purchases.size.toString() + " видов товара \n"
         val price = "К оплате " + amount.toString() + RUBLE
-        mView?.showTotalPurchases(goods + price)
+        view?.showTotalPurchases(goods + price)
     }
 
 
     override fun sendButtonClicked() {
-        if(mView?.isNotEmptyFieldsDelivery()!!){
-            mView?.goToPurchaseMethod(mView?.getInputOrder()!!)
+        if(view?.isNotEmptyFieldsDelivery()!!){
+            view?.goToPurchaseMethod(view?.getInputOrder()!!)
         }
     }
 
     override fun cancelButtonClicked() {
-        mView?.cancelOrder()
+        view?.cancelOrder()
     }
 
     override fun setToolbar() {
-        mView?.showToolbar()
+        view?.showToolbar()
     }
 
     override fun detachView() {
-        mView = null
+        view = null
     }
 }

@@ -1,37 +1,37 @@
 package com.ulan.app.munduz.ui.search
 
-import com.ulan.app.munduz.data.firebase.FirebaseRepository
+import com.ulan.app.munduz.data.repository.FirebaseRepository
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.listeners.ProductsCallback
 
 class SearchPresenterImpl: SearchPresenter{
 
-    private var mView: SearchView?
-    private var mRepository: FirebaseRepository
-    private var mProducts = mutableListOf<Product>()
+    private var view: SearchView?
+    private var repository: FirebaseRepository
+    private var products = mutableListOf<Product>()
 
-    constructor(mView: SearchView, mRepository: FirebaseRepository) {
-        this.mView = mView
-        this.mRepository = mRepository
+    constructor(view: SearchView, repository: FirebaseRepository) {
+        this.view = view
+        this.repository = repository
     }
 
     override fun setToolbar() {
-        mView?.showToolbar()
+        view?.showToolbar()
     }
 
     override fun loadProducts(): MutableList<Product> {
-        mRepository.loadSearchedProducts(object : ProductsCallback {
+        repository.loadSearchedProducts(object : ProductsCallback {
             override fun onCallback(values: MutableList<Product>) {
-                mView?.showProducts(values)
-                mProducts = values
+                view?.showProducts(values)
+                products = values
             }
 
         })
-        return mProducts
+        return products
     }
 
     override fun detachView() {
-        this.mView = null
+        this.view = null
     }
 
 }

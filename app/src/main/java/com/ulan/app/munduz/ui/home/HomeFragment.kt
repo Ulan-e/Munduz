@@ -3,7 +3,6 @@ package com.ulan.app.munduz.ui.home
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,6 @@ import android.widget.TextView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.ulan.app.munduz.R
@@ -38,40 +36,39 @@ import javax.inject.Inject
 class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
 
     @Inject
-    lateinit var mPresenter: HomePresenter
+    lateinit var presenter: HomePresenter
 
     @Inject
-    lateinit var mAdapter: ProductsAdapter
+    lateinit var productsAdapter: ProductsAdapter
 
     @Inject
-    lateinit var mFavoritesRepo: FavoritesRepository
+    lateinit var favoritesRepository: FavoritesRepository
 
     @Inject
-    lateinit var mPurchasesRepo: PurchasesRepository
+    lateinit var purchasesRepository: PurchasesRepository
 
-    private var mSliderAdapter: SliderAdapter? = null
+    private lateinit var mainActivity: MainActivity
+    private lateinit var tabLayout: TabLayout
+    private lateinit var viewPager: ViewPager
 
-    private lateinit var mMainActivity: MainActivity
-    private lateinit var mRecyclerView: RecyclerView
-    private lateinit var mViewPager: ViewPager
-    private lateinit var mTabLayout: TabLayout
+    private var sliderImageAdapter: SliderAdapter? = null
 
     lateinit var handler: Handler
     private var page = 0
     private var delay: Long = 5000L
+
     private val runnable = object : Runnable {
         override fun run() {
-            if(mSliderAdapter != null) {
-                if (mSliderAdapter!!.count == page) {
+            if (sliderImageAdapter != null) {
+                if (sliderImageAdapter!!.count == page) {
                     page = 0
                 } else {
                     page++
                 }
             }
-            mViewPager.setCurrentItem(page, true)
+            viewPager.setCurrentItem(page, true)
             handler.postDelayed(this, delay)
         }
-
     }
 
     override fun onCreateView(
@@ -80,29 +77,27 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.home_layout, container, false)
-        mRecyclerView = view.findViewById(R.id.home_recycler_view)
-        mViewPager = view.findViewById(R.id.view_pager)
-        mTabLayout = view.findViewById(R.id.tab_dots)
-        mTabLayout.setupWithViewPager(mViewPager, true)
-        mMainActivity = (activity as MainActivity)
-        mMainActivity.findViewById<LinearLayout>(R.id.search_layout).visibility = View.VISIBLE
-        mMainActivity.findViewById<EditText>(R.id.button_click).isEnabled = true
+        viewPager = view.findViewById(R.id.view_pager)
+        tabLayout = view.findViewById(R.id.tab_dots)
+        tabLayout.setupWithViewPager(viewPager, true)
+        mainActivity = (activity as MainActivity)
+        mainActivity.findViewById<LinearLayout>(R.id.search_layout).visibility = View.VISIBLE
+        mainActivity.findViewById<EditText>(R.id.button_click).isEnabled = true
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mPresenter.setToolbar()
-        mPresenter.loadSliderImages()
-        mPresenter.loadProducts()
+        presenter.setToolbar()
+        presenter.loadSliderImages()
+        presenter.loadProducts()
         handler = Handler()
-        Log.d("ulanbek","HomeFragment adapter=" +  mAdapter.toString())
     }
 
     override fun showToolbar() {
-        val toolbar = mMainActivity.findViewById<Toolbar>(R.id.main_toolbar)
+        val toolbar = mainActivity.findViewById<Toolbar>(R.id.main_toolbar)
         toolbar.navigationIcon = null
-        mMainActivity.supportActionBar?.hide()
+        mainActivity.supportActionBar?.hide()
         val textToolbar = toolbar.findViewById<TextView>(R.id.main_toolbar_text)
         val typeface = ResourcesCompat.getFont(activity!!, R.font.forte)
         textToolbar.typeface = typeface
@@ -116,7 +111,7 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
 
     override fun showErrorNetwork() {
         home_title.visibility = View.GONE
-        mMainActivity.findViewById<Button>(R.id.button_click).isEnabled = false
+        mainActivity.findViewById<Button>(R.id.button_click).isEnabled = false
         content_scroll_view.visibility = View.GONE
         error_layout.visibility = View.VISIBLE
         error_network_button.setOnClickListener {
@@ -130,10 +125,10 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
 
     override fun showProducts(products: MutableList<Product>) {
         val layoutManager = GridLayoutManager(activity, 2)
-        mRecyclerView.layoutManager = layoutManager
-        mAdapter.setProducts(products)
-        mAdapter.setRepositories(mFavoritesRepo, mPurchasesRepo)
-        mRecyclerView.adapter = mAdapter
+        home_recycler_view.layoutManager = layoutManager
+        productsAdapter.setProducts(products)
+        productsAdapter.setRepositories(favoritesRepository, purchasesRepository)
+        home_recycler_view.adapter = productsAdapter
     }
 
     override fun showEmptyData() {
@@ -141,9 +136,9 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
     }
 
     override fun showSliderImages(images: MutableList<SliderImage>) {
-        mSliderAdapter = SliderAdapter(activity!!.applicationContext, images)
-        mViewPager.adapter = mSliderAdapter
-        mViewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+        sliderImageAdapter = SliderAdapter(activity!!.applicationContext, images)
+        viewPager.adapter = sliderImageAdapter
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
 
             }
@@ -171,7 +166,7 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
 
     override fun onStart() {
         super.onStart()
-        mAdapter.notifyDataSetChanged()
+        productsAdapter.notifyDataSetChanged()
     }
 
     override fun onResume() {
@@ -186,7 +181,7 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        mPresenter.detachView()
+        presenter.detachView()
     }
 
     override fun onBackPressed(): Boolean {
@@ -194,15 +189,6 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
         activity!!.moveTaskToBack(true)
         activity!!.finish()
         return true
-    }
-
-    companion object {
-        fun newInstance(): HomeFragment {
-            val args = Bundle()
-            val fragment = HomeFragment()
-            fragment.arguments = args
-            return fragment
-        }
     }
 
 }

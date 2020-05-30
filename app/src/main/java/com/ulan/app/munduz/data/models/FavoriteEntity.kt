@@ -7,8 +7,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "favorite_table", indices = [Index(value = ["key"], unique = true)])
 class FavoriteEntity(
+
     @PrimaryKey(autoGenerate = true)
-    var id : Int = 0,
+    var id: Int = 0,
 
     @ColumnInfo(name = "key")
     var key: String = ""

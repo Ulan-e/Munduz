@@ -1,16 +1,14 @@
 package com.ulan.app.munduz.ui.basket
 
-import com.ulan.app.munduz.data.firebase.FirebaseRepository
-import com.ulan.app.munduz.data.models.PurchaseEntity
+import com.ulan.app.munduz.data.repository.FirebaseRepository
 import com.ulan.app.munduz.data.room.repository.PurchasesRepository
 import javax.inject.Inject
 
 class BasketPresenterImpl : BasketPresenter {
 
-    private var mView: BasketView?
-    private var mFirebaseRepository: FirebaseRepository
-    private var mPurchasesRepository: PurchasesRepository
-    private var mProducts = mutableListOf<PurchaseEntity>()
+    private var view: BasketView?
+    private var firebaseRepository: FirebaseRepository
+    private var purchasesRepository: PurchasesRepository
 
     @Inject
     constructor(
@@ -18,53 +16,53 @@ class BasketPresenterImpl : BasketPresenter {
         firebaseRepository: FirebaseRepository,
         purchasesRepository: PurchasesRepository
     ) {
-        this.mView = view
-        this.mFirebaseRepository = firebaseRepository
-        this.mPurchasesRepository = purchasesRepository
+        this.view = view
+        this.firebaseRepository = firebaseRepository
+        this.purchasesRepository = purchasesRepository
     }
 
     override fun setToolbar() {
-        mView?.showToolbar()
+        view?.showToolbar()
     }
 
     override fun loadProducts() {
-        val purchases = mPurchasesRepository.fetchPurchases()
+        val purchases = purchasesRepository.fetchAll()
         if (purchases.size > 0) {
-            mView?.showProducts(purchases)
-            mView?.showPurchaseButton()
-            var sum = mPurchasesRepository.sumOfPurchases()
-            mView?.showPurchasesAmount(sum)
+            view?.showProducts(purchases)
+            view?.showPurchaseButton()
+            var sum = purchasesRepository.purchasesAmount()
+            view?.showAmountPurchases(sum)
         } else {
-            mView?.showEmptyData()
-            mView?.hidePurchaseButton()
+            view?.showEmptyData()
+            view?.hidePurchaseButton()
         }
     }
 
     override fun purchaseButtonClicked() {
-        val purchases = mPurchasesRepository.fetchPurchases()
+        val purchases = purchasesRepository.fetchAll()
         var amount = 0
         for (num in purchases) {
             amount += num.priceInc
         }
-        mView?.purchaseAll(purchases, amount)
+        view?.purchaseAll(purchases, amount)
     }
 
     override fun goToHomeButtonClicked() {
-        mView?.showGoToHome()
+        view?.showGoToHome()
     }
 
     override fun purchasesAmountChanged() {
-        var amount = mPurchasesRepository.sumOfPurchases()
+        var amount = purchasesRepository.purchasesAmount()
         if (amount == 0) {
-            mView?.hidePurchaseButton()
-            mView?.showEmptyData()
+            view?.hidePurchaseButton()
+            view?.showEmptyData()
         } else {
-            mView?.showPurchasesAmount(amount)
+            view?.showAmountPurchases(amount)
         }
     }
 
     override fun detachView() {
-        mView = null
+        view = null
     }
 
 }

@@ -9,34 +9,34 @@ import javax.inject.Inject
 
 class DetailsPresenterImpl : DetailsPresenter {
 
-    private var mView: DetailsView?
-    private var mPurchaseRepository: PurchasesRepository
-    private var mFavoriteRepository: FavoritesRepository
-    private lateinit var mProduct: Product
+    private var view: DetailsView?
+    private var purchaseRepository: PurchasesRepository
+    private var favoriteRepository: FavoritesRepository
+    private lateinit var product: Product
 
     @Inject
     constructor(
-        mView: DetailsView,
+        view: DetailsView,
         repository: PurchasesRepository,
         keysRepository: FavoritesRepository
     ) {
-        this.mView = mView
-        this.mPurchaseRepository = repository
-        this.mFavoriteRepository = keysRepository
+        this.view = view
+        this.purchaseRepository = repository
+        this.favoriteRepository = keysRepository
     }
 
     override fun setProduct(product: Product) {
         if (product != null) {
-            this.mProduct = product
-            mView?.showProduct(mProduct)
-            mView?.changeAddToBasketText(getBasketText())
+            this.product = product
+            view?.showProduct(this.product)
+            view?.changeAddToBasketText(getBasketText())
         } else {
-            mView?.showEmptyData()
+            view?.showEmptyData()
         }
     }
 
     private fun getBasketText(): String {
-        if (mPurchaseRepository.isExist(mProduct.id)) {
+        if (purchaseRepository.isExist(product.id)) {
             return NOT_IN_BASKET
         } else {
             return NOT_IN_BASKET
@@ -44,51 +44,51 @@ class DetailsPresenterImpl : DetailsPresenter {
     }
 
     override fun setToolbar() {
-        mView?.showToolbar()
+        view?.showToolbar()
     }
 
     override fun isFavoriteProduct() {
-        if (mFavoriteRepository.isExist(mProduct.id)) {
-            mView?.markAsFavorite()
+        if (favoriteRepository.isExist(product.id)) {
+            view?.markAsFavorite()
         }
     }
 
     override fun isInAlreadyInBasket() {
-        if (mPurchaseRepository.isExist(mProduct.id)) {
-            mView?.changeAddToBasketText(ALREADY_IN_BASKET)
+        if (purchaseRepository.isExist(product.id)) {
+            view?.changeAddToBasketText(ALREADY_IN_BASKET)
         } else {
-            mView?.changeAddToBasketText(NOT_IN_BASKET)
+            view?.changeAddToBasketText(NOT_IN_BASKET)
         }
     }
 
     override fun favoriteClicked() {
-        if (mFavoriteRepository.isExist(mProduct.id)) {
-            mFavoriteRepository.remove(mProduct.id)
-            mView?.markAsNotFavorite()
+        if (favoriteRepository.isExist(product.id)) {
+            favoriteRepository.remove(product.id)
+            view?.markAsNotFavorite()
         } else {
-            mFavoriteRepository.insert(mProduct.id)
-            mView?.markAsFavorite()
+            favoriteRepository.insert(product.id)
+            view?.markAsFavorite()
         }
     }
 
     override fun unFavoriteClicked() {
-        mFavoriteRepository.remove(mProduct.id)
+        favoriteRepository.remove(product.id)
     }
 
     override fun onBackPressed() {
-        mView?.closeDetails()
+        view?.closeDetails()
     }
 
     override fun addToBasketClicked() {
-        if (mPurchaseRepository.isExist(mProduct.id)) {
-            mView?.goToBasket()
+        if (purchaseRepository.isExist(product.id)) {
+            view?.goToBasket()
         } else {
-            mPurchaseRepository.insert(mProduct)
-            mView?.changeAddToBasketText(ALREADY_IN_BASKET)
+            purchaseRepository.insert(product)
+            view?.changeAddToBasketText(ALREADY_IN_BASKET)
         }
     }
 
     override fun detachView() {
-        mView = null
+        view = null
     }
 }

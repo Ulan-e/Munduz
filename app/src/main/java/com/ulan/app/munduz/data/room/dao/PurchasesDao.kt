@@ -7,20 +7,20 @@ import com.ulan.app.munduz.data.models.PurchaseEntity
 interface PurchasesDao {
 
     @Query("SELECT * FROM purchases_table")
-    fun fetchAllPurchases(): List<PurchaseEntity>
-
-    @Query("SELECT SUM(purchases_table.priceInc) FROM purchases_table")
-    fun sumOfPurchases(): Int
+    fun fetchPurchases(): List<PurchaseEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertPurchase(purchaseEntity: PurchaseEntity)
+    fun insert(purchaseEntity: PurchaseEntity)
 
     @Update
-    fun updatePurchase(purchaseEntity: PurchaseEntity)
+    fun update(purchaseEntity: PurchaseEntity)
 
     @Delete
-    fun removePurchase(purchaseEntity: PurchaseEntity)
+    fun remove(purchaseEntity: PurchaseEntity)
 
     @Query("DELETE FROM purchases_table")
-    fun removeAllPurchases()
+    fun removePurchases()
+
+    @Query("SELECT SUM(purchases_table.priceInc) FROM purchases_table")
+    fun purchasesAmount(): Int
 }

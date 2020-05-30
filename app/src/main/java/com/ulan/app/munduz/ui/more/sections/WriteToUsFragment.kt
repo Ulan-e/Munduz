@@ -2,7 +2,6 @@ package com.ulan.app.munduz.ui.more.sections
 
 import android.os.Bundle
 import android.os.Handler
-import android.os.Message
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,27 +13,27 @@ import kotlinx.android.synthetic.main.writetous_layout.*
 
 class WriteToUsFragment : BaseDialogFragment() {
 
-    private lateinit var mSendEmailHelper: SendEmailHelper
+    private lateinit var sendEmailHelper: SendEmailHelper
 
-    private lateinit var mView: View
+    private lateinit var rootView: View
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mView = inflater.inflate(R.layout.writetous_layout, container, false)
-        mSendEmailHelper = SendEmailHelper(activity!!.applicationContext)
-        return mView
+        rootView = inflater.inflate(R.layout.writetous_layout, container, false)
+        return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        sendEmailHelper = SendEmailHelper(activity!!.applicationContext)
         send.setOnClickListener {
             sendMessage()
         }
 
-        cancel.setOnClickListener{
+        cancel.setOnClickListener {
             dismiss()
         }
     }
@@ -47,20 +46,20 @@ class WriteToUsFragment : BaseDialogFragment() {
         val text = writer_text.text.toString()
         if (from != "" && text != "") {
             message.body = "*** От кого " + from + "\n" + "*** Сообщение" + message
-            mSendEmailHelper.setMessage(message)
-            mSendEmailHelper.execute()
+            sendEmailHelper.setMessage(message)
+            sendEmailHelper.execute()
             showSnack("Спасибо за ваш отзыв")
             Handler().postDelayed({
                 dismiss()
             }, 2500)
-        }else{
+        } else {
             var message = activity!!.resources.getString(R.string.empty_fields)
             showSnack(message)
         }
     }
 
-    private fun showSnack(text: String){
-        val snack = Snackbar.make(mView, text, Snackbar.LENGTH_SHORT)
+    private fun showSnack(text: String) {
+        val snack = Snackbar.make(rootView, text, Snackbar.LENGTH_SHORT)
         snack.show()
     }
 }

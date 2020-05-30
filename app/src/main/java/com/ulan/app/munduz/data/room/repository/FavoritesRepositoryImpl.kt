@@ -11,7 +11,7 @@ class FavoritesRepositoryImpl(private val favoritesDao: FavoritesDao) : Favorite
             favoritesDao.insert(generateFavorite(key))
         } else {
             for (item in table) {
-               favoritesDao.insert(generateFavorite(key))
+                favoritesDao.insert(generateFavorite(key))
             }
         }
     }
@@ -26,12 +26,12 @@ class FavoritesRepositoryImpl(private val favoritesDao: FavoritesDao) : Favorite
     }
 
     override fun isExist(key: String): Boolean {
-         val table = favoritesDao.fetchFavorites()
-         for (item in table) {
-             if (key == item.key) {
-                 return true
-             }
-         }
+        val table = favoritesDao.fetchFavorites()
+        for (item in table) {
+            if (key == item.key) {
+                return true
+            }
+        }
         return false
     }
 

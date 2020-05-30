@@ -1,11 +1,6 @@
-package com.ulan.app.munduz.dagger.modules.activitymodule
+package com.ulan.app.munduz.ui.details
 
 import com.ulan.app.munduz.dagger.modules.RoomModule
-import com.ulan.app.munduz.dagger.scopes.DetailsScope
-import com.ulan.app.munduz.ui.details.DetailsActivity
-import com.ulan.app.munduz.ui.details.DetailsPresenter
-import com.ulan.app.munduz.ui.details.DetailsPresenterImpl
-import com.ulan.app.munduz.ui.details.DetailsView
 import dagger.Binds
 import dagger.Module
 

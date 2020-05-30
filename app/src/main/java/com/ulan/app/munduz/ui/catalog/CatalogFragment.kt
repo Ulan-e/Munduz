@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.adapter.CatalogAdapter
+import com.ulan.app.munduz.helpers.Constants.Companion.HOME_FRAGMENT
 import com.ulan.app.munduz.listeners.OnCategoryClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.filtered.FilteredFragment
@@ -24,12 +25,12 @@ import javax.inject.Inject
 class CatalogFragment : BaseFragment(), CatalogView, OnCategoryClickListener {
 
     @Inject
-    lateinit var mPresenter: CatalogPresenter
+    lateinit var presenter: CatalogPresenter
 
     @Inject
-    lateinit var mAdapter: CatalogAdapter
+    lateinit var adapter: CatalogAdapter
 
-    var mImages = intArrayOf()
+    private var images = intArrayOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,15 +42,16 @@ class CatalogFragment : BaseFragment(), CatalogView, OnCategoryClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mPresenter.setToolbar()
+        presenter.setToolbar()
         val catalog = activity!!.applicationContext.resources.getStringArray(R.array.category)
-        mImages = intArrayOf(R.mipmap.grocery, R.mipmap.napitki,
+        images = intArrayOf(
+            R.mipmap.grocery, R.mipmap.napitki,
             R.mipmap.postel, R.mipmap.dishes,
             R.mipmap.kazan, R.mipmap.chemodany,
             R.mipmap.beshik, R.mipmap.odezhda,
             R.mipmap.sredstvo
         )
-        mPresenter.setCatalog(catalog.toMutableList())
+        presenter.setCatalog(catalog.toMutableList())
     }
 
     override fun showToolbar() {
@@ -67,10 +69,15 @@ class CatalogFragment : BaseFragment(), CatalogView, OnCategoryClickListener {
     override fun showCatalog(catalog: MutableList<String>) {
         val layoutManager = LinearLayoutManager(activity!!.applicationContext)
         catalog_recycler_view.layoutManager = layoutManager
-        catalog_recycler_view.addItemDecoration(DividerItemDecoration(activity, LinearLayoutManager.HORIZONTAL))
-        mAdapter.setCatalogs(catalog.toMutableList())
-        mAdapter.setImages(mImages)
-        catalog_recycler_view.adapter = mAdapter
+        catalog_recycler_view.addItemDecoration(
+            DividerItemDecoration(
+                activity,
+                LinearLayoutManager.HORIZONTAL
+            )
+        )
+        adapter.setCatalogs(catalog.toMutableList())
+        adapter.setImages(images)
+        catalog_recycler_view.adapter = adapter
     }
 
     override fun onCategoryClick(category: String) {
@@ -87,22 +94,13 @@ class CatalogFragment : BaseFragment(), CatalogView, OnCategoryClickListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        mPresenter.detachView()
+        presenter.detachView()
     }
 
-    companion object {
-        fun newInstance(): CatalogFragment {
-            val args = Bundle()
-            val fragment = CatalogFragment()
-            fragment.arguments = args
-            return fragment
-        }
-    }
-
-    override fun onBackPressed(): Boolean  {
+    override fun onBackPressed(): Boolean {
         activity!!.supportFragmentManager
             .beginTransaction()
-            .replace(R.id.container, HomeFragment.newInstance(), "home")
+            .replace(R.id.container, HomeFragment(), HOME_FRAGMENT)
             .addToBackStack(null)
             .commit()
         val bottomNav = activity!!.findViewById<BottomNavigationView>(R.id.bottom_navigation_menu)

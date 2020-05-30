@@ -1,40 +1,40 @@
 package com.ulan.app.munduz.ui.filtered
 
-import com.ulan.app.munduz.data.firebase.FirebaseRepository
+import com.ulan.app.munduz.data.repository.FirebaseRepository
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.listeners.ProductsCallback
 import javax.inject.Inject
 
 class FilteredPresenterImpl : FilteredPresenter {
 
-    private var mView: FilteredView? = null
-    private var mRepository: FirebaseRepository? = null
+    private var view: FilteredView? = null
+    private var repository: FirebaseRepository? = null
 
     @Inject
-    constructor(mView: FilteredView, mRepository: FirebaseRepository) {
-        this.mView = mView
-        this.mRepository = mRepository
+    constructor(view: FilteredView, repository: FirebaseRepository) {
+        this.view = view
+        this.repository = repository
     }
 
     override fun setToolbar() {
-        mView?.showToolbar()
+        view?.showToolbar()
     }
 
     override fun loadProductsByCategory(categoryName: String) {
-        mRepository?.loadFilteredProducts(categoryName, object : ProductsCallback {
+        repository?.loadFilteredProducts(categoryName, object : ProductsCallback {
             override fun onCallback(values: MutableList<Product>) {
                 if (values.size > 0) {
-                    mView?.showProducts(values)
+                    view?.showProducts(values)
                 } else {
-                    mView?.showEmptyData()
+                    view?.showEmptyData()
                 }
             }
         })
     }
 
     override fun detachView() {
-        mView = null
-        mRepository = null
+        view = null
+        repository = null
     }
 
 }

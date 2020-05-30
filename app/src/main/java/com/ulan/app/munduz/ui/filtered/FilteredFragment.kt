@@ -29,18 +29,18 @@ import javax.inject.Inject
 class FilteredFragment : BaseFragment(), FilteredView, OnItemClickListener {
 
     @Inject
-    lateinit var mPresenter: FilteredPresenter
+    lateinit var presenter: FilteredPresenter
 
     @Inject
-    lateinit var mAdapter: ProductsAdapter
+    lateinit var adapter: ProductsAdapter
 
     @Inject
-    lateinit var mFirebaseRepository: FavoritesRepository
+    lateinit var firebaseRepository: FavoritesRepository
 
     @Inject
-    lateinit var mPurchasesRepository: PurchasesRepository
+    lateinit var purchasesRepository: PurchasesRepository
 
-    private lateinit var mCategory: String
+    private lateinit var titleCategory: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,9 +52,9 @@ class FilteredFragment : BaseFragment(), FilteredView, OnItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mCategory = arguments!!.getString(CATEGORY_ARG)
-        mPresenter.setToolbar()
-        mPresenter.loadProductsByCategory(mCategory)
+        titleCategory = arguments!!.getString(CATEGORY_ARG)
+        presenter.setToolbar()
+        presenter.loadProductsByCategory(titleCategory)
     }
 
     override fun isNetworkOn(): Boolean {
@@ -82,7 +82,7 @@ class FilteredFragment : BaseFragment(), FilteredView, OnItemClickListener {
             activity.supportFragmentManager.popBackStack()
         }
         val emptySpace = "            "
-        textToolbar.text = "$mCategory $emptySpace"
+        textToolbar.text = "$titleCategory $emptySpace"
         textToolbar.typeface = Typeface.DEFAULT
         textToolbar.textSize = resources.getDimension(R.dimen.toolbar_title_size)
     }
@@ -94,9 +94,9 @@ class FilteredFragment : BaseFragment(), FilteredView, OnItemClickListener {
     override fun showProducts(products: MutableList<Product>) {
         val layoutManager = GridLayoutManager(activity, 2)
         filter_recycler_view.layoutManager = layoutManager
-        mAdapter.setProducts(products)
-        mAdapter.setRepositories(mFirebaseRepository, mPurchasesRepository)
-        filter_recycler_view.adapter = mAdapter
+        adapter.setProducts(products)
+        adapter.setRepositories(firebaseRepository, purchasesRepository)
+        filter_recycler_view.adapter = adapter
     }
 
     override fun onItemClick(product: Product) {
@@ -107,7 +107,7 @@ class FilteredFragment : BaseFragment(), FilteredView, OnItemClickListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        mPresenter.detachView()
+        presenter.detachView()
     }
 
     companion object {

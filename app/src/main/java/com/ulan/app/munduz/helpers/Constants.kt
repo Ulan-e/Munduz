@@ -7,7 +7,7 @@ class Constants {
         //Room
         const val DATABASE_NAME = "database123"
 
-        const val TAG = "munduz.ru"
+        const val TAG = "munduz_app"
 
         //Firebase
         const val FIREBASE_ERROR_TITLE = "Firebase Database Error "

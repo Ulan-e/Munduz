@@ -6,8 +6,11 @@ import com.ulan.app.munduz.helpers.SendEmailHelper
 interface PurchasePresenter {
 
     fun setEmailHelper(emailHelper: SendEmailHelper)
+
     fun putOrderToMessage(order: Order)
+
     fun sendViaWhatsApp()
+
     fun sendViaEmail()
 
 }

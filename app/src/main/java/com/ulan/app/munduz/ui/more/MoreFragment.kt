@@ -31,50 +31,50 @@ import javax.inject.Inject
 class MoreFragment : BaseFragment(), MoreView {
 
     @Inject
-    lateinit var mPresenter: MorePresenter
+    lateinit var presenter: MorePresenter
 
-    private lateinit var mView: View
+    private lateinit var rootView: View
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        mView = inflater.inflate(R.layout.more_layout, container, false)
-        return mView
+        rootView = inflater.inflate(R.layout.more_layout, container, false)
+        return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mPresenter.setToolbar()
+        presenter.setToolbar()
 
         contacts_us.setOnClickListener {
-            mPresenter.goToContactsUs()
+            presenter.goToContactsUs()
         }
 
         write_tous_button.setOnClickListener {
-            mPresenter.goToWriteToUsFragment()
+            presenter.goToWriteToUsFragment()
         }
 
         about_app.setOnClickListener(){
-            mPresenter.goToAboutApp()
+            presenter.goToAboutApp()
         }
 
         instagram.setOnClickListener {
-            mPresenter.socialPageClicked(INSTAGRAM_PAGE)
+            presenter.socialPageClicked(INSTAGRAM_PAGE)
         }
 
         vkontakte.setOnClickListener {
-            mPresenter.socialPageClicked(VKONTAKTE_PAGE)
+            presenter.socialPageClicked(VKONTAKTE_PAGE)
         }
 
         odnoklassniki.setOnClickListener {
-            mPresenter.socialPageClicked(ODNOKLASSNIKI_PAGE)
+            presenter.socialPageClicked(ODNOKLASSNIKI_PAGE)
         }
 
         telegram.setOnClickListener {
-            mPresenter.socialPageClicked(TELEGRAM_PAGE)
+            presenter.socialPageClicked(TELEGRAM_PAGE)
         }
     }
 
@@ -94,7 +94,7 @@ class MoreFragment : BaseFragment(), MoreView {
     }
 
     private fun showSnackBar(text: String) {
-        val snack = Snackbar.make(mView, text, Snackbar.LENGTH_SHORT)
+        val snack = Snackbar.make(rootView, text, Snackbar.LENGTH_SHORT)
         snack.show()
     }
 
@@ -126,27 +126,18 @@ class MoreFragment : BaseFragment(), MoreView {
 
     override fun onDestroy() {
         super.onDestroy()
-        mPresenter.detachView()
+        presenter.detachView()
     }
 
     override fun onBackPressed(): Boolean {
         activity!!.supportFragmentManager
             .beginTransaction()
-            .replace(R.id.container, HomeFragment.newInstance(), HOME_FRAGMENT)
+            .replace(R.id.container, HomeFragment(), HOME_FRAGMENT)
             .addToBackStack(null)
             .commit()
         val bottomNav = activity!!.findViewById<BottomNavigationView>(R.id.bottom_navigation_menu)
         bottomNav.selectedItemId = R.id.home
         return true
-    }
-
-    companion object {
-        fun newInstance(): MoreFragment {
-            val args = Bundle()
-            val fragment = MoreFragment()
-            fragment.arguments = args
-            return fragment
-        }
     }
 
 }

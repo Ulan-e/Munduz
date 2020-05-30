@@ -16,39 +16,39 @@ import com.ulan.app.munduz.listeners.OnItemClickListener
 
 class ProductsAdapter : RecyclerView.Adapter<ProductsViewHolder> {
 
-    private var mContext: Context
-    private var mListener: OnItemClickListener
-    private lateinit var mProducts: MutableList<Product>
-    private lateinit var mFavoritesRepo: FavoritesRepository
-    private lateinit var mPurchasesRepo: PurchasesRepository
+    private var context: Context
+    private var listener: OnItemClickListener
+    private lateinit var products: MutableList<Product>
+    private lateinit var favoritesRepository: FavoritesRepository
+    private lateinit var purchasesRepository: PurchasesRepository
 
     constructor(context: Context, listener: OnItemClickListener) : super() {
-        this.mContext = context
-        this.mListener = listener
+        this.context = context
+        this.listener = listener
     }
 
     fun setProducts(products: MutableList<Product>) {
-        this.mProducts = products
+        this.products = products
     }
 
     fun setRepositories(favorites: FavoritesRepository, purchases: PurchasesRepository) {
-        this.mFavoritesRepo = favorites
-        this.mPurchasesRepo = purchases
+        this.favoritesRepository = favorites
+        this.purchasesRepository = purchases
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductsViewHolder {
-        val inflater = mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.product_item, parent, false)
         return ProductsViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        return mProducts.size
+        return products.size
     }
 
     override fun onBindViewHolder(holder: ProductsViewHolder, position: Int) {
-        val product = mProducts.get(position)
-        holder.bind(product, mListener)
+        val product = products.get(position)
+        holder.bind(product, listener)
         Picasso.get()
             .load(product.picture.urlImage)
             .fit()
@@ -57,13 +57,13 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsViewHolder> {
         holder.price.text = product.cost.toString() + RUBLE
 
         //Mark as favorite if product is in Database
-        if (mFavoritesRepo.isExist(product.id)) {
+        if (favoritesRepository.isExist(product.id)) {
             setAsFavorite(holder)
         } else {
             setAsNotFavorite(holder)
         }
 
-        if (mPurchasesRepo.isExist(product.id)) {
+        if (purchasesRepository.isExist(product.id)) {
             setInAlreadyBasket(holder)
         } else {
             setNotInBasket(holder)
@@ -71,42 +71,42 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsViewHolder> {
 
         //Click Handle (Favorite)
         holder.favorite.setOnClickListener {
-            if (mFavoritesRepo.isExist(product.id)) {
-                mFavoritesRepo.remove(product.id)
+            if (favoritesRepository.isExist(product.id)) {
+                favoritesRepository.remove(product.id)
                 setAsNotFavorite(holder)
             } else {
-                mFavoritesRepo.insert(product.id)
+                favoritesRepository.insert(product.id)
                 setAsFavorite(holder)
             }
         }
 
-        holder.in_out_basket.setOnClickListener {
-            if (mPurchasesRepo.isExist(product.id)) {
-                mPurchasesRepo.remove(product.id)
+        holder.basket.setOnClickListener {
+            if (purchasesRepository.isExist(product.id)) {
+                purchasesRepository.remove(product.id)
                 setNotInBasket(holder)
             } else {
-                mPurchasesRepo.insert(product)
+                purchasesRepository.insert(product)
                 setInAlreadyBasket(holder)
             }
         }
     }
 
     private fun setNotInBasket(holder: ProductsViewHolder) {
-        holder.in_out_basket.setBackgroundColor(mContext.resources.getColor(R.color.colorPrimary))
-        holder.in_out_basket.setTextColor(mContext.resources.getColor(R.color.white))
-        holder.in_out_basket.text = Constants.NOT_IN_BASKET
+        holder.basket.setBackgroundColor(context.resources.getColor(R.color.colorPrimary))
+        holder.basket.setTextColor(context.resources.getColor(R.color.white))
+        holder.basket.text = Constants.NOT_IN_BASKET
     }
 
     private fun setInAlreadyBasket(holder: ProductsViewHolder) {
-        holder.in_out_basket.setBackgroundColor(mContext.resources.getColor(R.color.white))
-        holder.in_out_basket.setTextColor(mContext.resources.getColor(R.color.colorPrimary))
-        holder.in_out_basket.text = Constants.ALREADY_IN_BASKET
+        holder.basket.setBackgroundColor(context.resources.getColor(R.color.white))
+        holder.basket.setTextColor(context.resources.getColor(R.color.colorPrimary))
+        holder.basket.text = Constants.ALREADY_IN_BASKET
     }
 
     private fun setAsFavorite(viewHolder: ProductsViewHolder) {
         viewHolder.favorite.setImageDrawable(
             ContextCompat.getDrawable(
-                mContext,
+                context,
                 R.drawable.ic_favorite_black_24dp
             )
         )
@@ -115,7 +115,7 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsViewHolder> {
     private fun setAsNotFavorite(viewHolder: ProductsViewHolder) {
         viewHolder.favorite.setImageDrawable(
             ContextCompat.getDrawable(
-                mContext,
+                context,
                 R.drawable.ic_favorite_border_24dp
             )
         )

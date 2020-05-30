@@ -13,8 +13,8 @@ import com.ulan.app.munduz.R
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
 import com.ulan.app.munduz.helpers.Constants.Companion.EXTRA_OPEN_BASKET
-import com.ulan.app.munduz.helpers.Constants.Companion.EXTRA_TURN_OFF_ADD_BASKET
 import com.ulan.app.munduz.helpers.Constants.Companion.EXTRA_PRODUCT_ARG
+import com.ulan.app.munduz.helpers.Constants.Companion.EXTRA_TURN_OFF_ADD_BASKET
 import com.ulan.app.munduz.helpers.Constants.Companion.NOT_IN_BASKET
 import com.ulan.app.munduz.helpers.Constants.Companion.OPEN_BASKET_ARG
 import com.ulan.app.munduz.helpers.Constants.Companion.TURN_OFF_ARG
@@ -27,19 +27,20 @@ import javax.inject.Inject
 class DetailsActivity : BaseActivity(), DetailsView {
 
     @Inject
-    lateinit var mPresenter: DetailsPresenter
+    lateinit var presenter: DetailsPresenter
 
-    private lateinit var mProduct: Product
-    private var mMenu: Menu? = null
-    private var mView: View? = null
+    private lateinit var product: Product
+
+    private var menu: Menu? = null
+    private var view: View? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.details_layout)
 
-        mProduct = intent.getParcelableExtra<Product>(EXTRA_PRODUCT_ARG)
+        product = intent.getParcelableExtra<Product>(EXTRA_PRODUCT_ARG)
         val turn = intent.getStringExtra(EXTRA_TURN_OFF_ADD_BASKET)
-        if(turn == TURN_OFF_ARG){
+        if (turn == TURN_OFF_ARG) {
             add_to_basket.setBackgroundColor(resources.getColor(R.color.white))
             add_to_basket.setTextColor(resources.getColor(R.color.colorPrimary))
             add_to_basket.text = Constants.ALREADY_IN_BASKET
@@ -47,13 +48,13 @@ class DetailsActivity : BaseActivity(), DetailsView {
             add_to_basket.isEnabled = false
         }
 
-        mPresenter.setToolbar()
-        mPresenter.setProduct(mProduct)
+        presenter.setToolbar()
+        presenter.setProduct(product)
 
-        mPresenter.isInAlreadyInBasket()
+        presenter.isInAlreadyInBasket()
 
         add_to_basket.setOnClickListener {
-            mPresenter.addToBasketClicked()
+            presenter.addToBasketClicked()
         }
     }
 
@@ -74,7 +75,7 @@ class DetailsActivity : BaseActivity(), DetailsView {
         supportActionBar!!.setDisplayShowTitleEnabled(false)
         image_progress_bar.visibility = View.VISIBLE
         Picasso.get()
-            .load(mProduct.picture.urlImage)
+            .load(product.picture.urlImage)
             .fit()
             .into(details_image, object : Callback {
                 override fun onSuccess() {
@@ -104,12 +105,12 @@ class DetailsActivity : BaseActivity(), DetailsView {
         product_priceFor.text = "Цена за " + product.priceFor
     }
 
-    override fun changeAddToBasketText(text: String) {
-        if(text == NOT_IN_BASKET){
+    override fun changeAddToBasketText(title: String) {
+        if (title == NOT_IN_BASKET) {
             add_to_basket.setBackgroundColor(resources.getColor(R.color.colorPrimary))
             add_to_basket.setTextColor(resources.getColor(R.color.white))
             add_to_basket.text = Constants.NOT_IN_BASKET
-        }else{
+        } else {
             add_to_basket.setBackgroundColor(resources.getColor(R.color.white))
             add_to_basket.setTextColor(resources.getColor(R.color.colorPrimary))
             add_to_basket.text = Constants.ALREADY_IN_BASKET
@@ -117,31 +118,31 @@ class DetailsActivity : BaseActivity(), DetailsView {
     }
 
     override fun addToBasket() {
-        mPresenter.addToBasketClicked()
+        presenter.addToBasketClicked()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.details_menu, menu)
-        this.mMenu = menu
-        mPresenter.isFavoriteProduct()
+        this.menu = menu
+        presenter.isFavoriteProduct()
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item!!.itemId) {
             R.id.favorite -> {
-                mPresenter.favoriteClicked()
+                presenter.favoriteClicked()
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
     override fun markAsFavorite() {
-        mMenu?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_favorite_black_24dp)
+        menu?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_favorite_black_24dp)
     }
 
     override fun markAsNotFavorite() {
-        mMenu?.getItem(0)?.icon =
+        menu?.getItem(0)?.icon =
             ContextCompat.getDrawable(this, R.drawable.ic_favorite_border_24dp)
     }
 
@@ -152,6 +153,6 @@ class DetailsActivity : BaseActivity(), DetailsView {
 
     override fun onDestroy() {
         super.onDestroy()
-        mPresenter.detachView()
+        presenter.detachView()
     }
 }

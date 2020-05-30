@@ -11,7 +11,7 @@ import androidx.appcompat.widget.Toolbar
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.ui.base.BaseFragment
 
-class AboutAppFragment: BaseFragment(){
+class AboutAppFragment : BaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,7 +23,7 @@ class AboutAppFragment: BaseFragment(){
         return view
     }
 
-    private fun showToolbar(){
+    private fun showToolbar() {
         val activity = (activity as AppCompatActivity)
         activity.findViewById<LinearLayout>(R.id.search_layout).visibility = View.GONE
         val toolbar = activity.findViewById<Toolbar>(R.id.main_toolbar)

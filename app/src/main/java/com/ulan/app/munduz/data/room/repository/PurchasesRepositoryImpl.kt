@@ -9,29 +9,29 @@ class PurchasesRepositoryImpl(private val purchasesDao: PurchasesDao) : Purchase
 
     override fun insert(product: Product) {
         val purchase = generateNewPurchase(product)
-        val table = purchasesDao.fetchAllPurchases()
+        val table = purchasesDao.fetchPurchases()
         if (table.isEmpty()) {
-            purchasesDao.insertPurchase(purchase)
+            purchasesDao.insert(purchase)
         } else {
             for (item in table) {
                 if (purchase.id != item.id) {
-                    purchasesDao.insertPurchase(purchase)
+                    purchasesDao.insert(purchase)
                 }
             }
         }
     }
 
     override fun remove(key: String) {
-        val table = purchasesDao.fetchAllPurchases()
+        val table = purchasesDao.fetchPurchases()
         for (item in table) {
             if (key == item.id) {
-                purchasesDao.removePurchase(item)
+                purchasesDao.remove(item)
             }
         }
     }
 
     override fun isExist(key: String): Boolean {
-        val table = purchasesDao.fetchAllPurchases()
+        val table = purchasesDao.fetchPurchases()
         for (item in table) {
             if (key == item.id) {
                 return true
@@ -41,24 +41,24 @@ class PurchasesRepositoryImpl(private val purchasesDao: PurchasesDao) : Purchase
     }
 
     override fun update(purchase: PurchaseEntity) {
-        val table = purchasesDao.fetchAllPurchases()
+        val table = purchasesDao.fetchPurchases()
         for (item in table) {
             if (purchase.id == item.id) {
-                purchasesDao.updatePurchase(purchase)
+                purchasesDao.update(purchase)
             }
         }
     }
 
-    override fun fetchPurchases(): MutableList<PurchaseEntity> {
-        return purchasesDao.fetchAllPurchases().toMutableList()
+    override fun fetchAll(): MutableList<PurchaseEntity> {
+        return purchasesDao.fetchPurchases().toMutableList()
     }
 
-    override fun sumOfPurchases(): Int {
-        return purchasesDao.sumOfPurchases()
+    override fun purchasesAmount(): Int {
+        return purchasesDao.purchasesAmount()
     }
 
     override fun removeAll() {
-        purchasesDao.removeAllPurchases()
+        purchasesDao.removePurchases()
     }
 
     private fun generateNewPurchase(product: Product): PurchaseEntity {

@@ -1,7 +1,7 @@
-package com.ulan.app.munduz.dagger.scopes
+package com.ulan.app.munduz.ui.main
 
 import javax.inject.Scope
 
 @Scope
 @Retention(AnnotationRetention.RUNTIME)
-annotation class DetailsScope
+annotation class MainScope 

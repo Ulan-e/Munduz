@@ -11,7 +11,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.adapter.FavoritesAdapter
@@ -26,32 +25,32 @@ import com.ulan.app.munduz.ui.home.HomeFragment
 import kotlinx.android.synthetic.main.favorite_layout.*
 import javax.inject.Inject
 
-class FavoriteFragment: BaseFragment(), FavoriteView, OnItemClickListener {
+class FavoriteFragment : BaseFragment(), FavoriteView, OnItemClickListener {
 
     @Inject
-    lateinit var mPresenter: FavoritePresenter
+    lateinit var presenter: FavoritePresenter
 
     @Inject
-    lateinit var mAdapter: FavoritesAdapter
+    lateinit var adapter: FavoritesAdapter
 
     @Inject
-    lateinit var mRoomRepository: FavoritesRepository
+    lateinit var favoritesRepository: FavoritesRepository
 
-    private lateinit var mRecyclerView: RecyclerView
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.favorite_layout, container, false)
-        mRecyclerView = view.findViewById(R.id.favorite_recycler_view)
-        return view
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.favorite_layout, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mPresenter.setToolbar()
-        mPresenter.loadProducts()
+        presenter.setToolbar()
+        presenter.loadProducts()
     }
 
-    override fun showToolbar(){
+    override fun showToolbar() {
         val activity = (activity as AppCompatActivity)
         activity.findViewById<LinearLayout>(R.id.search_layout).visibility = View.GONE
         val toolbar = activity.findViewById<Toolbar>(R.id.main_toolbar)
@@ -67,11 +66,11 @@ class FavoriteFragment: BaseFragment(), FavoriteView, OnItemClickListener {
     }
 
     override fun showProducts(products: MutableList<Product>) {
-        val layoutManager  =  LinearLayoutManager(activity!!.applicationContext)
-        mAdapter.setProducts(products)
-        mAdapter.setRepository(mRoomRepository)
-        mRecyclerView.layoutManager = layoutManager
-        mRecyclerView.adapter = mAdapter
+        val layoutManager = LinearLayoutManager(activity!!.applicationContext)
+        adapter.setProducts(products)
+        adapter.setRepository(favoritesRepository)
+        favorite_recycler_view.layoutManager = layoutManager
+        favorite_recycler_view.adapter = adapter
     }
 
     override fun onItemClick(product: Product) {
@@ -93,21 +92,11 @@ class FavoriteFragment: BaseFragment(), FavoriteView, OnItemClickListener {
 
     override fun onStart() {
         super.onStart()
-        mAdapter.notifyDataSetChanged()
+        adapter.notifyDataSetChanged()
     }
 
     override fun onStop() {
         super.onStop()
-        mPresenter.detachView()
+        presenter.detachView()
     }
-
-    companion object{
-        fun newInstance(): FavoriteFragment {
-            val args = Bundle()
-            val fragment = FavoriteFragment()
-            fragment.arguments = args
-            return fragment
-        }
-    }
-
 }

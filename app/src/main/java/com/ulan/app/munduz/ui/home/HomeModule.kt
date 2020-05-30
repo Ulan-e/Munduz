@@ -1,14 +1,10 @@
-package com.ulan.app.munduz.dagger.modules.fragmentmodule
+package com.ulan.app.munduz.ui.home
 
 import android.content.Context
 import com.ulan.app.munduz.adapter.ProductsAdapter
 import com.ulan.app.munduz.dagger.modules.RoomModule
-import com.ulan.app.munduz.dagger.scopes.MainScope
 import com.ulan.app.munduz.listeners.OnItemClickListener
-import com.ulan.app.munduz.ui.home.HomeFragment
-import com.ulan.app.munduz.ui.home.HomePresenter
-import com.ulan.app.munduz.ui.home.HomePresenterImpl
-import com.ulan.app.munduz.ui.home.HomeView
+import com.ulan.app.munduz.ui.main.MainScope
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -25,7 +21,7 @@ abstract class HomeModule {
     abstract fun homePresenter(homePresenter: HomePresenterImpl): HomePresenter
 
     @Module
-    companion object{
+    companion object {
 
         @JvmStatic
         @MainScope
@@ -37,7 +33,7 @@ abstract class HomeModule {
         @JvmStatic
         @MainScope
         @Provides
-        fun clickListener(homeFragment: HomeFragment): OnItemClickListener{
+        fun clickListener(homeFragment: HomeFragment): OnItemClickListener {
             return homeFragment
         }
     }

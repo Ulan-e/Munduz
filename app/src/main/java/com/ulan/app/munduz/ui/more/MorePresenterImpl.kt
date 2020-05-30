@@ -4,34 +4,34 @@ import javax.inject.Inject
 
 class MorePresenterImpl : MorePresenter {
 
-    private var mView: MoreView?
+    private var view: MoreView?
 
     @Inject
     constructor(mView: MoreView) {
-        this.mView = mView
+        this.view = mView
     }
 
     override fun setToolbar() {
-        mView?.showToolbar()
+        view?.showToolbar()
     }
 
     override fun goToContactsUs() {
-        mView?.showContactsUs()
+        view?.showContactsUs()
     }
 
     override fun goToAboutApp() {
-        mView?.showAboutApp()
+        view?.showAboutApp()
     }
 
     override fun goToWriteToUsFragment() {
-        mView?.showWriteUs()
+        view?.showWriteUs()
     }
 
     override fun socialPageClicked(siteUrl: String) {
-        mView?.showSocialPage(siteUrl)
+        view?.showSocialPage(siteUrl)
     }
 
     override fun detachView() {
-        mView = null
+        view = null
     }
 }

@@ -18,12 +18,12 @@ class SearchActivity : BaseActivity(), SearchView, OnItemClickListener,
     android.widget.SearchView.OnQueryTextListener {
 
     @Inject
-    lateinit var mPresenter: SearchPresenter
+    lateinit var presenter: SearchPresenter
 
     @Inject
-    lateinit var mAdapter: SearchAdapter
+    lateinit var adapter: SearchAdapter
 
-    private lateinit var mProducts: MutableList<Product>
+    private lateinit var products: MutableList<Product>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +36,7 @@ class SearchActivity : BaseActivity(), SearchView, OnItemClickListener,
         var hintText = resources.getString(R.string.search_hint)
         search_view_full.queryHint = hintText
 
-        mPresenter.loadProducts()
+        presenter.loadProducts()
 
         press_back.setOnClickListener {
             finish()
@@ -48,11 +48,11 @@ class SearchActivity : BaseActivity(), SearchView, OnItemClickListener,
     }
 
     override fun showProducts(products: MutableList<Product>) {
-        mProducts = products
+        this.products = products
         val layoutManager = LinearLayoutManager(this)
         search_results.layoutManager = layoutManager
-        mAdapter.setProducts(products)
-        search_results.adapter = mAdapter
+        adapter.setProducts(products)
+        search_results.adapter = adapter
     }
 
     override fun showEmptyData() {
@@ -66,12 +66,12 @@ class SearchActivity : BaseActivity(), SearchView, OnItemClickListener,
     }
 
     override fun onQueryTextSubmit(p0: String?): Boolean {
-        mAdapter.filter.filter(p0)
+        adapter.filter.filter(p0)
         return false
     }
 
     override fun onQueryTextChange(p0: String?): Boolean {
-        mAdapter.filter.filter(p0)
+        adapter.filter.filter(p0)
         return true
     }
 
@@ -82,6 +82,6 @@ class SearchActivity : BaseActivity(), SearchView, OnItemClickListener,
 
     override fun onDestroy() {
         super.onDestroy()
-        mPresenter.detachView()
+        presenter.detachView()
     }
 }

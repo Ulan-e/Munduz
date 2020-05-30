@@ -1,13 +1,16 @@
 package com.ulan.app.munduz.ui.orders
 
 import com.ulan.app.munduz.data.models.PurchaseEntity
-import com.ulan.app.munduz.helpers.SendEmailHelper
 import com.ulan.app.munduz.ui.base.BasePresenter
 
-interface OrdersPresenter : BasePresenter{
+interface OrdersPresenter : BasePresenter {
 
     fun setProducts(purchases: MutableList<PurchaseEntity>)
+
     fun setPurchasesAmount(amount: Int)
+
     fun sendButtonClicked()
+
     fun cancelButtonClicked()
+
 }

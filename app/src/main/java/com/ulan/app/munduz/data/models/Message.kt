@@ -7,4 +7,5 @@ import kotlinx.android.parcel.Parcelize
 data class Message(
     var email: String = "",
     var subject: String = "",
-    var body: String =""): Parcelable
+    var body: String = ""
+) : Parcelable

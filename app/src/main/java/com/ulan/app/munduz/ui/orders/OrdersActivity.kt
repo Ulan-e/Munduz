@@ -19,39 +19,42 @@ import javax.inject.Inject
 class OrdersActivity : BaseActivity(), OrdersView {
 
     @Inject
-    lateinit var mPresenter: OrdersPresenter
+    lateinit var presenter: OrdersPresenter
 
-    private lateinit var mPurchases: MutableList<PurchaseEntity>
-    private var mAmount: Int = 0
-    private lateinit var mRadioButtonText: String
+    private lateinit var purchases: MutableList<PurchaseEntity>
+
+    private lateinit var radioButtonText: String
+
+    private var amount: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.orders_layout)
-        mPurchases = intent.getParcelableArrayListExtra(EXTRA_PURCHASES_BUY_ARG)
-        mAmount = intent.getIntExtra(EXTRA_PRODUCT_AMOUNT_ARG, -1)
-        mRadioButtonText = resources.getString(R.string.delivery)
+        purchases = intent.getParcelableArrayListExtra(EXTRA_PURCHASES_BUY_ARG)
+        amount = intent.getIntExtra(EXTRA_PRODUCT_AMOUNT_ARG, -1)
+        radioButtonText = resources.getString(R.string.delivery)
         order_is_with_delivery.setOnCheckedChangeListener { group, checkedId ->
             if (R.id.delivery == checkedId) {
-                mRadioButtonText = resources.getString(R.string.delivery)
+                radioButtonText = resources.getString(R.string.delivery)
                 setVisibilitiesOfDelivery(View.VISIBLE)
                 setVisibilitiesOfPickUp(View.GONE)
             } else {
-                mRadioButtonText = resources.getString(R.string.pickup)
+                radioButtonText = resources.getString(R.string.pickup)
                 setVisibilitiesOfDelivery(View.GONE)
                 setVisibilitiesOfPickUp(View.VISIBLE)
             }
         }
 
-        mPresenter.setToolbar()
-        mPresenter.setProducts(mPurchases)
-        mPresenter.setPurchasesAmount(mAmount)
+        presenter.setToolbar()
+        presenter.setProducts(purchases)
+        presenter.setPurchasesAmount(amount)
 
         order_button.setOnClickListener {
-            mPresenter.sendButtonClicked()
+            presenter.sendButtonClicked()
         }
+
         cancel_button.setOnClickListener {
-            mPresenter.cancelButtonClicked()
+            presenter.cancelButtonClicked()
         }
 
     }
@@ -84,23 +87,23 @@ class OrdersActivity : BaseActivity(), OrdersView {
 
     override fun getInputOrder(): Order {
         var order = Order()
-        order.amountPurchases = mAmount
-        order.purchases = humanReadableArray(mPurchases).toString()
+        order.amountPurchases = amount
+        order.purchases = humanReadableArray(purchases).toString()
         order.clientName = client_name.text.toString()
         order.clientPhoneNumber = client_phone_number.text.toString()
-        if (mRadioButtonText == resources.getString(R.string.delivery)) {
+        if (radioButtonText == resources.getString(R.string.delivery)) {
             order.purchaseMethod =
-                mRadioButtonText + " Метро" + client_metro.text.toString() + "\n" + client_address.text.toString()
+                radioButtonText + " Метро" + client_metro.text.toString() + "\n" + client_address.text.toString()
         } else {
             order.purchaseMethod =
-                mRadioButtonText + client_time.text.toString()
+                radioButtonText + client_time.text.toString()
         }
         order.comment = client_comment.text.toString()
         return order
     }
 
     override fun isNotEmptyFieldsDelivery(): Boolean {
-        if (client_name.text.toString() == "" && client_phone_number.text.toString() == ""){
+        if (client_name.text.toString() == "" && client_phone_number.text.toString() == "") {
             var message = resources.getString(R.string.empty_fields)
             showSnackBar(message)
             return false
@@ -123,7 +126,7 @@ class OrdersActivity : BaseActivity(), OrdersView {
     }
 
     override fun showEmptyData() {
-
+        //TODO
     }
 
     private fun setVisibilitiesOfDelivery(visibility: Int) {
@@ -140,7 +143,7 @@ class OrdersActivity : BaseActivity(), OrdersView {
 
     override fun onDestroy() {
         super.onDestroy()
-        mPresenter.detachView()
+        presenter.detachView()
     }
 
 }

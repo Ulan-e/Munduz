@@ -41,24 +41,16 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.material:material:1.1.0'
-    implementation 'com.android.support:design:28.0.0'
-    implementation 'com.android.support:multidex:1.0.3'
-    implementation "com.android.support:support-emoji:28.0.0"
 
     //Database
     implementation 'com.google.firebase:firebase-database:16.0.4'
     implementation 'com.google.firebase:firebase-storage:16.0.4'
     implementation 'com.google.firebase:firebase-auth:16.0.5'
 
-    implementation "android.arch.persistence.room:runtime:1.1.1"
-    kapt "android.arch.persistence.room:compiler:1.1.1"
-    annotationProcessor 'androidx.room:room-compiler:2.2.3'
-
-    //RxJava2
-    implementation "io.reactivex.rxjava2:rxjava:2.2.10"
-    implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
-    implementation 'com.github.FrangSierra:RxFirebase:1.5.6'
+    //Room
+    implementation 'android.arch.persistence.room:runtime:1.1.1'
+    annotationProcessor 'android.arch.persistence.room:compiler:1.1.1'
+    kapt 'android.arch.persistence.room:compiler:1.1.1'
 
     //DI
     implementation 'com.google.dagger:dagger:2.16'
@@ -68,8 +60,7 @@ dependencies {
     kapt 'com.google.dagger:dagger-compiler:2.16'
     kapt 'com.google.dagger:dagger-android-processor:2.16'
 
-
-
+    //Network
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
@@ -77,12 +68,6 @@ dependencies {
 
     //ImageLoader
     implementation 'com.squareup.picasso:picasso:2.71828'
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
-
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.1.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
-
-    implementation 'androidx.emoji:emoji:1.0.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'

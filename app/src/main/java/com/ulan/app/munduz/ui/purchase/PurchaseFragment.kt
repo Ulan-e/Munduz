@@ -21,16 +21,16 @@ import javax.inject.Provider
 
 class PurchaseFragment : BaseDialogFragment(), PurchaseView {
 
-    private lateinit var mOrder: Order
+    private lateinit var order: Order
     private val PHONE = "79771734250"
     private val WHATSAPP = "http://api.whatsapp.com/send?phone="
     private val WHATSAPPTEXT = "&text="
 
     @Inject
-    lateinit var mPresenter: PurchasePresenter
+    lateinit var presenter: PurchasePresenter
 
     @Inject
-    lateinit var mSendEmailHelper: Provider<SendEmailHelper>
+    lateinit var sendEmailHelper: Provider<SendEmailHelper>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,18 +42,18 @@ class PurchaseFragment : BaseDialogFragment(), PurchaseView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val emailHelper = mSendEmailHelper.get()
-        mPresenter.setEmailHelper(emailHelper)
+        val emailHelper = sendEmailHelper.get()
+        presenter.setEmailHelper(emailHelper)
 
-        mOrder = arguments!!.getParcelable(Constants.ARGS_ORDER)
-        mPresenter.putOrderToMessage(mOrder)
+        order = arguments!!.getParcelable(Constants.ARGS_ORDER)
+        presenter.putOrderToMessage(order)
 
         via_email.setOnClickListener {
-            mPresenter.sendViaEmail()
+            presenter.sendViaEmail()
         }
 
         via_whatsapp.setOnClickListener {
-            mPresenter.sendViaWhatsApp()
+            presenter.sendViaWhatsApp()
         }
 
         cancel_purchase.setOnClickListener{
@@ -66,11 +66,11 @@ class PurchaseFragment : BaseDialogFragment(), PurchaseView {
     }
 
     override fun sendViaWhatsAppClicked() {
-        mPresenter.sendViaWhatsApp()
+        presenter.sendViaWhatsApp()
     }
 
     override fun sendViaEmailClicked() {
-        mPresenter.sendViaEmail()
+        presenter.sendViaEmail()
     }
 
     override fun showMessage(message: String) {
@@ -92,8 +92,6 @@ class PurchaseFragment : BaseDialogFragment(), PurchaseView {
                             + "Нажмите отправить --->>>>>"
                 )
             )
-            //Check if package exists or not. If not then code
-            //in catch block will be called
             startActivity(waIntent)
 
         } catch (e: PackageManager.NameNotFoundException) {

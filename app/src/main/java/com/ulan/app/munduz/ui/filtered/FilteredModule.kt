@@ -1,15 +1,9 @@
-package com.ulan.app.munduz.dagger.modules.fragmentmodule
+package com.ulan.app.munduz.ui.filtered
 
 import android.content.Context
 import com.ulan.app.munduz.adapter.ProductsAdapter
 import com.ulan.app.munduz.dagger.modules.RoomModule
-import com.ulan.app.munduz.dagger.scopes.FilteredScope
-import com.ulan.app.munduz.data.firebase.FirebaseRepository
 import com.ulan.app.munduz.listeners.OnItemClickListener
-import com.ulan.app.munduz.ui.filtered.FilteredFragment
-import com.ulan.app.munduz.ui.filtered.FilteredPresenter
-import com.ulan.app.munduz.ui.filtered.FilteredPresenterImpl
-import com.ulan.app.munduz.ui.filtered.FilteredView
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

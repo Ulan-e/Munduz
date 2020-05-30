@@ -8,12 +8,10 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.Fragment
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.ui.base.BaseFragment
-import kotlinx.android.synthetic.main.more_layout.*
 
-class ContactUsFragment: BaseFragment(){
+class ContactUsFragment : BaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,7 +23,7 @@ class ContactUsFragment: BaseFragment(){
         return view
     }
 
-    private fun showToolbar(){
+    private fun showToolbar() {
         val activity = (activity as AppCompatActivity)
         activity.findViewById<LinearLayout>(R.id.search_layout).visibility = View.GONE
         val toolbar = activity.findViewById<Toolbar>(R.id.main_toolbar)

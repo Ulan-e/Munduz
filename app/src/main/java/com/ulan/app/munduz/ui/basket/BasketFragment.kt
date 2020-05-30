@@ -12,7 +12,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.adapter.BasketAdapter
@@ -26,46 +25,42 @@ import com.ulan.app.munduz.helpers.RUBLE
 import com.ulan.app.munduz.listeners.OnChangeSumListener
 import com.ulan.app.munduz.listeners.OnItemBasketClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
-import com.ulan.app.munduz.ui.orders.OrdersActivity
 import com.ulan.app.munduz.ui.details.DetailsActivity
 import com.ulan.app.munduz.ui.home.HomeFragment
+import com.ulan.app.munduz.ui.orders.OrdersActivity
 import kotlinx.android.synthetic.main.basket_layout.*
 import javax.inject.Inject
 
 class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, OnChangeSumListener {
 
     @Inject
-    lateinit var mPresenter: BasketPresenter
+    lateinit var presenter: BasketPresenter
 
     @Inject
-    lateinit var mAdapter: BasketAdapter
+    lateinit var adapter: BasketAdapter
 
     @Inject
-    lateinit var mPurchasesRepository: PurchasesRepository
-
-    private lateinit var mRecyclerView: RecyclerView
+    lateinit var purchasesRepository: PurchasesRepository
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.basket_layout, container, false)
-        mRecyclerView = view.findViewById(R.id.basket_recycler_view)
-        return view
+        return inflater.inflate(R.layout.basket_layout, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mPresenter.setToolbar()
-        mPresenter.loadProducts()
+        presenter.setToolbar()
+        presenter.loadProducts()
 
         purchase_all.setOnClickListener {
-            mPresenter.purchaseButtonClicked()
+            presenter.purchaseButtonClicked()
         }
 
         open_catalog.setOnClickListener {
-            mPresenter.goToHomeButtonClicked()
+            presenter.goToHomeButtonClicked()
         }
     }
 
@@ -86,11 +81,11 @@ class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, On
 
     override fun showProducts(purchases: MutableList<PurchaseEntity>) {
         val layoutManager = LinearLayoutManager(activity!!.applicationContext)
-        mAdapter.setProducts(purchases)
-        mAdapter.setRepository(mPurchasesRepository)
-        mAdapter.setListener(this)
-        mRecyclerView.layoutManager = layoutManager
-        mRecyclerView.adapter = mAdapter
+        adapter.setProducts(purchases)
+        adapter.setRepository(purchasesRepository)
+        adapter.setListener(this)
+        basket_recycler_view.layoutManager = layoutManager
+        basket_recycler_view.adapter = adapter
     }
 
     override fun purchaseAll(purchases: MutableList<PurchaseEntity>, amount: Int) {
@@ -100,7 +95,7 @@ class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, On
         startActivity(intent)
     }
 
-    override fun showPurchasesAmount(amount: Int) {
+    override fun showAmountPurchases(amount: Int) {
         val amountText = activity!!.resources.getString(R.string.purchases_amount)
         sum_of_purchase.text = amountText + amount.toString() + RUBLE
     }
@@ -133,25 +128,16 @@ class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, On
 
     override fun onStart() {
         super.onStart()
-        mAdapter.notifyDataSetChanged()
+        adapter.notifyDataSetChanged()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        mPresenter.detachView()
-    }
-
-    companion object {
-        fun newInstance(): BasketFragment {
-            val args = Bundle()
-            val fragment = BasketFragment()
-            fragment.arguments = args
-            return fragment
-        }
+        presenter.detachView()
     }
 
     override fun onSumChanged() {
-        mPresenter.purchasesAmountChanged()
+        presenter.purchasesAmountChanged()
     }
 
     private fun goToHomePage() {
@@ -166,8 +152,8 @@ class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, On
     }
 
     private fun convertPurchaseToProduct(purchase: PurchaseEntity): Product {
-        var product = Product()
-        var pictures = Picture()
+        val product = Product()
+        val pictures = Picture()
         product.id = purchase.id
         product.name = purchase.name
         product.desc = purchase.desc

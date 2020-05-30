@@ -7,10 +7,10 @@ import com.ulan.app.munduz.data.models.FavoriteEntity
 interface FavoritesDao {
 
     @Query("SELECT * FROM favorite_table")
-    fun fetchFavorites() : List<FavoriteEntity>
+    fun fetchFavorites(): List<FavoriteEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(favorite: FavoriteEntity) : Long
+    fun insert(favorite: FavoriteEntity): Long
 
     @Delete
     fun remove(favorite: FavoriteEntity)

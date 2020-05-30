@@ -7,7 +7,7 @@ import javax.mail.*
 import javax.mail.internet.InternetAddress
 import javax.mail.internet.MimeMessage
 
-class SendEmailHelper : AsyncTask<Void, Void, Void>{
+class SendEmailHelper : AsyncTask<Void, Void, Void> {
 
     private val context: Context
     private lateinit var session: Session
@@ -20,7 +20,7 @@ class SendEmailHelper : AsyncTask<Void, Void, Void>{
         this.context = context
     }
 
-    fun setMessage(message: com.ulan.app.munduz.data.models.Message){
+    fun setMessage(message: com.ulan.app.munduz.data.models.Message) {
         this.email = message.email
         this.subject = message.subject
         this.body = message.body
@@ -36,30 +36,28 @@ class SendEmailHelper : AsyncTask<Void, Void, Void>{
         props.put("mail.smpt.socketFactory.port", "465")
         props.put("mail.smpt.socketFactory.class", "javax.net.ssl.SSLSocketFactory")
 
-        session = Session.getDefaultInstance(props, object : javax.mail.Authenticator(){
+        session = Session.getDefaultInstance(props, object : javax.mail.Authenticator() {
             override fun getPasswordAuthentication(): PasswordAuthentication {
                 return PasswordAuthentication(Config.EMAIL, Config.PASSWORD)
             }
         })
-        try{
+        try {
             var mime = MimeMessage(session)
             mime.setFrom(InternetAddress(Config.EMAIL))
             mime.addRecipient(Message.RecipientType.TO, InternetAddress(email))
             mime.setSubject(subject)
             mime.setText("$body\n")
             Transport.send(mime)
-        }catch (e: MessagingException){
+        } catch (e: MessagingException) {
             e.printStackTrace()
         }
         return null
     }
 
     class Config {
-        companion object{
+        companion object {
             const val EMAIL = "ulanbek255@gmail.com"
             const val PASSWORD = "ulitsapolbina16"
         }
     }
-
-
 }

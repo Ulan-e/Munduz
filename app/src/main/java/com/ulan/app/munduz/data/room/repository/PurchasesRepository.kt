@@ -6,11 +6,17 @@ import com.ulan.app.munduz.developer.Product
 interface PurchasesRepository {
 
     fun insert(product: Product)
-    fun isExist(key: String): Boolean
+
     fun update(purchase: PurchaseEntity)
-    fun fetchPurchases(): MutableList<PurchaseEntity>
+
+    fun fetchAll(): MutableList<PurchaseEntity>
+
     fun remove(key: String)
+
     fun removeAll()
-    fun sumOfPurchases() : Int
+
+    fun isExist(key: String): Boolean
+
+    fun purchasesAmount(): Int
 
 }
