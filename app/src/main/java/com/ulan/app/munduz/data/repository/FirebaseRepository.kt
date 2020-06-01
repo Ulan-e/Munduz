@@ -1,8 +1,8 @@
 package com.ulan.app.munduz.data.repository
 
-import com.ulan.app.munduz.listeners.ProductCallback
-import com.ulan.app.munduz.listeners.ProductsCallback
-import com.ulan.app.munduz.listeners.SliderImagesCallback
+import com.ulan.app.munduz.interfaces.ProductCallback
+import com.ulan.app.munduz.interfaces.ProductsCallback
+import com.ulan.app.munduz.interfaces.SliderImagesCallback
 
 interface FirebaseRepository {
 

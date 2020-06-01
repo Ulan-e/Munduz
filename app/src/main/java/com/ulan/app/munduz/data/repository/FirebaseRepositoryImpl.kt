@@ -11,9 +11,9 @@ import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_CATEGORY
 import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_ID
 import com.ulan.app.munduz.helpers.Constants.Companion.PRODUCT_RECOMMEND
 import com.ulan.app.munduz.helpers.Constants.Companion.TAG
-import com.ulan.app.munduz.listeners.ProductCallback
-import com.ulan.app.munduz.listeners.ProductsCallback
-import com.ulan.app.munduz.listeners.SliderImagesCallback
+import com.ulan.app.munduz.interfaces.ProductCallback
+import com.ulan.app.munduz.interfaces.ProductsCallback
+import com.ulan.app.munduz.interfaces.SliderImagesCallback
 
 class FirebaseRepositoryImpl: FirebaseRepository {
 
