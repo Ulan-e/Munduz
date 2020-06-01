@@ -4,4 +4,5 @@ interface BaseView {
 
     fun showToolbar()
     fun showEmptyData()
+
 }

@@ -26,7 +26,7 @@ class HomePresenterImpl : HomePresenter {
     }
 
     override fun loadProducts() {
-            firebaseRepository.loadRecommendedProducts(object : ProductsCallback {
+            firebaseRepository.loadProductsByRecommendation(object : ProductsCallback {
                 override fun onCallback(values: MutableList<Product>) {
                     if (values.size > 0) {
                         view?.showProducts(values)
@@ -39,7 +39,7 @@ class HomePresenterImpl : HomePresenter {
 
     override fun loadSliderImages() {
             firebaseRepository.loadSliderPhotos(object : SliderImagesCallback {
-                override fun onCallback(value: ArrayList<SliderImage>) {
+                override fun onCallback(value: List<SliderImage>) {
                     view?.showSliderImages(value)
                 }
             })

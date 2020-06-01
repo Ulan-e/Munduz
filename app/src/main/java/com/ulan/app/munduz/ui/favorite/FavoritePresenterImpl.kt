@@ -29,7 +29,7 @@ class FavoritePresenterImpl : FavoritePresenter {
         val keys = favoriteRepository.fetchAll()
         if (keys.size > 0) {
             for (item: FavoriteEntity in keys) {
-                firebaseRepository.loadLikedProduct(item.key, object : ProductCallback {
+                firebaseRepository.loadProductByKey(item.key, object : ProductCallback {
                     override fun onCallback(product: Product) {
                         products.add(product)
                         view?.showProducts(products)

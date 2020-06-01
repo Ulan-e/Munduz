@@ -19,15 +19,16 @@ class SearchPresenterImpl: SearchPresenter{
         view?.showToolbar()
     }
 
-    override fun loadProducts(): MutableList<Product> {
-        repository.loadSearchedProducts(object : ProductsCallback {
+    override fun loadProducts() {
+        repository.loadProducts(object : ProductsCallback {
             override fun onCallback(values: MutableList<Product>) {
-                view?.showProducts(values)
-                products = values
+                if (values.isNotEmpty()) {
+                    view?.showProducts(values)
+                } else {
+                    view?.showEmptyData()
+                }
             }
-
         })
-        return products
     }
 
     override fun detachView() {

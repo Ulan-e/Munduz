@@ -12,6 +12,6 @@ interface HomeView : BaseView {
 
     fun showProducts(products: MutableList<Product>)
 
-    fun showSliderImages(images: MutableList<SliderImage>)
+    fun showSliderImages(images: List<SliderImage>)
 
 }

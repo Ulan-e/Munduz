@@ -135,7 +135,7 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
         empty_new_products.visibility = View.VISIBLE
     }
 
-    override fun showSliderImages(images: MutableList<SliderImage>) {
+    override fun showSliderImages(images: List<SliderImage>) {
         sliderImageAdapter = SliderAdapter(activity!!.applicationContext, images)
         viewPager.adapter = sliderImageAdapter
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {

@@ -8,14 +8,12 @@ interface FirebaseRepository {
 
     fun loadProducts(callback: ProductsCallback)
 
-    fun loadSearchedProducts(callback: ProductsCallback)
+    fun loadProductsByRecommendation(callback: ProductsCallback)
 
-    fun loadRecommendedProducts(callback: ProductsCallback)
+    fun loadProductsByCategory(category: String, callback: ProductsCallback)
 
-    fun loadFilteredProducts(category: String, callback: ProductsCallback)
+    fun loadProductByKey(key: String, callback: ProductCallback)
 
-
-    fun loadLikedProduct(key: String, callback: ProductCallback)
 
     fun loadSliderPhotos(callback: SliderImagesCallback)
 }

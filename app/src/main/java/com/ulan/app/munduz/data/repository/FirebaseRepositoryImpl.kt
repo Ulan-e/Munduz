@@ -43,26 +43,7 @@ class FirebaseRepositoryImpl: FirebaseRepository {
         })
     }
 
-    override fun loadSearchedProducts(callback: ProductsCallback) {
-        val products = mutableListOf<Product>()
-        val productsRef = database.child(PRODUCTS_TABLE)
-        productsRef.keepSynced(true)
-        productsRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(p0: DataSnapshot) {
-                for (item: DataSnapshot in p0.children) {
-                    val product: Product? = item.getValue(Product::class.java)
-                    products.add(product!!)
-                }
-                callback.onCallback(products)
-            }
-
-            override fun onCancelled(p0: DatabaseError) {
-                Log.d(TAG, FIREBASE_ERROR_TITLE + p0.message)
-            }
-        })
-    }
-
-    override fun loadRecommendedProducts(callback: ProductsCallback) {
+    override fun loadProductsByRecommendation(callback: ProductsCallback) {
         val products = mutableListOf<Product>()
         val queryRef = database.child(PRODUCTS_TABLE).orderByChild(PRODUCT_RECOMMEND).equalTo(true)
         queryRef.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -80,7 +61,7 @@ class FirebaseRepositoryImpl: FirebaseRepository {
         })
     }
 
-    override fun loadFilteredProducts(category: String, callback: ProductsCallback) {
+    override fun loadProductsByCategory(category: String, callback: ProductsCallback) {
         val products = mutableListOf<Product>()
         val queryRef = database.child(PRODUCTS_TABLE).orderByChild(PRODUCT_CATEGORY).equalTo(category)
         queryRef.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -90,6 +71,27 @@ class FirebaseRepositoryImpl: FirebaseRepository {
                     products.add(product!!)
                 }
                 callback.onCallback(products)
+            }
+
+            override fun onCancelled(p0: DatabaseError) {
+                Log.d(TAG, FIREBASE_ERROR_TITLE + p0.message)
+            }
+        })
+    }
+
+    override fun loadProductByKey(key: String, callback: ProductCallback) {
+        var product = Product()
+        val queryRef = database.child(PRODUCTS_TABLE).orderByChild(PRODUCT_ID).equalTo(key)
+        queryRef.keepSynced(true)
+        queryRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(p0: DataSnapshot) {
+                for (item: DataSnapshot in p0.children) {
+                    val likedProduct: Product? = item.getValue(Product::class.java)
+                    if (likedProduct != null) {
+                        product = likedProduct
+                    }
+                }
+                callback.onCallback(product)
             }
 
             override fun onCancelled(p0: DatabaseError) {
@@ -108,28 +110,7 @@ class FirebaseRepositoryImpl: FirebaseRepository {
                     val image = item.getValue(SliderImage::class.java)
                     sliderImages.add(image!!)
                 }
-                callback.onCallback(sliderImages)
-            }
-
-            override fun onCancelled(p0: DatabaseError) {
-                Log.d(TAG, FIREBASE_ERROR_TITLE + p0.message)
-            }
-        })
-    }
-
-    override fun loadLikedProduct(key: String, callback: ProductCallback) {
-        var product = Product()
-        val queryRef = database.child(PRODUCTS_TABLE).orderByChild(PRODUCT_ID).equalTo(key)
-        queryRef.keepSynced(true)
-        queryRef.addListenerForSingleValueEvent(object : ValueEventListener {
-            override fun onDataChange(p0: DataSnapshot) {
-                for (item: DataSnapshot in p0.children) {
-                    val likedProduct: Product? = item.getValue(Product::class.java)
-                    if (likedProduct != null) {
-                        product = likedProduct
-                    }
-                }
-                callback.onCallback(product)
+                callback.onCallback(sliderImages.toList())
             }
 
             override fun onCancelled(p0: DatabaseError) {

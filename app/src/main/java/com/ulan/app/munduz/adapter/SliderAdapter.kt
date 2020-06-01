@@ -14,9 +14,9 @@ import com.ulan.app.munduz.data.models.SliderImage
 class SliderAdapter : PagerAdapter {
 
     private var context: Context
-    private var images: MutableList<SliderImage>
+    private var images: List<SliderImage>
 
-    constructor(context: Context, images: MutableList<SliderImage>) : super() {
+    constructor(context: Context, images: List<SliderImage>) : super() {
         this.context = context
         this.images = images
     }

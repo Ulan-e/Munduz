@@ -21,7 +21,7 @@ class FilteredPresenterImpl : FilteredPresenter {
     }
 
     override fun loadProductsByCategory(categoryName: String) {
-        repository?.loadFilteredProducts(categoryName, object : ProductsCallback {
+        repository?.loadProductsByCategory(categoryName, object : ProductsCallback {
             override fun onCallback(values: MutableList<Product>) {
                 if (values.size > 0) {
                     view?.showProducts(values)

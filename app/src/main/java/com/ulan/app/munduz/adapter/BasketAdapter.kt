@@ -19,6 +19,7 @@ class BasketAdapter : RecyclerView.Adapter<BasketViewHolder> {
 
     private var context: Context
     private var itemClickListener: OnItemBasketClickListener
+
     private lateinit var sumChangeListener: OnChangeSumListener
     private lateinit var purchases: MutableList<PurchaseEntity>
     private lateinit var purchasesRepository: PurchasesRepository
