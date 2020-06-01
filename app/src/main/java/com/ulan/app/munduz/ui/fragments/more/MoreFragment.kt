@@ -47,7 +47,7 @@ class MoreFragment : BaseFragment(), MoreView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        showToolbarTitle(resources.getString(R.string.more))
+        showToolbarTitle(false, resources.getString(R.string.more))
 
         contacts_us.setOnClickListener {
             presenter.goToContactsUs()
@@ -119,13 +119,7 @@ class MoreFragment : BaseFragment(), MoreView {
     }
 
     override fun onBackPressed(): Boolean {
-        activity!!.supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.container, HomeFragment(), HOME_FRAGMENT)
-            .addToBackStack(null)
-            .commit()
-        val bottomNav = activity!!.findViewById<BottomNavigationView>(R.id.bottom_navigation_menu)
-        bottomNav.selectedItemId = R.id.home
+        goToHome()
         return true
     }
 

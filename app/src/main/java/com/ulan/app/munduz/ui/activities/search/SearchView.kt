@@ -5,6 +5,8 @@ import com.ulan.app.munduz.ui.base.BaseView
 
 interface SearchView : BaseView {
 
+    fun showToolbar()
+
     fun showProducts(products: MutableList<Product>)
 
 }

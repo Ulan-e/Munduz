@@ -88,7 +88,7 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showToolbarTitle(resources.getString(R.string.app_name))
+        showToolbarTitle(true, resources.getString(R.string.app_name))
         presenter.loadSliderImages()
         presenter.loadProducts()
         handler = Handler()
@@ -174,7 +174,6 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
     }
 
     override fun onBackPressed(): Boolean {
-        super.onBackPressed()
         activity!!.moveTaskToBack(true)
         activity!!.finish()
         return true

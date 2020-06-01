@@ -2,17 +2,11 @@ package com.ulan.app.munduz.ui.fragments.basket
 
 
 import android.content.Intent
-import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.ui.adapter.BasketAdapter
 import com.ulan.app.munduz.data.models.Picture
@@ -20,13 +14,11 @@ import com.ulan.app.munduz.data.models.PurchaseEntity
 import com.ulan.app.munduz.data.room.repository.PurchasesRepository
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
-import com.ulan.app.munduz.helpers.Constants.Companion.HOME_FRAGMENT
 import com.ulan.app.munduz.helpers.RUBLE
 import com.ulan.app.munduz.interfaces.OnChangeSumListener
 import com.ulan.app.munduz.interfaces.OnItemBasketClickListener
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.activities.details.DetailsActivity
-import com.ulan.app.munduz.ui.fragments.home.HomeFragment
 import com.ulan.app.munduz.ui.activities.orders.OrdersActivity
 import kotlinx.android.synthetic.main.basket_layout.*
 import javax.inject.Inject
@@ -52,7 +44,7 @@ class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, On
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showToolbarTitle(resources.getString(R.string.basket))
+        showToolbarTitle(false ,resources.getString(R.string.basket))
         presenter.loadProducts()
 
         purchase_all.setOnClickListener {
@@ -62,19 +54,6 @@ class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, On
         open_catalog.setOnClickListener {
             presenter.goToHomeButtonClicked()
         }
-    }
-
-
-
-    override fun showToolbar() {
-        val activity = (activity as AppCompatActivity)
-        activity.findViewById<LinearLayout>(R.id.search_layout).visibility = View.GONE
-        val toolbar = activity.findViewById<Toolbar>(R.id.main_toolbar)
-        toolbar.navigationIcon = null
-        val textToolbar = toolbar.findViewById<TextView>(R.id.main_toolbar_text)
-        textToolbar.text = resources.getString(R.string.basket)
-        textToolbar.typeface = Typeface.DEFAULT
-        textToolbar.textSize = resources.getDimension(R.dimen.toolbar_title_size)
     }
 
     override fun showEmptyData() {
@@ -103,7 +82,7 @@ class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, On
     }
 
     override fun showGoToHome() {
-        goToHomePage()
+        goToHome()
     }
 
     override fun hidePurchaseButton() {
@@ -124,7 +103,7 @@ class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, On
     }
 
     override fun onBackPressed(): Boolean {
-        goToHomePage()
+        goToHome()
         return true
     }
 
@@ -140,17 +119,6 @@ class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, On
 
     override fun onSumChanged() {
         presenter.purchasesAmountChanged()
-    }
-
-    private fun goToHomePage() {
-        activity!!.supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.container, HomeFragment(), HOME_FRAGMENT)
-            .addToBackStack(null)
-            .commit()
-        val bottomNav =
-            activity!!.findViewById<BottomNavigationView>(R.id.bottom_navigation_menu)
-        bottomNav.selectedItemId = R.id.home
     }
 
     private fun convertPurchaseToProduct(purchase: PurchaseEntity): Product {

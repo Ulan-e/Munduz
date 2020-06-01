@@ -17,6 +17,7 @@ import com.ulan.app.munduz.data.room.repository.PurchasesRepository
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
 import com.ulan.app.munduz.helpers.Constants.Companion.CATEGORY_ARG
+import com.ulan.app.munduz.helpers.Constants.Companion.EMPTY_SPACE
 import com.ulan.app.munduz.helpers.Constants.Companion.HOME_FRAGMENT
 import com.ulan.app.munduz.helpers.isNetworkAvailable
 import com.ulan.app.munduz.interfaces.OnItemClickListener
@@ -53,9 +54,9 @@ class FilteredFragment : BaseFragment(), FilteredView, OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         titleCategory = arguments!!.getString(CATEGORY_ARG)
-        val emptySpace = "            "
-        val title = "$titleCategory $emptySpace"
-        showToolbarTitle(title)
+        val title = "$titleCategory $EMPTY_SPACE"
+        showToolbarTitle(false, title)
+
         presenter.loadProductsByCategory(titleCategory)
     }
 
@@ -95,6 +96,10 @@ class FilteredFragment : BaseFragment(), FilteredView, OnItemClickListener {
     override fun onDestroy() {
         super.onDestroy()
         presenter.detachView()
+    }
+
+    override fun onBackPressed(): Boolean {
+        return false
     }
 
     companion object {

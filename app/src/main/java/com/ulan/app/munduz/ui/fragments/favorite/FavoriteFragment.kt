@@ -46,7 +46,7 @@ class FavoriteFragment : BaseFragment(), FavoriteView, OnItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showToolbarTitle(resources.getString(R.string.favorite))
+        showToolbarTitle(false, resources.getString(R.string.favorite))
 
         presenter.loadProducts()
 
@@ -71,13 +71,7 @@ class FavoriteFragment : BaseFragment(), FavoriteView, OnItemClickListener {
     }
 
     override fun onBackPressed(): Boolean {
-        activity!!.supportFragmentManager
-            .beginTransaction()
-            .replace(R.id.container, HomeFragment(), HOME_FRAGMENT)
-            .addToBackStack(null)
-            .commit()
-        val bottomNav = activity!!.findViewById<BottomNavigationView>(R.id.bottom_navigation_menu)
-        bottomNav.selectedItemId = R.id.home
+        goToHome()
         return true
     }
 

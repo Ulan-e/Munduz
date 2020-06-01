@@ -5,6 +5,8 @@ import com.ulan.app.munduz.ui.base.BasePresenter
 
 interface OrdersPresenter : BasePresenter {
 
+    fun setToolbar()
+
     fun setProducts(purchases: MutableList<PurchaseEntity>)
 
     fun setPurchasesAmount(amount: Int)

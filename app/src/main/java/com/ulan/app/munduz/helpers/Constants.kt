@@ -8,6 +8,7 @@ class Constants {
         const val DATABASE_NAME = "database123"
 
         const val TAG = "munduz_app"
+        const val EMPTY_SPACE = "       "
 
         //Firebase
         const val FIREBASE_ERROR_TITLE = "Firebase Database Error "

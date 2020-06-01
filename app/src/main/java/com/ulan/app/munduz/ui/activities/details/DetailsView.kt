@@ -5,6 +5,8 @@ import com.ulan.app.munduz.ui.base.BaseView
 
 interface DetailsView : BaseView {
 
+    fun showToolbar()
+
     fun showProduct(product: Product)
 
     fun changeAddToBasketText(title: String)

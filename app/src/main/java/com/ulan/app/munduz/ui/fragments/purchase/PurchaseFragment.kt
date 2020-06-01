@@ -105,6 +105,8 @@ class PurchaseFragment : BaseDialogFragment(), PurchaseView {
         snack.show()
     }
 
+
+
     companion object {
         fun newInstance(order: Order): PurchaseFragment {
             val fragment = PurchaseFragment()

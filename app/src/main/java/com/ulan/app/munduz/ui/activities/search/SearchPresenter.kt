@@ -4,6 +4,8 @@ import com.ulan.app.munduz.ui.base.BasePresenter
 
 interface SearchPresenter : BasePresenter {
 
+    fun setToolbar()
+
     fun loadProducts()
 
 }

@@ -5,6 +5,8 @@ import com.ulan.app.munduz.ui.base.BasePresenter
 
 interface DetailsPresenter : BasePresenter {
 
+    fun setToolbar()
+
     fun setProduct(product: Product)
 
     fun isFavoriteProduct()

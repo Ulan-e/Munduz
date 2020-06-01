@@ -5,6 +5,8 @@ import com.ulan.app.munduz.ui.base.BaseView
 
 interface OrdersView : BaseView{
 
+    fun showToolbar()
+
     fun showTotalPurchases(total: String)
 
     fun getInputOrder() : Order
