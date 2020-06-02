@@ -11,14 +11,6 @@ import dagger.Provides
 @Module(includes = [RoomModule::class])
 abstract class FilteredModule {
 
-    @FilteredScope
-    @Binds
-    abstract fun filteredView(filteredFragment: FilteredFragment): FilteredView
-
-    @FilteredScope
-    @Binds
-    abstract fun filteredPresenter(presenter: FilteredPresenterImpl): FilteredPresenter
-
     @Module
     companion object {
 
@@ -35,6 +27,7 @@ abstract class FilteredModule {
         fun clickListener(filteredFragment: FilteredFragment): OnItemClickListener {
             return filteredFragment
         }
+
     }
 
 }

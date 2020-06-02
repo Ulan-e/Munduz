@@ -17,19 +17,20 @@ import com.ulan.app.munduz.helpers.Constants.Companion.EXTRA_PRODUCT_ARG
 import com.ulan.app.munduz.helpers.Constants.Companion.EXTRA_TURN_OFF_ADD_BASKET
 import com.ulan.app.munduz.helpers.Constants.Companion.NOT_IN_BASKET
 import com.ulan.app.munduz.helpers.Constants.Companion.OPEN_BASKET_ARG
-import com.ulan.app.munduz.helpers.Constants.Companion.TURN_OFF_ARG
+import com.ulan.app.munduz.helpers.Constants.Companion.BASKET_TURN_OFF
 import com.ulan.app.munduz.helpers.RUBLE
-import com.ulan.app.munduz.ui.base.BaseActivity
 import com.ulan.app.munduz.ui.activities.main.MainActivity
+import com.ulan.app.munduz.ui.base.BaseActivity
 import kotlinx.android.synthetic.main.details_layout.*
 import javax.inject.Inject
 
 class DetailsActivity : BaseActivity(), DetailsView {
 
     @Inject
-    lateinit var presenter: DetailsPresenter
+    lateinit var presenter: DetailsPresenterImpl
 
     private lateinit var product: Product
+    private lateinit var basketSwitcher: String
 
     private var menu: Menu? = null
     private var view: View? = null
@@ -39,22 +40,29 @@ class DetailsActivity : BaseActivity(), DetailsView {
         setContentView(R.layout.details_layout)
 
         product = intent.getParcelableExtra<Product>(EXTRA_PRODUCT_ARG)
-        val turn = intent.getStringExtra(EXTRA_TURN_OFF_ADD_BASKET)
-        if (turn == TURN_OFF_ARG) {
-            add_to_basket.setBackgroundColor(resources.getColor(R.color.white))
-            add_to_basket.setTextColor(resources.getColor(R.color.colorPrimary))
-            add_to_basket.text = Constants.ALREADY_IN_BASKET
-            add_to_basket.isClickable = false
-            add_to_basket.isEnabled = false
-        }
+        basketSwitcher = intent.getStringExtra(EXTRA_TURN_OFF_ADD_BASKET)
 
+        disableBasketButton(basketSwitcher)
+
+        presenter.bindView(this)
         presenter.setToolbar()
         presenter.setProduct(product)
-
-        presenter.isInAlreadyInBasket()
+        presenter.isInBasket()
 
         add_to_basket.setOnClickListener {
             presenter.addToBasketClicked()
+        }
+    }
+
+    private fun disableBasketButton(basketSwitcher: String?) {
+        if (basketSwitcher != null) {
+            if (basketSwitcher == BASKET_TURN_OFF) {
+                add_to_basket.setBackgroundColor(resources.getColor(R.color.white))
+                add_to_basket.setTextColor(resources.getColor(R.color.colorPrimary))
+                add_to_basket.text = Constants.ALREADY_IN_BASKET
+                add_to_basket.isClickable = false
+                add_to_basket.isEnabled = false
+            }
         }
     }
 
@@ -69,10 +77,22 @@ class DetailsActivity : BaseActivity(), DetailsView {
     }
 
     override fun showToolbar() {
+        toolbarSettings()
+        toolbarImage()
+    }
+
+    private fun toolbarSettings() {
         setSupportActionBar(product_toolbar)
         product_toolbar.title = ""
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         supportActionBar!!.setDisplayShowTitleEnabled(false)
+        product_toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp)
+        product_toolbar.setNavigationOnClickListener {
+            finish()
+        }
+    }
+
+    private fun toolbarImage() {
         image_progress_bar.visibility = View.VISIBLE
         Picasso.get()
             .load(product.picture.urlImage)
@@ -88,10 +108,6 @@ class DetailsActivity : BaseActivity(), DetailsView {
                 }
 
             })
-        product_toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp)
-        product_toolbar.setNavigationOnClickListener {
-            finish()
-        }
     }
 
     override fun showEmptyData() {
@@ -105,7 +121,7 @@ class DetailsActivity : BaseActivity(), DetailsView {
         product_priceFor.text = "Цена за " + product.priceFor
     }
 
-    override fun changeAddToBasketText(title: String) {
+    override fun changeBasketText(title: String) {
         if (title == NOT_IN_BASKET) {
             add_to_basket.setBackgroundColor(resources.getColor(R.color.colorPrimary))
             add_to_basket.setTextColor(resources.getColor(R.color.white))
@@ -124,7 +140,7 @@ class DetailsActivity : BaseActivity(), DetailsView {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.details_menu, menu)
         this.menu = menu
-        presenter.isFavoriteProduct()
+        presenter.isFavorite()
         return true
     }
 
@@ -153,6 +169,6 @@ class DetailsActivity : BaseActivity(), DetailsView {
 
     override fun onDestroy() {
         super.onDestroy()
-        presenter.detachView()
+        presenter.unbindView(this)
     }
 }

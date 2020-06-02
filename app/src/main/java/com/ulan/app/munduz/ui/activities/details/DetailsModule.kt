@@ -11,8 +11,4 @@ abstract class DetailsModule {
     @Binds
     abstract fun detailsActivity(detailsActivity: DetailsActivity): DetailsView
 
-    @DetailsScope
-    @Binds
-    abstract fun detailsPresenter(detailsPresenter: DetailsPresenterImpl): DetailsPresenter
-
 }

@@ -5,20 +5,18 @@ import androidx.annotation.CallSuper
 import androidx.annotation.NonNull
 import androidx.annotation.Nullable
 
-abstract class Presenter<V> {
+abstract class BasePresenter<V> {
 
     @Nullable
     private var view: V? = null
 
     protected fun getView(): V? {
-        Log.d("ulanbek", "getView() $view")
         return view
     }
 
     @CallSuper
     open fun bindView(@NonNull view: V) {
         this.view = view
-        Log.d("ulanbek", "bindView() $view")
     }
 
     @CallSuper
@@ -28,6 +26,6 @@ abstract class Presenter<V> {
         } else {
             throw IllegalStateException("Unexpected view")
         }
-        Log.d("ulanbek", "unbindView() $view")
     }
+
 }

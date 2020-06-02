@@ -28,7 +28,7 @@ import javax.inject.Inject
 class FavoriteFragment : BaseFragment(), FavoriteView, OnItemClickListener {
 
     @Inject
-    lateinit var presenter: FavoritePresenter
+    lateinit var presenter: FavoritePresenterImpl
 
     @Inject
     lateinit var adapter: FavoritesAdapter
@@ -48,6 +48,7 @@ class FavoriteFragment : BaseFragment(), FavoriteView, OnItemClickListener {
         super.onViewCreated(view, savedInstanceState)
         showToolbarTitle(false, resources.getString(R.string.favorite))
 
+        presenter.bindView(this)
         presenter.loadProducts()
 
     }
@@ -80,8 +81,8 @@ class FavoriteFragment : BaseFragment(), FavoriteView, OnItemClickListener {
         adapter.notifyDataSetChanged()
     }
 
-    override fun onStop() {
-        super.onStop()
-        presenter.detachView()
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.unbindView(this)
     }
 }

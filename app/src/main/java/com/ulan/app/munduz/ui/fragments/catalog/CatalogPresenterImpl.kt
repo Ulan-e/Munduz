@@ -1,22 +1,16 @@
 package com.ulan.app.munduz.ui.fragments.catalog
 
-class CatalogPresenterImpl : CatalogPresenter {
+import com.ulan.app.munduz.ui.base.BasePresenter
+import javax.inject.Inject
 
-    private var view: CatalogView?
-
-    constructor(view: CatalogView) {
-        this.view = view
-    }
+class CatalogPresenterImpl @Inject constructor() : BasePresenter<CatalogView>(), CatalogPresenter {
 
     override fun setCatalog(catalog: MutableList<String>) {
         if (catalog.size > 0) {
-            view?.showCatalog(catalog)
+            getView()?.showCatalog(catalog)
         } else {
-            view?.showEmptyData()
+            getView()?.showEmptyData()
         }
     }
 
-    override fun detachView() {
-        view = null
-    }
 }

@@ -19,7 +19,7 @@ import javax.inject.Inject
 class OrdersActivity : BaseActivity(), OrdersView {
 
     @Inject
-    lateinit var presenter: OrdersPresenter
+    lateinit var presenter: OrdersPresenterImpl
 
     private lateinit var purchases: MutableList<PurchaseEntity>
 
@@ -30,21 +30,13 @@ class OrdersActivity : BaseActivity(), OrdersView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.orders_layout)
+
         purchases = intent.getParcelableArrayListExtra(EXTRA_PURCHASES_BUY_ARG)
         amount = intent.getIntExtra(EXTRA_PRODUCT_AMOUNT_ARG, -1)
-        radioButtonText = resources.getString(R.string.delivery)
-        order_is_with_delivery.setOnCheckedChangeListener { group, checkedId ->
-            if (R.id.delivery == checkedId) {
-                radioButtonText = resources.getString(R.string.delivery)
-                setVisibilitiesOfDelivery(View.VISIBLE)
-                setVisibilitiesOfPickUp(View.GONE)
-            } else {
-                radioButtonText = resources.getString(R.string.pickup)
-                setVisibilitiesOfDelivery(View.GONE)
-                setVisibilitiesOfPickUp(View.VISIBLE)
-            }
-        }
 
+        setRadioButtonText()
+
+        presenter.bindView(this)
         presenter.setToolbar()
         presenter.setProducts(purchases)
         presenter.setPurchasesAmount(amount)
@@ -57,6 +49,21 @@ class OrdersActivity : BaseActivity(), OrdersView {
             presenter.cancelButtonClicked()
         }
 
+    }
+
+    private fun setRadioButtonText() {
+        radioButtonText = resources.getString(R.string.delivery)
+        order_is_with_delivery.setOnCheckedChangeListener { group, checkedId ->
+            if (R.id.delivery == checkedId) {
+                radioButtonText = resources.getString(R.string.delivery)
+                setVisibilitiesOfDelivery(View.VISIBLE)
+                setVisibilitiesOfPickUp(View.GONE)
+            } else {
+                radioButtonText = resources.getString(R.string.pickup)
+                setVisibilitiesOfDelivery(View.GONE)
+                setVisibilitiesOfPickUp(View.VISIBLE)
+            }
+        }
     }
 
     override fun showToolbar() {
@@ -76,7 +83,11 @@ class OrdersActivity : BaseActivity(), OrdersView {
     private fun humanReadableArray(purchases: MutableList<PurchaseEntity>): StringBuilder {
         var result: StringBuilder = java.lang.StringBuilder()
         for (item in purchases) {
-            result.append(item.name + ", цена за " + item.perPriceInc + ", цена " + item.priceInc + "\n")
+            result.append(
+                        item.name + ", цена за " +
+                        item.perPriceInc + ", цена " +
+                        item.priceInc + "\n"
+            )
         }
         return result
     }
@@ -102,7 +113,7 @@ class OrdersActivity : BaseActivity(), OrdersView {
         return order
     }
 
-    override fun isNotEmptyFieldsDelivery(): Boolean {
+    override fun isNotEmptyFields(): Boolean {
         if (client_name.text.toString() == "" && client_phone_number.text.toString() == "") {
             var message = resources.getString(R.string.empty_fields)
             showSnackBar(message)
@@ -143,7 +154,7 @@ class OrdersActivity : BaseActivity(), OrdersView {
 
     override fun onDestroy() {
         super.onDestroy()
-        presenter.detachView()
+        presenter.unbindView(this)
     }
 
 }

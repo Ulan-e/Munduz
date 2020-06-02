@@ -1,21 +1,20 @@
 package com.ulan.app.munduz.ui.activities.details
 
 import com.ulan.app.munduz.developer.Product
-import com.ulan.app.munduz.ui.base.BasePresenter
 
-interface DetailsPresenter : BasePresenter {
+interface DetailsPresenter {
 
     fun setToolbar()
 
     fun setProduct(product: Product)
 
-    fun isFavoriteProduct()
+    fun isFavorite()
 
-    fun isInAlreadyInBasket()
+    fun isInBasket()
 
     fun favoriteClicked()
 
-    fun unFavoriteClicked()
+    fun unfavoriteClicked()
 
     fun addToBasketClicked()
 

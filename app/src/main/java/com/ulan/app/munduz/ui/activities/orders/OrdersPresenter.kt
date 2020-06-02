@@ -1,9 +1,8 @@
 package com.ulan.app.munduz.ui.activities.orders
 
 import com.ulan.app.munduz.data.models.PurchaseEntity
-import com.ulan.app.munduz.ui.base.BasePresenter
 
-interface OrdersPresenter : BasePresenter {
+interface OrdersPresenter {
 
     fun setToolbar()
 

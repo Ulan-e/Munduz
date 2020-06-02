@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ulan.app.munduz.R
-import com.ulan.app.munduz.ui.adapter.BasketAdapter
 import com.ulan.app.munduz.data.models.Picture
 import com.ulan.app.munduz.data.models.PurchaseEntity
 import com.ulan.app.munduz.data.room.repository.PurchasesRepository
@@ -17,16 +16,17 @@ import com.ulan.app.munduz.helpers.Constants
 import com.ulan.app.munduz.helpers.RUBLE
 import com.ulan.app.munduz.interfaces.OnChangeSumListener
 import com.ulan.app.munduz.interfaces.OnItemBasketClickListener
-import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.activities.details.DetailsActivity
 import com.ulan.app.munduz.ui.activities.orders.OrdersActivity
+import com.ulan.app.munduz.ui.adapter.BasketAdapter
+import com.ulan.app.munduz.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.basket_layout.*
 import javax.inject.Inject
 
 class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, OnChangeSumListener {
 
     @Inject
-    lateinit var presenter: BasketPresenter
+    lateinit var presenter: BasketPresenterImpl
 
     @Inject
     lateinit var adapter: BasketAdapter
@@ -44,7 +44,9 @@ class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, On
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showToolbarTitle(false ,resources.getString(R.string.basket))
+        showToolbarTitle(false, resources.getString(R.string.basket))
+
+        presenter.bindView(this)
         presenter.loadProducts()
 
         purchase_all.setOnClickListener {
@@ -98,7 +100,7 @@ class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, On
     override fun onItemClick(purchase: PurchaseEntity) {
         val intent = Intent(activity, DetailsActivity::class.java)
         intent.putExtra(Constants.EXTRA_PRODUCT_ARG, convertPurchaseToProduct(purchase))
-        intent.putExtra(Constants.EXTRA_TURN_OFF_ADD_BASKET, Constants.TURN_OFF_ARG)
+        intent.putExtra(Constants.EXTRA_TURN_OFF_ADD_BASKET, Constants.BASKET_TURN_OFF)
         startActivity(intent)
     }
 
@@ -114,7 +116,7 @@ class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, On
 
     override fun onDestroy() {
         super.onDestroy()
-        presenter.detachView()
+        presenter.unbindView(this)
     }
 
     override fun onSumChanged() {

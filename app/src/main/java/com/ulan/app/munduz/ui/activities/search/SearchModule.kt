@@ -18,12 +18,6 @@ class SearchModule {
 
     @SearchScope
     @Provides
-    fun searchPresenter(searchView: SearchView, repository: FirebaseRepository): SearchPresenter {
-        return SearchPresenterImpl(searchView, repository)
-    }
-
-    @SearchScope
-    @Provides
     fun clickListener(searchActivity: SearchActivity): OnItemClickListener {
         return searchActivity
     }

@@ -16,22 +16,6 @@ class BasketModule {
 
     @MainScope
     @Provides
-    fun basketView(fragment: BasketFragment): BasketView {
-        return fragment
-    }
-
-    @MainScope
-    @Provides
-    fun basketPresenter(
-        view: BasketView,
-        firebaseRepository: FirebaseRepository,
-        purchasesRepository: PurchasesRepository
-    ): BasketPresenter {
-        return BasketPresenterImpl(view, firebaseRepository, purchasesRepository)
-    }
-
-    @MainScope
-    @Provides
     fun basketListener(fragment: BasketFragment): OnItemBasketClickListener {
         return fragment
     }

@@ -9,7 +9,7 @@ interface DetailsView : BaseView {
 
     fun showProduct(product: Product)
 
-    fun changeAddToBasketText(title: String)
+    fun changeBasketText(title: String)
 
     fun addToBasket()
 

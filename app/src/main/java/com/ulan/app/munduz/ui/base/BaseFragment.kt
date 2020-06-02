@@ -28,7 +28,6 @@ abstract class BaseFragment : DaggerFragment(), OnBackPressedListener {
     }
 
     protected fun showToolbarTitle(isAppName: Boolean, title: String) {
-        activity!!.findViewById<LinearLayout>(R.id.search_layout).visibility = View.GONE
         val toolbar = activity!!.findViewById<Toolbar>(R.id.main_toolbar)
         toolbar.navigationIcon = null
 
@@ -36,10 +35,12 @@ abstract class BaseFragment : DaggerFragment(), OnBackPressedListener {
         textToolbar.text = title
 
         if (isAppName) {
+            activity!!.findViewById<LinearLayout>(R.id.search_layout).visibility = View.VISIBLE
             val typeface = ResourcesCompat.getFont(activity!!, R.font.forte)
             textToolbar.typeface = typeface
             textToolbar.textSize = resources.getDimension(R.dimen.toolbar_app_title_size)
         } else {
+            activity!!.findViewById<LinearLayout>(R.id.search_layout).visibility = View.GONE
             val typeface = ResourcesCompat.getFont(activity!!, R.font.calibri)
             textToolbar.typeface = typeface
             textToolbar.textSize = resources.getDimension(R.dimen.toolbar_title_size)

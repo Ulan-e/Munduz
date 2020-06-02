@@ -6,6 +6,4 @@ interface MainPresenter {
 
     fun addFragment(fragment: BaseFragment, title: String)
 
-    fun detachView()
-
 }

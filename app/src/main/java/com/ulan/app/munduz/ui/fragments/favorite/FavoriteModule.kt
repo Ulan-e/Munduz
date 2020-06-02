@@ -15,22 +15,6 @@ class FavoriteModule {
 
     @MainScope
     @Provides
-    fun favoriteView(fragment: FavoriteFragment): FavoriteView {
-        return fragment
-    }
-
-    @MainScope
-    @Provides
-    fun favoritePresenter(
-        view: FavoriteView,
-        firebaseRepository: FirebaseRepository,
-        favoriteRepository: FavoritesRepository
-    ): FavoritePresenter {
-        return FavoritePresenterImpl(view, firebaseRepository, favoriteRepository)
-    }
-
-    @MainScope
-    @Provides
     fun clickListener(fragment: FavoriteFragment): OnItemClickListener {
         return fragment
     }

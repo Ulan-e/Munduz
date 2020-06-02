@@ -11,7 +11,4 @@ abstract class MoreModule {
     @Binds
     abstract fun moreView(moreFragment: MoreFragment): MoreView
 
-    @MainScope
-    @Binds
-    abstract fun morePresenter(morePresenter: MorePresenterImpl): MorePresenter
 }

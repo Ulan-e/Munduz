@@ -1,33 +1,24 @@
 package com.ulan.app.munduz.ui.fragments.more
 
+import com.ulan.app.munduz.ui.base.BasePresenter
 import javax.inject.Inject
 
-class MorePresenterImpl : MorePresenter {
-
-    private var view: MoreView?
-
-    @Inject
-    constructor(mView: MoreView) {
-        this.view = mView
-    }
+class MorePresenterImpl @Inject constructor() : BasePresenter<MoreView>(),MorePresenter {
 
     override fun goToContactsUs() {
-        view?.showContactsUs()
+        getView()?.showContactsUs()
     }
 
     override fun goToAboutApp() {
-        view?.showAboutApp()
+        getView()?.showAboutApp()
     }
 
     override fun goToWriteToUsFragment() {
-        view?.showWriteUs()
+        getView()?.showWriteUs()
     }
 
     override fun socialPageClicked(siteUrl: String) {
-        view?.showSocialPage(siteUrl)
+        getView()?.showSocialPage(siteUrl)
     }
 
-    override fun detachView() {
-        view = null
-    }
 }

@@ -18,7 +18,7 @@ class SearchActivity : BaseActivity(), SearchView, OnItemClickListener,
     android.widget.SearchView.OnQueryTextListener {
 
     @Inject
-    lateinit var presenter: SearchPresenter
+    lateinit var presenter: SearchPresenterImpl
 
     @Inject
     lateinit var adapter: SearchAdapter
@@ -28,6 +28,8 @@ class SearchActivity : BaseActivity(), SearchView, OnItemClickListener,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.search_layout)
+
+        presenter.bindView(this)
 
         search_view_full.setIconifiedByDefault(false)
         search_view_full.requestFocus()
@@ -82,6 +84,6 @@ class SearchActivity : BaseActivity(), SearchView, OnItemClickListener,
 
     override fun onDestroy() {
         super.onDestroy()
-        presenter.detachView()
+        presenter.unbindView(this)
     }
 }

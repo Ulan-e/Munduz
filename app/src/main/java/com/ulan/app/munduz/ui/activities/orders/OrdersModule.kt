@@ -12,10 +12,4 @@ class OrdersModule {
         return activity
     }
 
-    @OrdersScope
-    @Provides
-    fun ordersPresenter(view: OrdersView): OrdersPresenter {
-        return OrdersPresenterImpl(view)
-    }
-
 }

@@ -3,6 +3,7 @@ package com.ulan.app.munduz.ui.fragments.home
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +23,8 @@ import com.ulan.app.munduz.data.models.SliderImage
 import com.ulan.app.munduz.data.room.repository.FavoritesRepository
 import com.ulan.app.munduz.data.room.repository.PurchasesRepository
 import com.ulan.app.munduz.developer.Product
+import com.ulan.app.munduz.helpers.Constants
+import com.ulan.app.munduz.helpers.Constants.Companion.BASKET_TURN_ON
 import com.ulan.app.munduz.helpers.Constants.Companion.EXTRA_PRODUCT_ARG
 import com.ulan.app.munduz.helpers.Constants.Companion.HOME_FRAGMENT
 import com.ulan.app.munduz.helpers.isNetworkAvailable
@@ -36,7 +39,7 @@ import javax.inject.Inject
 class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
 
     @Inject
-    lateinit var presenter: HomePresenter
+    lateinit var presenter: HomePresenterImpl
 
     @Inject
     lateinit var productsAdapter: ProductsAdapter
@@ -71,6 +74,11 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d("ulanbek", "HomeFragment onCreate()")
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -89,6 +97,7 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         showToolbarTitle(true, resources.getString(R.string.app_name))
+        presenter.bindView(this)
         presenter.loadSliderImages()
         presenter.loadProducts()
         handler = Handler()
@@ -143,13 +152,13 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
             override fun onPageSelected(position: Int) {
                 page = position
             }
-
         })
     }
 
     override fun onItemClick(product: Product) {
         val intent = Intent(activity, DetailsActivity::class.java)
         intent.putExtra(EXTRA_PRODUCT_ARG, product)
+        intent.putExtra(Constants.EXTRA_TURN_OFF_ADD_BASKET, BASKET_TURN_ON)
         startActivity(intent)
     }
 
@@ -170,7 +179,7 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        presenter.detachView()
+        presenter.unbindView(this)
     }
 
     override fun onBackPressed(): Boolean {

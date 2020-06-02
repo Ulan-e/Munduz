@@ -3,36 +3,33 @@ package com.ulan.app.munduz.ui.activities.search
 import com.ulan.app.munduz.data.repository.FirebaseRepository
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.interfaces.ProductsCallback
+import com.ulan.app.munduz.ui.base.BasePresenter
+import javax.inject.Inject
 
-class SearchPresenterImpl: SearchPresenter{
+class SearchPresenterImpl : BasePresenter<SearchView>, SearchPresenter {
 
-    private var view: SearchView?
     private var repository: FirebaseRepository
     private var products = mutableListOf<Product>()
 
-    constructor(view: SearchView, repository: FirebaseRepository) {
-        this.view = view
+    @Inject
+    constructor(repository: FirebaseRepository) {
         this.repository = repository
     }
 
     override fun setToolbar() {
-        view?.showToolbar()
+        getView()?.showToolbar()
     }
 
     override fun loadProducts() {
         repository.loadProducts(object : ProductsCallback {
             override fun onCallback(values: MutableList<Product>) {
                 if (values.isNotEmpty()) {
-                    view?.showProducts(values)
+                    getView()?.showProducts(values)
                 } else {
-                    view?.showEmptyData()
+                    getView()?.showEmptyData()
                 }
             }
         })
-    }
-
-    override fun detachView() {
-        this.view = null
     }
 
 }

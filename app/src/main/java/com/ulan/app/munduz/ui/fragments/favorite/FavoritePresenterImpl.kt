@@ -5,18 +5,17 @@ import com.ulan.app.munduz.data.models.FavoriteEntity
 import com.ulan.app.munduz.data.room.repository.FavoritesRepository
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.interfaces.ProductCallback
+import com.ulan.app.munduz.ui.base.BasePresenter
 import javax.inject.Inject
 
-class FavoritePresenterImpl : FavoritePresenter {
+class FavoritePresenterImpl : BasePresenter<FavoriteView>, FavoritePresenter {
 
-    private var view: FavoriteView?
     private var firebaseRepository: FirebaseRepository
     private var favoriteRepository: FavoritesRepository
     private var products = mutableListOf<Product>()
 
     @Inject
-    constructor(view: FavoriteView, firebase: FirebaseRepository, favorites: FavoritesRepository) {
-        this.view = view
+    constructor(firebase: FirebaseRepository, favorites: FavoritesRepository) {
         this.firebaseRepository = firebase
         this.favoriteRepository = favorites
     }
@@ -28,16 +27,12 @@ class FavoritePresenterImpl : FavoritePresenter {
                 firebaseRepository.loadProductByKey(item.key, object : ProductCallback {
                     override fun onCallback(product: Product) {
                         products.add(product)
-                        view?.showProducts(products)
+                        getView()?.showProducts(products)
                     }
                 })
             }
         } else {
-            view?.showEmptyData()
+            getView()?.showEmptyData()
         }
-    }
-
-    override fun detachView() {
-        view = null
     }
 }

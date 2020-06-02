@@ -1,8 +1,6 @@
 package com.ulan.app.munduz.ui.fragments.more
 
-import com.ulan.app.munduz.ui.base.BasePresenter
-
-interface MorePresenter : BasePresenter {
+interface MorePresenter {
 
     fun goToContactsUs()
 

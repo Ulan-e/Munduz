@@ -30,7 +30,7 @@ import javax.inject.Inject
 class FilteredFragment : BaseFragment(), FilteredView, OnItemClickListener {
 
     @Inject
-    lateinit var presenter: FilteredPresenter
+    lateinit var presenter: FilteredPresenterImpl
 
     @Inject
     lateinit var adapter: ProductsAdapter
@@ -57,6 +57,7 @@ class FilteredFragment : BaseFragment(), FilteredView, OnItemClickListener {
         val title = "$titleCategory $EMPTY_SPACE"
         showToolbarTitle(false, title)
 
+        presenter.bindView(this)
         presenter.loadProductsByCategory(titleCategory)
     }
 
@@ -90,12 +91,13 @@ class FilteredFragment : BaseFragment(), FilteredView, OnItemClickListener {
     override fun onItemClick(product: Product) {
         val intent = Intent(activity, DetailsActivity::class.java)
         intent.putExtra(Constants.EXTRA_PRODUCT_ARG, product)
+        intent.putExtra(Constants.EXTRA_TURN_OFF_ADD_BASKET, Constants.BASKET_TURN_ON)
         startActivity(intent)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        presenter.detachView()
+        presenter.unbindView(this)
     }
 
     override fun onBackPressed(): Boolean {

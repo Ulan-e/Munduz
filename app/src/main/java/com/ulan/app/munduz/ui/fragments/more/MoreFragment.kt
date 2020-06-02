@@ -31,7 +31,7 @@ import javax.inject.Inject
 class MoreFragment : BaseFragment(), MoreView {
 
     @Inject
-    lateinit var presenter: MorePresenter
+    lateinit var presenter: MorePresenterImpl
 
     private lateinit var rootView: View
 
@@ -48,6 +48,8 @@ class MoreFragment : BaseFragment(), MoreView {
         super.onViewCreated(view, savedInstanceState)
 
         showToolbarTitle(false, resources.getString(R.string.more))
+
+        presenter.bindView(this)
 
         contacts_us.setOnClickListener {
             presenter.goToContactsUs()
@@ -115,7 +117,7 @@ class MoreFragment : BaseFragment(), MoreView {
 
     override fun onDestroy() {
         super.onDestroy()
-        presenter.detachView()
+        presenter.unbindView(this)
     }
 
     override fun onBackPressed(): Boolean {

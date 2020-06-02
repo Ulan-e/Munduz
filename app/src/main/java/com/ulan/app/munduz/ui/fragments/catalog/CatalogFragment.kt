@@ -1,6 +1,7 @@
 package com.ulan.app.munduz.ui.fragments.catalog
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,12 +18,17 @@ import javax.inject.Inject
 class CatalogFragment : BaseFragment(), CatalogView, OnCategoryClickListener {
 
     @Inject
-    lateinit var presenter: CatalogPresenter
+    lateinit var presenter: CatalogPresenterImpl
 
     @Inject
     lateinit var adapter: CatalogAdapter
 
     private var images = intArrayOf()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.d("ulanbek", "HomeFragment onCreate()")
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,6 +40,7 @@ class CatalogFragment : BaseFragment(), CatalogView, OnCategoryClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        presenter.bindView(this)
         showToolbarTitle(true, resources.getString(R.string.app_name))
 
         val catalog = activity!!.applicationContext.resources.getStringArray(R.array.category)
@@ -75,7 +82,7 @@ class CatalogFragment : BaseFragment(), CatalogView, OnCategoryClickListener {
 
     override fun onDestroy() {
         super.onDestroy()
-        presenter.detachView()
+        presenter.unbindView(this)
     }
 
     override fun onBackPressed(): Boolean {

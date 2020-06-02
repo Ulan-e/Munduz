@@ -2,6 +2,7 @@ package com.ulan.app.munduz.ui.activities.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ulan.app.munduz.R
@@ -12,6 +13,7 @@ import com.ulan.app.munduz.helpers.Constants.Companion.FAVORITE_FRAGMENT
 import com.ulan.app.munduz.helpers.Constants.Companion.HOME_FRAGMENT
 import com.ulan.app.munduz.helpers.Constants.Companion.MORE_FRAGMENT
 import com.ulan.app.munduz.helpers.Constants.Companion.OPEN_BASKET_ARG
+import com.ulan.app.munduz.ui.activities.search.SearchActivity
 import com.ulan.app.munduz.ui.base.BaseActivity
 import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.fragments.basket.BasketFragment
@@ -19,7 +21,6 @@ import com.ulan.app.munduz.ui.fragments.catalog.CatalogFragment
 import com.ulan.app.munduz.ui.fragments.favorite.FavoriteFragment
 import com.ulan.app.munduz.ui.fragments.home.HomeFragment
 import com.ulan.app.munduz.ui.fragments.more.MoreFragment
-import com.ulan.app.munduz.ui.activities.search.SearchActivity
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -27,7 +28,7 @@ import javax.inject.Inject
 class MainActivity : BaseActivity(), MainView {
 
     @Inject
-    lateinit var presenter: MainPresenter
+    lateinit var presenter: MainPresenterImpl
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -35,13 +36,16 @@ class MainActivity : BaseActivity(), MainView {
         setContentView(R.layout.activity_main)
 
         val title = intent.getStringExtra(EXTRA_OPEN_BASKET)
+
+        presenter.bindView(this)
+
         if (title == OPEN_BASKET_ARG) {
             initBottomNav(R.id.basket)
-        }else{
+        } else {
             initBottomNav(R.id.home)
         }
 
-        button_click.setOnClickListener{
+        button_click.setOnClickListener {
             startActivity(Intent(this@MainActivity, SearchActivity::class.java))
         }
     }
@@ -89,6 +93,7 @@ class MainActivity : BaseActivity(), MainView {
             .replace(R.id.container, fragment, title)
             .addToBackStack(null)
             .commit()
+
     }
 
     override fun onBackPressed() {
@@ -103,5 +108,10 @@ class MainActivity : BaseActivity(), MainView {
                 fragment.onBackPressed()
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.unbindView(this)
     }
 }

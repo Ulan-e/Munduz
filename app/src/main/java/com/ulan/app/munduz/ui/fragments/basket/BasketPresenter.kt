@@ -1,8 +1,6 @@
 package com.ulan.app.munduz.ui.fragments.basket
 
-import com.ulan.app.munduz.ui.base.BasePresenter
-
-interface BasketPresenter : BasePresenter {
+interface BasketPresenter {
 
     fun loadProducts()
 

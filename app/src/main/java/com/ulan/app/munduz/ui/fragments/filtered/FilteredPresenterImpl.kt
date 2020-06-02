@@ -3,16 +3,15 @@ package com.ulan.app.munduz.ui.fragments.filtered
 import com.ulan.app.munduz.data.repository.FirebaseRepository
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.interfaces.ProductsCallback
+import com.ulan.app.munduz.ui.base.BasePresenter
 import javax.inject.Inject
 
-class FilteredPresenterImpl : FilteredPresenter {
+class FilteredPresenterImpl : BasePresenter<FilteredView>, FilteredPresenter {
 
-    private var view: FilteredView? = null
     private var repository: FirebaseRepository? = null
 
     @Inject
-    constructor(view: FilteredView, repository: FirebaseRepository) {
-        this.view = view
+    constructor(repository: FirebaseRepository) {
         this.repository = repository
     }
 
@@ -20,17 +19,12 @@ class FilteredPresenterImpl : FilteredPresenter {
         repository?.loadProductsByCategory(categoryName, object : ProductsCallback {
             override fun onCallback(values: MutableList<Product>) {
                 if (values.size > 0) {
-                    view?.showProducts(values)
+                    getView()?.showProducts(values)
                 } else {
-                    view?.showEmptyData()
+                    getView()?.showEmptyData()
                 }
             }
         })
-    }
-
-    override fun detachView() {
-        view = null
-        repository = null
     }
 
 }

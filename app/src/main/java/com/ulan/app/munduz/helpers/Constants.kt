@@ -30,7 +30,8 @@ class Constants {
         const val OPEN_BASKET_ARG = "open_basket"
 
         const val EXTRA_TURN_OFF_ADD_BASKET = "turn_off_basket"
-        const val TURN_OFF_ARG = "basket_off"
+        const val BASKET_TURN_OFF = "basket_off"
+        const val BASKET_TURN_ON = "basket_on"
 
         //Social Network
         const val INSTAGRAM_PAGE = "https://www.instagram.com/munduz.ru"

@@ -11,7 +11,7 @@ interface OrdersView : BaseView{
 
     fun getInputOrder() : Order
 
-    fun isNotEmptyFieldsDelivery() : Boolean
+    fun isNotEmptyFields() : Boolean
 
     fun cancelOrder()
 

@@ -10,4 +10,5 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
     }
+
 }
