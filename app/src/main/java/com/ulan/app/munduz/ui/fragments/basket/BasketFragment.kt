@@ -44,6 +44,7 @@ class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, On
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         showToolbarTitle(false, resources.getString(R.string.basket))
 
         presenter.bindView(this)
@@ -64,9 +65,11 @@ class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, On
 
     override fun showProducts(purchases: MutableList<PurchaseEntity>) {
         val layoutManager = LinearLayoutManager(activity!!.applicationContext)
-        adapter.setProducts(purchases)
-        adapter.setRepository(purchasesRepository)
-        adapter.setListener(this)
+        adapter.apply {
+            setProducts(purchases)
+            setRepository(purchasesRepository)
+        }.setListener(this)
+
         basket_recycler_view.layoutManager = layoutManager
         basket_recycler_view.adapter = adapter
     }

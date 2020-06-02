@@ -5,7 +5,6 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.android.material.snackbar.Snackbar
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.helpers.SendEmailHelper
 import com.ulan.app.munduz.ui.base.BaseDialogFragment
@@ -29,6 +28,7 @@ class WriteToUsFragment : BaseDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         sendEmailHelper = SendEmailHelper(activity!!.applicationContext)
+
         send.setOnClickListener {
             sendMessage()
         }
@@ -48,18 +48,14 @@ class WriteToUsFragment : BaseDialogFragment() {
             message.body = "*** От кого " + from + "\n" + "*** Сообщение" + message
             sendEmailHelper.setMessage(message)
             sendEmailHelper.execute()
-            showSnack("Спасибо за ваш отзыв")
+            showSnackBar(rootView, "Спасибо за ваш отзыв")
             Handler().postDelayed({
                 dismiss()
             }, 2500)
         } else {
             var message = activity!!.resources.getString(R.string.empty_fields)
-            showSnack(message)
+            showSnackBar(rootView, message)
         }
     }
 
-    private fun showSnack(text: String) {
-        val snack = Snackbar.make(rootView, text, Snackbar.LENGTH_SHORT)
-        snack.show()
-    }
 }

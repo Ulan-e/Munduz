@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.google.android.material.snackbar.Snackbar
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.data.models.Order
 import com.ulan.app.munduz.helpers.Constants
@@ -22,7 +21,7 @@ import javax.inject.Provider
 class PurchaseFragment : BaseDialogFragment(), PurchaseView {
 
     private lateinit var order: Order
-    private val PHONE = "79771734250"
+    private val PHONE_NUMBER = "79771734250"
     private val WHATSAPP = "http://api.whatsapp.com/send?phone="
     private val WHATSAPPTEXT = "&text="
 
@@ -56,7 +55,7 @@ class PurchaseFragment : BaseDialogFragment(), PurchaseView {
             presenter.sendViaWhatsApp()
         }
 
-        cancel_purchase.setOnClickListener{
+        cancel_purchase.setOnClickListener {
             dismiss()
         }
     }
@@ -74,23 +73,19 @@ class PurchaseFragment : BaseDialogFragment(), PurchaseView {
     }
 
     override fun showMessage(message: String) {
-        showSnackBar(message)
+        showSnackBar(root_purchase_layout, message)
         Handler().postDelayed({
             dismiss()
         }, 2200)
     }
 
     override fun sendOrderToWhatsApp(message: com.ulan.app.munduz.data.models.Message) {
-        val pm = activity!!.getPackageManager()
         try {
-            val number: String = PHONE
+            val number: String = PHONE_NUMBER
             val waIntent = Intent(Intent.ACTION_VIEW)
-            waIntent.setData(
-                Uri.parse(
-                    WHATSAPP + number +
-                            WHATSAPPTEXT + message.body
-                            + "Нажмите отправить --->>>>>"
-                )
+            waIntent.data = Uri.parse(
+                WHATSAPP + number +
+                        WHATSAPPTEXT + message.body + "Нажмите отправить --->>>>>"
             )
             startActivity(waIntent)
 
@@ -99,13 +94,6 @@ class PurchaseFragment : BaseDialogFragment(), PurchaseView {
                 .show()
         }
     }
-
-    private fun showSnackBar(text: String) {
-        val snack = Snackbar.make(root_purchase_layout, text, Snackbar.LENGTH_SHORT)
-        snack.show()
-    }
-
-
 
     companion object {
         fun newInstance(order: Order): PurchaseFragment {

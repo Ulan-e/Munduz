@@ -3,22 +3,16 @@ package com.ulan.app.munduz.ui.fragments.home
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.appcompat.widget.Toolbar
-import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import com.ulan.app.munduz.R
-import com.ulan.app.munduz.ui.adapter.ProductsAdapter
-import com.ulan.app.munduz.ui.adapter.SliderAdapter
 import com.ulan.app.munduz.data.models.SliderImage
 import com.ulan.app.munduz.data.room.repository.FavoritesRepository
 import com.ulan.app.munduz.data.room.repository.PurchasesRepository
@@ -29,9 +23,11 @@ import com.ulan.app.munduz.helpers.Constants.Companion.EXTRA_PRODUCT_ARG
 import com.ulan.app.munduz.helpers.Constants.Companion.HOME_FRAGMENT
 import com.ulan.app.munduz.helpers.isNetworkAvailable
 import com.ulan.app.munduz.interfaces.OnItemClickListener
-import com.ulan.app.munduz.ui.base.BaseFragment
 import com.ulan.app.munduz.ui.activities.details.DetailsActivity
 import com.ulan.app.munduz.ui.activities.main.MainActivity
+import com.ulan.app.munduz.ui.adapter.ProductsAdapter
+import com.ulan.app.munduz.ui.adapter.SliderAdapter
+import com.ulan.app.munduz.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.error_layout.*
 import kotlinx.android.synthetic.main.home_layout.*
 import javax.inject.Inject
@@ -74,11 +70,6 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.d("ulanbek", "HomeFragment onCreate()")
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -88,9 +79,11 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
         viewPager = view.findViewById(R.id.view_pager)
         tabLayout = view.findViewById(R.id.tab_dots)
         tabLayout.setupWithViewPager(viewPager, true)
-        mainActivity = (activity as MainActivity)
-        mainActivity.findViewById<LinearLayout>(R.id.search_layout).visibility = View.VISIBLE
-        mainActivity.findViewById<EditText>(R.id.button_click).isEnabled = true
+
+        activity?.let {
+            it.findViewById<LinearLayout>(R.id.search_layout).visibility = View.VISIBLE
+            it.findViewById<EditText>(R.id.button_click).isEnabled = true
+        }
         return view
     }
 
@@ -98,8 +91,10 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
         super.onViewCreated(view, savedInstanceState)
         showToolbarTitle(true, resources.getString(R.string.app_name))
         presenter.bindView(this)
-        presenter.loadSliderImages()
-        presenter.loadProducts()
+        presenter.apply {
+            loadSliderImages()
+            loadProducts()
+        }
         handler = Handler()
     }
 
@@ -183,8 +178,10 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
     }
 
     override fun onBackPressed(): Boolean {
-        activity!!.moveTaskToBack(true)
-        activity!!.finish()
+        activity?.let {
+            it.moveTaskToBack(true)
+            it.finish()
+        }
         return true
     }
 

@@ -12,12 +12,12 @@ import com.squareup.picasso.Picasso
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.developer.Product
 import com.ulan.app.munduz.helpers.Constants
+import com.ulan.app.munduz.helpers.Constants.Companion.BASKET_TURN_OFF
 import com.ulan.app.munduz.helpers.Constants.Companion.EXTRA_OPEN_BASKET
 import com.ulan.app.munduz.helpers.Constants.Companion.EXTRA_PRODUCT_ARG
 import com.ulan.app.munduz.helpers.Constants.Companion.EXTRA_TURN_OFF_ADD_BASKET
 import com.ulan.app.munduz.helpers.Constants.Companion.NOT_IN_BASKET
 import com.ulan.app.munduz.helpers.Constants.Companion.OPEN_BASKET_ARG
-import com.ulan.app.munduz.helpers.Constants.Companion.BASKET_TURN_OFF
 import com.ulan.app.munduz.helpers.RUBLE
 import com.ulan.app.munduz.ui.activities.main.MainActivity
 import com.ulan.app.munduz.ui.base.BaseActivity
@@ -39,15 +39,19 @@ class DetailsActivity : BaseActivity(), DetailsView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.details_layout)
 
+        presenter.bindView(this)
+
         product = intent.getParcelableExtra<Product>(EXTRA_PRODUCT_ARG)
         basketSwitcher = intent.getStringExtra(EXTRA_TURN_OFF_ADD_BASKET)
 
         disableBasketButton(basketSwitcher)
 
-        presenter.bindView(this)
-        presenter.setToolbar()
-        presenter.setProduct(product)
-        presenter.isInBasket()
+        presenter.apply{
+            setToolbar()
+            setProduct(product)
+            isInBasket()
+        }
+
 
         add_to_basket.setOnClickListener {
             presenter.addToBasketClicked()
@@ -57,11 +61,13 @@ class DetailsActivity : BaseActivity(), DetailsView {
     private fun disableBasketButton(basketSwitcher: String?) {
         if (basketSwitcher != null) {
             if (basketSwitcher == BASKET_TURN_OFF) {
-                add_to_basket.setBackgroundColor(resources.getColor(R.color.white))
-                add_to_basket.setTextColor(resources.getColor(R.color.colorPrimary))
-                add_to_basket.text = Constants.ALREADY_IN_BASKET
-                add_to_basket.isClickable = false
-                add_to_basket.isEnabled = false
+                add_to_basket.apply{
+                    setBackgroundColor(resources.getColor(R.color.white))
+                    setTextColor(resources.getColor(R.color.colorPrimary))
+                    text = Constants.ALREADY_IN_BASKET
+                    isClickable = false
+                    isEnabled = false
+                }
             }
         }
     }
@@ -123,13 +129,18 @@ class DetailsActivity : BaseActivity(), DetailsView {
 
     override fun changeBasketText(title: String) {
         if (title == NOT_IN_BASKET) {
-            add_to_basket.setBackgroundColor(resources.getColor(R.color.colorPrimary))
-            add_to_basket.setTextColor(resources.getColor(R.color.white))
-            add_to_basket.text = Constants.NOT_IN_BASKET
+            add_to_basket.apply {
+                setBackgroundColor(resources.getColor(R.color.colorPrimary))
+                setTextColor(resources.getColor(R.color.white))
+                text = Constants.NOT_IN_BASKET
+            }
+
         } else {
-            add_to_basket.setBackgroundColor(resources.getColor(R.color.white))
-            add_to_basket.setTextColor(resources.getColor(R.color.colorPrimary))
-            add_to_basket.text = Constants.ALREADY_IN_BASKET
+            add_to_basket.apply {
+                setBackgroundColor(resources.getColor(R.color.white))
+                setTextColor(resources.getColor(R.color.colorPrimary))
+                text = Constants.ALREADY_IN_BASKET
+            }
         }
     }
 

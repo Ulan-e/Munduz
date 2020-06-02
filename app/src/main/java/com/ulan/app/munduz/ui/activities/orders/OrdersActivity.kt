@@ -7,6 +7,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.ulan.app.munduz.R
 import com.ulan.app.munduz.data.models.Order
 import com.ulan.app.munduz.data.models.PurchaseEntity
+import com.ulan.app.munduz.helpers.Constants.Companion.EMPTY_SPACE
 import com.ulan.app.munduz.helpers.Constants.Companion.EXTRA_PRODUCT_AMOUNT_ARG
 import com.ulan.app.munduz.helpers.Constants.Companion.EXTRA_PURCHASES_BUY_ARG
 import com.ulan.app.munduz.helpers.Constants.Companion.PURCHASE_FRAGMENT
@@ -31,15 +32,20 @@ class OrdersActivity : BaseActivity(), OrdersView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.orders_layout)
 
+        presenter.bindView(this)
+
         purchases = intent.getParcelableArrayListExtra(EXTRA_PURCHASES_BUY_ARG)
         amount = intent.getIntExtra(EXTRA_PRODUCT_AMOUNT_ARG, -1)
 
         setRadioButtonText()
 
-        presenter.bindView(this)
-        presenter.setToolbar()
-        presenter.setProducts(purchases)
-        presenter.setPurchasesAmount(amount)
+
+        presenter.apply {
+            setToolbar()
+            setProducts(purchases)
+            setPurchasesAmount(amount)
+        }
+
 
         order_button.setOnClickListener {
             presenter.sendButtonClicked()
@@ -68,15 +74,22 @@ class OrdersActivity : BaseActivity(), OrdersView {
 
     override fun showToolbar() {
         setSupportActionBar(order_toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setDisplayShowTitleEnabled(false)
-        val emptySpace = "       "
-        order_toolbar_text.text = resources.getString(R.string.order) + emptySpace
-        order_toolbar_text.typeface = Typeface.DEFAULT
-        order_toolbar_text.textSize = resources.getDimension(R.dimen.toolbar_title_size)
-        order_toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
-        order_toolbar.setNavigationOnClickListener {
-            finish()
+        supportActionBar!!.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setDisplayShowTitleEnabled(false)
+        }
+
+        order_toolbar_text.apply {
+            text = resources.getString(R.string.order) + EMPTY_SPACE
+            typeface = Typeface.DEFAULT
+            textSize = resources.getDimension(R.dimen.toolbar_title_size)
+        }
+
+        order_toolbar.apply {
+            setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
+            setNavigationOnClickListener {
+                finish()
+            }
         }
     }
 
@@ -84,7 +97,7 @@ class OrdersActivity : BaseActivity(), OrdersView {
         var result: StringBuilder = java.lang.StringBuilder()
         for (item in purchases) {
             result.append(
-                        item.name + ", цена за " +
+                item.name + ", цена за " +
                         item.perPriceInc + ", цена " +
                         item.priceInc + "\n"
             )
@@ -115,7 +128,7 @@ class OrdersActivity : BaseActivity(), OrdersView {
 
     override fun isNotEmptyFields(): Boolean {
         if (client_name.text.toString() == "" && client_phone_number.text.toString() == "") {
-            var message = resources.getString(R.string.empty_fields)
+            val message = resources.getString(R.string.empty_fields)
             showSnackBar(message)
             return false
         }

@@ -17,7 +17,7 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>, Filt
     private var context: Context
     private var itemClickListener: OnItemClickListener
 
-    private lateinit var emptyProducts: MutableList<Product>
+    private var emptyProducts = mutableListOf<Product>()
     private lateinit var initialProducts: MutableList<Product>
     private lateinit var filterProducts: MutableList<Product>
 

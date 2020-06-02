@@ -5,16 +5,11 @@ import com.ulan.app.munduz.data.models.Order
 import com.ulan.app.munduz.helpers.SendEmailHelper
 import javax.inject.Inject
 
-class PurchasePresenterImpl : PurchasePresenter {
+class PurchasePresenterImpl @Inject constructor(private var view: PurchaseView) :
+    PurchasePresenter {
 
-    private var view: PurchaseView
     private lateinit var sendEmailHelper: SendEmailHelper
     private lateinit var message: Message
-
-    @Inject
-    constructor(view: PurchaseView) {
-        this.view = view
-    }
 
     override fun setEmailHelper(emailHelper: SendEmailHelper) {
         this.sendEmailHelper = emailHelper

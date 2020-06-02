@@ -1,7 +1,6 @@
 package com.ulan.app.munduz.ui.fragments.catalog
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,11 +23,6 @@ class CatalogFragment : BaseFragment(), CatalogView, OnCategoryClickListener {
     lateinit var adapter: CatalogAdapter
 
     private var images = intArrayOf()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        Log.d("ulanbek", "HomeFragment onCreate()")
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
