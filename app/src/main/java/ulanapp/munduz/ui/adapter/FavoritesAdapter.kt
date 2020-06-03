@@ -4,11 +4,11 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import ulanapp.munduz.R
 import ulanapp.munduz.data.models.Product
 import ulanapp.munduz.data.room.repository.FavoritesRepository
 import ulanapp.munduz.helpers.RUBLE
+import ulanapp.munduz.helpers.setSmallImage
 import ulanapp.munduz.interfaces.OnItemClickListener
 
 class FavoritesAdapter : RecyclerView.Adapter<FavoritesViewHolder> {
@@ -42,33 +42,27 @@ class FavoritesAdapter : RecyclerView.Adapter<FavoritesViewHolder> {
     }
 
     override fun onBindViewHolder(holder: FavoritesViewHolder, position: Int) {
-        val product = products.get(position)
+        val product = products[position]
         holder.bind(product, listener)
 
-        Picasso.get()
-            .load(product.picture.urlImage)
-            .error(R.drawable.ic_error_image_black_24dp)
-            .fit()
-            .into(holder.image)
-
+        setSmallImage(product.picture.urlImage, holder.image)
         holder.name.text = product.name
         holder.category.text = product.category
         holder.price.text = product.cost.toString() + " " + RUBLE
 
         holder.remove.setOnClickListener {
-            if (repository.isExist(product.id)) {
-                products.removeAt(position)
-                repository.remove(product.id)
-                updateAfterItemRemoved(position)
-            }
+            removeProduct(product, position, holder)
         }
     }
 
-    private fun updateAfterItemRemoved(position: Int) {
-        notifyItemRemoved(position)
-        notifyItemChanged(position)
-        notifyItemRangeChanged(position, products.size)
-        notifyDataSetChanged()
+    private fun removeProduct(product: Product, position: Int, holder: FavoritesViewHolder) {
+        if (repository.isExist(product.id)) {
+            repository.remove(product.id)
+            products.removeAt(position)
+            notifyItemRemoved(position)
+            notifyItemRangeChanged(position, products.size)
+            notifyDataSetChanged()
+        }
     }
 
 }

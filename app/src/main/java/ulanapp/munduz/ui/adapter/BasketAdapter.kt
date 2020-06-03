@@ -4,13 +4,13 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import ulanapp.munduz.R
 import ulanapp.munduz.data.models.PurchaseEntity
 import ulanapp.munduz.data.room.repository.PurchasesRepository
 import ulanapp.munduz.helpers.RUBLE
 import ulanapp.munduz.helpers.convertIntToString
 import ulanapp.munduz.helpers.convertStringToInt
+import ulanapp.munduz.helpers.setSmallImage
 import ulanapp.munduz.interfaces.OnChangeSumListener
 import ulanapp.munduz.interfaces.OnItemBasketClickListener
 
@@ -62,11 +62,8 @@ class BasketAdapter : RecyclerView.Adapter<BasketViewHolder> {
     override fun onBindViewHolder(holder: BasketViewHolder, position: Int) {
         val purchase = purchases[position]
         holder.bind(purchase, itemClickListener)
-        Picasso.get()
-            .load(purchase.picture.urlImage)
-            .error(R.drawable.ic_error_image_black_24dp)
-            .fit()
-            .into(holder.image)
+
+        setSmallImage(purchase.picture.urlImage, holder.image)
         holder.name.text = purchase.name
         holder.price.text = purchase.priceInc.toString() + RUBLE
         holder.perPrice.text = purchase.perPriceInc
@@ -82,6 +79,7 @@ class BasketAdapter : RecyclerView.Adapter<BasketViewHolder> {
             changedPerPrice += initialPerPrice
             purchase.priceInc = changedPrice
             purchase.perPriceInc = changedPerPrice.toString() + perCount
+
             updateValues(holder, purchase)
         }
 
@@ -91,16 +89,24 @@ class BasketAdapter : RecyclerView.Adapter<BasketViewHolder> {
                 changedPerPrice -= initialPerPrice
                 purchase.priceInc = changedPrice
                 purchase.perPriceInc = changedPerPrice.toString() + perCount
+
                 updateValues(holder, purchase)
             }
         }
 
         holder.remove.setOnClickListener {
-            if (purchasesRepository.isExist(purchase.id)) {
-                purchases.removeAt(position)
-                purchasesRepository.remove(purchase.id)
-                updateAfterRemoving(position)
-            }
+            removePurchase(purchase, position, holder)
+        }
+    }
+
+    private fun removePurchase(purchase: PurchaseEntity, position: Int, holder: BasketViewHolder) {
+        if (purchasesRepository.isExist(purchase.id)) {
+            purchasesRepository.remove(purchase.id)
+            purchases.removeAt(position)
+            notifyItemRemoved(position)
+            notifyItemRangeChanged(position, purchases.size)
+
+            sumChangeListener.onSumChanged()
         }
     }
 
@@ -109,14 +115,6 @@ class BasketAdapter : RecyclerView.Adapter<BasketViewHolder> {
         sumChangeListener.onSumChanged()
         holder.price.text = purchase.priceInc.toString() + RUBLE
         holder.perPrice.text = purchase.perPriceInc
-    }
-
-    private fun updateAfterRemoving(position: Int) {
-        notifyItemRemoved(position)
-        notifyItemChanged(position)
-        notifyItemRangeChanged(position, purchases.size)
-        notifyDataSetChanged()
-        sumChangeListener.onSumChanged()
     }
 
 }

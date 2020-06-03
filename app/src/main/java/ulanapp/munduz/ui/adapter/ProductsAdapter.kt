@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import ulanapp.munduz.R
 import ulanapp.munduz.data.models.Product
 import ulanapp.munduz.data.room.repository.FavoritesRepository
@@ -13,6 +12,7 @@ import ulanapp.munduz.data.room.repository.PurchasesRepository
 import ulanapp.munduz.helpers.Constants.Companion.ALREADY_IN_BASKET
 import ulanapp.munduz.helpers.Constants.Companion.NOT_IN_BASKET
 import ulanapp.munduz.helpers.RUBLE
+import ulanapp.munduz.helpers.setSmallImage
 import ulanapp.munduz.interfaces.OnItemClickListener
 
 class ProductsAdapter : RecyclerView.Adapter<ProductsViewHolder> {
@@ -48,16 +48,13 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsViewHolder> {
     }
 
     override fun onBindViewHolder(holder: ProductsViewHolder, position: Int) {
-        val product = products.get(position)
+        val product = products[position]
         holder.bind(product, listener)
-        Picasso.get()
-            .load(product.picture.urlImage)
-            .fit()
-            .into(holder.image)
+
+        setSmallImage(product.picture.urlImage, holder.image)
         holder.name.text = product.name
         holder.price.text = product.cost.toString() + RUBLE
 
-        //Mark as favorite if product is in Database
         if (favoritesRepository.isExist(product.id)) {
             setAsFavorite(holder)
         } else {
@@ -65,12 +62,11 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsViewHolder> {
         }
 
         if (purchasesRepository.isExist(product.id)) {
-            setInAlreadyBasket(holder)
+            setToBasket(holder)
         } else {
             setNotInBasket(holder)
         }
 
-        //Click Handle (Favorite)
         holder.favorite.setOnClickListener {
             if (favoritesRepository.isExist(product.id)) {
                 favoritesRepository.remove(product.id)
@@ -87,21 +83,25 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsViewHolder> {
                 setNotInBasket(holder)
             } else {
                 purchasesRepository.insert(product)
-                setInAlreadyBasket(holder)
+                setToBasket(holder)
             }
         }
     }
 
     private fun setNotInBasket(holder: ProductsViewHolder) {
-        holder.basket.setBackgroundColor(context.resources.getColor(R.color.colorPrimary))
-        holder.basket.setTextColor(context.resources.getColor(R.color.white))
-        holder.basket.text = NOT_IN_BASKET
+        holder.basket.apply {
+            setBackgroundColor(context.resources.getColor(R.color.colorPrimary))
+            setTextColor(context.resources.getColor(R.color.white))
+            text = NOT_IN_BASKET
+        }
     }
 
-    private fun setInAlreadyBasket(holder: ProductsViewHolder) {
-        holder.basket.setBackgroundColor(context.resources.getColor(R.color.white))
-        holder.basket.setTextColor(context.resources.getColor(R.color.colorPrimary))
-        holder.basket.text = ALREADY_IN_BASKET
+    private fun setToBasket(holder: ProductsViewHolder) {
+        holder.basket.apply {
+            setBackgroundColor(context.resources.getColor(R.color.white))
+            setTextColor(context.resources.getColor(R.color.colorPrimary))
+            text = ALREADY_IN_BASKET
+        }
     }
 
     private fun setAsFavorite(viewHolder: ProductsViewHolder) {
