@@ -20,19 +20,22 @@ class PurchasePresenterImpl @Inject constructor(private var view: PurchaseView) 
         message.email = "uulanerkinbaev@gmail.com"
         message.subject = "Приложение Munduz"
         message.body =
-            "               Товары " + "\n" +
+            order.purchaseMethod + " " + "\n" + "\n" +
                     order.purchases + "\n" +
-                    "> Сумма заказа  " + order.amountPurchases + "\n" +
-                    "> Имя Клиента  " + order.clientName + "\n" +
-                    "> Номер телефона  " + order.clientPhoneNumber + "\n" +
-                    "> Способ покупки  " + order.purchaseMethod + "\n" +
-                    "> Комментарий  " + order.comment + "\n"
+                    "> Сумма  " + order.amountPurchases + "\n" +
+                    "> Покупатель  " + order.clientName + "\n" +
+                    "> Телефон  " + order.clientPhoneNumber + "\n" +
+                    if (order.comment.isNotEmpty()) {
+                        "> Комментарий  " + "*" + order.comment + "\n"
+                    } else {
+                        ""
+                    }
     }
 
     override fun sendViaWhatsApp() {
         view.sendOrderToWhatsApp(message)
         sendWithEmailHelper()
-        view?.closeDialog()
+        view.closeDialog()
     }
 
     override fun sendViaEmail() {

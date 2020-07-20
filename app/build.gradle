@@ -40,7 +40,10 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
+
+    //Google
     implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.google.android.play:core:1.7.3'
 
     //Database
     implementation 'com.google.firebase:firebase-database:16.0.4'

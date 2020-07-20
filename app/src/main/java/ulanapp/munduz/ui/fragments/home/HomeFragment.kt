@@ -118,10 +118,10 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
 
     override fun showProducts(products: MutableList<Product>) {
         val layoutManager = GridLayoutManager(activity, 2)
-        home_recycler_view.layoutManager = layoutManager
+        pro_recycler_view.layoutManager = layoutManager
         productsAdapter.setProducts(products)
         productsAdapter.setRepositories(favoritesRepository, purchasesRepository)
-        home_recycler_view.adapter = productsAdapter
+        pro_recycler_view.adapter = productsAdapter
     }
 
     override fun showEmptyData() {

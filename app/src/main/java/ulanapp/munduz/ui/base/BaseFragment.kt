@@ -11,8 +11,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.DaggerFragment
 import ulanapp.munduz.R
+import ulanapp.munduz.helpers.Constants.Companion.CATALOG_FRAGMENT
 import ulanapp.munduz.helpers.Constants.Companion.HOME_FRAGMENT
 import ulanapp.munduz.interfaces.OnBackPressedListener
+import ulanapp.munduz.ui.fragments.catalog.CatalogFragment
 import ulanapp.munduz.ui.fragments.home.HomeFragment
 
 abstract class BaseFragment : DaggerFragment(), OnBackPressedListener {
@@ -50,10 +52,10 @@ abstract class BaseFragment : DaggerFragment(), OnBackPressedListener {
     protected fun goToHome() {
         val bottomNav =
             activity!!.findViewById<BottomNavigationView>(R.id.bottom_navigation_menu)
-        bottomNav.selectedItemId = R.id.home
+        bottomNav.selectedItemId = R.id.catalog
         activity!!.supportFragmentManager
             .beginTransaction()
-            .replace(R.id.container, HomeFragment(), HOME_FRAGMENT)
+            .replace(R.id.container, CatalogFragment(), CATALOG_FRAGMENT)
             .addToBackStack(null)
             .commit()
     }

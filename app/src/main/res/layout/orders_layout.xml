@@ -4,203 +4,208 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
+            android:id="@+id/order_scroll"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
-                android:id="@+id/order_toolbar"
+        <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                style="@style/ToolBarTextView"
-                android:background="@color/colorPrimary"
-                android:minHeight="?attr/actionBarSize">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/order_toolbar"
+                    style="@style/ToolBarTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@color/colorPrimary"
+                    android:minHeight="?attr/actionBarSize">
+
+                <TextView
+                        android:id="@+id/order_toolbar_text"
+                        style="@style/ToolBarTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+            </androidx.appcompat.widget.Toolbar>
+
 
             <TextView
-                    android:id="@+id/order_toolbar_text"
+                    android:id="@+id/total_purchase"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    style="@style/ToolBarTextView"/>
-
-        </androidx.appcompat.widget.Toolbar>
-
-
-        <TextView
-                android:id="@+id/total_purchase"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:textAlignment="center"
-                android:textSize="19sp"
-                android:textStyle="bold"
-                android:lineSpacingExtra="3dp"/>
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="4dp"
+                    android:lineSpacingExtra="3dp"
+                    android:textAlignment="center"
+                    android:textSize="21sp"
+                    android:textStyle="bold" />
 
 
-        <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:layout_marginBottom="3dp"
-                android:layout_marginLeft="13dp"
-                android:layout_marginRight="13dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/client_name"
+            <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/your_name"
-                    android:inputType="textPersonName"
-                    android:maxLength="18">
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="13dp"
+                    android:layout_marginBottom="3dp">
 
-            </com.google.android.material.textfield.TextInputEditText>
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/client_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/your_name"
+                        android:inputType="textPersonName"
+                        android:maxLength="18">
 
-        <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:layout_marginBottom="3dp"
-                android:layout_marginLeft="13dp"
-                android:layout_marginRight="13dp">
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/client_phone_number"
+            <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/phone"
-                    android:inputType="phone"
-                    android:maxLength="12">
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="13dp"
+                    android:layout_marginBottom="3dp">
 
-            </com.google.android.material.textfield.TextInputEditText>
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/client_phone_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/phone"
+                        android:inputType="phone"
+                        android:maxLength="12">
 
-        <TextView
-                android:id="@+id/client_phone_warning"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:text="@string/bottom_text_phone_number"
-                android:textSize="13sp" />
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
 
-
-        <RadioGroup
-                android:id="@+id/order_is_with_delivery"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:checkedButton="@id/delivery"
-                android:orientation="horizontal">
-
-            <RadioButton
-                    android:id="@+id/delivery"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="7dp"
-                    android:text="@string/delivery">
-
-            </RadioButton>
-
-            <RadioButton
-                    android:id="@+id/pickup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="6dp"
-                    android:text="@string/pickup">
-
-            </RadioButton>
-        </RadioGroup>
-
-        <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/client_metro_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_marginTop="3dp"
-                android:layout_marginBottom="3dp"
-                android:layout_marginLeft="13dp"
-                android:layout_marginRight="13dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/client_metro"
+            <RadioGroup
+                    android:id="@+id/order_is_with_delivery"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/metro"
-                    android:inputType="textShortMessage"
-                    android:maxLength="25">
+                    android:layout_marginTop="16dp"
+                    android:checkedButton="@id/delivery"
+                    android:orientation="horizontal">
 
-            </com.google.android.material.textfield.TextInputEditText>
-        </com.google.android.material.textfield.TextInputLayout>
+                <RadioButton
+                        android:id="@+id/delivery"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="7dp"
+                        android:text="@string/delivery">
 
-        <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/client_address_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_marginTop="3dp"
-                android:layout_marginBottom="3dp"
-                android:layout_marginLeft="13dp"
-                android:layout_marginRight="13dp">
+                </RadioButton>
 
-            <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/client_address"
+                <RadioButton
+                        android:id="@+id/pickup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:text="@string/pickup">
+
+                </RadioButton>
+            </RadioGroup>
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/client_metro_container"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/address"
-                    android:inputType="textShortMessage"
-                    android:maxLength="40">
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="13dp"
+                    android:layout_marginBottom="3dp">
 
-            </com.google.android.material.textfield.TextInputEditText>
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/client_metro"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/metro"
+                        android:inputType="textShortMessage"
+                        android:maxLength="25">
 
-        <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/client_time_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:visibility="gone">
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/client_time"
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/client_address_container"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Когда заберете?"
-                    android:inputType="textShortMessage"
-                    android:maxLength="25"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="13dp"
+                    android:layout_marginBottom="3dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/client_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/address"
+                        android:inputType="textShortMessage"
+                        android:maxLength="40">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/client_time_container"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:visibility="gone">
 
-            </com.google.android.material.textfield.TextInputEditText>
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/client_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Когда заберете?"
+                        android:inputType="textShortMessage"
+                        android:maxLength="25"
+                        android:visibility="gone">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
 
 
-        <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_marginTop="3dp"
-                android:layout_marginBottom="3dp"
-                android:layout_marginLeft="13dp"
-                android:layout_marginRight="13dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/client_comment"
+            <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/comment_hint"
-                    android:maxLength="40">
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="3dp">
 
-            </com.google.android.material.textfield.TextInputEditText>
-        </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/client_comment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/comment_hint"
+                        android:maxLength="40">
 
-    </LinearLayout>
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                    android:id="@+id/client_delivery_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:text="Доставка 190 рублей по Москве"
+                    android:textSize="14sp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -210,9 +215,9 @@
 
         <com.google.android.material.button.MaterialButton
                 android:id="@+id/cancel_button"
+                style="@style/ButtonVioletOutlinedStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/ButtonVioletOutlinedStyle"
                 android:layout_weight="1"
                 android:text="@string/cancel"
                 android:textSize="14sp">

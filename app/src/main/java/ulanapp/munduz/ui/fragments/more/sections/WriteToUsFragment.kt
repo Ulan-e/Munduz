@@ -28,7 +28,7 @@ class WriteToUsFragment : BaseDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        sendEmailHelper = SendEmailHelper(activity!!.applicationContext)
+        sendEmailHelper = SendEmailHelper()
 
         send.setOnClickListener {
             sendMessage()

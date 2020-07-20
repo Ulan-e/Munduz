@@ -17,7 +17,7 @@ class PurchaseModule {
 
     @Provides
     fun sendEmail(context: Context): SendEmailHelper {
-        return SendEmailHelper(context)
+        return SendEmailHelper()
     }
 
     @OrdersScope

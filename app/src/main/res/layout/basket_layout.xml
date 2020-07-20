@@ -70,7 +70,7 @@
                 android:layout_gravity="center"
                 android:textSize="14sp"
                 style="@style/ButtonVioletStyle"
-                android:text="@string/goto_home">
+                android:text="В Каталог">
 
         </com.google.android.material.button.MaterialButton>
 

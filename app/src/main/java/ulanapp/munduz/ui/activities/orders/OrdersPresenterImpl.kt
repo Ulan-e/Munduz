@@ -8,15 +8,16 @@ import javax.inject.Inject
 class OrdersPresenterImpl @Inject constructor() : BasePresenter<OrdersView>(), OrdersPresenter {
 
     private lateinit var purchases: MutableList<PurchaseEntity>
+    private var amount = 0
 
     override fun setProducts(purchases: MutableList<PurchaseEntity>) {
         this.purchases = purchases
     }
 
     override fun setPurchasesAmount(amount: Int) {
-        val goods = "Итого " + purchases.size.toString() + " видов товара \n"
+        this.amount = amount
         val price = "К оплате " + amount.toString() + RUBLE
-        getView()?.showTotalPurchases(goods + price)
+        getView()?.showTotalPurchases(price)
     }
 
 
@@ -32,6 +33,10 @@ class OrdersPresenterImpl @Inject constructor() : BasePresenter<OrdersView>(), O
 
     override fun setToolbar() {
         getView()?.showToolbar()
+    }
+
+    override fun getAmount(): Int {
+        return this.amount
     }
 
 }

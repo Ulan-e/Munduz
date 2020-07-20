@@ -39,11 +39,11 @@ class OrdersActivity : BaseActivity(), OrdersView {
 
         setRadioButtonText()
 
+        presenter.setPurchasesAmount(amount + 190)
 
         presenter.apply {
             setToolbar()
             setProducts(purchases)
-            setPurchasesAmount(amount)
         }
 
 
@@ -64,10 +64,14 @@ class OrdersActivity : BaseActivity(), OrdersView {
                 radioButtonText = resources.getString(R.string.delivery)
                 setVisibilitiesOfDelivery(View.VISIBLE)
                 setVisibilitiesOfPickUp(View.GONE)
+                presenter.setPurchasesAmount(amount + 190)
             } else {
                 radioButtonText = resources.getString(R.string.pickup)
                 setVisibilitiesOfDelivery(View.GONE)
                 setVisibilitiesOfPickUp(View.VISIBLE)
+                if (amount > 190) {
+                    presenter.setPurchasesAmount(amount - 190)
+                }
             }
         }
     }
@@ -94,10 +98,10 @@ class OrdersActivity : BaseActivity(), OrdersView {
     }
 
     private fun humanReadableArray(purchases: MutableList<PurchaseEntity>): StringBuilder {
-        var result: StringBuilder = java.lang.StringBuilder()
+        val result: StringBuilder = java.lang.StringBuilder()
         for (item in purchases) {
             result.append(
-                item.name + ", цена за " +
+                item.name + ", " +
                         item.perPriceInc + ", цена " +
                         item.priceInc + "\n"
             )
@@ -110,14 +114,14 @@ class OrdersActivity : BaseActivity(), OrdersView {
     }
 
     override fun getInputOrder(): Order {
-        var order = Order()
-        order.amountPurchases = amount
+        val order = Order()
+        order.amountPurchases = presenter.getAmount()
         order.purchases = humanReadableArray(purchases).toString()
         order.clientName = client_name.text.toString()
         order.clientPhoneNumber = client_phone_number.text.toString()
         if (radioButtonText == resources.getString(R.string.delivery)) {
             order.purchaseMethod =
-                radioButtonText + " Метро" + client_metro.text.toString() + "\n" + client_address.text.toString()
+                radioButtonText + " " + client_metro.text.toString() + "\n" + client_address.text.toString()
         } else {
             order.purchaseMethod =
                 radioButtonText + client_time.text.toString()
@@ -158,6 +162,7 @@ class OrdersActivity : BaseActivity(), OrdersView {
         client_metro.visibility = visibility
         client_address_container.visibility = visibility
         client_address.visibility = visibility
+        client_delivery_price.visibility = visibility
     }
 
     private fun setVisibilitiesOfPickUp(visibility: Int) {

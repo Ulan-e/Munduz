@@ -86,12 +86,12 @@ class PurchaseFragment : BaseDialogFragment(), PurchaseView {
             val waIntent = Intent(Intent.ACTION_VIEW)
             waIntent.data = Uri.parse(
                 WHATSAPP + number +
-                        WHATSAPPTEXT + message.body + "Нажмите отправить --->>>>>"
+                        WHATSAPPTEXT + message.body
             )
             startActivity(waIntent)
 
         } catch (e: PackageManager.NameNotFoundException) {
-            Toast.makeText(activity!!, "WhatsApp not Installed", Toast.LENGTH_SHORT)
+            Toast.makeText(activity!!, "WhatsApp не установлен", Toast.LENGTH_SHORT)
                 .show()
         }
     }

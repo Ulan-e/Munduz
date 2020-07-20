@@ -7,6 +7,8 @@ interface OrdersPresenter {
 
     fun setToolbar()
 
+    fun getAmount() : Int
+
     fun setProducts(purchases: MutableList<PurchaseEntity>)
 
     fun setPurchasesAmount(amount: Int)

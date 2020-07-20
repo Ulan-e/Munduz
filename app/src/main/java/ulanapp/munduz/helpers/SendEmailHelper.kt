@@ -1,24 +1,18 @@
 package ulanapp.munduz.helpers
 
-import android.content.Context
 import android.os.AsyncTask
 import java.util.*
 import javax.mail.*
 import javax.mail.internet.InternetAddress
 import javax.mail.internet.MimeMessage
 
-class SendEmailHelper : AsyncTask<Void, Void, Void> {
+class SendEmailHelper : AsyncTask<Void, Void, Void>() {
 
-    private val context: Context
     private lateinit var session: Session
 
     private lateinit var email: String
     private lateinit var subject: String
     private lateinit var body: String
-
-    constructor(context: Context) {
-        this.context = context
-    }
 
     fun setMessage(message: ulanapp.munduz.data.models.Message) {
         this.email = message.email
@@ -42,7 +36,7 @@ class SendEmailHelper : AsyncTask<Void, Void, Void> {
             }
         })
         try {
-            var mime = MimeMessage(session)
+            val mime = MimeMessage(session)
             mime.setFrom(InternetAddress(Config.EMAIL))
             mime.addRecipient(Message.RecipientType.TO, InternetAddress(email))
             mime.setSubject(subject)

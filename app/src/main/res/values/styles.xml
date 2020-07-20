@@ -124,7 +124,7 @@
         <item name="android:textColor">@color/black_tiny</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textAlignment">center</item>
-        <item name="android:layout_margin">12dp</item>
+        <item name="android:layout_margin">9dp</item>
     </style>
 
     <style name="RecommendedTextStyle" parent="Widget.AppCompat.TextView">

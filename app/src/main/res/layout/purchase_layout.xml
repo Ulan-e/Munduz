@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/root_purchase_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -8,9 +9,9 @@
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bottom_line"
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp">
+            android:layout_marginRight="5dp"
+            android:background="@drawable/bottom_line">
 
         <TextView
                 android:layout_width="wrap_content"
@@ -18,7 +19,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_margin="10dp"
                 android:text="Отправить"
-                android:textSize="22sp"/>
+                android:textSize="22sp" />
 
         <ImageView
                 android:id="@+id/cancel_purchase"
@@ -35,46 +36,39 @@
     </RelativeLayout>
 
 
-    <TextView
-            android:id="@+id/text_purchase_method"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/cancel_purchase"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="10dp"
-            android:text="Выберите способ отправки заказа"
-            android:textAlignment="center"
-            android:textSize="19sp" />
-
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/text_purchase_method"
             android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
             android:layout_marginBottom="0dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
         <Button
                 android:id="@+id/via_whatsapp"
-                android:layout_width="100dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                style="@style/ButtonVioletStyle"
+                android:backgroundTint="@color/green_whatsapp"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:text="Отправить в\n WhatsApp"
-                android:textSize="13sp"
-                android:lineSpacingExtra="3dp"/>
+                android:lineSpacingExtra="3dp"
+                android:text="Отправить в WhatsApp"
+                android:textSize="13sp" />
 
         <Button
                 android:id="@+id/via_email"
-                android:layout_width="100dp"
+                style="@style/ButtonVioletOutlinedStyle"
+                app:strokeColor="@color/gray_light"
+                android:textColor="@color/black_tiny"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="4dp"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:text="Отправить в\n Почту"
-                android:textSize="13sp"
-                android:lineSpacingExtra="3dp"/>
+                android:lineSpacingExtra="3dp"
+                android:text="Другой способ отправки"
+                android:textSize="13sp" />
     </LinearLayout>
 
 
