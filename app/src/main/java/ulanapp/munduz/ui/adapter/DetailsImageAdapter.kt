@@ -7,11 +7,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.squareup.picasso.Picasso
+import com.bumptech.glide.Glide
 import ulanapp.munduz.R
-import ulanapp.munduz.data.models.SliderImage
 
-class SliderAdapter(private var context: Context, private var images: List<SliderImage>) :
+class DetailsImageAdapter(private val context: Context, private val pictures: MutableList<String>) :
     PagerAdapter() {
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
@@ -19,15 +18,16 @@ class SliderAdapter(private var context: Context, private var images: List<Slide
     }
 
     override fun getCount(): Int {
-        return images.size
+        return pictures.size
     }
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val view = inflater.inflate(R.layout.item_slider, null)
-        val imageView = view.findViewById<ImageView>(R.id.imageView)
-        val sliderImage = images.get(position)
-        Picasso.get().load(sliderImage.image).into(imageView)
+        val view = inflater.inflate(R.layout.details_image_item, null)
+        val imageView = view.findViewById<ImageView>(R.id.item_image)
+
+        val picture = pictures[position]
+        Glide.with(context).load(picture).into(imageView)
 
         val viewPager = container as ViewPager
         viewPager.addView(view, 0)
@@ -39,4 +39,5 @@ class SliderAdapter(private var context: Context, private var images: List<Slide
         val view = `object` as View
         viewPager.removeView(view)
     }
+
 }

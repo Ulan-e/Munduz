@@ -25,18 +25,35 @@
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:toolbarId="@+id/product_toolbar">
 
-
-            <ImageView
-                    android:id="@+id/details_image"
+            <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_gravity="center_horizontal"
-                    android:scaleType="centerCrop">
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="10dp">
 
-            </ImageView>
+                <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/view_pager_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_gravity="center_horizontal"
+                        android:scaleType="centerCrop">
 
+                </androidx.viewpager.widget.ViewPager>
+
+                <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/image_tab_dots"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_horizontal|bottom"
+                        android:paddingBottom="7dp"
+                        app:tabBackground="@drawable/tab_selector"
+                        android:background="@color/transparent"
+                        app:tabGravity="center"
+                        app:tabIndicatorHeight="0dp"
+                        app:tabMaxWidth="14dp"/>
+            </FrameLayout>
 
             <androidx.appcompat.widget.Toolbar
                     android:id="@+id/product_toolbar"
@@ -54,7 +71,7 @@
                     android:layout_gravity="center"
                     android:indeterminate="true"
                     android:indeterminateTint="@color/blue_dark"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>

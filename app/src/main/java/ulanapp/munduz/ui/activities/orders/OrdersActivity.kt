@@ -124,7 +124,7 @@ class OrdersActivity : BaseActivity(), OrdersView {
                 radioButtonText + " " + client_metro.text.toString() + "\n" + client_address.text.toString()
         } else {
             order.purchaseMethod =
-                radioButtonText + client_time.text.toString()
+                radioButtonText + " " + client_time.text.toString()
         }
         order.comment = client_comment.text.toString()
         return order

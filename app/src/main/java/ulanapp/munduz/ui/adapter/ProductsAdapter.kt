@@ -3,6 +3,7 @@ package ulanapp.munduz.ui.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import ulanapp.munduz.R
@@ -84,6 +85,7 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsViewHolder> {
             } else {
                 purchasesRepository.insert(product)
                 setToBasket(holder)
+                Toast.makeText(context, "Добавлен в Корзину", Toast.LENGTH_SHORT).show()
             }
         }
     }

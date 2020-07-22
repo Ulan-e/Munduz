@@ -7,8 +7,8 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.core.content.ContextCompat
-import com.squareup.picasso.Callback
-import com.squareup.picasso.Picasso
+import androidx.viewpager.widget.ViewPager
+import com.google.android.material.tabs.TabLayout
 import ulanapp.munduz.data.models.Product
 import kotlinx.android.synthetic.main.details_layout.*
 import ulanapp.munduz.R
@@ -21,6 +21,7 @@ import ulanapp.munduz.helpers.Constants.Companion.NOT_IN_BASKET
 import ulanapp.munduz.helpers.Constants.Companion.OPEN_BASKET_ARG
 import ulanapp.munduz.helpers.RUBLE
 import ulanapp.munduz.ui.activities.main.MainActivity
+import ulanapp.munduz.ui.adapter.DetailsImageAdapter
 import ulanapp.munduz.ui.base.BaseActivity
 import javax.inject.Inject
 
@@ -32,8 +33,12 @@ class DetailsActivity : BaseActivity(), DetailsView {
     private lateinit var product: Product
     private lateinit var basketSwitcher: String
 
+    private var detailsImageAdapter: DetailsImageAdapter? = null
+
     private var menu: Menu? = null
-    private var view: View? = null
+
+    private lateinit var tabLayout: TabLayout
+    private lateinit var viewPager: ViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,22 +51,23 @@ class DetailsActivity : BaseActivity(), DetailsView {
 
         disableBasketButton(basketSwitcher)
 
-        presenter.apply{
+        presenter.apply {
             setToolbar()
             setProduct(product)
             isInBasket()
         }
 
-
         add_to_basket.setOnClickListener {
             presenter.addToBasketClicked()
         }
+
+
     }
 
     private fun disableBasketButton(basketSwitcher: String?) {
         if (basketSwitcher != null) {
             if (basketSwitcher == BASKET_TURN_OFF) {
-                add_to_basket.apply{
+                add_to_basket.apply {
                     setBackgroundColor(resources.getColor(R.color.white))
                     setTextColor(resources.getColor(R.color.colorPrimary))
                     text = Constants.ALREADY_IN_BASKET
@@ -99,21 +105,49 @@ class DetailsActivity : BaseActivity(), DetailsView {
     }
 
     private fun toolbarImage() {
-        image_progress_bar.visibility = View.VISIBLE
-        Picasso.get()
-            .load(product.picture.urlImage)
-            .fit()
-            .into(details_image, object : Callback {
-                override fun onSuccess() {
-                    image_progress_bar.visibility = View.GONE
-                }
+        viewPager = findViewById(R.id.view_pager_image)
 
-                override fun onError(e: Exception?) {
-                    details_image.setImageResource(R.drawable.ic_error_image_black_24dp)
-                    Log.e(Constants.TAG, "Error loading image")
-                }
+        val pictures = mutableListOf<String>()
+        val one = product.picture.urlImage
+        val two = product.picture.urlImage2
+        val three = product.picture.urlImage3
 
-            })
+        if (two.isEmpty() && three.isEmpty()) {  //if One Image
+            pictures.clear()
+            pictures.add(one)
+            detailsImageAdapter = DetailsImageAdapter(this, pictures)
+        } else if (two.isNotEmpty()) {  //if Two Images
+            pictures.clear()
+            pictures.add(one)
+            pictures.add(two)
+            detailsImageAdapter = DetailsImageAdapter(this, pictures)
+        } else if (two.isNotEmpty() && three.isNotEmpty()) { //if Three Images
+            pictures.clear()
+            pictures.add(one)
+            pictures.add(two)
+            pictures.add(three)
+            detailsImageAdapter = DetailsImageAdapter(this, pictures)
+        }
+
+        tabLayout = findViewById(R.id.image_tab_dots)
+        tabLayout.setupWithViewPager(viewPager, true)
+        viewPager.adapter = detailsImageAdapter
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {
+
+            }
+
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+
+            }
+
+            override fun onPageSelected(position: Int) {
+            }
+        })
     }
 
     override fun showEmptyData() {
