@@ -16,18 +16,14 @@ import ulanapp.munduz.helpers.RUBLE
 import ulanapp.munduz.helpers.setSmallImage
 import ulanapp.munduz.interfaces.OnItemClickListener
 
-class ProductsAdapter : RecyclerView.Adapter<ProductsViewHolder> {
+class ProductsAdapter(
+    private var context: Context,
+    private var listener: OnItemClickListener) :
+        RecyclerView.Adapter<ProductsViewHolder>() {
 
-    private var context: Context
-    private var listener: OnItemClickListener
     private lateinit var products: MutableList<Product>
     private lateinit var favoritesRepository: FavoritesRepository
     private lateinit var purchasesRepository: PurchasesRepository
-
-    constructor(context: Context, listener: OnItemClickListener) : super() {
-        this.context = context
-        this.listener = listener
-    }
 
     fun setProducts(products: MutableList<Product>) {
         this.products = products
@@ -52,7 +48,7 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsViewHolder> {
         val product = products[position]
         holder.bind(product, listener)
 
-        setSmallImage(product.picture.urlImage, holder.image)
+        setSmallImage(context, product.picture.urlImage, holder.image)
         holder.name.text = product.name
         holder.price.text = product.cost.toString() + RUBLE
 

@@ -10,17 +10,14 @@ import androidx.recyclerview.widget.RecyclerView
 import ulanapp.munduz.R
 import ulanapp.munduz.interfaces.OnCategoryClickListener
 
-class CatalogAdapter : RecyclerView.Adapter<CatalogAdapter.CatalogViewHolder> {
+class CatalogAdapter(
+    private var context: Context,
+    listener: OnCategoryClickListener) :
+        RecyclerView.Adapter<CatalogAdapter.CatalogViewHolder>() {
 
-    private var context: Context
-    private var categoryClickListener: OnCategoryClickListener
+    private var categoryClickListener: OnCategoryClickListener = listener
     private lateinit var catalog: MutableList<String>
     private lateinit var images: IntArray
-
-    constructor(context: Context, listener: OnCategoryClickListener) : super() {
-        this.context = context
-        this.categoryClickListener = listener
-    }
 
     fun setCatalogs(catalog: MutableList<String>) {
         this.catalog = catalog

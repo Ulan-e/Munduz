@@ -12,19 +12,16 @@ import ulanapp.munduz.R
 import ulanapp.munduz.data.models.Product
 import ulanapp.munduz.interfaces.OnItemClickListener
 
-class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>, Filterable {
+class SearchAdapter(
+    private var context: Context,
+    listener: OnItemClickListener) :
+        RecyclerView.Adapter<SearchAdapter.SearchViewHolder>(), Filterable {
 
-    private var context: Context
-    private var itemClickListener: OnItemClickListener
+    private var itemClickListener: OnItemClickListener = listener
 
     private var emptyProducts = mutableListOf<Product>()
     private lateinit var initialProducts: MutableList<Product>
     private lateinit var filterProducts: MutableList<Product>
-
-    constructor(context: Context, listener: OnItemClickListener) : super() {
-        this.context = context
-        this.itemClickListener = listener
-    }
 
     fun setProducts(products: MutableList<Product>) {
         this.initialProducts = products
@@ -55,7 +52,7 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>, Filt
                 if (pattern.isEmpty()) {
                     filterProducts = emptyProducts
                 } else {
-                    var innerList = ArrayList<Product>()
+                    val innerList = ArrayList<Product>()
                     for (product: Product in initialProducts) {
                         if (product.name.toLowerCase().contains(pattern)) {
                             innerList.add(product)

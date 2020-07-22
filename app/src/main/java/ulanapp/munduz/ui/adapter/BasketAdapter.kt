@@ -15,19 +15,16 @@ import ulanapp.munduz.interfaces.OnChangeSumListener
 import ulanapp.munduz.interfaces.OnItemBasketClickListener
 
 
-class BasketAdapter : RecyclerView.Adapter<BasketViewHolder> {
+class BasketAdapter(
+    private var context: Context,
+    listener: OnItemBasketClickListener) :
+        RecyclerView.Adapter<BasketViewHolder>() {
 
-    private var context: Context
-    private var itemClickListener: OnItemBasketClickListener
+    private var itemClickListener: OnItemBasketClickListener = listener
 
     private lateinit var sumChangeListener: OnChangeSumListener
     private lateinit var purchases: MutableList<PurchaseEntity>
     private lateinit var purchasesRepository: PurchasesRepository
-
-    constructor(context: Context, listener: OnItemBasketClickListener) : super() {
-        this.context = context
-        this.itemClickListener = listener
-    }
 
     fun setProducts(purchases: MutableList<PurchaseEntity>) {
         this.purchases = purchases
@@ -63,7 +60,7 @@ class BasketAdapter : RecyclerView.Adapter<BasketViewHolder> {
         val purchase = purchases[position]
         holder.bind(purchase, itemClickListener)
 
-        setSmallImage(purchase.picture.urlImage, holder.image)
+        setSmallImage(context, purchase.picture.urlImage, holder.image)
         holder.name.text = purchase.name
         holder.price.text = purchase.priceInc.toString() + RUBLE
         holder.perPrice.text = purchase.perPriceInc
