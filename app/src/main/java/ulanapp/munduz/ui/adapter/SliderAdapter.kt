@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.squareup.picasso.Picasso
 import ulanapp.munduz.R
 import ulanapp.munduz.data.models.SliderImage
+import ulanapp.munduz.helpers.setSmallImage
 
 class SliderAdapter(private var context: Context, private var images: List<SliderImage>) :
     PagerAdapter() {
@@ -26,8 +26,8 @@ class SliderAdapter(private var context: Context, private var images: List<Slide
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view = inflater.inflate(R.layout.item_slider, null)
         val imageView = view.findViewById<ImageView>(R.id.imageView)
-        val sliderImage = images.get(position)
-        Picasso.get().load(sliderImage.image).into(imageView)
+        val sliderImage = images[position]
+        setSmallImage(context, sliderImage.image, imageView)
 
         val viewPager = container as ViewPager
         viewPager.addView(view, 0)

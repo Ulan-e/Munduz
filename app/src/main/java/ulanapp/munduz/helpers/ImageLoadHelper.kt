@@ -3,7 +3,6 @@ package ulanapp.munduz.helpers
 import android.content.Context
 import android.widget.ImageView
 import com.bumptech.glide.Glide
-import com.squareup.picasso.Picasso
 import ulanapp.munduz.R
 
 fun setSmallImage(context: Context, urlImage: String, viewImage: ImageView) {
