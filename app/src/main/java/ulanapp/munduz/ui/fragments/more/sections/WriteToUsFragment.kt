@@ -40,13 +40,13 @@ class WriteToUsFragment : BaseDialogFragment() {
     }
 
     private fun sendMessage() {
-        var message = Message()
+        val message = Message()
         message.email = "uulanerkinbaev@gmail.com"
         message.subject = "Отзыв Munduz"
         val from = writer_name.text.toString()
         val text = writer_text.text.toString()
         if (from != "" && text != "") {
-            message.body = "*** От кого " + from + "\n" + "*** Сообщение" + message
+            message.body = "*** От кого $from\n*** Сообщение$message"
             sendEmailHelper.setMessage(message)
             sendEmailHelper.execute()
             showSnackBar(rootView, "Спасибо за ваш отзыв")
@@ -54,7 +54,7 @@ class WriteToUsFragment : BaseDialogFragment() {
                 dismiss()
             }, 2500)
         } else {
-            var message = activity!!.resources.getString(R.string.empty_fields)
+            val message = activity!!.resources.getString(R.string.empty_fields)
             showSnackBar(rootView, message)
         }
     }

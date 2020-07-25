@@ -35,7 +35,11 @@ class CatalogFragment : BaseFragment(), CatalogView, OnCategoryClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.bindView(this)
-        showToolbarTitle(true, resources.getString(R.string.app_name))
+        showToolbarTitle(
+            withBackButton = false,
+            isAppName = true,
+            title = resources.getString(R.string.app_name)
+        )
 
         val catalog = activity!!.applicationContext.resources.getStringArray(R.array.category)
         images = intArrayOf(

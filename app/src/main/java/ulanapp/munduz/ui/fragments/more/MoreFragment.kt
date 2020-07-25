@@ -39,7 +39,11 @@ class MoreFragment : BaseFragment(), MoreView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        showToolbarTitle(false, resources.getString(R.string.more))
+        showToolbarTitle(
+            withBackButton = false,
+            isAppName = false,
+            title = resources.getString(R.string.more)
+        )
 
         presenter.bindView(this)
 

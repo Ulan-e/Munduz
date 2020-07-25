@@ -21,7 +21,7 @@ class AboutAppFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val title = resources.getString(R.string.about_app) + EMPTY_SPACE
-        showToolbarTitle(false, title)
+        showToolbarTitle(withBackButton = true, isAppName = false, title = title)
     }
 
     override fun onBackPressed(): Boolean {

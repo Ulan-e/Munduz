@@ -1,23 +1,27 @@
 package ulanapp.munduz.ui.activities.orders
 
-import ulanapp.munduz.data.models.PurchaseEntity
-import ulanapp.munduz.helpers.RUBLE
+import ulanapp.munduz.data.room.repository.PurchasesRepository
 import ulanapp.munduz.ui.base.BasePresenter
 import javax.inject.Inject
 
-class OrdersPresenterImpl @Inject constructor() : BasePresenter<OrdersView>(), OrdersPresenter {
+class OrdersPresenterImpl @Inject constructor(private var repository: PurchasesRepository) :
+    BasePresenter<OrdersView>(), OrdersPresenter {
 
-    private lateinit var purchases: MutableList<PurchaseEntity>
     private var amount = 0
 
-    override fun setProducts(purchases: MutableList<PurchaseEntity>) {
-        this.purchases = purchases
+    init {
+        amount = this.repository.purchasesAmount()
     }
 
-    override fun setPurchasesAmount(amount: Int) {
-        this.amount = amount
-        val price = "К оплате " + amount.toString() + RUBLE
-        getView()?.showTotalPurchases(price)
+
+    override fun setWithDeliveryOrNot(withDelivery: Boolean) {
+        if (withDelivery) {
+            amount += 190
+            getView()?.showTotalPurchases(amount)
+        } else {
+            amount -= 190
+            getView()?.showTotalPurchases(amount)
+        }
     }
 
 
@@ -37,6 +41,19 @@ class OrdersPresenterImpl @Inject constructor() : BasePresenter<OrdersView>(), O
 
     override fun getAmount(): Int {
         return this.amount
+    }
+
+    override fun getAllPurchases(): String {
+        val purchases = repository.fetchAll()
+        val result: StringBuilder = java.lang.StringBuilder()
+        for (item in purchases) {
+            result.append(
+                item.name + ", " +
+                        item.perPriceInc + ", цена " +
+                        item.priceInc + "\n"
+            )
+        }
+        return result.toString()
     }
 
 }

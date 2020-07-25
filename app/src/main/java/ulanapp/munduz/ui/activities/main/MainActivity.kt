@@ -36,7 +36,7 @@ class MainActivity : BaseActivity(), MainView {
     @Inject
     lateinit var presenter: MainPresenterImpl
 
-    lateinit var appUpdateManager: AppUpdateManager
+    private lateinit var appUpdateManager: AppUpdateManager
 
     companion object{
         const val REQUEST_UPDATE_CODE = 13
@@ -136,7 +136,7 @@ class MainActivity : BaseActivity(), MainView {
     }
 
     private fun onBackPressedInFragments() {
-        var fragments = supportFragmentManager.fragments
+        val fragments = supportFragmentManager.fragments
         for (fragment: Fragment in fragments) {
             if (fragment is BaseFragment) {
                 fragment.onBackPressed()

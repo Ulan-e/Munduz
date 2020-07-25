@@ -53,7 +53,7 @@ class FilteredFragment : BaseFragment(), FilteredView, OnItemClickListener {
         super.onViewCreated(view, savedInstanceState)
         titleCategory = arguments!!.getString(CATEGORY_ARG)
         val title = "$titleCategory $EMPTY_SPACE"
-        showToolbarTitle(false, title)
+        showToolbarTitle(withBackButton = true, isAppName = false, title = title)
 
         presenter.bindView(this)
         presenter.loadProductsByCategory(titleCategory)

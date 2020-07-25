@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ulanapp.munduz.data.models.Product
 import kotlinx.android.synthetic.main.search_layout.*
 import ulanapp.munduz.R
+import ulanapp.munduz.helpers.Constants
 import ulanapp.munduz.helpers.Constants.Companion.EXTRA_PRODUCT_ARG
 import ulanapp.munduz.interfaces.OnItemClickListener
 import ulanapp.munduz.ui.activities.details.DetailsActivity
@@ -35,7 +36,7 @@ class SearchActivity : BaseActivity(), SearchView, OnItemClickListener,
         search_view_full.requestFocus()
 
         search_view_full.setOnQueryTextListener(this)
-        var hintText = resources.getString(R.string.search_hint)
+        val hintText = resources.getString(R.string.search_hint)
         search_view_full.queryHint = hintText
 
         presenter.loadProducts()
@@ -64,6 +65,7 @@ class SearchActivity : BaseActivity(), SearchView, OnItemClickListener,
     override fun onItemClick(product: Product) {
         val intent = Intent(this, DetailsActivity::class.java)
         intent.putExtra(EXTRA_PRODUCT_ARG, product)
+        intent.putExtra(Constants.EXTRA_TURN_OFF_ADD_BASKET, Constants.BASKET_TURN_ON)
         startActivity(intent)
     }
 

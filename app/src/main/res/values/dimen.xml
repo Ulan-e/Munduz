@@ -2,7 +2,7 @@
 <resources>
 
     <dimen name="toolbar_app_title_size">7.5sp</dimen>
-    <dimen name="toolbar_title_size">6sp</dimen>
+    <dimen name="toolbar_title_size">7sp</dimen>
     <dimen name="product_name_size">16sp</dimen>
     <dimen name="product_desc_title_size">15sp</dimen>
     <dimen name="product_desc_size">14sp</dimen>

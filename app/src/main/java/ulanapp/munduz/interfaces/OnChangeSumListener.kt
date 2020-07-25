@@ -2,6 +2,6 @@ package ulanapp.munduz.interfaces
 
 interface OnChangeSumListener {
 
-    fun onSumChanged()
+    fun onAmountChanged(amount: Int)
 
 }

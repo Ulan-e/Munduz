@@ -46,6 +46,7 @@ class FirebaseRepositoryImpl: FirebaseRepository {
     override fun loadProductsByRecommendation(callback: ProductsCallback) {
         val products = mutableListOf<Product>()
         val queryRef = database.child(PRODUCTS_TABLE).orderByChild(PRODUCT_RECOMMEND).equalTo(true)
+        queryRef.keepSynced(true)
         queryRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 for (item: DataSnapshot in p0.children) {

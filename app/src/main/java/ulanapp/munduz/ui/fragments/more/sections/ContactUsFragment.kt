@@ -19,7 +19,11 @@ class ContactUsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showToolbarTitle(false, resources.getString(R.string.contacts_us))
+        showToolbarTitle(
+            withBackButton = true,
+            isAppName = false,
+            title = resources.getString(R.string.contacts_us)
+        )
     }
 
     override fun onBackPressed(): Boolean {

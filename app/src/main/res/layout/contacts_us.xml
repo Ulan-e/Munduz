@@ -15,26 +15,33 @@
             android:paddingBottom="4dp">
 
         <TextView
-                android:id="@+id/munduz"
+                android:id="@+id/phone_one"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:layout_marginLeft="19dp"
-                android:layout_marginTop="5dp"
-                android:text="Мундуз"
-                android:textSize="16sp"
-                android:textColor="@color/gray_dark"/>
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="7dp"
+                android:autoLink="phone"
+                android:paddingBottom="5dp"
+                android:text="+7 926 730 32 66"
+                android:textColor="@color/gray_dark"
+                android:textColorLink="@color/blue_light"
+                android:textSize="19sp" />
 
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/munduz"
+                android:layout_below="@id/phone_one"
                 android:layout_centerHorizontal="true"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="2dp"
+                android:autoLink="phone"
                 android:paddingBottom="5dp"
-                android:text="+7 965 965 00 00"
-                android:textColor="@color/gray_dark"/>
+                android:text="+7 926 057 33 03"
+                android:textColor="@color/gray_dark"
+                android:textColorLink="@color/blue_light"
+                android:textSize="19sp" />
+
 
         <ImageView
                 android:layout_width="40dp"
@@ -42,48 +49,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_margin="5dp"
-                android:src="@drawable/ic_person_black_24dp" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/bottom_line"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
-            android:paddingBottom="4dp">
-
-        <TextView
-                android:id="@+id/munar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="19dp"
-                android:layout_marginTop="5dp"
-                android:text="Мунар"
-                android:textSize="16sp"
-                android:textColor="@color/gray_dark"/>
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/munar"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="2dp"
-                android:paddingBottom="5dp"
-                android:text="+7 965 965 00 00"
-                android:textColor="@color/gray_dark"/>
-
-        <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_margin="5dp"
-                android:src="@drawable/ic_person_black_24dp" />
+                android:src="@drawable/ic_call_24" />
 
     </RelativeLayout>
 
@@ -101,10 +67,11 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@+id/location_market"
-                android:text="Адрес: Волгоградcкий проспект 32к8 \n Метро: Волгоградский проспект \n График 9:00 - 21:00 \n "
+                android:gravity="center_horizontal"
+                android:text="Адрес: Волгоградcкий проспект 32к8 \n Метро: Волгоградский проспект \n График: 10:00 - 21:00 \n "
                 android:textAlignment="center"
-                android:textSize="16sp"
-                android:textColor="@color/gray_dark"/>
+                android:textColor="@color/gray_dark"
+                android:textSize="16sp" />
 
         <ImageView
                 android:id="@+id/location_market"
@@ -118,8 +85,8 @@
     </RelativeLayout>
 
     <ImageView
-            android:layout_width="295dp"
-            android:layout_height="295dp"
+            android:layout_width="280dp"
+            android:layout_height="280dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="9dp"
             android:scaleType="fitXY"

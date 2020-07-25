@@ -3,7 +3,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
         android:layout_marginLeft="9dp"
         android:layout_marginRight="9dp">
 
@@ -22,12 +21,12 @@
 
         <ImageView
                 android:id="@+id/catalog_image"
-                android:layout_width="125dp"
-                android:layout_height="90dp"
+                android:layout_width="115dp"
+                android:layout_height="75dp"
                 android:layout_alignParentRight="true"
                 android:src="@mipmap/napitki"
                 android:scaleType="centerCrop"
-                android:layout_marginRight="-60dp">
+                android:layout_marginRight="-68dp">
 
         </ImageView>
 

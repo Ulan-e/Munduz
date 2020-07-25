@@ -48,7 +48,7 @@
                         android:layout_height="20dp"
                         android:layout_gravity="center_horizontal|bottom"
                         android:paddingBottom="7dp"
-                        app:tabBackground="@drawable/tab_selector"
+                        app:tabBackground="@drawable/tab_selector_image"
                         android:background="@color/transparent"
                         app:tabGravity="center"
                         app:tabIndicatorHeight="0dp"
@@ -79,7 +79,7 @@
     <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="65dp"
+            android:layout_marginBottom="73dp"
             android:overScrollMode="never"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 

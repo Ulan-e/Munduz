@@ -11,7 +11,7 @@
     <string name="about_app">О Приложении</string>
     <string name="write_to_us">Написать нам</string>
 
-    <string name="purchases_amount">"Сумма товара "</string>
+    <string name="purchases_amount">"К оплате "</string>
     <string name="delivery">"Доставка"</string>
     <string name="pickup">"Самовывоз"</string>
     <string name="order">"Заказать"</string>
