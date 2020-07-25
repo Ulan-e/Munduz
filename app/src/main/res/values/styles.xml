@@ -7,13 +7,13 @@
     </style>
 
     <style name="ButtonVioletSmallStyle" parent="Widget.MaterialComponents.Button">
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">11sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_gravity">bottom|center_horizontal</item>
         <item name="android:layout_marginTop">2dp</item>
         <item name="android:layout_marginBottom">2dp</item>
-        <item name="android:layout_marginLeft">10dp</item>
-        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginRight">8dp</item>
     </style>
 
     <style name="ButtonVioletOnlyTextStyle" parent="Widget.MaterialComponents.Button.TextButton">

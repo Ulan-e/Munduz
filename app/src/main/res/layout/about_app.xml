@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
     <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="410dp"
-            android:layout_margin="7dp"
-            android:background="@drawable/bottom_line"
-            android:orientation="vertical">
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
 
         <ImageView
                 android:layout_width="90dp"
@@ -17,7 +15,6 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:src="@mipmap/app_icon">
-
         </ImageView>
 
     </RelativeLayout>
@@ -26,9 +23,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
-            android:orientation="vertical">
+            android:layout_marginBottom="15dp"
+            android:orientation="vertical"
+            android:layout_gravity="bottom">
 
         <TextView
                 android:id="@+id/dev_about"
@@ -78,4 +75,4 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

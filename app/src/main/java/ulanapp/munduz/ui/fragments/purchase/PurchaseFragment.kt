@@ -93,6 +93,8 @@ class PurchaseFragment : BaseDialogFragment(), PurchaseView {
         } catch (e: PackageManager.NameNotFoundException) {
             Toast.makeText(activity!!, "WhatsApp не установлен", Toast.LENGTH_SHORT)
                 .show()
+            Toast.makeText(activity!!, "Выберите другой способ покупки", Toast.LENGTH_SHORT)
+                .show()
         }
     }
 

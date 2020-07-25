@@ -1,20 +1,18 @@
 package ulanapp.munduz.ui.fragments.basket
 
-import ulanapp.munduz.data.repository.FirebaseRepository
 import ulanapp.munduz.data.room.repository.PurchasesRepository
+import ulanapp.munduz.interfaces.OnChangeSumListener
 import ulanapp.munduz.ui.base.BasePresenter
 import javax.inject.Inject
 
-class BasketPresenterImpl : BasePresenter<BasketView>, BasketPresenter {
-
-    private var firebaseRepository: FirebaseRepository
+class BasketPresenterImpl @Inject constructor(
     private var purchasesRepository: PurchasesRepository
-    private var amount = 0
+) : BasePresenter<BasketView>(), BasketPresenter {
 
-    @Inject
-    constructor(firebaseRepository: FirebaseRepository, purchasesRepository: PurchasesRepository) {
-        this.firebaseRepository = firebaseRepository
-        this.purchasesRepository = purchasesRepository
+    private lateinit var sumChangeListener: OnChangeSumListener
+
+    fun setListener(listener: OnChangeSumListener) {
+        this.sumChangeListener = listener
     }
 
     override fun loadProducts() {
@@ -23,7 +21,7 @@ class BasketPresenterImpl : BasePresenter<BasketView>, BasketPresenter {
         if (purchases.size > 0) {
             getView()?.showProducts(purchases)
             getView()?.showPurchaseButton()
-            getView()?.showAmountPurchases(sum)
+            sumChangeListener.onAmountChanged(sum)
         } else {
             getView()?.showEmptyData()
             getView()?.hidePurchaseButton()
@@ -32,24 +30,11 @@ class BasketPresenterImpl : BasePresenter<BasketView>, BasketPresenter {
 
     override fun purchaseButtonClicked() {
         val purchases = purchasesRepository.fetchAll()
-        for (num in purchases) {
-            amount += num.priceInc
-        }
-        getView()?.purchaseAll(purchases, amount)
+        getView()?.purchaseAll(purchases)
     }
 
     override fun goToHomeButtonClicked() {
         getView()?.showGoToHome()
-    }
-
-    override fun purchasesAmountChanged() {
-        amount = purchasesRepository.purchasesAmount()
-        if (amount == 0) {
-            getView()?.hidePurchaseButton()
-            getView()?.showEmptyData()
-        } else {
-            getView()?.showAmountPurchases(amount)
-        }
     }
 
 }

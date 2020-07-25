@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.home_layout.*
 import ulanapp.munduz.R
 import ulanapp.munduz.data.models.Product
 import ulanapp.munduz.data.models.SliderImage
+import ulanapp.munduz.data.repository.FirebaseRepository
 import ulanapp.munduz.data.room.repository.FavoritesRepository
 import ulanapp.munduz.data.room.repository.PurchasesRepository
 import ulanapp.munduz.helpers.Constants.Companion.BASKET_TURN_ON
@@ -39,6 +40,9 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
 
     @Inject
     lateinit var productsAdapter: ProductsAdapter
+
+    @Inject
+    lateinit var firebaseRepository: FirebaseRepository
 
     @Inject
     lateinit var favoritesRepository: FavoritesRepository
@@ -89,9 +93,14 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showToolbarTitle(true, resources.getString(R.string.app_name))
+        showToolbarTitle(
+            withBackButton = false,
+            isAppName = true,
+            title = resources.getString(R.string.app_name)
+        )
         presenter.bindView(this)
         presenter.apply {
+            setRepository(firebaseRepository)
             loadSliderImages()
             loadProducts()
         }

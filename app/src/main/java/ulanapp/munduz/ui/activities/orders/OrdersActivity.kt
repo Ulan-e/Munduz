@@ -7,11 +7,10 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.orders_layout.*
 import ulanapp.munduz.R
 import ulanapp.munduz.data.models.Order
-import ulanapp.munduz.data.models.PurchaseEntity
+import ulanapp.munduz.data.room.repository.PurchasesRepository
 import ulanapp.munduz.helpers.Constants.Companion.EMPTY_SPACE
-import ulanapp.munduz.helpers.Constants.Companion.EXTRA_PRODUCT_AMOUNT_ARG
-import ulanapp.munduz.helpers.Constants.Companion.EXTRA_PURCHASES_BUY_ARG
 import ulanapp.munduz.helpers.Constants.Companion.PURCHASE_FRAGMENT
+import ulanapp.munduz.helpers.RUBLE
 import ulanapp.munduz.ui.base.BaseActivity
 import ulanapp.munduz.ui.fragments.purchase.PurchaseFragment
 import javax.inject.Inject
@@ -22,28 +21,22 @@ class OrdersActivity : BaseActivity(), OrdersView {
     @Inject
     lateinit var presenter: OrdersPresenterImpl
 
-    private lateinit var purchases: MutableList<PurchaseEntity>
+    @Inject
+    lateinit var purchasesRepository: PurchasesRepository
 
     private lateinit var radioButtonText: String
-
-    private var amount: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.orders_layout)
 
         presenter.bindView(this)
-
-        purchases = intent.getParcelableArrayListExtra(EXTRA_PURCHASES_BUY_ARG)
-        amount = intent.getIntExtra(EXTRA_PRODUCT_AMOUNT_ARG, -1)
+        presenter.setWithDeliveryOrNot(true)
 
         setRadioButtonText()
 
-        presenter.setPurchasesAmount(amount + 190)
-
         presenter.apply {
             setToolbar()
-            setProducts(purchases)
         }
 
 
@@ -64,14 +57,12 @@ class OrdersActivity : BaseActivity(), OrdersView {
                 radioButtonText = resources.getString(R.string.delivery)
                 setVisibilitiesOfDelivery(View.VISIBLE)
                 setVisibilitiesOfPickUp(View.GONE)
-                presenter.setPurchasesAmount(amount + 190)
+                presenter.setWithDeliveryOrNot(true)
             } else {
                 radioButtonText = resources.getString(R.string.pickup)
                 setVisibilitiesOfDelivery(View.GONE)
                 setVisibilitiesOfPickUp(View.VISIBLE)
-                if (amount > 190) {
-                    presenter.setPurchasesAmount(amount - 190)
-                }
+                presenter.setWithDeliveryOrNot(false)
             }
         }
     }
@@ -97,26 +88,15 @@ class OrdersActivity : BaseActivity(), OrdersView {
         }
     }
 
-    private fun humanReadableArray(purchases: MutableList<PurchaseEntity>): StringBuilder {
-        val result: StringBuilder = java.lang.StringBuilder()
-        for (item in purchases) {
-            result.append(
-                item.name + ", " +
-                        item.perPriceInc + ", цена " +
-                        item.priceInc + "\n"
-            )
-        }
-        return result
-    }
-
-    override fun showTotalPurchases(total: String) {
-        total_purchase.text = total
+    override fun showTotalPurchases(sum: Int) {
+        val amountOfPurchases = "К оплате $sum $RUBLE"
+        total_purchase.text = amountOfPurchases
     }
 
     override fun getInputOrder(): Order {
         val order = Order()
         order.amountPurchases = presenter.getAmount()
-        order.purchases = humanReadableArray(purchases).toString()
+        order.purchases = presenter.getAllPurchases()
         order.clientName = client_name.text.toString()
         order.clientPhoneNumber = client_phone_number.text.toString()
         if (radioButtonText == resources.getString(R.string.delivery)) {
@@ -144,12 +124,12 @@ class OrdersActivity : BaseActivity(), OrdersView {
     }
 
     override fun goToPurchaseMethod(order: Order) {
-        var fragment = PurchaseFragment.newInstance(order)
+        val fragment = PurchaseFragment.newInstance(order)
         fragment.show(supportFragmentManager, PURCHASE_FRAGMENT)
     }
 
     private fun showSnackBar(text: String) {
-        val snack = Snackbar.make(relative_layout, text, Snackbar.LENGTH_SHORT)
+        val snack = Snackbar.make(coordinator_orders, text, Snackbar.LENGTH_SHORT)
         snack.show()
     }
 

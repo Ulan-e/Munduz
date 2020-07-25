@@ -49,9 +49,14 @@ class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, On
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        showToolbarTitle(false, resources.getString(R.string.basket))
+        showToolbarTitle(
+            withBackButton = false,
+            isAppName = false,
+            title = resources.getString(R.string.basket)
+        )
 
         presenter.bindView(this)
+        presenter.setListener(this)
         presenter.loadProducts()
 
         purchase_all.setOnClickListener {
@@ -78,16 +83,10 @@ class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, On
         basket_recycler_view.adapter = adapter
     }
 
-    override fun purchaseAll(purchases: MutableList<PurchaseEntity>, amount: Int) {
+    override fun purchaseAll(purchases: MutableList<PurchaseEntity>) {
         val intent = Intent(activity!!, OrdersActivity::class.java)
-        intent.putExtra(EXTRA_PRODUCT_AMOUNT_ARG, amount)
         intent.putParcelableArrayListExtra(EXTRA_PURCHASES_BUY_ARG, ArrayList(purchases))
         startActivity(intent)
-    }
-
-    override fun showAmountPurchases(amount: Int) {
-        val amountText = activity!!.resources.getString(R.string.purchases_amount)
-        sum_of_purchase.text = amountText + amount.toString() + RUBLE
     }
 
     override fun showGoToHome() {
@@ -126,8 +125,14 @@ class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, On
         presenter.unbindView(this)
     }
 
-    override fun onSumChanged() {
-        presenter.purchasesAmountChanged()
+    override fun onAmountChanged(amount: Int) {
+        if (amount > 0) {
+            val amountText = activity!!.resources.getString(R.string.purchases_amount)
+            sum_of_purchase.text = amountText + amount.toString() + RUBLE
+        } else {
+            hidePurchaseButton()
+            showEmptyData()
+        }
     }
 
     private fun convertPurchaseToProduct(purchase: PurchaseEntity): Product {

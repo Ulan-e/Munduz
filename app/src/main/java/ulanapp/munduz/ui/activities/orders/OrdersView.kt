@@ -7,14 +7,14 @@ interface OrdersView : BaseView {
 
     fun showToolbar()
 
-    fun showTotalPurchases(total: String)
+    fun showTotalPurchases(sum: Int)
 
-    fun getInputOrder() : Order
+    fun getInputOrder(): Order
 
-    fun isNotEmptyFields() : Boolean
+    fun isNotEmptyFields(): Boolean
 
     fun cancelOrder()
 
     fun goToPurchaseMethod(order: Order)
-    
+
 }

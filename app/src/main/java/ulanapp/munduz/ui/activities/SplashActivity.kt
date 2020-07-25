@@ -12,7 +12,7 @@ import ulanapp.munduz.ui.activities.main.MainActivity
 class SplashActivity : AppCompatActivity() {
 
     private var delayHandler: Handler? = null
-    private var SPLASH_DELAY: Long = 2300
+    private var SPLASH_DELAY: Long = 1500
 
     private val runnable: Runnable = Runnable {
         if (!isFinishing) {

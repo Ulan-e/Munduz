@@ -17,8 +17,9 @@ import ulanapp.munduz.interfaces.OnItemBasketClickListener
 
 class BasketAdapter(
     private var context: Context,
-    listener: OnItemBasketClickListener) :
-        RecyclerView.Adapter<BasketViewHolder>() {
+    listener: OnItemBasketClickListener
+) :
+    RecyclerView.Adapter<BasketViewHolder>() {
 
     private var itemClickListener: OnItemBasketClickListener = listener
 
@@ -103,15 +104,18 @@ class BasketAdapter(
             notifyItemRemoved(position)
             notifyItemRangeChanged(position, purchases.size)
 
-            sumChangeListener.onSumChanged()
+            sumChangeListener.onAmountChanged(getAmountPurchases())
         }
     }
 
     private fun updateValues(holder: BasketViewHolder, purchase: PurchaseEntity) {
         purchasesRepository.update(purchase)
-        sumChangeListener.onSumChanged()
+        sumChangeListener.onAmountChanged(getAmountPurchases())
         holder.price.text = purchase.priceInc.toString() + RUBLE
         holder.perPrice.text = purchase.perPriceInc
     }
 
+    private fun getAmountPurchases(): Int {
+        return purchasesRepository.purchasesAmount()
+    }
 }

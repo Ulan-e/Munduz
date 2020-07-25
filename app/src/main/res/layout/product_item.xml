@@ -46,7 +46,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/NameTextStyle"
-                    android:text="Курут FАлма фавыаы \n Gddsgs dgsdfgds \n sfdsfsd"
+                    android:text=""
                     android:minHeight="30dp"
                     android:lines="2"
                     android:maxLines="2"></TextView>
@@ -82,4 +82,5 @@
 
 
     </androidx.cardview.widget.CardView>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

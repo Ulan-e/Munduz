@@ -1,17 +1,19 @@
 package ulanapp.munduz.ui.activities.orders
 
-import ulanapp.munduz.data.models.PurchaseEntity
+import ulanapp.munduz.data.room.repository.PurchasesRepository
 
 
 interface OrdersPresenter {
 
     fun setToolbar()
 
-    fun getAmount() : Int
+    fun setWithDeliveryOrNot(withDelivery: Boolean)
 
-    fun setProducts(purchases: MutableList<PurchaseEntity>)
+    fun getAmount(): Int
+/*
+    fun setRepository(purchasesRepository: PurchasesRepository)*/
 
-    fun setPurchasesAmount(amount: Int)
+    fun getAllPurchases(): String
 
     fun sendButtonClicked()
 

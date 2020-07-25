@@ -29,9 +29,16 @@ abstract class BaseFragment : DaggerFragment(), OnBackPressedListener {
         retainInstance = true
     }
 
-    protected fun showToolbarTitle(isAppName: Boolean, title: String) {
+    protected fun showToolbarTitle(withBackButton: Boolean, isAppName: Boolean, title: String) {
         val toolbar = activity!!.findViewById<Toolbar>(R.id.main_toolbar)
-        toolbar.navigationIcon = null
+        if (withBackButton) {
+            toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
+            toolbar.setNavigationOnClickListener{
+                activity!!.supportFragmentManager.popBackStack()
+            }
+        } else {
+            toolbar.navigationIcon = null
+        }
 
         val textToolbar = toolbar.findViewById<TextView>(R.id.main_toolbar_text)
         textToolbar.text = title

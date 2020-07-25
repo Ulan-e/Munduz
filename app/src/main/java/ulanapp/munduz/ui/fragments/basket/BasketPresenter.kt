@@ -8,6 +8,4 @@ interface BasketPresenter {
 
     fun goToHomeButtonClicked()
 
-    fun purchasesAmountChanged()
-
 }
