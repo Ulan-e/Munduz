@@ -14,7 +14,7 @@ import ulanapp.munduz.R
 import ulanapp.munduz.data.models.Message
 import ulanapp.munduz.data.models.Order
 import ulanapp.munduz.helpers.Constants.Companion.ARGS_ORDER
-import ulanapp.munduz.helpers.SendEmailHelper
+import ulanapp.munduz.helpers.SendEmailAsync
 import ulanapp.munduz.ui.base.BaseDialogFragment
 import javax.inject.Inject
 import javax.inject.Provider
@@ -30,7 +30,7 @@ class PurchaseFragment : BaseDialogFragment(), PurchaseView {
     lateinit var presenter: PurchasePresenter
 
     @Inject
-    lateinit var sendEmailHelper: Provider<SendEmailHelper>
+    lateinit var sendEmailHelper: Provider<SendEmailAsync>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,7 +45,7 @@ class PurchaseFragment : BaseDialogFragment(), PurchaseView {
         val emailHelper = sendEmailHelper.get()
         presenter.setEmailHelper(emailHelper)
 
-        order = arguments!!.getParcelable(ARGS_ORDER)
+        order = arguments!!.getParcelable(ARGS_ORDER)!!
         presenter.putOrderToMessage(order)
 
         via_email.setOnClickListener {
@@ -77,7 +77,7 @@ class PurchaseFragment : BaseDialogFragment(), PurchaseView {
         showSnackBar(root_purchase_layout, message)
         Handler().postDelayed({
             dismiss()
-        }, 2200)
+        }, 2000)
     }
 
     override fun sendOrderToWhatsApp(message: Message) {

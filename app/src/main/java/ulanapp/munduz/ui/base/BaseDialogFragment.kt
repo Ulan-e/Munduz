@@ -15,7 +15,7 @@ abstract class BaseDialogFragment: DaggerAppCompatDialogFragment() {
     }
 
     protected fun showSnackBar(view: View, text: String){
-        val snack = Snackbar.make(root_purchase_layout, text, Snackbar.LENGTH_SHORT)
+        val snack = Snackbar.make(view, text, Snackbar.LENGTH_SHORT)
         snack.show()
     }
 }
