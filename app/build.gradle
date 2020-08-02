@@ -43,12 +43,11 @@ dependencies {
 
     //Google
     implementation 'com.google.android.material:material:1.1.0'
-    implementation 'com.google.android.play:core:1.7.3'
+    implementation 'com.google.android.play:core:1.8.0'
 
     //Database
-    implementation 'com.google.firebase:firebase-database:16.0.4'
-    implementation 'com.google.firebase:firebase-storage:16.0.4'
-    implementation 'com.google.firebase:firebase-auth:16.0.5'
+    implementation 'com.google.firebase:firebase-database:19.3.1'
+    implementation 'com.google.firebase:firebase-storage:19.1.1'
 
     //Room
     implementation 'android.arch.persistence.room:runtime:1.1.1'

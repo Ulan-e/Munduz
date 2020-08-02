@@ -54,7 +54,7 @@ class MainActivity : BaseActivity(), MainView {
     private var installStateUpdatedListener: InstallStateUpdatedListener =
         object : InstallStateUpdatedListener {
             override fun onStateUpdate(state: InstallState) {
-                if (state.installStatus() == InstallStatus.DOWNLOADED) {
+                if (state.installStatus() == DOWNLOADED) {
                     popupMessageForCompleteUpdate()
                 } else if (state.installStatus() == INSTALLED) {
                     appUpdateManager.unregisterListener(this)
