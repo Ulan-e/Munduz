@@ -2,16 +2,16 @@ package ulanapp.munduz.ui.fragments.purchase
 
 import ulanapp.munduz.data.models.Message
 import ulanapp.munduz.data.models.Order
-import ulanapp.munduz.helpers.SendEmailHelper
+import ulanapp.munduz.helpers.SendEmailAsync
 import javax.inject.Inject
 
 class PurchasePresenterImpl @Inject constructor(private var view: PurchaseView) :
     PurchasePresenter {
 
-    private lateinit var sendEmailHelper: SendEmailHelper
+    private lateinit var sendEmailHelper: SendEmailAsync
     private lateinit var message: Message
 
-    override fun setEmailHelper(emailHelper: SendEmailHelper) {
+    override fun setEmailHelper(emailHelper: SendEmailAsync) {
         this.sendEmailHelper = emailHelper
     }
 

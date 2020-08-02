@@ -41,7 +41,8 @@ abstract class BaseFragment : DaggerFragment(), OnBackPressedListener {
         }
 
         val textToolbar = toolbar.findViewById<TextView>(R.id.main_toolbar_text)
-        textToolbar.text = title
+        val emptySpaces = "       "
+        textToolbar.text = title + emptySpaces
 
         if (isAppName) {
             activity!!.findViewById<LinearLayout>(R.id.search_layout).visibility = View.VISIBLE

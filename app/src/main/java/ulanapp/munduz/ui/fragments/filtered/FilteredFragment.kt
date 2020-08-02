@@ -51,7 +51,7 @@ class FilteredFragment : BaseFragment(), FilteredView, OnItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        titleCategory = arguments!!.getString(CATEGORY_ARG)
+        titleCategory = arguments!!.getString(CATEGORY_ARG).toString()
         val title = "$titleCategory $EMPTY_SPACE"
         showToolbarTitle(withBackButton = true, isAppName = false, title = title)
 

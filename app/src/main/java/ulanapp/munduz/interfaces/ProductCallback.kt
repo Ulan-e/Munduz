@@ -4,5 +4,5 @@ import ulanapp.munduz.data.models.Product
 
 interface ProductCallback{
 
-    fun onCallback(product: Product)
+    fun onCallback(product: Product?)
 }

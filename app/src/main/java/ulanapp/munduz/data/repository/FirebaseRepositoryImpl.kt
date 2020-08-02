@@ -15,7 +15,7 @@ import ulanapp.munduz.interfaces.ProductCallback
 import ulanapp.munduz.interfaces.ProductsCallback
 import ulanapp.munduz.interfaces.SliderImagesCallback
 
-class FirebaseRepositoryImpl: FirebaseRepository {
+class FirebaseRepositoryImpl : FirebaseRepository {
 
     private val database: DatabaseReference
 
@@ -32,7 +32,9 @@ class FirebaseRepositoryImpl: FirebaseRepository {
             override fun onDataChange(p0: DataSnapshot) {
                 for (item: DataSnapshot in p0.children) {
                     val product: Product? = item.getValue(Product::class.java)
-                    products.add(product!!)
+                    if (product?.visible == true) {
+                        products.add(product)
+                    }
                 }
                 callback.onCallback(products)
             }
@@ -51,7 +53,9 @@ class FirebaseRepositoryImpl: FirebaseRepository {
             override fun onDataChange(p0: DataSnapshot) {
                 for (item: DataSnapshot in p0.children) {
                     val product: Product? = item.getValue(Product::class.java)
-                    products.add(product!!)
+                    if (product?.visible == true) {
+                        products.add(product)
+                    }
                 }
                 callback.onCallback(products)
             }
@@ -64,12 +68,15 @@ class FirebaseRepositoryImpl: FirebaseRepository {
 
     override fun loadProductsByCategory(category: String, callback: ProductsCallback) {
         val products = mutableListOf<Product>()
-        val queryRef = database.child(PRODUCTS_TABLE).orderByChild(PRODUCT_CATEGORY).equalTo(category)
+        val queryRef =
+            database.child(PRODUCTS_TABLE).orderByChild(PRODUCT_CATEGORY).equalTo(category)
         queryRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 for (item: DataSnapshot in p0.children) {
                     val product: Product? = item.getValue(Product::class.java)
-                    products.add(product!!)
+                    if (product?.visible == true) {
+                        products.add(product)
+                    }
                 }
                 callback.onCallback(products)
             }
@@ -81,16 +88,14 @@ class FirebaseRepositoryImpl: FirebaseRepository {
     }
 
     override fun loadProductByKey(key: String, callback: ProductCallback) {
-        var product = Product()
+        var product: Product? = null
         val queryRef = database.child(PRODUCTS_TABLE).orderByChild(PRODUCT_ID).equalTo(key)
         queryRef.keepSynced(true)
         queryRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 for (item: DataSnapshot in p0.children) {
-                    val likedProduct: Product? = item.getValue(Product::class.java)
-                    if (likedProduct != null) {
-                        product = likedProduct
-                    }
+                    val fetchedProduct: Product? = item.getValue(Product::class.java)
+                    product = fetchedProduct!!
                 }
                 callback.onCallback(product)
             }

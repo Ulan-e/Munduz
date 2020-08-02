@@ -2,7 +2,6 @@ package ulanapp.munduz.ui.activities.details
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -12,6 +11,7 @@ import com.google.android.material.tabs.TabLayout
 import ulanapp.munduz.data.models.Product
 import kotlinx.android.synthetic.main.details_layout.*
 import ulanapp.munduz.R
+import ulanapp.munduz.data.repository.FirebaseRepository
 import ulanapp.munduz.helpers.Constants
 import ulanapp.munduz.helpers.Constants.Companion.BASKET_TURN_OFF
 import ulanapp.munduz.helpers.Constants.Companion.EXTRA_OPEN_BASKET
@@ -20,6 +20,7 @@ import ulanapp.munduz.helpers.Constants.Companion.EXTRA_TURN_OFF_ADD_BASKET
 import ulanapp.munduz.helpers.Constants.Companion.NOT_IN_BASKET
 import ulanapp.munduz.helpers.Constants.Companion.OPEN_BASKET_ARG
 import ulanapp.munduz.helpers.RUBLE
+import ulanapp.munduz.interfaces.ProductCallback
 import ulanapp.munduz.ui.activities.main.MainActivity
 import ulanapp.munduz.ui.adapter.DetailsImageAdapter
 import ulanapp.munduz.ui.base.BaseActivity
@@ -30,8 +31,11 @@ class DetailsActivity : BaseActivity(), DetailsView {
     @Inject
     lateinit var presenter: DetailsPresenterImpl
 
-    private lateinit var product: Product
-    private lateinit var basketSwitcher: String
+    @Inject
+    lateinit var firebaseRepository: FirebaseRepository
+
+    private var product: Product? = null
+    private var basketSwitcher: String? = null
 
     private var detailsImageAdapter: DetailsImageAdapter? = null
 
@@ -53,15 +57,13 @@ class DetailsActivity : BaseActivity(), DetailsView {
 
         presenter.apply {
             setToolbar()
-            setProduct(product)
+            setProduct(product!!)
             isInBasket()
         }
 
         add_to_basket.setOnClickListener {
             presenter.addToBasketClicked()
         }
-
-
     }
 
     private fun disableBasketButton(basketSwitcher: String?) {
@@ -76,10 +78,6 @@ class DetailsActivity : BaseActivity(), DetailsView {
                 }
             }
         }
-    }
-
-    override fun closeDetails() {
-        finish()
     }
 
     override fun goToBasket() {
@@ -108,9 +106,9 @@ class DetailsActivity : BaseActivity(), DetailsView {
         viewPager = findViewById(R.id.view_pager_image)
 
         val pictures = mutableListOf<String>()
-        val one = product.picture.urlImage
-        val two = product.picture.urlImage2
-        val three = product.picture.urlImage3
+        val one = product!!.picture.urlImage
+        val two = product!!.picture.urlImage2
+        val three = product!!.picture.urlImage3
 
         if (two.isEmpty() && three.isEmpty()) {  //if One Image
             pictures.clear()
@@ -155,10 +153,37 @@ class DetailsActivity : BaseActivity(), DetailsView {
     }
 
     override fun showProduct(product: Product) {
+        checkProductVisibility(product)
+
         product_name.text = product.name
         product_desc.text = product.desc
         product_price.text = product.cost.toString() + " " + RUBLE
         product_priceFor.text = "Цена за " + product.priceFor
+
+    }
+
+    private fun checkProductVisibility(p: Product) {
+        firebaseRepository.loadProductByKey(p.id, object : ProductCallback {
+            override fun onCallback(product: Product?) {
+                //check if product removed
+                if (product != null) {
+                    if (product.visible) {
+                        product_availability.text = "Есть в наличии"
+                        product_availability.setTextColor(resources.getColor(R.color.green_light))
+                    } else {
+                        product_availability.text = "Товар скоро будет"
+                        product_availability.setTextColor(resources.getColor(R.color.red_light))
+                    }
+                } else {
+                    appbar_layout.visibility = View.GONE
+                    details_content.visibility = View.GONE
+                    add_to_basket.visibility = View.GONE
+                    empty_product.visibility = View.VISIBLE
+                    empty_product.text =
+                        "Рекомендуем удалить товар из Корзины \n \n Товар снят с продажи"
+                }
+            }
+        })
     }
 
     override fun changeBasketText(title: String) {
@@ -168,7 +193,6 @@ class DetailsActivity : BaseActivity(), DetailsView {
                 setTextColor(resources.getColor(R.color.white))
                 text = Constants.NOT_IN_BASKET
             }
-
         } else {
             add_to_basket.apply {
                 setBackgroundColor(resources.getColor(R.color.white))
@@ -209,6 +233,10 @@ class DetailsActivity : BaseActivity(), DetailsView {
 
     override fun onBackPressed() {
         super.onBackPressed()
+        finish()
+    }
+
+    override fun closeDetails() {
         finish()
     }
 

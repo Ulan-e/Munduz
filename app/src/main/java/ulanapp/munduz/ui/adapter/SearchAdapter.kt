@@ -54,7 +54,7 @@ class SearchAdapter(
                 } else {
                     val innerList = ArrayList<Product>()
                     for (product: Product in initialProducts) {
-                        if (product.name.toLowerCase().contains(pattern)) {
+                        if (product.name.toLowerCase().contains(pattern) || product.desc.toLowerCase().contains(pattern)) {
                             innerList.add(product)
                         }
                     }

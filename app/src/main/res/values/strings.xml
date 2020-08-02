@@ -18,7 +18,7 @@
     <string name="success_order"> "Ваш заказ успешно выполнен \n Вам позвонять в течении 30 минут" </string>
     <string name="search_hint">Найти товар</string>
     <string name="version_title">Версия</string>
-    <string name="version_code">1.2</string>
+    <string name="version_code">1.01 Beta</string>
     <string name="ulan_erkinbaev">Улан Эркинбаев</string>
     <string name="developer">Разрабочик</string>
     <string name="ready_purchase">Оформить Заказ</string>
@@ -61,8 +61,8 @@
         <item>Кухня</item>
         <item>Казаны</item>
         <item>Чемоданы</item>
-        <item>Мебель/Бешик</item>
         <item>Одежда</item>
         <item>Химия</item>
+        <item>Книги</item>
     </string-array>
 </resources>

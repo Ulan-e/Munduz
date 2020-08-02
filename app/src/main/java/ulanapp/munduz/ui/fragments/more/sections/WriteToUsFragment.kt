@@ -8,12 +8,12 @@ import android.view.ViewGroup
 import kotlinx.android.synthetic.main.writetous_layout.*
 import ulanapp.munduz.R
 import ulanapp.munduz.data.models.Message
-import ulanapp.munduz.helpers.SendEmailHelper
+import ulanapp.munduz.helpers.SendEmailAsync
 import ulanapp.munduz.ui.base.BaseDialogFragment
 
 class WriteToUsFragment : BaseDialogFragment() {
 
-    private lateinit var sendEmailHelper: SendEmailHelper
+    private lateinit var sendEmailHelper: SendEmailAsync
 
     private lateinit var rootView: View
 
@@ -28,7 +28,7 @@ class WriteToUsFragment : BaseDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        sendEmailHelper = SendEmailHelper()
+        sendEmailHelper = SendEmailAsync()
 
         send.setOnClickListener {
             sendMessage()

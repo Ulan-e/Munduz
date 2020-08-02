@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/coordinator_layout"
         android:layout_width="match_parent"
@@ -11,10 +10,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
+            android:background="@color/white"
             android:fitsSystemWindows="true"
             android:theme="@style/Widget.AppCompat.ActionBar"
-            app:expanded="true"
-            android:background="@color/white">
+            app:expanded="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:id="@+id/coll_toolbar"
@@ -35,9 +34,9 @@
                         android:id="@+id/view_pager_image"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
                         android:layout_marginLeft="8dp"
                         android:layout_marginRight="8dp"
-                        android:layout_gravity="center_horizontal"
                         android:scaleType="centerCrop">
 
                 </androidx.viewpager.widget.ViewPager>
@@ -47,24 +46,23 @@
                         android:layout_width="match_parent"
                         android:layout_height="20dp"
                         android:layout_gravity="center_horizontal|bottom"
+                        android:background="@color/transparent"
                         android:paddingBottom="7dp"
                         app:tabBackground="@drawable/tab_selector_image"
-                        android:background="@color/transparent"
                         app:tabGravity="center"
                         app:tabIndicatorHeight="0dp"
-                        app:tabMaxWidth="14dp"/>
+                        app:tabMaxWidth="14dp" />
             </FrameLayout>
 
             <androidx.appcompat.widget.Toolbar
                     android:id="@+id/product_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    app:layout_collapseMode="pin"
                     android:background="@android:color/transparent"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" >
-            </androidx.appcompat.widget.Toolbar>
+                    app:layout_collapseMode="pin"
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"></androidx.appcompat.widget.Toolbar>
 
-          <ProgressBar
+            <ProgressBar
                     android:id="@+id/image_progress_bar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -77,6 +75,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
+            android:id="@+id/details_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="73dp"
@@ -118,14 +117,14 @@
                         android:id="@+id/product_priceFor"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="14sp"
-                        android:layout_margin="5dp"
                         android:layout_below="@+id/product_price"
+                        android:layout_margin="5dp"
                         android:background="@drawable/frame_for_textview"
-                        android:paddingTop="0dp"
-                        android:paddingBottom="1dp"
                         android:paddingLeft="5dp"
-                        android:paddingRight="5dp">
+                        android:paddingTop="0dp"
+                        android:paddingRight="5dp"
+                        android:paddingBottom="1dp"
+                        android:textSize="14sp">
 
                 </TextView>
 
@@ -135,8 +134,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_margin="8dp"
-                        android:text="@string/avalaible"
-                        android:textColor="@color/green_tiny"
                         android:textSize="14sp">
 
                 </TextView>
@@ -146,14 +143,14 @@
                     android:id="@+id/product_delivery_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textAllCaps="true"
+                    android:layout_margin="8dp"
                     android:drawableLeft="@drawable/ic_small_car"
                     android:drawablePadding="10dp"
                     android:paddingTop="6dp"
+                    android:text="@string/delivery"
+                    android:textAllCaps="true"
                     android:textSize="17sp"
-                    android:layout_margin="8dp"
-                    android:text="@string/delivery">
+                    android:textStyle="bold">
 
             </TextView>
 
@@ -161,12 +158,12 @@
                     android:id="@+id/product_delivery"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
                     android:layout_margin="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="8dp"
                     android:lineSpacingExtra="5dp"
-                    android:text="@string/delivery_text">
+                    android:text="@string/delivery_text"
+                    android:textSize="16sp">
 
             </TextView>
 
@@ -174,14 +171,14 @@
                     android:id="@+id/product_desc_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textAllCaps="true"
+                    android:layout_margin="8dp"
                     android:drawableLeft="@drawable/ic_small_description"
                     android:drawablePadding="10dp"
                     android:paddingTop="6dp"
+                    android:text="@string/description"
+                    android:textAllCaps="true"
                     android:textSize="17sp"
-                    android:layout_margin="8dp"
-                    android:text="@string/description">
+                    android:textStyle="bold">
 
             </TextView>
 
@@ -189,11 +186,11 @@
                     android:id="@+id/product_desc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
                     android:layout_margin="8dp"
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="8dp"
-                    android:lineSpacingExtra="5dp">
+                    android:lineSpacingExtra="5dp"
+                    android:textSize="16sp">
 
             </TextView>
 
@@ -204,22 +201,23 @@
 
     <com.google.android.material.button.MaterialButton
             android:id="@+id/add_to_basket"
+            style="@style/ButtonVioletStyle"
             android:layout_width="match_parent"
             android:layout_height="58dp"
             android:layout_gravity="bottom|center_horizontal"
             app:icon="@drawable/ic_basket_black_24dp"
-            app:iconGravity="textEnd"
-            style="@style/ButtonVioletStyle">
-    </com.google.android.material.button.MaterialButton>
+            app:iconGravity="textEnd"></com.google.android.material.button.MaterialButton>
 
 
     <TextView
             android:id="@+id/empty_product"
+            style="@style/EmptyTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/EmptyTextStyle"
-            android:visibility="gone"
-            android:text="@string/empty_product">
+            android:lineSpacingExtra="4dp"
+            android:text="@string/empty_product"
+            android:textColor="@color/red_light"
+            android:visibility="gone">
 
     </TextView>
 

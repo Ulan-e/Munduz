@@ -27,7 +27,7 @@
             android:orientation="vertical"
             android:layout_gravity="bottom">
 
-        <TextView
+ <!--       <TextView
                 android:id="@+id/dev_about"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -48,16 +48,15 @@
                 android:textSize="16sp"
                 android:textStyle="bold">
 
-        </TextView>
+        </TextView>-->
 
         <TextView
                 android:id="@+id/app_version"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/dev_about_bottom"
                 android:layout_marginLeft="9dp"
                 android:text="@string/version_title"
-                android:textSize="18sp">
+                android:textSize="19sp">
 
         </TextView>
 

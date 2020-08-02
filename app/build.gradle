@@ -8,13 +8,13 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.ulan.app.munduz"
-        minSdkVersion 16
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion 17
+        targetSdkVersion 29
+        versionCode 1093
+        versionName "1.02"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -43,12 +43,11 @@ dependencies {
 
     //Google
     implementation 'com.google.android.material:material:1.1.0'
-    implementation 'com.google.android.play:core:1.7.3'
+    implementation 'com.google.android.play:core:1.8.0'
 
     //Database
-    implementation 'com.google.firebase:firebase-database:16.0.4'
-    implementation 'com.google.firebase:firebase-storage:16.0.4'
-    implementation 'com.google.firebase:firebase-auth:16.0.5'
+    implementation 'com.google.firebase:firebase-database:19.3.1'
+    implementation 'com.google.firebase:firebase-storage:19.1.1'
 
     //Room
     implementation 'android.arch.persistence.room:runtime:1.1.1'
@@ -64,8 +63,8 @@ dependencies {
     kapt 'com.google.dagger:dagger-android-processor:2.16'
 
     //Network
-    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.5.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.7.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.4.1'
     implementation 'com.squareup.okhttp3:okhttp:4.2.0'
 

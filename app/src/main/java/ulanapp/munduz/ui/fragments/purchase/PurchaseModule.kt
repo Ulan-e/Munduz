@@ -3,7 +3,7 @@ package ulanapp.munduz.ui.fragments.purchase
 import android.content.Context
 import dagger.Module
 import dagger.Provides
-import ulanapp.munduz.helpers.SendEmailHelper
+import ulanapp.munduz.helpers.SendEmailAsync
 import ulanapp.munduz.ui.activities.orders.OrdersScope
 
 @Module
@@ -16,8 +16,8 @@ class PurchaseModule {
     }
 
     @Provides
-    fun sendEmail(context: Context): SendEmailHelper {
-        return SendEmailHelper()
+    fun sendEmail(context: Context): SendEmailAsync {
+        return SendEmailAsync()
     }
 
     @OrdersScope
