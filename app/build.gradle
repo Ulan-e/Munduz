@@ -13,8 +13,8 @@ android {
         applicationId "com.ulan.app.munduz"
         minSdkVersion 17
         targetSdkVersion 29
-        versionCode 1091
-        versionName "1.0"
+        versionCode 1093
+        versionName "1.02"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }

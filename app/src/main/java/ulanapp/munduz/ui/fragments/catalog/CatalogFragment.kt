@@ -46,8 +46,8 @@ class CatalogFragment : BaseFragment(), CatalogView, OnCategoryClickListener {
             R.mipmap.grocery, R.mipmap.napitki,
             R.mipmap.postel, R.mipmap.dishes,
             R.mipmap.kazan, R.mipmap.chemodany,
-            R.mipmap.beshik, R.mipmap.odezhda,
-            R.mipmap.sredstvo
+            R.mipmap.odezhda, R.mipmap.sredstvo,
+            R.mipmap.knigi
         )
         presenter.setCatalog(catalog.toMutableList())
     }

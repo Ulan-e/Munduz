@@ -71,7 +71,7 @@
                 android:text="Адрес: Волгоградcкий проспект 32к8 \n Метро: Волгоградский проспект \n График: 10:00 - 21:00 \n "
                 android:textAlignment="center"
                 android:textColor="@color/gray_dark"
-                android:textSize="16sp" />
+                android:textSize="17sp" />
 
         <ImageView
                 android:id="@+id/location_market"
@@ -85,11 +85,11 @@
     </RelativeLayout>
 
     <ImageView
-            android:layout_width="280dp"
-            android:layout_height="280dp"
+            android:layout_width="285dp"
+            android:layout_height="285dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="9dp"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/address" />
+            app:srcCompat="@mipmap/address" />
 
 </LinearLayout>

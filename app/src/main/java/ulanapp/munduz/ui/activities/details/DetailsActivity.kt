@@ -12,6 +12,7 @@ import com.google.android.material.tabs.TabLayout
 import ulanapp.munduz.data.models.Product
 import kotlinx.android.synthetic.main.details_layout.*
 import ulanapp.munduz.R
+import ulanapp.munduz.data.repository.FirebaseRepository
 import ulanapp.munduz.helpers.Constants
 import ulanapp.munduz.helpers.Constants.Companion.BASKET_TURN_OFF
 import ulanapp.munduz.helpers.Constants.Companion.EXTRA_OPEN_BASKET
@@ -20,6 +21,7 @@ import ulanapp.munduz.helpers.Constants.Companion.EXTRA_TURN_OFF_ADD_BASKET
 import ulanapp.munduz.helpers.Constants.Companion.NOT_IN_BASKET
 import ulanapp.munduz.helpers.Constants.Companion.OPEN_BASKET_ARG
 import ulanapp.munduz.helpers.RUBLE
+import ulanapp.munduz.interfaces.ProductCallback
 import ulanapp.munduz.ui.activities.main.MainActivity
 import ulanapp.munduz.ui.adapter.DetailsImageAdapter
 import ulanapp.munduz.ui.base.BaseActivity
@@ -29,6 +31,9 @@ class DetailsActivity : BaseActivity(), DetailsView {
 
     @Inject
     lateinit var presenter: DetailsPresenterImpl
+
+    @Inject
+    lateinit var firebaseRepository: FirebaseRepository
 
     private lateinit var product: Product
     private lateinit var basketSwitcher: String
@@ -50,6 +55,7 @@ class DetailsActivity : BaseActivity(), DetailsView {
         basketSwitcher = intent.getStringExtra(EXTRA_TURN_OFF_ADD_BASKET)
 
         disableBasketButton(basketSwitcher)
+        checkProductAvailability()
 
         presenter.apply {
             setToolbar()
@@ -60,8 +66,22 @@ class DetailsActivity : BaseActivity(), DetailsView {
         add_to_basket.setOnClickListener {
             presenter.addToBasketClicked()
         }
+    }
 
-
+    private fun checkProductAvailability(){
+   /*     firebaseRepository.loadProductByKey(product.id, object : ProductCallback {
+            override fun onCallback(product: Product) {
+                if (product.visibility){
+                    product_availability.text = "Есть в наличии"
+                    product_availability.setTextColor(R.color.green_light)
+                    //TODO : In Basket text
+                }else{
+                    product_availability.text = "Товар скоро будет"
+                    product_availability.setTextColor(R.color.red_light)
+                    //TODO : Remove button
+                }
+            }
+        })*/
     }
 
     private fun disableBasketButton(basketSwitcher: String?) {
