@@ -18,8 +18,9 @@ import ulanapp.munduz.interfaces.OnItemClickListener
 
 class ProductsAdapter(
     private var context: Context,
-    private var listener: OnItemClickListener) :
-        RecyclerView.Adapter<ProductsViewHolder>() {
+    private var listener: OnItemClickListener
+) :
+    RecyclerView.Adapter<ProductsViewHolder>() {
 
     private lateinit var products: MutableList<Product>
     private lateinit var favoritesRepository: FavoritesRepository
@@ -84,6 +85,7 @@ class ProductsAdapter(
                 Toast.makeText(context, "Добавлен в Корзину", Toast.LENGTH_SHORT).show()
             }
         }
+
     }
 
     private fun setNotInBasket(holder: ProductsViewHolder) {

@@ -13,7 +13,7 @@ data class Product(
     var priceFor: String = "",
     var picture: Picture = Picture(),
     var date: Long = 0L,
-    var visibility: Boolean = false,
+    var visible: Boolean = true,
     var recommend: Boolean = false
 ) : Parcelable
 

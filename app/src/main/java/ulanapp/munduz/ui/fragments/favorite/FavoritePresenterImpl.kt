@@ -25,8 +25,8 @@ class FavoritePresenterImpl : BasePresenter<FavoriteView>, FavoritePresenter {
         if (keys.size > 0) {
             for (item: FavoriteEntity in keys) {
                 firebaseRepository.loadProductByKey(item.key, object : ProductCallback {
-                    override fun onCallback(product: Product) {
-                        products.add(product)
+                    override fun onCallback(product: Product?) {
+                        products.add(product!!)
                         getView()?.showProducts(products)
                     }
                 })

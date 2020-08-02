@@ -8,17 +8,14 @@ import ulanapp.munduz.helpers.Constants.Companion.NOT_IN_BASKET
 import ulanapp.munduz.ui.base.BasePresenter
 import javax.inject.Inject
 
-class DetailsPresenterImpl : BasePresenter<DetailsView>, DetailsPresenter {
+class DetailsPresenterImpl @Inject constructor(
+    repository: PurchasesRepository,
+    keysRepository: FavoritesRepository
+) : BasePresenter<DetailsView>(), DetailsPresenter {
 
     private lateinit var product: Product
-    private var purchaseRepository: PurchasesRepository
-    private var favoriteRepository: FavoritesRepository
-
-    @Inject
-    constructor(repository: PurchasesRepository, keysRepository: FavoritesRepository) {
-        this.purchaseRepository = repository
-        this.favoriteRepository = keysRepository
-    }
+    private var purchaseRepository: PurchasesRepository = repository
+    private var favoriteRepository: FavoritesRepository = keysRepository
 
     override fun setProduct(product: Product) {
         this.product = product
