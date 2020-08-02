@@ -191,12 +191,14 @@ class DetailsActivity : BaseActivity(), DetailsView {
             add_to_basket.apply {
                 setBackgroundColor(resources.getColor(R.color.colorPrimary))
                 setTextColor(resources.getColor(R.color.white))
+                iconTint = ContextCompat.getColorStateList(applicationContext, R.color.white)
                 text = Constants.NOT_IN_BASKET
             }
         } else {
             add_to_basket.apply {
                 setBackgroundColor(resources.getColor(R.color.white))
                 setTextColor(resources.getColor(R.color.colorPrimary))
+                iconTint = ContextCompat.getColorStateList(applicationContext, R.color.gray_tiny)
                 text = Constants.ALREADY_IN_BASKET
             }
         }
