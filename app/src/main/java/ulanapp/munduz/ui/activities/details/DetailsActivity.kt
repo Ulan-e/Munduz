@@ -114,21 +114,21 @@ class DetailsActivity : BaseActivity(), DetailsView {
             pictures.clear()
             pictures.add(one)
             detailsImageAdapter = DetailsImageAdapter(this, pictures)
-        } else if (two.isNotEmpty()) {  //if Two Images
+        } else if (two.isNotEmpty() && three.isEmpty()) {  //if Two Images
             pictures.clear()
             pictures.add(one)
             pictures.add(two)
             detailsImageAdapter = DetailsImageAdapter(this, pictures)
+            makeDotsInViewPager()
         } else if (two.isNotEmpty() && three.isNotEmpty()) { //if Three Images
             pictures.clear()
             pictures.add(one)
             pictures.add(two)
             pictures.add(three)
             detailsImageAdapter = DetailsImageAdapter(this, pictures)
+            makeDotsInViewPager()
         }
 
-        tabLayout = findViewById(R.id.image_tab_dots)
-        tabLayout.setupWithViewPager(viewPager, true)
         viewPager.adapter = detailsImageAdapter
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
@@ -146,6 +146,11 @@ class DetailsActivity : BaseActivity(), DetailsView {
             override fun onPageSelected(position: Int) {
             }
         })
+    }
+
+    private fun makeDotsInViewPager(){
+        tabLayout = findViewById(R.id.image_tab_dots)
+        tabLayout.setupWithViewPager(viewPager, true)
     }
 
     override fun showEmptyData() {
@@ -246,4 +251,5 @@ class DetailsActivity : BaseActivity(), DetailsView {
         super.onDestroy()
         presenter.unbindView(this)
     }
+
 }
