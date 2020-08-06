@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/coordinator_orders"
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -41,11 +40,20 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="4dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginBottom="4dp"
                     android:lineSpacingExtra="3dp"
+                    android:text="К оплате 4567"
                     android:textAlignment="center"
-                    android:textSize="21sp"
+                    android:textColor="@color/black_tiny"
+                    android:textSize="22sp"
                     android:textStyle="bold" />
+
+            <TextView
+                    android:id="@+id/client_delivery_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textColor="@color/gray_light"
+                    android:textSize="13sp" />
 
 
             <com.google.android.material.textfield.TextInputLayout
@@ -179,6 +187,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
+            <!-- Comment Invisible -->
             <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
@@ -186,7 +195,8 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="3dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginBottom="3dp">
+                    android:layout_marginBottom="3dp"
+                    android:visibility="gone">
 
                 <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/client_comment"
@@ -197,15 +207,6 @@
 
                 </com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                    android:id="@+id/client_delivery_price"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="12dp"
-                    android:textColor="@color/red_light"
-                    android:text="Доставка 190 рублей по Москве"
-                    android:textSize="14sp" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

@@ -52,6 +52,7 @@ class ProductsAdapter(
         setSmallImage(context, product.picture.urlImage, holder.image)
         holder.name.text = product.name
         holder.price.text = product.cost.toString() + RUBLE
+        holder.availibility.text = "В наличии"
 
         if (favoritesRepository.isExist(product.id)) {
             setAsFavorite(holder)

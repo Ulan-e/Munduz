@@ -7,7 +7,7 @@ interface OrdersPresenter {
 
     fun setToolbar()
 
-    fun setWithDeliveryOrNot(withDelivery: Boolean)
+    fun isWithDelivery(withDelivery: Boolean)
 
     fun getAmount(): Int
 /*

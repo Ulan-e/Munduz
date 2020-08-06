@@ -39,8 +39,8 @@
 
         <ImageView
                 android:id="@+id/instagram"
-                android:layout_width="31dp"
-                android:layout_height="31dp"
+                android:layout_width="29dp"
+                android:layout_height="29dp"
                 android:layout_margin="14dp"
                 android:layout_weight="1"
                 android:clickable="true"
@@ -48,17 +48,17 @@
 
         <ImageView
                 android:id="@+id/odnoklassniki"
-                android:layout_width="31dp"
-                android:layout_height="31dp"
-                android:layout_margin="14dp"
+                android:layout_width="29dp"
+                android:layout_height="29dp"
+                android:layout_margin="13dp"
                 android:layout_weight="1"
                 android:src="@drawable/ic_odnoklassniki" />
 
         <ImageView
                 android:id="@+id/vkontakte"
-                android:layout_width="31dp"
-                android:layout_height="31dp"
-                android:layout_margin="14dp"
+                android:layout_width="29dp"
+                android:layout_height="29dp"
+                android:layout_margin="13dp"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:visibility="gone"
@@ -66,8 +66,8 @@
 
         <ImageView
                 android:id="@+id/telegram"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="29dp"
+                android:layout_height="29dp"
                 android:layout_margin="13dp"
                 android:layout_weight="1"
                 android:clickable="true"

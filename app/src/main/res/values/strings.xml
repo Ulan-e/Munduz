@@ -17,8 +17,8 @@
     <string name="order">"Заказать"</string>
     <string name="success_order"> "Ваш заказ успешно выполнен \n Вам позвонять в течении 30 минут" </string>
     <string name="search_hint">Найти товар</string>
-    <string name="version_title">Версия</string>
-    <string name="version_code">1.12</string>
+    <string name="version_title">Version</string>
+    <string name="version_code">1.18</string>
     <string name="ulan_erkinbaev">Улан Эркинбаев</string>
     <string name="developer">Разрабочик</string>
     <string name="ready_purchase">Оформить Заказ</string>
