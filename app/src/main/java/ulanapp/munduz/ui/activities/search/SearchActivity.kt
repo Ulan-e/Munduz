@@ -29,6 +29,7 @@ class SearchActivity : BaseActivity(), SearchView, OnItemClickListener,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.search_layout)
+        checkInternetConnection()
 
         presenter.bindView(this)
 

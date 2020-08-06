@@ -47,6 +47,7 @@ class DetailsActivity : BaseActivity(), DetailsView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.details_layout)
+        checkInternetConnection()
 
         presenter.bindView(this)
 

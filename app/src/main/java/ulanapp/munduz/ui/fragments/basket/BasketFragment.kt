@@ -48,7 +48,7 @@ class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, On
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        checkInternetConnection()
         showToolbarTitle(
             withBackButton = false,
             isAppName = false,
@@ -134,6 +134,8 @@ class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, On
             showEmptyData()
         }
     }
+
+
 
     private fun convertPurchaseToProduct(purchase: PurchaseEntity): Product {
         val product = Product()

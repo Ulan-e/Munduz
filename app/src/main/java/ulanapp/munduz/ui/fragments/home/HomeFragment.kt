@@ -93,6 +93,7 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        checkInternetConnection()
         showToolbarTitle(
             withBackButton = false,
             isAppName = true,

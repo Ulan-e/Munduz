@@ -29,6 +29,7 @@ class OrdersActivity : BaseActivity(), OrdersView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.orders_layout)
+        checkInternetConnection()
 
         presenter.bindView(this)
         presenter.isWithDelivery(true)

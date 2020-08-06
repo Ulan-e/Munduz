@@ -98,7 +98,7 @@ class MainActivity : BaseActivity(), MainView {
                         this,
                         REQUEST_UPDATE_CODE
                     )
-                    Log.d(TAG, "Update success")
+                    Log.e(TAG, "Update success")
                 } catch (e: SendIntentException) {
                     e.printStackTrace()
                 }
@@ -181,27 +181,9 @@ class MainActivity : BaseActivity(), MainView {
         }
     }
 
-
     override fun onDestroy() {
         super.onDestroy()
         presenter.unbindView(this)
     }
 
-
-    /*   private var installStateUpdatedListener: InstallStateUpdatedListener =
-           object : InstallStateUpdatedListener {
-               override fun onStateUpdate(state: InstallState) {
-                   if (state.installStatus() == DOWNLOADED) {
-                       popupMessageForCompleteUpdate()
-                   } else if (state.installStatus() == INSTALLED) {
-                       appUpdateManager.unregisterListener(this)
-                   } else {
-                       Log.i(TAG, "InstallStateUpdatedListener: state: " + state.installStatus())
-                   }
-               }
-
-               override fun onStop() {
-        super.onStop()
-    }
-           }*/
 }
