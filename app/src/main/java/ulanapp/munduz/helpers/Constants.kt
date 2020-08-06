@@ -37,7 +37,7 @@ class Constants {
         const val INSTAGRAM_PAGE = "https://www.instagram.com/munduz.ru"
         const val VKONTAKTE_PAGE = "https://vk.com/ulanerkinbaev"
         const val ODNOKLASSNIKI_PAGE = "https://ok.ru/profile/581176986653"
-        const val TELEGRAM_PAGE = "https://tele.click/ulanerkinbaev"
+        const val TELEGRAM_PAGE = "https://t.me/betatest25"
 
 
         const val ALREADY_IN_BASKET = "В корзине"

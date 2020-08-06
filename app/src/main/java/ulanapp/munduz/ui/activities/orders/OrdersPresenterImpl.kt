@@ -14,7 +14,7 @@ class OrdersPresenterImpl @Inject constructor(private var repository: PurchasesR
     }
 
 
-    override fun setWithDeliveryOrNot(withDelivery: Boolean) {
+    override fun isWithDelivery(withDelivery: Boolean) {
         if (withDelivery) {
             amount += 190
             getView()?.showTotalPurchases(amount)

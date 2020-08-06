@@ -34,6 +34,7 @@ class CatalogFragment : BaseFragment(), CatalogView, OnCategoryClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        checkInternetConnection()
         presenter.bindView(this)
         showToolbarTitle(
             withBackButton = false,

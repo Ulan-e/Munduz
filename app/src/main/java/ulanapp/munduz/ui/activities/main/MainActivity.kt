@@ -16,6 +16,7 @@ import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.InstallStatus.DOWNLOADED
 import com.google.android.play.core.install.model.InstallStatus.INSTALLED
+import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.android.play.core.install.model.UpdateAvailability.UPDATE_AVAILABLE
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
@@ -51,19 +52,6 @@ class MainActivity : BaseActivity(), MainView {
         const val REQUEST_UPDATE_CODE = 13
     }
 
-    private var installStateUpdatedListener: InstallStateUpdatedListener =
-        object : InstallStateUpdatedListener {
-            override fun onStateUpdate(state: InstallState) {
-                if (state.installStatus() == DOWNLOADED) {
-                    popupMessageForCompleteUpdate()
-                } else if (state.installStatus() == INSTALLED) {
-                    appUpdateManager.unregisterListener(this)
-                } else {
-                    Log.i(TAG, "InstallStateUpdatedListener: state: " + state.installStatus())
-                }
-            }
-        }
-
     private var itemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
@@ -96,26 +84,25 @@ class MainActivity : BaseActivity(), MainView {
             false
         }
 
-    override fun onStart() {
-        super.onStart()
-
+    override fun onResume() {
+        super.onResume()
         appUpdateManager = AppUpdateManagerFactory.create(this)
-        appUpdateManager.registerListener(installStateUpdatedListener)
         appUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
-            if (appUpdateInfo.updateAvailability() === UPDATE_AVAILABLE
+            if (appUpdateInfo.updateAvailability() == UPDATE_AVAILABLE
                 && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)
             ) {
                 try {
                     appUpdateManager.startUpdateFlowForResult(
                         appUpdateInfo,
                         AppUpdateType.IMMEDIATE,
-                        this@MainActivity,
+                        this,
                         REQUEST_UPDATE_CODE
                     )
+                    Log.e(TAG, "Update success")
                 } catch (e: SendIntentException) {
                     e.printStackTrace()
                 }
-            } else if (appUpdateInfo.installStatus() === DOWNLOADED) {
+            } else if (appUpdateInfo.installStatus() == DOWNLOADED) {
                 popupMessageForCompleteUpdate()
             } else {
                 Log.e(TAG, "checkForAppUpdateAvailability: something else")
@@ -130,7 +117,7 @@ class MainActivity : BaseActivity(), MainView {
             Snackbar.LENGTH_INDEFINITE
         )
 
-        snackMessage.setAction("Установить") {
+        snackMessage.setAction("Рестарт") {
             appUpdateManager.completeUpdate()
         }
 
@@ -169,14 +156,13 @@ class MainActivity : BaseActivity(), MainView {
             .replace(R.id.container, fragment, title)
             .addToBackStack(null)
             .commit()
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_UPDATE_CODE) {
             if (resultCode != Activity.RESULT_OK) {
-                Log.e(Constants.TAG, "Update flow failed! Result code: $resultCode")
+                Log.e(TAG, "Update flow failed! Result code: $resultCode")
             }
         }
     }
@@ -195,13 +181,9 @@ class MainActivity : BaseActivity(), MainView {
         }
     }
 
-    override fun onStop() {
-        super.onStop()
-        appUpdateManager.unregisterListener(installStateUpdatedListener)
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         presenter.unbindView(this)
     }
+
 }

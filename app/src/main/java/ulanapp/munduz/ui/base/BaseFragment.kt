@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -12,10 +13,9 @@ import dagger.android.support.AndroidSupportInjection
 import dagger.android.support.DaggerFragment
 import ulanapp.munduz.R
 import ulanapp.munduz.helpers.Constants.Companion.CATALOG_FRAGMENT
-import ulanapp.munduz.helpers.Constants.Companion.HOME_FRAGMENT
+import ulanapp.munduz.helpers.isNetworkAvailable
 import ulanapp.munduz.interfaces.OnBackPressedListener
 import ulanapp.munduz.ui.fragments.catalog.CatalogFragment
-import ulanapp.munduz.ui.fragments.home.HomeFragment
 
 abstract class BaseFragment : DaggerFragment(), OnBackPressedListener {
 
@@ -31,29 +31,48 @@ abstract class BaseFragment : DaggerFragment(), OnBackPressedListener {
 
     protected fun showToolbarTitle(withBackButton: Boolean, isAppName: Boolean, title: String) {
         val toolbar = activity!!.findViewById<Toolbar>(R.id.main_toolbar)
+        val titleToolbar = toolbar?.findViewById<TextView>(R.id.main_toolbar_text)
+
+        enableNavigation(toolbar, withBackButton)
+        setTitle(toolbar, title)
+        changeTitleFont(titleToolbar, isAppName)
+
+    }
+
+    private fun enableNavigation(toolbar: Toolbar, withBackButton: Boolean) {
         if (withBackButton) {
             toolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
-            toolbar.setNavigationOnClickListener{
+            toolbar.setNavigationOnClickListener {
                 activity!!.supportFragmentManager.popBackStack()
             }
         } else {
             toolbar.navigationIcon = null
         }
+    }
 
-        val textToolbar = toolbar.findViewById<TextView>(R.id.main_toolbar_text)
+    private fun setTitle(toolbar: Toolbar?, title: String) {
+        val textToolbar = toolbar?.findViewById<TextView>(R.id.main_toolbar_text)
         val emptySpaces = "       "
-        textToolbar.text = title + emptySpaces
+        textToolbar?.text = title + emptySpaces
+    }
 
+    private fun changeTitleFont(titleToolbar: TextView?, isAppName: Boolean) {
         if (isAppName) {
             activity!!.findViewById<LinearLayout>(R.id.search_layout).visibility = View.VISIBLE
             val typeface = ResourcesCompat.getFont(activity!!, R.font.forte)
-            textToolbar.typeface = typeface
-            textToolbar.textSize = resources.getDimension(R.dimen.toolbar_app_title_size)
+            titleToolbar?.typeface = typeface
+            titleToolbar?.textSize = resources.getDimension(R.dimen.toolbar_app_title_size)
         } else {
             activity!!.findViewById<LinearLayout>(R.id.search_layout).visibility = View.GONE
             val typeface = ResourcesCompat.getFont(activity!!, R.font.calibri)
-            textToolbar.typeface = typeface
-            textToolbar.textSize = resources.getDimension(R.dimen.toolbar_title_size)
+            titleToolbar?.typeface = typeface
+            titleToolbar?.textSize = resources.getDimension(R.dimen.toolbar_title_size)
+        }
+    }
+
+    protected fun checkInternetConnection(){
+        if(!isNetworkAvailable(activity!!)){
+            Toast.makeText(activity!!, "Нет подключения к Интернету", Toast.LENGTH_SHORT).show()
         }
     }
 

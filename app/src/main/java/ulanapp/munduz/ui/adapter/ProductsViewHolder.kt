@@ -16,6 +16,7 @@ class ProductsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val price: TextView = itemView.findViewById(R.id.product_price)
     val favorite: ImageView = itemView.findViewById(R.id.favorite)
     val basket: Button = itemView.findViewById(R.id.in_out_basket)
+    val availibility: TextView = itemView.findViewById(R.id.product_availability)
 
     fun bind(product: Product, onItemClickListener: OnItemClickListener) {
         itemView.setOnClickListener {

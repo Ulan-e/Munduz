@@ -38,7 +38,6 @@ class MoreFragment : BaseFragment(), MoreView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         showToolbarTitle(
             withBackButton = false,
             isAppName = false,
@@ -61,10 +60,6 @@ class MoreFragment : BaseFragment(), MoreView {
 
         instagram.setOnClickListener {
             presenter.socialPageClicked(INSTAGRAM_PAGE)
-        }
-
-        vkontakte.setOnClickListener {
-            presenter.socialPageClicked(VKONTAKTE_PAGE)
         }
 
         odnoklassniki.setOnClickListener {

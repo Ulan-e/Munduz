@@ -29,9 +29,10 @@ class OrdersActivity : BaseActivity(), OrdersView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.orders_layout)
+        checkInternetConnection()
 
         presenter.bindView(this)
-        presenter.setWithDeliveryOrNot(true)
+        presenter.isWithDelivery(true)
 
         setRadioButtonText()
 
@@ -52,19 +53,34 @@ class OrdersActivity : BaseActivity(), OrdersView {
 
     private fun setRadioButtonText() {
         radioButtonText = resources.getString(R.string.delivery)
+        client_delivery_price.text = "Cумма c доставкой (190 рублей по Москве)"
         order_is_with_delivery.setOnCheckedChangeListener { group, checkedId ->
             if (R.id.delivery == checkedId) {
                 radioButtonText = resources.getString(R.string.delivery)
                 setVisibilitiesOfDelivery(View.VISIBLE)
                 setVisibilitiesOfPickUp(View.GONE)
-                presenter.setWithDeliveryOrNot(true)
+                client_delivery_price.text = "Cумма c доставкой (190 рублей по Москве)"
+                presenter.isWithDelivery(true)
             } else {
                 radioButtonText = resources.getString(R.string.pickup)
                 setVisibilitiesOfDelivery(View.GONE)
                 setVisibilitiesOfPickUp(View.VISIBLE)
-                presenter.setWithDeliveryOrNot(false)
+                client_delivery_price.text = ""
+                presenter.isWithDelivery(false)
             }
         }
+    }
+
+    private fun setVisibilitiesOfDelivery(visibility: Int) {
+        client_metro_container.visibility = visibility
+        client_metro.visibility = visibility
+        client_address_container.visibility = visibility
+        client_address.visibility = visibility
+    }
+
+    private fun setVisibilitiesOfPickUp(visibility: Int) {
+        client_time_container.visibility = visibility
+        client_time.visibility = visibility
     }
 
     override fun showToolbar() {
@@ -135,19 +151,6 @@ class OrdersActivity : BaseActivity(), OrdersView {
 
     override fun showEmptyData() {
         //TODO
-    }
-
-    private fun setVisibilitiesOfDelivery(visibility: Int) {
-        client_metro_container.visibility = visibility
-        client_metro.visibility = visibility
-        client_address_container.visibility = visibility
-        client_address.visibility = visibility
-        client_delivery_price.visibility = visibility
-    }
-
-    private fun setVisibilitiesOfPickUp(visibility: Int) {
-        client_time_container.visibility = visibility
-        client_time.visibility = visibility
     }
 
     override fun onDestroy() {

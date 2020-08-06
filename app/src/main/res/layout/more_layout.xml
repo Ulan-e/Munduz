@@ -8,26 +8,26 @@
 
     <com.google.android.material.button.MaterialButton
             android:id="@+id/contacts_us"
+            style="@style/ButtonBlackOnlyTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/ButtonBlackOnlyTextStyle"
-            android:text="@string/contacts_us"/>
+            android:text="@string/contacts_us" />
 
     <com.google.android.material.button.MaterialButton
             android:id="@+id/write_tous_button"
+            style="@style/ButtonBlackOnlyTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/contacts_us"
-            style="@style/ButtonBlackOnlyTextStyle"
-            android:text="@string/write_to_us"/>
+            android:text="@string/write_to_us" />
 
     <com.google.android.material.button.MaterialButton
             android:id="@+id/about_app"
+            style="@style/ButtonBlackOnlyTextStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/write_tous_button"
-            style="@style/ButtonBlackOnlyTextStyle"
-            android:text="@string/about_app"/>
+            android:text="@string/about_app" />
 
 
     <LinearLayout
@@ -39,34 +39,25 @@
 
         <ImageView
                 android:id="@+id/instagram"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_margin="13dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_margin="14dp"
                 android:layout_weight="1"
                 android:clickable="true"
                 android:src="@drawable/ic_instagram" />
 
         <ImageView
                 android:id="@+id/odnoklassniki"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:layout_margin="13dp"
                 android:layout_weight="1"
                 android:src="@drawable/ic_odnoklassniki" />
 
         <ImageView
-                android:id="@+id/vkontakte"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_margin="13dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:src="@drawable/ic_vkontakte" />
-
-        <ImageView
                 android:id="@+id/telegram"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:layout_margin="13dp"
                 android:layout_weight="1"
                 android:clickable="true"

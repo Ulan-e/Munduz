@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/main_activity_root"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/main_activity_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
@@ -41,7 +41,7 @@
                     android:layout_width="290dp"
                     android:layout_height="33dp"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="3dp"
+                    android:layout_marginBottom="5dp"
                     android:background="@drawable/search_rounded"
                     android:drawableLeft="@drawable/ic_search_gray_24dp"
                     android:focusable="false"
@@ -56,18 +56,18 @@
                 android:layout_height="match_parent"
                 android:layout_below="@+id/search_layout"
                 android:layout_marginBottom="2dp"
-                android:orientation="vertical"
-                android:background="@color/colorBackground"/>
+                android:background="@color/colorBackground"
+                android:orientation="vertical" />
 
     </RelativeLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation_menu"
-            android:fitsSystemWindows="true"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_alignParentBottom="true"
             android:background="@color/white"
+            android:fitsSystemWindows="true"
             app:itemIconTint="@drawable/selector_bottomnav"
             app:itemTextColor="@drawable/selector_bottomnav"
             app:labelVisibilityMode="labeled"

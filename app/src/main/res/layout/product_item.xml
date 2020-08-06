@@ -46,17 +46,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/NameTextStyle"
-                    android:text=""
-                    android:minHeight="30dp"
-                    android:lines="2"
-                    android:maxLines="2"></TextView>
+                    android:ellipsize="end"
+                    android:maxLines="1">
+
+            </TextView>
 
             <TextView
                     android:id="@+id/product_availability"
                     style="@style/AvailabilityTextStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/available">
+                    android:layout_height="wrap_content">
 
             </TextView>
 
@@ -64,8 +63,9 @@
                     android:id="@+id/product_price"
                     style="@style/PriceTextStyle"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="22H"></TextView>
+                    android:layout_height="wrap_content">
+
+            </TextView>
 
             <com.google.android.material.button.MaterialButton
                     android:id="@+id/in_out_basket"
