@@ -13,7 +13,6 @@ class OrdersPresenterImpl @Inject constructor(private var repository: PurchasesR
         amount = this.repository.purchasesAmount()
     }
 
-
     override fun isWithDelivery(withDelivery: Boolean) {
         if (withDelivery) {
             amount += 190
@@ -23,7 +22,6 @@ class OrdersPresenterImpl @Inject constructor(private var repository: PurchasesR
             getView()?.showTotalPurchases(amount)
         }
     }
-
 
     override fun sendButtonClicked() {
         if (getView()?.isNotEmptyFields()!!) {
@@ -55,5 +53,4 @@ class OrdersPresenterImpl @Inject constructor(private var repository: PurchasesR
         }
         return result.toString()
     }
-
 }

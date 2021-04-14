@@ -32,6 +32,7 @@ class SearchActivity : BaseActivity(), SearchView, OnItemClickListener,
         checkInternetConnection()
 
         presenter.bindView(this)
+        presenter.loadProducts()
 
         search_view_full.setIconifiedByDefault(false)
         search_view_full.requestFocus()
@@ -39,8 +40,6 @@ class SearchActivity : BaseActivity(), SearchView, OnItemClickListener,
         search_view_full.setOnQueryTextListener(this)
         val hintText = resources.getString(R.string.search_hint)
         search_view_full.queryHint = hintText
-
-        presenter.loadProducts()
 
         press_back.setOnClickListener {
             finish()

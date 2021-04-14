@@ -35,5 +35,4 @@ class HomePresenterImpl @Inject constructor() : BasePresenter<HomeView>(), HomeP
             }
         })
     }
-
 }

@@ -6,15 +6,11 @@ import ulanapp.munduz.interfaces.ProductsCallback
 import ulanapp.munduz.ui.base.BasePresenter
 import javax.inject.Inject
 
-class SearchPresenterImpl : BasePresenter<SearchView>, SearchPresenter {
-
+class SearchPresenterImpl @Inject constructor(
     private var repository: FirebaseRepository
-    private var products = mutableListOf<Product>()
+) : BasePresenter<SearchView>(), SearchPresenter {
 
-    @Inject
-    constructor(repository: FirebaseRepository) {
-        this.repository = repository
-    }
+    private var products = mutableListOf<Product>()
 
     override fun setToolbar() {
         getView()?.showToolbar()
@@ -31,5 +27,4 @@ class SearchPresenterImpl : BasePresenter<SearchView>, SearchPresenter {
             }
         })
     }
-
 }

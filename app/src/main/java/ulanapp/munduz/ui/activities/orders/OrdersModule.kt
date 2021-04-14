@@ -20,5 +20,4 @@ class OrdersModule {
     fun orderPresenter(repository: PurchasesRepository): OrdersPresenter {
         return OrdersPresenterImpl(repository)
     }
-
 }

@@ -5,6 +5,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import ulanapp.munduz.R
 
+// ставим картинку среднего размера
 fun setSmallImage(context: Context, urlImage: String, viewImage: ImageView) {
     Glide
         .with(context)

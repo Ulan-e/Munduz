@@ -14,8 +14,7 @@ import ulanapp.munduz.interfaces.OnItemClickListener
 class FavoritesAdapter(
     private var context: Context,
     private var listener: OnItemClickListener
-) :
-    RecyclerView.Adapter<FavoritesViewHolder>() {
+) : RecyclerView.Adapter<FavoritesViewHolder>() {
 
     private lateinit var products: MutableList<Product>
     private lateinit var repository: FavoritesRepository
@@ -61,5 +60,4 @@ class FavoritesAdapter(
             notifyDataSetChanged()
         }
     }
-
 }

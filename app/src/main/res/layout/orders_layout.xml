@@ -31,7 +31,6 @@
 
             </androidx.appcompat.widget.Toolbar>
 
-
             <TextView
                     android:id="@+id/total_purchase"
                     android:layout_width="match_parent"
@@ -54,7 +53,6 @@
                     android:gravity="center"
                     android:textColor="@color/gray_light"
                     android:textSize="13sp" />
-
 
             <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -238,7 +236,5 @@
                 android:textSize="14sp">
 
         </com.google.android.material.button.MaterialButton>
-
     </LinearLayout>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

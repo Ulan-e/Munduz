@@ -5,5 +5,4 @@ import ulanapp.munduz.data.models.Product
 interface OnItemClickListener {
 
     fun onItemClick(product: Product)
-
 }

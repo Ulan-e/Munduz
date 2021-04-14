@@ -27,5 +27,4 @@ class AboutAppFragment : BaseFragment() {
     override fun onBackPressed(): Boolean {
         return false
     }
-
 }

@@ -26,5 +26,4 @@ class SearchModule {
     fun searchAdapter(context: Context, clickListener: OnItemClickListener): SearchAdapter {
         return SearchAdapter(context, clickListener)
     }
-
 }

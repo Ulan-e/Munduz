@@ -4,7 +4,6 @@
         android:layout_height="match_parent"
         android:background="@drawable/gradient_splash">
 
-
     <TextView
             android:id="@+id/splash_text"
             android:layout_width="wrap_content"
@@ -12,8 +11,5 @@
             android:textSize="32sp"
             android:textColor="@color/white"
             android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true">
-
-    </TextView>
-
+            android:layout_centerVertical="true"/>
 </RelativeLayout>

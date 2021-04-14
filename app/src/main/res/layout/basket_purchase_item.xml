@@ -108,10 +108,7 @@
                         android:background="@drawable/rounded_button">
 
                 </ImageButton>
-
             </LinearLayout>
         </RelativeLayout>
-
     </RelativeLayout>
-
 </androidx.cardview.widget.CardView>

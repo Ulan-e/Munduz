@@ -95,6 +95,4 @@ abstract class FragmentBuilderModule {
     @MainScope
     @ContributesAndroidInjector
     abstract fun aboutAppFragment(): AboutAppFragment
-
-
 }

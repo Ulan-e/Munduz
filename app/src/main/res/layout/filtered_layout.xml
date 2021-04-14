@@ -8,8 +8,7 @@
             android:id="@+id/filter_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="8dp">
-    </androidx.recyclerview.widget.RecyclerView>
+            android:layout_margin="8dp"/>
 
     <TextView
             android:id="@+id/empty_filter_catalog"
@@ -17,8 +16,7 @@
             android:layout_height="wrap_content"
             android:visibility="gone"
             style="@style/EmptyTextStyle"
-            android:text="@string/empty_filter_products">
-    </TextView>
+            android:text="@string/empty_filter_products"/>
 
     <include layout="@layout/error_layout"/>
 

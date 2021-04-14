@@ -15,7 +15,6 @@ import ulanapp.munduz.ui.base.BaseActivity
 import ulanapp.munduz.ui.fragments.purchase.PurchaseFragment
 import javax.inject.Inject
 
-
 class OrdersActivity : BaseActivity(), OrdersView {
 
     @Inject
@@ -40,47 +39,15 @@ class OrdersActivity : BaseActivity(), OrdersView {
             setToolbar()
         }
 
-
+        // клик на заказать продукт
         order_button.setOnClickListener {
             presenter.sendButtonClicked()
         }
 
+        // отменить заказ
         cancel_button.setOnClickListener {
             presenter.cancelButtonClicked()
         }
-
-    }
-
-    private fun setRadioButtonText() {
-        radioButtonText = resources.getString(R.string.delivery)
-        client_delivery_price.text = "Cумма c доставкой (190 рублей по Москве)"
-        order_is_with_delivery.setOnCheckedChangeListener { group, checkedId ->
-            if (R.id.delivery == checkedId) {
-                radioButtonText = resources.getString(R.string.delivery)
-                setVisibilitiesOfDelivery(View.VISIBLE)
-                setVisibilitiesOfPickUp(View.GONE)
-                client_delivery_price.text = "Cумма c доставкой (190 рублей по Москве)"
-                presenter.isWithDelivery(true)
-            } else {
-                radioButtonText = resources.getString(R.string.pickup)
-                setVisibilitiesOfDelivery(View.GONE)
-                setVisibilitiesOfPickUp(View.VISIBLE)
-                client_delivery_price.text = ""
-                presenter.isWithDelivery(false)
-            }
-        }
-    }
-
-    private fun setVisibilitiesOfDelivery(visibility: Int) {
-        client_metro_container.visibility = visibility
-        client_metro.visibility = visibility
-        client_address_container.visibility = visibility
-        client_address.visibility = visibility
-    }
-
-    private fun setVisibilitiesOfPickUp(visibility: Int) {
-        client_time_container.visibility = visibility
-        client_time.visibility = visibility
     }
 
     override fun showToolbar() {
@@ -144,11 +111,6 @@ class OrdersActivity : BaseActivity(), OrdersView {
         fragment.show(supportFragmentManager, PURCHASE_FRAGMENT)
     }
 
-    private fun showSnackBar(text: String) {
-        val snack = Snackbar.make(coordinator_orders, text, Snackbar.LENGTH_SHORT)
-        snack.show()
-    }
-
     override fun showEmptyData() {
         //TODO
     }
@@ -158,4 +120,44 @@ class OrdersActivity : BaseActivity(), OrdersView {
         presenter.unbindView(this)
     }
 
+    // ставим сумму заказа
+    private fun setRadioButtonText() {
+        radioButtonText = resources.getString(R.string.delivery)
+        client_delivery_price.text = resources.getString(R.string.order_sum)
+        order_is_with_delivery.setOnCheckedChangeListener { group, checkedId ->
+            if (R.id.delivery == checkedId) {
+                radioButtonText = resources.getString(R.string.delivery)
+                setVisibilitiesOfDelivery(View.VISIBLE)
+                setVisibilitiesOfPickUp(View.GONE)
+                client_delivery_price.text = resources.getString(R.string.order_sum)
+                presenter.isWithDelivery(true)
+            } else {
+                radioButtonText = resources.getString(R.string.pickup)
+                setVisibilitiesOfDelivery(View.GONE)
+                setVisibilitiesOfPickUp(View.VISIBLE)
+                client_delivery_price.text = ""
+                presenter.isWithDelivery(false)
+            }
+        }
+    }
+
+    // видимость доставки
+    private fun setVisibilitiesOfDelivery(visibility: Int) {
+        client_metro_container.visibility = visibility
+        client_metro.visibility = visibility
+        client_address_container.visibility = visibility
+        client_address.visibility = visibility
+    }
+
+    // видимость самовывоза
+    private fun setVisibilitiesOfPickUp(visibility: Int) {
+        client_time_container.visibility = visibility
+        client_time.visibility = visibility
+    }
+
+    // показать сообщение
+    private fun showSnackBar(text: String) {
+        val snack = Snackbar.make(coordinator_orders, text, Snackbar.LENGTH_SHORT)
+        snack.show()
+    }
 }

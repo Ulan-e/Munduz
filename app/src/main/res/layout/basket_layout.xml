@@ -19,9 +19,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="top|center_horizontal">
-
             </TextView>
-
 
             <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/basket_recycler_view"
@@ -31,9 +29,7 @@
 
             </androidx.recyclerview.widget.RecyclerView>
         </LinearLayout>
-
     </androidx.core.widget.NestedScrollView>
-
 
     <com.google.android.material.button.MaterialButton
             android:id="@+id/purchase_all"
@@ -45,7 +41,6 @@
             android:layout_marginLeft="12dp"
             android:layout_marginRight="12dp"
             android:text="@string/ready_purchase">
-
     </com.google.android.material.button.MaterialButton>
 
     <LinearLayout
@@ -62,7 +57,6 @@
                 android:layout_height="wrap_content"
                 style="@style/EmptyTextStyle"
                 android:text="@string/empty_basket">
-
         </TextView>
 
         <com.google.android.material.button.MaterialButton
@@ -73,9 +67,6 @@
                 android:textSize="14sp"
                 style="@style/ButtonVioletStyle"
                 android:text="В Каталог">
-
         </com.google.android.material.button.MaterialButton>
-
     </LinearLayout>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

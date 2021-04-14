@@ -20,9 +20,7 @@
             <androidx.viewpager.widget.ViewPager
                     android:id="@+id/view_pager"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-            </androidx.viewpager.widget.ViewPager>
+                    android:layout_height="match_parent"/>
 
             <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tab_dots"
@@ -37,15 +35,12 @@
                     app:tabMaxWidth="14dp"/>
         </FrameLayout>
 
-
         <TextView
                 android:id="@+id/home_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/RecommendedTextStyle"
-                android:text="@string/recommended">
-
-        </TextView>
+                android:text="@string/recommended"/>
 
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/pro_recycler_view"
@@ -53,9 +48,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="8dp"
                 android:overScrollMode="never"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        </androidx.recyclerview.widget.RecyclerView>
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
         <TextView
                 android:id="@+id/empty_new_products"
@@ -65,8 +58,5 @@
                 android:visibility="gone"
                 android:text="@string/empty_recomended">
         </TextView>
-
     </LinearLayout>
-
-
 </androidx.core.widget.NestedScrollView>

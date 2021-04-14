@@ -1,7 +1,6 @@
 package ulanapp.munduz.helpers
 
 import android.os.AsyncTask
-import android.util.Log
 import java.util.*
 import javax.mail.*
 import javax.mail.internet.InternetAddress

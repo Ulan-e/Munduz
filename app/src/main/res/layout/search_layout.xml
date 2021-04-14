@@ -20,9 +20,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_marginTop="9dp"
                 android:layout_marginLeft="13dp"
-                android:background="?android:attr/selectableItemBackground">
-
-        </ImageButton>
+                android:background="?android:attr/selectableItemBackground"/>
 
         <SearchView
                 android:id="@+id/search_view_full"
@@ -37,10 +35,8 @@
                 android:layout_toRightOf="@+id/press_back"
                 android:searchIcon="@null"
                 android:inputType="text">
-
         </SearchView>
     </RelativeLayout>
-
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/search_results"
@@ -50,6 +46,4 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     </androidx.recyclerview.widget.RecyclerView>
-
-
 </LinearLayout>

@@ -5,8 +5,7 @@ class Constants {
     companion object {
 
         //Room
-        const val DATABASE_NAME = "database123"
-
+        const val DATABASE_NAME = "database_munduz"
         const val TAG = "munduz_app"
         const val EMPTY_SPACE = "       "
 
@@ -25,10 +24,8 @@ class Constants {
         const val ARGS_ORDER = "args_order"
 
         const val CATEGORY_ARG = "category_args"
-
         const val EXTRA_OPEN_BASKET = "go_to_basket"
         const val OPEN_BASKET_ARG = "open_basket"
-
         const val EXTRA_TURN_OFF_ADD_BASKET = "turn_off_basket"
         const val BASKET_TURN_OFF = "basket_off"
         const val BASKET_TURN_ON = "basket_on"
@@ -38,8 +35,6 @@ class Constants {
         const val VKONTAKTE_PAGE = "https://vk.com/ulanerkinbaev"
         const val ODNOKLASSNIKI_PAGE = "https://ok.ru/profile/581176986653"
         const val TELEGRAM_PAGE = "https://t.me/betatest25"
-
-
         const val ALREADY_IN_BASKET = "В корзине"
         const val NOT_IN_BASKET = "Добавить"
 
@@ -54,7 +49,5 @@ class Constants {
         const val CONTACT_TO_US_FRAGMENT = "contact_to_us_fragment"
         const val WRITE_TO_US_FRAGMENT = "write_to_us_fragment"
         const val ABOUT_APP_FRAGMENT = "about_app_fragment"
-
-
     }
 }

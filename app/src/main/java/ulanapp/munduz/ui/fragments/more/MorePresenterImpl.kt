@@ -20,5 +20,4 @@ class MorePresenterImpl @Inject constructor() : BasePresenter<MoreView>(),MorePr
     override fun socialPageClicked(siteUrl: String) {
         getView()?.showSocialPage(siteUrl)
     }
-
 }

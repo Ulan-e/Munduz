@@ -9,5 +9,4 @@ interface MorePresenter {
     fun goToWriteToUsFragment()
 
     fun socialPageClicked(siteUrl: String)
-
 }

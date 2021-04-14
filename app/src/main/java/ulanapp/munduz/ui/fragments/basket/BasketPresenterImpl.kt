@@ -11,10 +11,6 @@ class BasketPresenterImpl @Inject constructor(
 
     private lateinit var sumChangeListener: OnChangeSumListener
 
-    fun setListener(listener: OnChangeSumListener) {
-        this.sumChangeListener = listener
-    }
-
     override fun loadProducts() {
         val purchases = purchasesRepository.fetchAll()
         val sum = purchasesRepository.purchasesAmount()
@@ -37,4 +33,7 @@ class BasketPresenterImpl @Inject constructor(
         getView()?.showGoToHome()
     }
 
+    fun setListener(listener: OnChangeSumListener) {
+        this.sumChangeListener = listener
+    }
 }

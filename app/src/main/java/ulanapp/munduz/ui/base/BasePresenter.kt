@@ -26,5 +26,4 @@ abstract class BasePresenter<V> {
             throw IllegalStateException("Unexpected view")
         }
     }
-
 }

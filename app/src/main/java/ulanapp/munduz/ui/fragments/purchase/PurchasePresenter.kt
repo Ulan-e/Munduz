@@ -12,5 +12,4 @@ interface PurchasePresenter {
     fun sendViaWhatsApp()
 
     fun sendViaEmail()
-
 }

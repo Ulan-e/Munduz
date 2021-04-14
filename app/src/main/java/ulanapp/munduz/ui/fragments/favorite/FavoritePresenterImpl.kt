@@ -8,17 +8,14 @@ import ulanapp.munduz.interfaces.ProductCallback
 import ulanapp.munduz.ui.base.BasePresenter
 import javax.inject.Inject
 
-class FavoritePresenterImpl : BasePresenter<FavoriteView>, FavoritePresenter {
+class FavoritePresenterImpl @Inject constructor(
+    firebase: FirebaseRepository,
+    favorites: FavoritesRepository
+) : BasePresenter<FavoriteView>(), FavoritePresenter {
 
-    private var firebaseRepository: FirebaseRepository
-    private var favoriteRepository: FavoritesRepository
+    private var firebaseRepository: FirebaseRepository = firebase
+    private var favoriteRepository: FavoritesRepository = favorites
     private var products = mutableListOf<Product>()
-
-    @Inject
-    constructor(firebase: FirebaseRepository, favorites: FavoritesRepository) {
-        this.firebaseRepository = firebase
-        this.favoriteRepository = favorites
-    }
 
     override fun loadProducts() {
         val keys = favoriteRepository.fetchAll()
@@ -35,5 +32,4 @@ class FavoritePresenterImpl : BasePresenter<FavoriteView>, FavoritePresenter {
             getView()?.showEmptyData()
         }
     }
-
 }

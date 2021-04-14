@@ -19,8 +19,7 @@ import ulanapp.munduz.interfaces.OnItemClickListener
 class ProductsAdapter(
     private var context: Context,
     private var listener: OnItemClickListener
-) :
-    RecyclerView.Adapter<ProductsViewHolder>() {
+) : RecyclerView.Adapter<ProductsViewHolder>() {
 
     private lateinit var products: MutableList<Product>
     private lateinit var favoritesRepository: FavoritesRepository
@@ -122,5 +121,4 @@ class ProductsAdapter(
             )
         )
     }
-
 }

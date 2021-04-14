@@ -25,5 +25,4 @@ class PurchaseModule {
     fun purchasePresenter(view: PurchaseView): PurchasePresenter {
         return PurchasePresenterImpl(view)
     }
-
 }

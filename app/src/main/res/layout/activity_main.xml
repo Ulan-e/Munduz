@@ -25,7 +25,6 @@
                     style="@style/ToolBarTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
-
         </androidx.appcompat.widget.Toolbar>
 
         <LinearLayout
@@ -72,5 +71,4 @@
             app:itemTextColor="@drawable/selector_bottomnav"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_navigation_menu" />
-
 </RelativeLayout>

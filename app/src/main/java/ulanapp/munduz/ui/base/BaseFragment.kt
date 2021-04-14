@@ -72,7 +72,9 @@ abstract class BaseFragment : DaggerFragment(), OnBackPressedListener {
 
     protected fun checkInternetConnection(){
         if(!isNetworkAvailable(activity!!)){
-            Toast.makeText(activity!!, "Нет подключения к Интернету", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                activity, resources.getString(R.string.no_internet), Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -86,5 +88,4 @@ abstract class BaseFragment : DaggerFragment(), OnBackPressedListener {
             .addToBackStack(null)
             .commit()
     }
-
 }

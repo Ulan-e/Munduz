@@ -75,5 +75,4 @@ class DetailsPresenterImpl @Inject constructor(
             getView()?.changeBasketText(ALREADY_IN_BASKET)
         }
     }
-
 }

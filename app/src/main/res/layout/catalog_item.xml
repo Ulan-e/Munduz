@@ -29,7 +29,5 @@
                 android:layout_marginRight="-68dp">
 
         </ImageView>
-
     </RelativeLayout>
-
 </androidx.cardview.widget.CardView>

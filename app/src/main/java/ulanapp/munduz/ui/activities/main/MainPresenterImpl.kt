@@ -9,5 +9,4 @@ class MainPresenterImpl @Inject constructor() : BasePresenter<MainView>(), MainP
     override fun addFragment(fragment: BaseFragment, title: String) {
         getView()?.showFragment(fragment, title)
     }
-
 }

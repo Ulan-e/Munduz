@@ -6,14 +6,11 @@ import ulanapp.munduz.interfaces.ProductsCallback
 import ulanapp.munduz.ui.base.BasePresenter
 import javax.inject.Inject
 
-class FilteredPresenterImpl : BasePresenter<FilteredView>, FilteredPresenter {
+class FilteredPresenterImpl @Inject constructor(
+    repository: FirebaseRepository
+) : BasePresenter<FilteredView>(), FilteredPresenter {
 
-    private var repository: FirebaseRepository? = null
-
-    @Inject
-    constructor(repository: FirebaseRepository) {
-        this.repository = repository
-    }
+    private var repository: FirebaseRepository? = repository
 
     override fun loadProductsByCategory(categoryName: String) {
         repository?.loadProductsByCategory(categoryName, object : ProductsCallback {
@@ -26,5 +23,4 @@ class FilteredPresenterImpl : BasePresenter<FilteredView>, FilteredPresenter {
             }
         })
     }
-
 }

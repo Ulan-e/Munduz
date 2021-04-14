@@ -21,5 +21,4 @@ class FavoritesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             onClickListener.onItemClick(product)
         }
     }
-
 }

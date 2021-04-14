@@ -1,22 +1,22 @@
 package ulanapp.munduz.ui.activities.orders
 
-import ulanapp.munduz.data.room.repository.PurchasesRepository
-
-
 interface OrdersPresenter {
 
+    // настрокий тулбара
     fun setToolbar()
 
+    // с доставкой?
     fun isWithDelivery(withDelivery: Boolean)
 
+    // получить сумму
     fun getAmount(): Int
-/*
-    fun setRepository(purchasesRepository: PurchasesRepository)*/
 
+    // получить все заказы
     fun getAllPurchases(): String
 
+    // клик на отправить
     fun sendButtonClicked()
 
+    // отменить заказ
     fun cancelButtonClicked()
-
 }

@@ -14,7 +14,6 @@ import ulanapp.munduz.helpers.setSmallImage
 import ulanapp.munduz.interfaces.OnChangeSumListener
 import ulanapp.munduz.interfaces.OnItemBasketClickListener
 
-
 class BasketAdapter(
     private var context: Context,
     listener: OnItemBasketClickListener

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <dimen name="toolbar_app_title_size">8.5sp</dimen>
     <dimen name="toolbar_title_size">8sp</dimen>
     <dimen name="product_name_size">16sp</dimen>
@@ -12,5 +11,4 @@
     <dimen name="product_image_margin">5sp</dimen>
     <dimen name="product_text_top_margin">5sp</dimen>
     <dimen name="product_item_margin">5sp</dimen>
-
 </resources>

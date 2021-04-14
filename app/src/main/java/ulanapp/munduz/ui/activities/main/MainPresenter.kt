@@ -5,5 +5,4 @@ import ulanapp.munduz.ui.base.BaseFragment
 interface MainPresenter {
 
     fun addFragment(fragment: BaseFragment, title: String)
-
 }

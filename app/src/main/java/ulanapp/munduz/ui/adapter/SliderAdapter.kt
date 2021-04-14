@@ -11,8 +11,9 @@ import ulanapp.munduz.R
 import ulanapp.munduz.data.models.SliderImage
 import ulanapp.munduz.helpers.setSmallImage
 
-class SliderAdapter(private var context: Context, private var images: List<SliderImage>) :
-    PagerAdapter() {
+class SliderAdapter(
+    private var context: Context, private var images: List<SliderImage>
+) : PagerAdapter() {
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view == `object`

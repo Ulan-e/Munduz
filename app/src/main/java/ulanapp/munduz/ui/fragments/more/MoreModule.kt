@@ -10,5 +10,4 @@ abstract class MoreModule {
     @MainScope
     @Binds
     abstract fun moreView(moreFragment: MoreFragment): MoreView
-
 }

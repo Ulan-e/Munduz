@@ -12,5 +12,4 @@ class CatalogPresenterImpl @Inject constructor() : BasePresenter<CatalogView>(),
             getView()?.showEmptyData()
         }
     }
-
 }

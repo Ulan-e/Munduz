@@ -14,5 +14,4 @@ interface PurchaseView {
     fun sendOrderToWhatsApp(message: Message)
 
     fun closeDialog()
-
 }

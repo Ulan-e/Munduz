@@ -3,7 +3,6 @@ package ulanapp.munduz.ui.activities.main
 import dagger.Binds
 import dagger.Module
 
-
 @Module
 abstract class MainModule {
 
@@ -14,5 +13,4 @@ abstract class MainModule {
     @MainScope
     @Binds
     abstract fun mainPresenter(mainPresenter: MainPresenterImpl): MainPresenter
-
 }

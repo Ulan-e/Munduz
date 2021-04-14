@@ -14,8 +14,8 @@ import ulanapp.munduz.interfaces.OnItemClickListener
 
 class SearchAdapter(
     private var context: Context,
-    listener: OnItemClickListener) :
-        RecyclerView.Adapter<SearchAdapter.SearchViewHolder>(), Filterable {
+    listener: OnItemClickListener
+) : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>(), Filterable {
 
     private var itemClickListener: OnItemClickListener = listener
 
@@ -85,7 +85,4 @@ class SearchAdapter(
             }
         }
     }
-
 }
-
-

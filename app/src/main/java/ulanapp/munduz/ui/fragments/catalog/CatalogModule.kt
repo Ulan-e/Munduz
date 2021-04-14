@@ -21,5 +21,4 @@ class CatalogModule {
     fun catalogAdapter(context: Context, clickListener: OnCategoryClickListener): CatalogAdapter {
         return CatalogAdapter(context, clickListener)
     }
-
 }

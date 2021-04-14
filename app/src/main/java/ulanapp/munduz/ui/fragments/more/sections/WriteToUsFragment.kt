@@ -21,7 +21,7 @@ class WriteToUsFragment : BaseDialogFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         rootView = inflater.inflate(R.layout.writetous_layout, container, false)
         return rootView
     }
@@ -58,5 +58,4 @@ class WriteToUsFragment : BaseDialogFragment() {
             showSnackBar(rootView, message)
         }
     }
-
 }

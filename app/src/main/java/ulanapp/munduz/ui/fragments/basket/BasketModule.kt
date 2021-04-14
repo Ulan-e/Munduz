@@ -8,7 +8,6 @@ import ulanapp.munduz.interfaces.OnItemBasketClickListener
 import ulanapp.munduz.ui.activities.main.MainScope
 import ulanapp.munduz.ui.adapter.BasketAdapter
 
-
 @Module(includes = [RoomModule::class])
 class BasketModule {
 

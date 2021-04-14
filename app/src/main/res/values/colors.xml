@@ -4,33 +4,25 @@
     <color name="colorPrimaryDark">#5721B4</color>
     <color name="colorBackground">#F8F7FA</color>
     <color name="colorAccent">#D81B60</color>
-
     <color name="pink">#C2517B</color>
     <color name="white">#FDFCFC</color>
     <color name="transparent">@android:color/transparent</color>
-
     <color name="violet_tiny">#7646C3</color>
     <color name="violet_light">#5A398F</color>
     <color name="violet_dark">#412271</color>
-
     <color name="gray_white">#ECEBEB</color>
     <color name="gray_tiny">#AEAEAE</color>
     <color name="gray_light">#8F8F8F</color>
     <color name="gray_dark">#686868</color>
-
     <color name="black_tiny">#535353</color>
     <color name="black_light">#333333</color>
     <color name="black_dark">#1E1E1E</color>
-
     <color name="green_tiny">#3CA398</color>
     <color name="green_light">#008577</color>
     <color name="green_dark">#00574B</color>
-
     <color name="green_whatsapp">#3A933D</color>
-
     <color name="blue_tiny">#4E5EBC</color>
     <color name="blue_light">#364ABA</color>
     <color name="blue_dark">#1D35B8</color>
-
     <color name="red_light">#B8333E</color>
 </resources>

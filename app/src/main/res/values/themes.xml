@@ -10,5 +10,4 @@
         <item name="windowActionBar">false</item>
         <item name="fontFamily">@font/calibri</item>
     </style>
-
 </resources>

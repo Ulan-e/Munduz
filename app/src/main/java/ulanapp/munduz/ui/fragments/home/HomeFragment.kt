@@ -194,5 +194,4 @@ class HomeFragment : BaseFragment(), HomeView, OnItemClickListener {
         }
         return true
     }
-
 }

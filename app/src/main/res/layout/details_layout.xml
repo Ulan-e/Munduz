@@ -60,7 +60,7 @@
                     android:layout_height="?attr/actionBarSize"
                     android:background="@android:color/transparent"
                     app:layout_collapseMode="pin"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"></androidx.appcompat.widget.Toolbar>
+                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
             <ProgressBar
                     android:id="@+id/image_progress_bar"
@@ -94,9 +94,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:textSize="21sp"
-                    android:textStyle="bold">
-
-            </TextView>
+                    android:textStyle="bold"/>
 
             <RelativeLayout
                     android:layout_width="match_parent"
@@ -109,9 +107,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_marginLeft="8dp"
                         android:textSize="25sp"
-                        android:textStyle="bold">
-
-                </TextView>
+                        android:textStyle="bold"/>
 
                 <TextView
                         android:id="@+id/product_priceFor"
@@ -124,9 +120,7 @@
                         android:paddingTop="0dp"
                         android:paddingRight="5dp"
                         android:paddingBottom="1dp"
-                        android:textSize="14sp">
-
-                </TextView>
+                        android:textSize="14sp"/>
 
                 <TextView
                         android:id="@+id/product_availability"
@@ -134,9 +128,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_margin="8dp"
-                        android:textSize="14sp">
-
-                </TextView>
+                        android:textSize="14sp"/>
             </RelativeLayout>
 
             <TextView
@@ -150,9 +142,7 @@
                     android:text="@string/delivery"
                     android:textAllCaps="true"
                     android:textSize="17sp"
-                    android:textStyle="bold">
-
-            </TextView>
+                    android:textStyle="bold"/>
 
             <TextView
                     android:id="@+id/product_delivery"
@@ -163,9 +153,7 @@
                     android:layout_marginRight="8dp"
                     android:lineSpacingExtra="5dp"
                     android:text="@string/delivery_text"
-                    android:textSize="16sp">
-
-            </TextView>
+                    android:textSize="16sp"/>
 
             <TextView
                     android:id="@+id/product_desc_title"
@@ -178,9 +166,7 @@
                     android:text="@string/description"
                     android:textAllCaps="true"
                     android:textSize="17sp"
-                    android:textStyle="bold">
-
-            </TextView>
+                    android:textStyle="bold"/>
 
             <TextView
                     android:id="@+id/product_desc"
@@ -190,14 +176,10 @@
                     android:layout_marginLeft="12dp"
                     android:layout_marginRight="8dp"
                     android:lineSpacingExtra="5dp"
-                    android:textSize="16sp">
-
-            </TextView>
+                    android:textSize="16sp"/>
 
         </LinearLayout>
-
     </androidx.core.widget.NestedScrollView>
-
 
     <com.google.android.material.button.MaterialButton
             android:id="@+id/add_to_basket"
@@ -206,8 +188,7 @@
             android:layout_height="58dp"
             android:layout_gravity="bottom|center_horizontal"
             app:icon="@drawable/ic_basket_black_24dp"
-            app:iconGravity="textEnd"></com.google.android.material.button.MaterialButton>
-
+            app:iconGravity="textEnd"/>
 
     <TextView
             android:id="@+id/empty_product"
@@ -217,8 +198,5 @@
             android:lineSpacingExtra="4dp"
             android:text="@string/empty_product"
             android:textColor="@color/red_light"
-            android:visibility="gone">
-
-    </TextView>
-
+            android:visibility="gone"/>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

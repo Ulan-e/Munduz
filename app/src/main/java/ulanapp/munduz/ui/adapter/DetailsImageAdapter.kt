@@ -10,8 +10,9 @@ import androidx.viewpager.widget.ViewPager
 import com.bumptech.glide.Glide
 import ulanapp.munduz.R
 
-class DetailsImageAdapter(private val context: Context, private val pictures: MutableList<String>) :
-    PagerAdapter() {
+class DetailsImageAdapter(
+    private val context: Context, private val pictures: MutableList<String>
+) : PagerAdapter() {
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
         return view == `object`
@@ -39,5 +40,4 @@ class DetailsImageAdapter(private val context: Context, private val pictures: Mu
         val view = `object` as View
         viewPager.removeView(view)
     }
-
 }

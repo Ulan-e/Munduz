@@ -47,5 +47,4 @@ class PurchasePresenterImpl @Inject constructor(private var view: PurchaseView) 
         sendEmailHelper.setMessage(message)
         sendEmailHelper.execute()
     }
-
 }

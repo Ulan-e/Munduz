@@ -53,6 +53,10 @@
     <string name="phone">Телефон</string>
     <string name="metro">Метро</string>
     <string name="address">Адрес</string>
+    <string name="app_updated">Приложение обновлено</string>
+    <string name="restart">Рестарт</string>
+    <string name="no_internet">"Нет подключения к Интернету"</string>
+    <string name="order_sum">Cумма c доставкой (190 рублей по Москве)</string>
 
     <string-array name="category">
         <item>Продукты</item>

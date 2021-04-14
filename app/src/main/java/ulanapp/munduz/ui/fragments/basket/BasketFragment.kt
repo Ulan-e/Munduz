@@ -135,8 +135,7 @@ class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, On
         }
     }
 
-
-
+    // конверт покупку в продукт
     private fun convertPurchaseToProduct(purchase: PurchaseEntity): Product {
         val product = Product()
         val pictures = Picture()
@@ -152,5 +151,4 @@ class BasketFragment : BaseFragment(), BasketView, OnItemBasketClickListener, On
         product.category = purchase.category
         return product
     }
-
 }

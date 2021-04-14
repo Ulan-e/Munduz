@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.splash_screen.*
 import ulanapp.munduz.R
 import ulanapp.munduz.ui.activities.main.MainActivity
 
-class SplashActivity : AppCompatActivity() {
+class StartAppActivity : AppCompatActivity() {
 
     private var delayHandler: Handler? = null
     private var SPLASH_DELAY: Long = 1450
@@ -40,5 +40,4 @@ class SplashActivity : AppCompatActivity() {
         }
         super.onDestroy()
     }
-
 }

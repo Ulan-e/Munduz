@@ -10,5 +10,4 @@ abstract class DetailsModule {
     @DetailsScope
     @Binds
     abstract fun detailsActivity(detailsActivity: DetailsActivity): DetailsView
-
 }

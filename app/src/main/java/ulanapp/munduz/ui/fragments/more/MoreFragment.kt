@@ -31,7 +31,7 @@ class MoreFragment : BaseFragment(), MoreView {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         rootView = inflater.inflate(R.layout.more_layout, container, false)
         return rootView
     }
@@ -115,5 +115,4 @@ class MoreFragment : BaseFragment(), MoreView {
         goToHome()
         return true
     }
-
 }

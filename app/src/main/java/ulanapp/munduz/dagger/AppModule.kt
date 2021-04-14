@@ -11,7 +11,6 @@ abstract class AppModule {
 
     @Binds
     abstract fun context(application: BaseApplication): Context
-
 }
 
 @Scope

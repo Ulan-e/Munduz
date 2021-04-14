@@ -40,7 +40,6 @@ class DetailsActivity : BaseActivity(), DetailsView {
     private var detailsImageAdapter: DetailsImageAdapter? = null
 
     private var menu: Menu? = null
-
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager
 
@@ -51,9 +50,11 @@ class DetailsActivity : BaseActivity(), DetailsView {
 
         presenter.bindView(this)
 
+        // получаем аргументы
         product = intent.getParcelableExtra<Product>(EXTRA_PRODUCT_ARG)
         basketSwitcher = intent.getStringExtra(EXTRA_TURN_OFF_ADD_BASKET)
 
+        // отключаем кнопку добавление в корзину
         disableBasketButton(basketSwitcher)
 
         presenter.apply {
@@ -62,22 +63,9 @@ class DetailsActivity : BaseActivity(), DetailsView {
             isInBasket()
         }
 
+        // клик на добавление в корзину
         add_to_basket.setOnClickListener {
             presenter.addToBasketClicked()
-        }
-    }
-
-    private fun disableBasketButton(basketSwitcher: String?) {
-        if (basketSwitcher != null) {
-            if (basketSwitcher == BASKET_TURN_OFF) {
-                add_to_basket.apply {
-                    setBackgroundColor(resources.getColor(R.color.white))
-                    setTextColor(resources.getColor(R.color.colorPrimary))
-                    text = Constants.ALREADY_IN_BASKET
-                    isClickable = false
-                    isEnabled = false
-                }
-            }
         }
     }
 
@@ -89,69 +77,7 @@ class DetailsActivity : BaseActivity(), DetailsView {
 
     override fun showToolbar() {
         toolbarSettings()
-        toolbarImage()
-    }
-
-    private fun toolbarSettings() {
-        setSupportActionBar(product_toolbar)
-        product_toolbar.title = ""
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
-        supportActionBar!!.setDisplayShowTitleEnabled(false)
-        product_toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp)
-        product_toolbar.setNavigationOnClickListener {
-            finish()
-        }
-    }
-
-    private fun toolbarImage() {
-        viewPager = findViewById(R.id.view_pager_image)
-
-        val pictures = mutableListOf<String>()
-        val one = product!!.picture.urlImage
-        val two = product!!.picture.urlImage2
-        val three = product!!.picture.urlImage3
-
-        if (two.isEmpty() && three.isEmpty()) {  //if One Image
-            pictures.clear()
-            pictures.add(one)
-            detailsImageAdapter = DetailsImageAdapter(this, pictures)
-        } else if (two.isNotEmpty() && three.isEmpty()) {  //if Two Images
-            pictures.clear()
-            pictures.add(one)
-            pictures.add(two)
-            detailsImageAdapter = DetailsImageAdapter(this, pictures)
-            makeDotsInViewPager()
-        } else if (two.isNotEmpty() && three.isNotEmpty()) { //if Three Images
-            pictures.clear()
-            pictures.add(one)
-            pictures.add(two)
-            pictures.add(three)
-            detailsImageAdapter = DetailsImageAdapter(this, pictures)
-            makeDotsInViewPager()
-        }
-
-        viewPager.adapter = detailsImageAdapter
-        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-            override fun onPageScrollStateChanged(state: Int) {
-
-            }
-
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-
-            }
-
-            override fun onPageSelected(position: Int) {
-            }
-        })
-    }
-
-    private fun makeDotsInViewPager(){
-        tabLayout = findViewById(R.id.image_tab_dots)
-        tabLayout.setupWithViewPager(viewPager, true)
+        headerImage()
     }
 
     override fun showEmptyData() {
@@ -160,36 +86,10 @@ class DetailsActivity : BaseActivity(), DetailsView {
 
     override fun showProduct(product: Product) {
         checkProductVisibility(product)
-
         product_name.text = product.name
         product_desc.text = product.desc
         product_price.text = product.cost.toString() + " " + RUBLE
         product_priceFor.text = "Цена за " + product.priceFor
-
-    }
-
-    private fun checkProductVisibility(p: Product) {
-        firebaseRepository.loadProductByKey(p.id, object : ProductCallback {
-            override fun onCallback(product: Product?) {
-                //check if product removed
-                if (product != null) {
-                    if (product.visible) {
-                        product_availability.text = "Есть в наличии"
-                        product_availability.setTextColor(resources.getColor(R.color.green_light))
-                    } else {
-                        product_availability.text = "Товар скоро будет"
-                        product_availability.setTextColor(resources.getColor(R.color.red_light))
-                    }
-                } else {
-                    appbar_layout.visibility = View.GONE
-                    details_content.visibility = View.GONE
-                    add_to_basket.visibility = View.GONE
-                    empty_product.visibility = View.VISIBLE
-                    empty_product.text =
-                        "Рекомендуем удалить товар из Корзины \n \n Товар снят с продажи"
-                }
-            }
-        })
     }
 
     override fun changeBasketText(title: String) {
@@ -253,4 +153,115 @@ class DetailsActivity : BaseActivity(), DetailsView {
         presenter.unbindView(this)
     }
 
+    // отключаем кнопку добавление в корзину
+    private fun disableBasketButton(basketSwitcher: String?) {
+        if (basketSwitcher != null) {
+            if (basketSwitcher == BASKET_TURN_OFF) {
+                add_to_basket.apply {
+                    setBackgroundColor(resources.getColor(R.color.white))
+                    setTextColor(resources.getColor(R.color.colorPrimary))
+                    text = Constants.ALREADY_IN_BASKET
+                    isClickable = false
+                    isEnabled = false
+                }
+            }
+        }
+    }
+
+    // настраиваем тулбар
+    private fun toolbarSettings() {
+        setSupportActionBar(product_toolbar)
+        product_toolbar.title = ""
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        supportActionBar!!.setDisplayShowTitleEnabled(false)
+        product_toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp)
+        product_toolbar.setNavigationOnClickListener {
+            finish()
+        }
+    }
+
+    private fun headerImage() {
+        viewPager = findViewById(R.id.view_pager_image)
+
+        val pictures = mutableListOf<String>()
+        val one = product!!.picture.urlImage
+        val two = product!!.picture.urlImage2
+        val three = product!!.picture.urlImage3
+
+        if (two.isEmpty() && three.isEmpty()) {
+
+            // одна фотография товара
+            pictures.clear()
+            pictures.add(one)
+            detailsImageAdapter = DetailsImageAdapter(this, pictures)
+        } else if (two.isNotEmpty() && three.isEmpty()) {
+
+            //две фотографии товара
+            pictures.clear()
+            pictures.add(one)
+            pictures.add(two)
+            detailsImageAdapter = DetailsImageAdapter(this, pictures)
+            makeDotsInViewPager()
+        } else if (two.isNotEmpty() && three.isNotEmpty()) {
+
+            // три фотографии товара
+            pictures.clear()
+            pictures.add(one)
+            pictures.add(two)
+            pictures.add(three)
+            detailsImageAdapter = DetailsImageAdapter(this, pictures)
+            makeDotsInViewPager()
+        }
+
+        // настраиваем ViewPager
+        viewPager.adapter = detailsImageAdapter
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {
+
+            }
+
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+
+            }
+
+            override fun onPageSelected(position: Int) {
+            }
+        })
+    }
+
+    // точки внизу фотографий
+    private fun makeDotsInViewPager(){
+        tabLayout = findViewById(R.id.image_tab_dots)
+        tabLayout.setupWithViewPager(viewPager, true)
+    }
+
+    // проверяем видимость продукта
+    private fun checkProductVisibility(p: Product) {
+        firebaseRepository.loadProductByKey(p.id, object : ProductCallback {
+            override fun onCallback(product: Product?) {
+
+                // проверка если продукт удален
+                if (product != null) {
+                    if (product.visible) {
+                        product_availability.text = "Есть в наличии"
+                        product_availability.setTextColor(resources.getColor(R.color.green_light))
+                    } else {
+                        product_availability.text = "Товар скоро будет"
+                        product_availability.setTextColor(resources.getColor(R.color.red_light))
+                    }
+                } else {
+                    appbar_layout.visibility = View.GONE
+                    details_content.visibility = View.GONE
+                    add_to_basket.visibility = View.GONE
+                    empty_product.visibility = View.VISIBLE
+                    empty_product.text =
+                        "Рекомендуем удалить товар из Корзины \n \n Товар снят с продажи"
+                }
+            }
+        })
+    }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Toast
 import dagger.android.AndroidInjection
 import dagger.android.support.DaggerAppCompatActivity
+import ulanapp.munduz.R
 import ulanapp.munduz.helpers.isNetworkAvailable
 
 abstract class BaseActivity : DaggerAppCompatActivity() {
@@ -15,8 +16,9 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
 
     protected fun checkInternetConnection(){
         if(!isNetworkAvailable(this)){
-            Toast.makeText(this, "Нет подключения к Интернету", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                this, resources.getString(R.string.no_internet), Toast.LENGTH_SHORT
+            ).show()
         }
     }
-
 }

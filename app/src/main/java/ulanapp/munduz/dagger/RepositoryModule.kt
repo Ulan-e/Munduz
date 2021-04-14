@@ -13,6 +13,7 @@ import ulanapp.munduz.data.room.repository.FavoritesRepository
 import ulanapp.munduz.data.room.repository.FavoritesRepositoryImpl
 import ulanapp.munduz.data.room.repository.PurchasesRepository
 import ulanapp.munduz.data.room.repository.PurchasesRepositoryImpl
+import ulanapp.munduz.helpers.Constants.Companion.DATABASE_NAME
 
 @Module
 class FirebaseModule {
@@ -31,7 +32,7 @@ class RoomModule {
         return Room.databaseBuilder(
             context,
             MunduzDatabase::class.java,
-            "database_ulan123"
+            DATABASE_NAME
         )
             .allowMainThreadQueries()
             .build()
@@ -60,5 +61,4 @@ class RoomModule {
             purchaseKeys
         )
     }
-
 }

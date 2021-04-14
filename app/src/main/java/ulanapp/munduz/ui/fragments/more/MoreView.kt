@@ -11,5 +11,4 @@ interface MoreView : BaseView {
     fun showWriteUs()
 
     fun showSocialPage(url: String)
-
 }

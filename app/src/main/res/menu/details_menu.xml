@@ -7,5 +7,4 @@
             android:title="@string/favorite"
             android:icon="@drawable/ic_favorite_border_24dp"
             app:showAsAction="always"/>
-
 </menu>

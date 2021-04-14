@@ -10,18 +10,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.play.core.appupdate.AppUpdateManager
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory
-import com.google.android.play.core.install.InstallState
-import com.google.android.play.core.install.InstallStateUpdatedListener
 import com.google.android.play.core.install.model.AppUpdateType
-import com.google.android.play.core.install.model.InstallStatus
 import com.google.android.play.core.install.model.InstallStatus.DOWNLOADED
-import com.google.android.play.core.install.model.InstallStatus.INSTALLED
-import com.google.android.play.core.install.model.UpdateAvailability
 import com.google.android.play.core.install.model.UpdateAvailability.UPDATE_AVAILABLE
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
 import ulanapp.munduz.R
-import ulanapp.munduz.helpers.Constants
 import ulanapp.munduz.helpers.Constants.Companion.BASKET_FRAGMENT
 import ulanapp.munduz.helpers.Constants.Companion.CATALOG_FRAGMENT
 import ulanapp.munduz.helpers.Constants.Companion.EXTRA_OPEN_BASKET
@@ -40,7 +34,6 @@ import ulanapp.munduz.ui.fragments.home.HomeFragment
 import ulanapp.munduz.ui.fragments.more.MoreFragment
 import javax.inject.Inject
 
-
 class MainActivity : BaseActivity(), MainView {
 
     @Inject
@@ -51,38 +44,6 @@ class MainActivity : BaseActivity(), MainView {
     companion object {
         const val REQUEST_UPDATE_CODE = 13
     }
-
-    private var itemSelectedListener =
-        BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.home -> {
-                    val homeFragment = HomeFragment()
-                    presenter.addFragment(homeFragment, HOME_FRAGMENT)
-                    return@OnNavigationItemSelectedListener true
-                }
-                R.id.catalog -> {
-                    val catalogFragment = CatalogFragment()
-                    presenter.addFragment(catalogFragment, CATALOG_FRAGMENT)
-                    return@OnNavigationItemSelectedListener true
-                }
-                R.id.basket -> {
-                    val basketFragment = BasketFragment()
-                    presenter.addFragment(basketFragment, BASKET_FRAGMENT)
-                    return@OnNavigationItemSelectedListener true
-                }
-                R.id.favorite -> {
-                    val favoriteFragment = FavoriteFragment()
-                    presenter.addFragment(favoriteFragment, FAVORITE_FRAGMENT)
-                    return@OnNavigationItemSelectedListener true
-                }
-                R.id.more -> {
-                    val moreFragment = MoreFragment()
-                    presenter.addFragment(moreFragment, MORE_FRAGMENT)
-                    return@OnNavigationItemSelectedListener true
-                }
-            }
-            false
-        }
 
     override fun onResume() {
         super.onResume()
@@ -110,21 +71,6 @@ class MainActivity : BaseActivity(), MainView {
         }
     }
 
-    private fun popupMessageForCompleteUpdate() {
-        val snackMessage = Snackbar.make(
-            main_activity_root,
-            "Приложение обновлено",
-            Snackbar.LENGTH_INDEFINITE
-        )
-
-        snackMessage.setAction("Рестарт") {
-            appUpdateManager.completeUpdate()
-        }
-
-        snackMessage.setActionTextColor(resources.getColor(R.color.green_dark))
-        snackMessage.show()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
@@ -134,12 +80,14 @@ class MainActivity : BaseActivity(), MainView {
 
         presenter.bindView(this)
 
+        // проверка какой фрагмент открыть
         if (title == OPEN_BASKET_ARG) {
             initBottomNav(R.id.basket)
         } else {
             initBottomNav(R.id.home)
         }
 
+        // клик на поиск продукта
         button_click.setOnClickListener {
             startActivity(Intent(this@MainActivity, SearchActivity::class.java))
         }
@@ -172,6 +120,11 @@ class MainActivity : BaseActivity(), MainView {
         super.onBackPressed()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.unbindView(this)
+    }
+
     private fun onBackPressedInFragments() {
         val fragments = supportFragmentManager.fragments
         for (fragment: Fragment in fragments) {
@@ -181,9 +134,46 @@ class MainActivity : BaseActivity(), MainView {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.unbindView(this)
+    // показываем попап обновления завершено
+    private fun popupMessageForCompleteUpdate() {
+        val snackMessage = Snackbar.make(
+            main_activity_root,
+            resources.getString(R.string.app_updated),
+            Snackbar.LENGTH_INDEFINITE
+        )
+
+        // рестарт приложения
+        snackMessage.setAction(resources.getString(R.string.restart)) {
+            appUpdateManager.completeUpdate()
+        }
+        snackMessage.setActionTextColor(resources.getColor(R.color.green_dark))
+        snackMessage.show()
     }
 
+    private var itemSelectedListener =
+        BottomNavigationView.OnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.home -> {
+                    presenter.addFragment(HomeFragment(), HOME_FRAGMENT)
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.catalog -> {
+                    presenter.addFragment(CatalogFragment(), CATALOG_FRAGMENT)
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.basket -> {
+                    presenter.addFragment(BasketFragment(), BASKET_FRAGMENT)
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.favorite -> {
+                    presenter.addFragment(FavoriteFragment(), FAVORITE_FRAGMENT)
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.more -> {
+                    presenter.addFragment(MoreFragment(), MORE_FRAGMENT)
+                    return@OnNavigationItemSelectedListener true
+                }
+            }
+            false
+        }
 }
